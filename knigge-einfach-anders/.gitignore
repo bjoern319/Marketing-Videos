@@ -1,0 +1,10 @@
+node_modules/
+snapshots/
+.hyperframes/
+renders/work-*/
+renders/.*
+*.wav
+.thumbnails/
+.waveform-cache/
+*.log
+renders/*.mp4

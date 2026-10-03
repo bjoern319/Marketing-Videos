@@ -1,0 +1,352 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      src: url("assets/fonts/Montserrat-Variable.woff2") format("woff2");
+      font-weight: 300 900;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      font-family: "Montserrat", sans-serif;
+    }
+    .f08-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 42%, #384343 0%, #2c3535 70%);
+    }
+    .f08-mark {
+      position: absolute;
+      left: -260px;
+      top: 620px;
+      width: 700px;
+      height: 700px;
+      display: block;
+      opacity: 0.3;
+    }
+    .f08-icon {
+      position: absolute;
+      left: 725px;
+      top: 104px;
+      width: 104px;
+      height: 104px;
+      display: block;
+    }
+    .f08-word {
+      position: absolute;
+      left: 855px;
+      top: 104px;
+      width: 400px;
+      height: 104px;
+    }
+    .f08-knigge {
+      position: absolute;
+      left: 0;
+      top: -5.6px;
+      display: block;
+      font-size: 80.1px;
+      font-weight: 700;
+      line-height: 0.8;
+      letter-spacing: 2.73px;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .f08-immo {
+      position: absolute;
+      left: 0;
+      top: 64.5px;
+      display: block;
+      font-size: 46.1px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 4.97px;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .f08-mask {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 268px;
+      overflow: hidden;
+      height: 104px;
+      text-align: center;
+    }
+    .f08-h {
+      display: block;
+      font-size: 84px;
+      font-weight: 800;
+      line-height: 104px;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .f08-sub {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 386px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      font-size: 36px;
+      font-weight: 500;
+      color: #d2d9d8;
+    }
+    .f08-sub span {
+      display: block;
+    }
+    .f08-contact {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 486px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 64px;
+    }
+    .f08-pill {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 44px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .f08-pill svg {
+      display: block;
+      width: 46px;
+      height: 46px;
+      flex: none;
+    }
+    .f08-sep {
+      display: block;
+      width: 2px;
+      height: 54px;
+      background: #56625f;
+    }
+    .f08-social {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 586px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+    .f08-follow {
+      display: block;
+      font-size: 30px;
+      font-weight: 500;
+      color: #aab4b3;
+    }
+    .f08-soc {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 34px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .f08-soc svg {
+      display: block;
+      width: 40px;
+      height: 40px;
+      flex: none;
+    }
+    .f08-addr {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 676px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 500;
+      color: #aab4b3;
+    }
+    .f08-motto {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 772px;
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+    }
+    .f08-mmask {
+      overflow: hidden;
+      height: 100px;
+    }
+    .f08-m {
+      display: block;
+      font-size: 80px;
+      line-height: 100px;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .f08-light {
+      font-weight: 300;
+      color: #ffffff;
+    }
+    .f08-bold {
+      font-weight: 800;
+      color: #e8656b;
+    }
+    .f08-black {
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      opacity: 0;
+    }
+  </style>
+
+  <div id="root" data-composition-id="08-cta" data-start="0" data-duration="9" data-width="1920" data-height="1080">
+    <div class="f08-bg"></div>
+    <svg class="f08-mark" id="f08-mark" viewBox="0 0 100 100">
+      <g fill="none" stroke="#ca2c35" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="miter">
+        <polygon points="0,0 100,0 100,100 0,100" vector-effect="non-scaling-stroke" />
+        <polyline points="79.5,0 0,100" vector-effect="non-scaling-stroke" />
+        <polyline points="47.5,40.2 100,100" vector-effect="non-scaling-stroke" />
+      </g>
+    </svg>
+
+    <svg class="f08-icon" id="f08-icon" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="f08-kgl" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6">
+          <stop offset="0" stop-color="#5e0f18" />
+          <stop offset="0.56" stop-color="#a4222b" />
+          <stop offset="0.8" stop-color="#c12a33" />
+          <stop offset="0.93" stop-color="#ca2c35" />
+        </linearGradient>
+        <linearGradient id="f08-kgr" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0">
+          <stop offset="0" stop-color="#4a0a13" />
+          <stop offset="1" stop-color="#b0252e" />
+        </linearGradient>
+        <linearGradient id="f08-kgb" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100">
+          <stop offset="0" stop-color="#480a12" />
+          <stop offset="0.5" stop-color="#a2222b" />
+          <stop offset="0.85" stop-color="#ca2c35" />
+        </linearGradient>
+      </defs>
+      <polygon id="f08-fl" points="0,0 79.5,0 0,100" fill="url(#f08-kgl)" />
+      <polygon id="f08-fr" points="79.5,0 100,0 100,100 47.5,40.2" fill="url(#f08-kgr)" />
+      <polygon id="f08-fb" points="47.5,40.2 100,100 0,100" fill="url(#f08-kgb)" />
+    </svg>
+    <div class="f08-word" data-layout-allow-overlap>
+      <span class="f08-knigge" id="f08-knigge" data-layout-allow-overlap>KNIGGE</span>
+      <span class="f08-immo" id="f08-immo" data-layout-allow-overlap>IMMOBILIEN</span>
+    </div>
+
+    <div class="f08-mask"><span class="f08-h" id="f08-h">Lernen wir uns kennen.</span></div>
+    <div class="f08-sub" id="f08-sub">
+      <span>Persönlich.</span><span>Unverbindlich.</span><span>Vor Ort in Bergisch Gladbach.</span>
+    </div>
+
+    <div class="f08-contact" id="f08-contact">
+      <div class="f08-pill">
+        <svg viewBox="0 0 46 46">
+          <rect x="0" y="0" width="46" height="46" rx="10" fill="#ca2c35" />
+          <path d="M16.5 11.5 L20.5 11.5 L22.5 17.5 L19.5 19.8 C21 23 23 25 26.2 26.5 L28.5 23.5 L34.5 25.5 L34.5 29.5 C34.5 31.5 33 33 31 33 C20.5 32.4 13.6 25.5 13 15 C13 13 14.5 11.5 16.5 11.5 Z" fill="#ffffff" />
+        </svg>
+        <span>02202 12 40 300</span>
+      </div>
+      <span class="f08-sep"></span>
+      <div class="f08-pill">
+        <svg viewBox="0 0 46 46">
+          <rect x="0" y="0" width="46" height="46" rx="10" fill="#ca2c35" />
+          <circle cx="23" cy="23" r="11" fill="none" stroke="#ffffff" stroke-width="2.6" />
+          <path d="M12 23 H34 M23 12 C19 16 19 30 23 34 M23 12 C27 16 27 30 23 34" fill="none" stroke="#ffffff" stroke-width="2.4" />
+        </svg>
+        <span>knigge-immobilien.de</span>
+      </div>
+    </div>
+    <div class="f08-social" id="f08-social">
+      <span class="f08-follow">Folgen Sie uns:</span>
+      <div class="f08-soc">
+        <svg viewBox="0 0 40 40">
+          <rect x="0" y="0" width="40" height="40" rx="9" fill="#ca2c35" />
+          <rect x="8" y="11.5" width="24" height="17" rx="5" fill="none" stroke="#ffffff" stroke-width="2.4" />
+          <path d="M17.5 15.6 L24.6 20 L17.5 24.4 Z" fill="#ffffff" />
+        </svg>
+        <span>KNIGGE.Immobilien</span>
+      </div>
+      <div class="f08-soc">
+        <svg viewBox="0 0 40 40">
+          <rect x="0" y="0" width="40" height="40" rx="9" fill="#ca2c35" />
+          <rect x="9.5" y="9.5" width="21" height="21" rx="6" fill="none" stroke="#ffffff" stroke-width="2.4" />
+          <circle cx="20" cy="20" r="5" fill="none" stroke="#ffffff" stroke-width="2.4" />
+          <circle cx="26.2" cy="13.8" r="1.5" fill="#ffffff" />
+        </svg>
+        <span>@kniggeimmobilien</span>
+      </div>
+    </div>
+    <div class="f08-addr" id="f08-addr">Laurentiusstraße 98 · 51465 Bergisch Gladbach</div>
+
+    <div class="f08-motto">
+      <div class="f08-mmask"><span class="f08-m f08-light" id="f08-m1">einfach</span></div>
+      <div class="f08-mmask"><span class="f08-m f08-bold" id="f08-m2">anders.</span></div>
+    </div>
+
+    <div class="f08-black" id="f08-black"></div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#f08-mark", { opacity: 0, x: -50 }, { opacity: 0.3, x: 0, duration: 1.6, ease: "power3.out" }, 0);
+
+      // Bildmarke setzt sich aus ihren drei Facetten zusammen
+      tl.fromTo("#f08-fl", { opacity: 0, x: -14, y: -14 }, { opacity: 1, x: 0, y: 0, duration: 0.7, ease: "power3.out" }, 0.15);
+      tl.fromTo("#f08-fr", { opacity: 0, x: 16 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 0.27);
+      tl.fromTo("#f08-fb", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.39);
+      tl.fromTo(
+        "#f08-knigge",
+        { clipPath: "inset(0% 100% 0% 0%)" },
+        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power3.out" },
+        0.55
+      );
+      tl.fromTo(
+        "#f08-immo",
+        { clipPath: "inset(0% 100% 0% 0%)" },
+        { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power3.out" },
+        0.72
+      );
+
+      tl.fromTo("#f08-h", { yPercent: 105 }, { yPercent: 0, duration: 0.85, ease: "power3.out" }, 1.2);
+      tl.fromTo(
+        "#f08-sub > span",
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.22 },
+        1.95
+      );
+      tl.fromTo(
+        "#f08-contact > *",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.15 },
+        2.85
+      );
+      // Social Media: YouTube + Instagram
+      tl.fromTo(
+        "#f08-social > *",
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.14 },
+        3.35
+      );
+      tl.fromTo("#f08-addr", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.9);
+
+      // Peak-End: das Motto ist der letzte Eindruck
+      tl.fromTo("#f08-m1", { yPercent: 105 }, { yPercent: 0, duration: 0.85, ease: "power3.out" }, 4.4);
+      tl.fromTo("#f08-m2", { yPercent: 105 }, { yPercent: 0, duration: 0.85, ease: "power3.out" }, 4.7);
+
+      // Abblende (letzter Frame)
+      tl.fromTo("#f08-black", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power1.in" }, 8.2);
+
+      window.__timelines["08-cta"] = tl;
+    })();
+  </script>
+</template>

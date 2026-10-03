@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #ECEEEA;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="72.5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="el-01-hook"
+        class="scene"
+        data-composition-id="01-hook"
+        data-composition-src="compositions/frames/01-hook.html"
+        data-start="0"
+        data-duration="6"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-02-brand"
+        class="scene"
+        data-composition-id="02-brand"
+        data-composition-src="compositions/frames/02-brand.html"
+        data-start="6"
+        data-duration="6"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-03-klischees"
+        class="scene"
+        data-composition-id="03-klischees"
+        data-composition-src="compositions/frames/03-klischees.html"
+        data-start="11.5"
+        data-duration="16.6"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-04-dach"
+        class="scene"
+        data-composition-id="04-dach"
+        data-composition-src="compositions/frames/04-dach.html"
+        data-start="27.5"
+        data-duration="9.1"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-05-zahlen"
+        class="scene"
+        data-composition-id="05-zahlen"
+        data-composition-src="compositions/frames/05-zahlen.html"
+        data-start="36"
+        data-duration="10.6"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-06-heimat"
+        class="scene"
+        data-composition-id="06-heimat"
+        data-composition-src="compositions/frames/06-heimat.html"
+        data-start="46"
+        data-duration="8.5"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-07-passt"
+        class="scene"
+        data-composition-id="07-passt"
+        data-composition-src="compositions/frames/07-passt.html"
+        data-start="54"
+        data-duration="10.2"
+        data-track-index="0"
+      ></div>
+
+      <div
+        id="el-08-cta"
+        class="scene"
+        data-composition-id="08-cta"
+        data-composition-src="compositions/frames/08-cta.html"
+        data-start="63.5"
+        data-duration="9"
+        data-track-index="1"
+      ></div>
+
+      <!-- BGM -->
+      <audio
+        id="el-bgm"
+        src="assets/audio/knigge-bgm.mp3"
+        data-start="0"
+        data-duration="72.5"
+        data-track-index="11"
+        data-volume="0.8"
+      ></audio>
+
+      <!-- SFX -->
+      <audio
+        id="el-sfx-0"
+        src="assets/sfx/pop.mp3"
+        data-start="3.17"
+        data-duration="0.72"
+        data-track-index="20"
+        data-volume="0.35"
+      ></audio>
+      <audio
+        id="el-sfx-1"
+        src="assets/sfx/whoosh-cinematic.mp3"
+        data-start="3"
+        data-duration="5.5"
+        data-track-index="21"
+        data-volume="0.28"
+      ></audio>
+      <audio
+        id="el-sfx-2"
+        src="assets/sfx/whoosh-short.mp3"
+        data-start="6.15"
+        data-duration="0.57"
+        data-track-index="22"
+        data-volume="0.2"
+      ></audio>
+      <audio
+        id="el-sfx-3"
+        src="assets/sfx/whoosh-short.mp3"
+        data-start="14.2"
+        data-duration="0.57"
+        data-track-index="23"
+        data-volume="0.16"
+      ></audio>
+      <audio
+        id="el-sfx-4"
+        src="assets/sfx/whoosh-short.mp3"
+        data-start="17.4"
+        data-duration="0.57"
+        data-track-index="24"
+        data-volume="0.16"
+      ></audio>
+      <audio
+        id="el-sfx-5"
+        src="assets/sfx/whoosh-short.mp3"
+        data-start="20.6"
+        data-duration="0.57"
+        data-track-index="25"
+        data-volume="0.16"
+      ></audio>
+      <audio
+        id="el-sfx-6"
+        src="assets/sfx/whoosh-short.mp3"
+        data-start="23.8"
+        data-duration="0.57"
+        data-track-index="26"
+        data-volume="0.16"
+      ></audio>
+      <audio
+        id="el-sfx-7"
+        src="assets/sfx/pop.mp3"
+        data-start="28.82"
+        data-duration="0.72"
+        data-track-index="27"
+        data-volume="0.16"
+      ></audio>
+      <audio
+        id="el-sfx-8"
+        src="assets/sfx/pop.mp3"
+        data-start="30.12"
+        data-duration="0.72"
+        data-track-index="28"
+        data-volume="0.16"
+      ></audio>
+      <audio
+        id="el-sfx-9"
+        src="assets/sfx/pop.mp3"
+        data-start="31.42"
+        data-duration="0.72"
+        data-track-index="29"
+        data-volume="0.16"
+      ></audio>
+      <audio
+        id="el-sfx-10"
+        src="assets/sfx/pop.mp3"
+        data-start="47.55"
+        data-duration="0.72"
+        data-track-index="30"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="el-sfx-11"
+        src="assets/sfx/click.mp3"
+        data-start="55.85"
+        data-duration="0.37"
+        data-track-index="31"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="el-sfx-12"
+        src="assets/sfx/click.mp3"
+        data-start="57.25"
+        data-duration="0.37"
+        data-track-index="32"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="el-sfx-13"
+        src="assets/sfx/click.mp3"
+        data-start="58.65"
+        data-duration="0.37"
+        data-track-index="33"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="el-sfx-14"
+        src="assets/sfx/click.mp3"
+        data-start="60.05"
+        data-duration="0.37"
+        data-track-index="34"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="el-sfx-15"
+        src="assets/sfx/chime.mp3"
+        data-start="67.5"
+        data-duration="2.5"
+        data-track-index="35"
+        data-volume="0.35"
+      ></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-02-brand", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power3.in" }, 11.5);
+        tl.fromTo("#el-03-klischees", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, 11.5);
+        tl.to("#el-03-klischees", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 27.5);
+        tl.fromTo("#el-04-dach", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 27.5);
+        tl.to("#el-04-dach", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 36);
+        tl.fromTo("#el-05-zahlen", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 36);
+        tl.to("#el-05-zahlen", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.6, ease: "power2.inOut" }, 46);
+        tl.fromTo("#el-06-heimat", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 46);
+        tl.to("#el-06-heimat", { scale: 2.5, opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power3.in" }, 54);
+        tl.fromTo("#el-07-passt", { scale: 0.5, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, 54);
+        tl.to("#el-07-passt", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.7, ease: "power2.inOut" }, 63.5);
+        tl.fromTo("#el-08-cta", { filter: "blur(10px)", scale: 0.97, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.7, ease: "power2.inOut" }, 63.5);
+        tl.to({}, { duration: 72.5 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

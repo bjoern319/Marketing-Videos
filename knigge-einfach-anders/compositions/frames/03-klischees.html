@@ -1,0 +1,225 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      src: url("assets/fonts/Montserrat-Variable.woff2") format("woff2");
+      font-weight: 300 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Montserrat";
+      src: url("assets/fonts/Montserrat-Italic-Variable.woff2") format("woff2");
+      font-weight: 300 900;
+      font-style: italic;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      font-family: "Montserrat", sans-serif;
+    }
+    .f03-bg {
+      position: absolute;
+      inset: 0;
+      background: #eceeea;
+    }
+    .f03-kicker {
+      position: absolute;
+      left: 120px;
+      top: 100px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: #ca2c35;
+    }
+    .f03-head {
+      position: absolute;
+      left: 120px;
+      top: 138px;
+      display: flex;
+      gap: 22px;
+    }
+    .f03-mask {
+      overflow: hidden;
+      height: 84px;
+    }
+    .f03-h {
+      display: block;
+      font-size: 66px;
+      font-weight: 800;
+      line-height: 84px;
+      letter-spacing: -0.015em;
+      color: #444f4f;
+      white-space: nowrap;
+    }
+    .f03-h-red {
+      color: #ca2c35;
+    }
+    .f03-col {
+      position: absolute;
+      top: 280px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+    }
+    .f03-col-left {
+      left: 120px;
+      color: #6b7777;
+    }
+    .f03-col-right {
+      left: 952px;
+      color: #ca2c35;
+    }
+    .f03-rule {
+      position: absolute;
+      left: 120px;
+      width: 1680px;
+      height: 2px;
+      background: #cfd5d1;
+    }
+    .f03-cliche {
+      position: absolute;
+      left: 120px;
+      display: block;
+      font-size: 34px;
+      font-style: italic;
+      font-weight: 500;
+      line-height: 44px;
+      color: #5e6a6a;
+      white-space: nowrap;
+    }
+    .f03-strike {
+      position: absolute;
+      left: -6px;
+      right: -6px;
+      top: 22px;
+      height: 5px;
+      border-radius: 3px;
+      background: #ca2c35;
+      display: block;
+    }
+    .f03-bullet {
+      position: absolute;
+      left: 900px;
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+    .f03-main {
+      position: absolute;
+      left: 952px;
+      display: block;
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 48px;
+      color: #444f4f;
+      white-space: nowrap;
+    }
+    .f03-sub {
+      position: absolute;
+      left: 952px;
+      display: block;
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 34px;
+      color: #5e6a6a;
+      white-space: nowrap;
+    }
+  </style>
+
+  <div id="root" data-composition-id="03-klischees" data-start="0" data-duration="16.6" data-width="1920" data-height="1080">
+    <div class="f03-bg"></div>
+    <div class="f03-kicker" id="f03-kicker">DIE BEKANNTEN MAKLER-KLISCHEES</div>
+    <div class="f03-head">
+      <div class="f03-mask"><span class="f03-h" id="f03-h1">Kennen wir.</span></div>
+      <div class="f03-mask"><span class="f03-h f03-h-red" id="f03-h2">Widerlegen wir.</span></div>
+    </div>
+    <div class="f03-col f03-col-left" id="f03-col-l">KLISCHEE</div>
+    <div class="f03-col f03-col-right" id="f03-col-r">BEI KNIGGE</div>
+    <div id="f03-rows"></div>
+  </div>
+
+  <script>
+    (function () {
+      const ROWS = [
+        ["„Den Preis schätzen wir mal grob.“", "Fundierte Wertermittlung", "vom zertifizierten Immobiliengutachter"],
+        ["„Jedes Mal ein neuer Ansprechpartner.“", "Persönliche Betreuung", "Menschen, die Sie und Ihre Immobilie kennen"],
+        ["„Ihr Zuhause – öffentlich für alle.“", "Auf Wunsch diskret", "Verkauf unter vier Augen, ohne öffentliche Inserate"],
+        ["„Nach dem Notartermin: Funkstille.“", "Langfristig an Ihrer Seite", "mit eigener Hausverwaltung – auch nach dem Verkauf"],
+      ];
+      const TOP = 318;
+      const PITCH = 142;
+      const host = document.getElementById("f03-rows");
+      const bullet =
+        '<svg class="f03-bullet" viewBox="0 0 100 100">' +
+        '<polygon points="0,0 79.5,0 0,100" fill="#c12a33"/>' +
+        '<polygon points="79.5,0 100,0 100,100 47.5,40.2" fill="#7d1720"/>' +
+        '<polygon points="47.5,40.2 100,100 0,100" fill="#a2222b"/></svg>';
+
+      ROWS.forEach((r, i) => {
+        const y = TOP + i * PITCH;
+        host.insertAdjacentHTML(
+          "beforeend",
+          `<div class="f03-rule" id="f03-rule-${i}" style="top:${y}px"></div>` +
+            `<span class="f03-cliche" id="f03-c-${i}" style="top:${y + 49}px">${r[0]}<span class="f03-strike" id="f03-s-${i}"></span></span>` +
+            bullet.replace('class="f03-bullet"', `class="f03-bullet" id="f03-b-${i}" style="top:${y + 30}px"`) +
+            `<span class="f03-main" id="f03-m-${i}" style="top:${y + 20}px">${r[1]}</span>` +
+            `<span class="f03-sub" id="f03-u-${i}" style="top:${y + 74}px">${r[2]}</span>`
+        );
+      });
+      host.insertAdjacentHTML(
+        "beforeend",
+        `<div class="f03-rule" id="f03-rule-end" style="top:${TOP + ROWS.length * PITCH}px"></div>`
+      );
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#f03-kicker", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+      tl.fromTo("#f03-h1", { yPercent: 105 }, { yPercent: 0, duration: 0.75, ease: "power3.out" }, 0.3);
+      tl.fromTo("#f03-h2", { yPercent: 105 }, { yPercent: 0, duration: 0.75, ease: "power3.out" }, 0.85);
+      tl.fromTo(
+        ["#f03-col-l", "#f03-col-r"],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.6, ease: "power2.out", stagger: 0.15 },
+        1.45
+      );
+
+      ROWS.forEach((r, i) => {
+        const T = 2.0 + i * 3.2;
+        tl.fromTo(
+          `#f03-rule-${i}`,
+          { scaleX: 0, transformOrigin: "0% 50%" },
+          { scaleX: 1, duration: 0.7, ease: "power2.inOut" },
+          T - 0.15
+        );
+        // Klischee erscheint …
+        tl.fromTo(`#f03-c-${i}`, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, T);
+        // … und wird rot durchgestrichen.
+        tl.fromTo(
+          `#f03-s-${i}`,
+          { scaleX: 0, transformOrigin: "0% 50%" },
+          { scaleX: 1, duration: 0.45, ease: "power2.inOut" },
+          T + 0.75
+        );
+        tl.to(`#f03-c-${i}`, { color: "#7a8585", duration: 0.4, ease: "power2.out" }, T + 0.95);
+        // Die KNIGGE-Antwort
+        tl.fromTo(
+          `#f03-b-${i}`,
+          { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" },
+          { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" },
+          T + 1.1
+        );
+        tl.fromTo(`#f03-m-${i}`, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, T + 1.15);
+        tl.fromTo(`#f03-u-${i}`, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, T + 1.4);
+      });
+      tl.fromTo(
+        "#f03-rule-end",
+        { scaleX: 0, transformOrigin: "0% 50%" },
+        { scaleX: 1, duration: 0.7, ease: "power2.inOut" },
+        2.0 + 3 * 3.2 + 0.6
+      );
+
+      window.__timelines["03-klischees"] = tl;
+    })();
+  </script>
+</template>

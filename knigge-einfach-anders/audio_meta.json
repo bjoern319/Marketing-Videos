@@ -1,0 +1,22 @@
+{
+  "bgm": { "path": "assets/audio/knigge-bgm.mp3", "volume": 0.8 },
+  "voices": [],
+  "sfx": [
+    { "frame": 1, "file": "assets/sfx/pop.mp3", "offset_s": 3.17, "duration_s": 0.72, "volume": 0.35 },
+    { "frame": 1, "file": "assets/sfx/whoosh-cinematic.mp3", "offset_s": 3.0, "duration_s": 5.5, "volume": 0.28 },
+    { "frame": 2, "file": "assets/sfx/whoosh-short.mp3", "offset_s": 0.15, "duration_s": 0.57, "volume": 0.2 },
+    { "frame": 3, "file": "assets/sfx/whoosh-short.mp3", "offset_s": 2.7, "duration_s": 0.57, "volume": 0.16 },
+    { "frame": 3, "file": "assets/sfx/whoosh-short.mp3", "offset_s": 5.9, "duration_s": 0.57, "volume": 0.16 },
+    { "frame": 3, "file": "assets/sfx/whoosh-short.mp3", "offset_s": 9.1, "duration_s": 0.57, "volume": 0.16 },
+    { "frame": 3, "file": "assets/sfx/whoosh-short.mp3", "offset_s": 12.3, "duration_s": 0.57, "volume": 0.16 },
+    { "frame": 4, "file": "assets/sfx/pop.mp3", "offset_s": 1.32, "duration_s": 0.72, "volume": 0.16 },
+    { "frame": 4, "file": "assets/sfx/pop.mp3", "offset_s": 2.62, "duration_s": 0.72, "volume": 0.16 },
+    { "frame": 4, "file": "assets/sfx/pop.mp3", "offset_s": 3.92, "duration_s": 0.72, "volume": 0.16 },
+    { "frame": 6, "file": "assets/sfx/pop.mp3", "offset_s": 1.55, "duration_s": 0.72, "volume": 0.3 },
+    { "frame": 7, "file": "assets/sfx/click.mp3", "offset_s": 1.85, "duration_s": 0.37, "volume": 0.3 },
+    { "frame": 7, "file": "assets/sfx/click.mp3", "offset_s": 3.25, "duration_s": 0.37, "volume": 0.3 },
+    { "frame": 7, "file": "assets/sfx/click.mp3", "offset_s": 4.65, "duration_s": 0.37, "volume": 0.3 },
+    { "frame": 7, "file": "assets/sfx/click.mp3", "offset_s": 6.05, "duration_s": 0.37, "volume": 0.3 },
+    { "frame": 8, "file": "assets/sfx/chime.mp3", "offset_s": 4.0, "duration_s": 2.5, "volume": 0.35 }
+  ]
+}

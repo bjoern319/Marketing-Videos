@@ -1,0 +1,270 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      src: url("assets/fonts/Montserrat-Variable.woff2") format("woff2");
+      font-weight: 300 900;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      font-family: "Montserrat", sans-serif;
+    }
+    .f06-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 80px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 80px),
+        radial-gradient(ellipse 60% 70% at 72% 50%, #384343 0%, #2c3535 70%);
+    }
+    .f06-kicker {
+      position: absolute;
+      left: 120px;
+      top: 292px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: #e8656b;
+    }
+    .f06-mask {
+      position: absolute;
+      left: 120px;
+      top: 330px;
+      overflow: hidden;
+      height: 106px;
+    }
+    .f06-h {
+      display: block;
+      font-size: 84px;
+      font-weight: 800;
+      line-height: 106px;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .f06-sub {
+      position: absolute;
+      left: 120px;
+      top: 462px;
+      width: 760px;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.38;
+      color: #d2d9d8;
+    }
+    .f06-subline {
+      display: block;
+      white-space: nowrap;
+    }
+    .f06-info {
+      position: absolute;
+      left: 120px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 27px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .f06-info-muted {
+      font-size: 25px;
+      font-weight: 500;
+      color: #aab4b3;
+    }
+    .f06-info svg {
+      display: block;
+      width: 26px;
+      height: 26px;
+      flex: none;
+    }
+    .f06-net {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      display: block;
+    }
+    .f06-node {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      margin-left: -6px;
+      margin-top: -6px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: block;
+    }
+    .f06-label {
+      position: absolute;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 30px;
+      color: #e8eeec;
+      white-space: nowrap;
+      display: block;
+    }
+    .f06-pin {
+      position: absolute;
+      left: 1336px;
+      top: 440px;
+      width: 48px;
+      height: 62px;
+      display: block;
+      overflow: visible;
+    }
+    .f06-ring {
+      position: absolute;
+      left: 1300px;
+      top: 440px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #e8656b;
+      display: block;
+      opacity: 0;
+    }
+    .f06-center {
+      position: absolute;
+      left: 1260px;
+      top: 512px;
+      width: 200px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+  </style>
+
+  <div id="root" data-composition-id="06-heimat" data-start="0" data-duration="8.5" data-width="1920" data-height="1080">
+    <div class="f06-bg"></div>
+
+    <div class="f06-kicker" id="f06-kicker">VERWURZELT SEIT 2006</div>
+    <div class="f06-mask"><span class="f06-h" id="f06-h">Wir sind von hier.</span></div>
+    <div class="f06-sub" id="f06-sub">
+      <span class="f06-subline">Wir kennen Bergisch Gladbach –</span>
+      <span class="f06-subline">Stadtteil für Stadtteil.</span>
+    </div>
+
+    <div class="f06-info" id="f06-i1" style="top: 640px">
+      <svg viewBox="0 0 26 26"><path d="M13 2 C7.5 2 4 6 4 10.6 C4 16.5 13 24 13 24 C13 24 22 16.5 22 10.6 C22 6 18.5 2 13 2 Z" fill="#ca2c35" /><circle cx="13" cy="10.5" r="3.4" fill="#2c3535" /></svg>
+      <span>Kompetenzcenter Laurentiusstraße 98</span>
+    </div>
+    <div class="f06-info f06-info-muted" id="f06-i2" style="top: 692px">
+      <svg viewBox="0 0 26 26"><rect x="8" y="8" width="10" height="10" fill="#ca2c35" /></svg>
+      <span>Weitere Büros in Köln und Wipperfürth</span>
+    </div>
+
+    <svg class="f06-net" id="f06-net" viewBox="0 0 1920 1080"></svg>
+    <div id="f06-nodes"></div>
+
+    <div class="f06-ring" id="f06-ring"></div>
+    <svg class="f06-pin" id="f06-pin" viewBox="0 0 48 62">
+      <path d="M24 2 C12 2 4 10.5 4 21 C4 34 24 60 24 60 C24 60 44 34 44 21 C44 10.5 36 2 24 2 Z" fill="#ca2c35" />
+      <circle cx="24" cy="21" r="8" fill="#ffffff" />
+    </svg>
+    <div class="f06-center" id="f06-center">Stadtmitte</div>
+  </div>
+
+  <script>
+    (function () {
+      // Stilisierte Lage der Stadtteile rund um die Stadtmitte (keine exakte Karte).
+      const CX = 1360;
+      const CY = 500;
+      const U = 165;
+      const PLACES = [
+        ["Schildgen", -1.9, -1.95],
+        ["Paffrath", -1.35, -1.05],
+        ["Hand", -0.35, -1.45],
+        ["Sand", 0.95, -0.55],
+        ["Herkenrath", 1.85, -0.45],
+        ["Moitzfeld", 1.9, 1.15],
+        ["Bensberg", 1.15, 1.45],
+        ["Frankenforst", 0.25, 2.25],
+        ["Refrath", -0.75, 2.0],
+        ["Gronau", -1.15, 0.3],
+      ];
+      const net = document.getElementById("f06-net");
+      const nodes = document.getElementById("f06-nodes");
+      const NS = "http://www.w3.org/2000/svg";
+
+      PLACES.forEach((p, i) => {
+        const x = CX + p[1] * U;
+        const y = CY + p[2] * U;
+        const line = document.createElementNS(NS, "line");
+        line.setAttribute("x1", CX);
+        line.setAttribute("y1", CY);
+        line.setAttribute("x2", x);
+        line.setAttribute("y2", y);
+        line.setAttribute("stroke", "rgba(255,255,255,0.2)");
+        line.setAttribute("stroke-width", "1.5");
+        line.setAttribute("id", `f06-l-${i}`);
+        net.appendChild(line);
+
+        const dot = document.createElement("span");
+        dot.className = "f06-node";
+        dot.id = `f06-d-${i}`;
+        dot.style.left = x + "px";
+        dot.style.top = y + "px";
+        nodes.appendChild(dot);
+
+        const label = document.createElement("span");
+        label.className = "f06-label";
+        label.id = `f06-t-${i}`;
+        label.textContent = p[0];
+        label.style.top = y - 15 + "px";
+        if (p[1] < 0) {
+          label.style.right = 1920 - (x - 18) + "px";
+        } else {
+          label.style.left = x + 18 + "px";
+        }
+        nodes.appendChild(label);
+      });
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#f06-kicker", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.2);
+      tl.fromTo("#f06-h", { yPercent: 105 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 0.35);
+      tl.fromTo("#f06-sub", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 1.0);
+
+      // Die Nadel: KNIGGE in der Stadtmitte
+      tl.fromTo("#f06-pin", { opacity: 0, y: -70 }, { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 1.0);
+      tl.fromTo("#f06-center", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.4);
+      tl.fromTo(
+        "#f06-ring",
+        { opacity: 0.7, scale: 0.2, transformOrigin: "50% 50%" },
+        { opacity: 0, scale: 2.2, duration: 1.2, ease: "power2.out" },
+        1.5
+      );
+
+      // Stadtteil für Stadtteil
+      PLACES.forEach((p, i) => {
+        const T = 1.8 + i * 0.27;
+        const line = document.getElementById(`f06-l-${i}`);
+        const len = Math.ceil(Math.hypot(p[1] * U, p[2] * U));
+        line.setAttribute("stroke-dasharray", `${len} ${len}`);
+        tl.fromTo(line, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, T);
+        tl.fromTo(
+          `#f06-d-${i}`,
+          { opacity: 0, scale: 0 },
+          { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" },
+          T + 0.35
+        );
+        tl.fromTo(
+          `#f06-t-${i}`,
+          { opacity: 0, x: p[1] < 0 ? 10 : -10 },
+          { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" },
+          T + 0.4
+        );
+      });
+
+      tl.fromTo("#f06-i1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 4.7);
+      tl.fromTo("#f06-i2", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 5.05);
+
+      window.__timelines["06-heimat"] = tl;
+    })();
+  </script>
+</template>

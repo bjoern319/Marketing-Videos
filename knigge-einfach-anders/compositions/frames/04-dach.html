@@ -1,0 +1,238 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      src: url("assets/fonts/Montserrat-Variable.woff2") format("woff2");
+      font-weight: 300 900;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      font-family: "Montserrat", sans-serif;
+    }
+    .f04-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 30% 20%, #384343 0%, #2c3535 65%);
+    }
+    .f04-mark {
+      position: absolute;
+      left: 1360px;
+      top: 560px;
+      width: 760px;
+      height: 760px;
+      display: block;
+      opacity: 0.3;
+    }
+    .f04-kicker {
+      position: absolute;
+      left: 140px;
+      top: 104px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: #e8656b;
+    }
+    .f04-mask {
+      position: absolute;
+      left: 140px;
+      top: 142px;
+      overflow: hidden;
+      height: 92px;
+    }
+    .f04-h {
+      display: block;
+      font-size: 72px;
+      font-weight: 800;
+      line-height: 92px;
+      letter-spacing: -0.015em;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .f04-card {
+      position: absolute;
+      top: 316px;
+      width: 520px;
+      height: 400px;
+      border-radius: 8px;
+      background: #404b4b;
+      overflow: hidden;
+    }
+    .f04-card-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 6px;
+      background: #ca2c35;
+      display: block;
+    }
+    .f04-ico {
+      position: absolute;
+      left: 48px;
+      top: 58px;
+      width: 92px;
+      height: 92px;
+      display: block;
+      overflow: visible;
+    }
+    .f04-ico .f04-stroke {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .f04-ico .f04-accent {
+      fill: none;
+      stroke: #e8656b;
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .f04-title {
+      position: absolute;
+      left: 48px;
+      top: 186px;
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+    }
+    .f04-text {
+      position: absolute;
+      left: 48px;
+      top: 252px;
+      width: 424px;
+      font-size: 27px;
+      font-weight: 500;
+      line-height: 1.42;
+      color: #c3cbca;
+    }
+    .f04-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 790px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      font-size: 30px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .f04-chip {
+      display: block;
+    }
+    .f04-sq {
+      display: block;
+      width: 12px;
+      height: 12px;
+      background: #ca2c35;
+    }
+    .f04-tail {
+      color: #c3cbca;
+      font-weight: 500;
+    }
+  </style>
+
+  <div id="root" data-composition-id="04-dach" data-start="0" data-duration="9.1" data-width="1920" data-height="1080">
+    <div class="f04-bg"></div>
+    <svg class="f04-mark" id="f04-mark" viewBox="0 0 100 100">
+      <g fill="none" stroke="#ca2c35" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="miter">
+        <polygon points="0,0 100,0 100,100 0,100" vector-effect="non-scaling-stroke" />
+        <polyline points="79.5,0 0,100" vector-effect="non-scaling-stroke" />
+        <polyline points="47.5,40.2 100,100" vector-effect="non-scaling-stroke" />
+      </g>
+    </svg>
+
+    <div class="f04-kicker" id="f04-kicker">IMMOBILIEN-KOMPETENZCENTER BERGISCH GLADBACH</div>
+    <div class="f04-mask"><span class="f04-h" id="f04-h">Alles unter einem Dach.</span></div>
+
+    <div class="f04-card" id="f04-card-0" style="left: 140px">
+      <span class="f04-card-bar" id="f04-bar-0"></span>
+      <!-- Schlüssel: Vermitteln -->
+      <svg class="f04-ico" viewBox="0 0 92 92">
+        <circle class="f04-stroke f04-draw-0" cx="28" cy="46" r="18" />
+        <circle class="f04-accent f04-draw-0" cx="28" cy="46" r="6" />
+        <path class="f04-stroke f04-draw-0" d="M46 46 H86 M72 46 V60 M82 46 V56" />
+      </svg>
+      <div class="f04-title" id="f04-t-0">Vermitteln</div>
+      <div class="f04-text" id="f04-x-0">Wohn- und Gewerbeimmobilien: verkaufen, kaufen, vermieten.</div>
+    </div>
+
+    <div class="f04-card" id="f04-card-1" style="left: 700px">
+      <span class="f04-card-bar" id="f04-bar-1"></span>
+      <!-- Mehrfamilienhaus: Verwalten -->
+      <svg class="f04-ico" viewBox="0 0 92 92">
+        <path class="f04-stroke f04-draw-1" d="M14 86 V22 L46 6 L78 22 V86 Z" />
+        <path class="f04-stroke f04-draw-1" d="M28 34 H38 M54 34 H64 M28 50 H38 M54 50 H64" />
+        <path class="f04-accent f04-draw-1" d="M38 86 V66 H54 V86" />
+      </svg>
+      <div class="f04-title" id="f04-t-1">Verwalten</div>
+      <div class="f04-text" id="f04-x-1">Miet- und WEG-Verwaltung – individuell und bedarfsgerecht.</div>
+    </div>
+
+    <div class="f04-card" id="f04-card-2" style="left: 1260px">
+      <span class="f04-card-bar" id="f04-bar-2"></span>
+      <!-- Sessel + Leuchte: Gestalten -->
+      <svg class="f04-ico" viewBox="0 0 92 92">
+        <path class="f04-stroke f04-draw-2" d="M10 56 V44 Q10 38 16 38 Q22 38 22 44 V56 M70 56 V44 Q70 38 76 38 Q82 38 82 44 V56" />
+        <path class="f04-stroke f04-draw-2" d="M22 52 V30 Q22 20 32 20 H60 Q70 20 70 30 V52 M10 56 H82 V70 H10 Z M18 70 V80 M74 70 V80" />
+        <path class="f04-accent f04-draw-2" d="M46 6 V14 M38 6 H54" />
+      </svg>
+      <div class="f04-title" id="f04-t-2">Gestalten</div>
+      <div class="f04-text" id="f04-x-2">Jede Lebensphase braucht ihre eigene Wohnidee.</div>
+    </div>
+
+    <div class="f04-line" id="f04-line">
+      <span class="f04-chip">Verkauf</span><span class="f04-sq"></span>
+      <span class="f04-chip">Vermietung</span><span class="f04-sq"></span>
+      <span class="f04-chip">Verwaltung</span><span class="f04-sq"></span>
+      <span class="f04-chip">Entwicklung</span>
+      <span class="f04-chip f04-tail">– aus einer Hand.</span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#f04-mark", { opacity: 0, x: 60 }, { opacity: 0.3, x: 0, duration: 1.6, ease: "power3.out" }, 0);
+      tl.fromTo("#f04-kicker", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.2);
+      tl.fromTo("#f04-h", { yPercent: 105 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 0.35);
+
+      // Dreierregel: drei Karten nacheinander
+      [0, 1, 2].forEach((i) => {
+        const T = 1.35 + i * 1.3;
+        tl.fromTo(`#f04-card-${i}`, { opacity: 0, y: 46 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, T);
+        tl.fromTo(
+          `#f04-bar-${i}`,
+          { scaleX: 0, transformOrigin: "0% 50%" },
+          { scaleX: 1, duration: 0.6, ease: "power2.inOut" },
+          T + 0.2
+        );
+        // Icon zeichnet sich (stroke draw)
+        document.querySelectorAll(".f04-draw-" + i).forEach((el) => {
+          const len = Math.ceil(el.getTotalLength());
+          el.style.strokeDasharray = len + " " + len;
+          tl.fromTo(el, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, T + 0.3);
+        });
+        tl.fromTo(`#f04-t-${i}`, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, T + 0.45);
+        tl.fromTo(`#f04-x-${i}`, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, T + 0.65);
+      });
+
+      tl.fromTo(
+        "#f04-line > *",
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.09 },
+        5.5
+      );
+
+      window.__timelines["04-dach"] = tl;
+    })();
+  </script>
+</template>

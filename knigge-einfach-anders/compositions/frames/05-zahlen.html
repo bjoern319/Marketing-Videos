@@ -1,0 +1,223 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Montserrat";
+      src: url("assets/fonts/Montserrat-Variable.woff2") format("woff2");
+      font-weight: 300 900;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      font-family: "Montserrat", sans-serif;
+    }
+    .f05-bg {
+      position: absolute;
+      inset: 0;
+      background: #eceeea;
+    }
+    .f05-kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 104px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: #ca2c35;
+    }
+    .f05-stat {
+      position: absolute;
+      top: 176px;
+      width: 560px;
+      height: 330px;
+      text-align: center;
+    }
+    .f05-pre {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 30px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #6b7777;
+    }
+    .f05-num {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 30px;
+      font-size: 150px;
+      font-weight: 800;
+      line-height: 170px;
+      letter-spacing: -0.03em;
+      color: #ca2c35;
+      font-variant-numeric: tabular-nums;
+    }
+    .f05-label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 214px;
+      font-size: 32px;
+      font-weight: 700;
+      color: #444f4f;
+    }
+    .f05-note {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 262px;
+      font-size: 24px;
+      font-weight: 500;
+      color: #5e6a6a;
+    }
+    .f05-div {
+      position: absolute;
+      top: 236px;
+      width: 2px;
+      height: 230px;
+      background: #cfd5d1;
+    }
+    .f05-quote {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 592px;
+      text-align: center;
+    }
+    .f05-qmask {
+      overflow: hidden;
+      height: 74px;
+      margin-bottom: 6px;
+    }
+    .f05-q {
+      display: block;
+      font-size: 54px;
+      line-height: 74px;
+      letter-spacing: -0.01em;
+      color: #444f4f;
+      white-space: nowrap;
+    }
+    .f05-q1 {
+      font-weight: 500;
+    }
+    .f05-q2 {
+      font-weight: 800;
+    }
+    .f05-red {
+      color: #ca2c35;
+    }
+    .f05-src {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 808px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      font-size: 24px;
+      font-weight: 600;
+      color: #5e6a6a;
+    }
+    .f05-badge {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+
+  <div id="root" data-composition-id="05-zahlen" data-start="0" data-duration="10.6" data-width="1920" data-height="1080">
+    <div class="f05-bg"></div>
+    <div class="f05-kicker" id="f05-kicker">DAS SIND WIR</div>
+
+    <div class="f05-stat" id="f05-s0" style="left: 120px">
+      <div class="f05-pre">SEIT 2006</div>
+      <div class="f05-num" id="f05-n0">0</div>
+      <div class="f05-label">Jahre vor Ort</div>
+      <div class="f05-note">in Bergisch Gladbach</div>
+    </div>
+    <div class="f05-div" id="f05-d0" style="left: 680px"></div>
+    <div class="f05-stat" id="f05-s1" style="left: 680px">
+      <div class="f05-pre">RUND</div>
+      <div class="f05-num" id="f05-n1">0</div>
+      <div class="f05-label">Wohneinheiten</div>
+      <div class="f05-note">in Miet- &amp; WEG-Verwaltung</div>
+    </div>
+    <div class="f05-div" id="f05-d1" style="left: 1240px"></div>
+    <div class="f05-stat" id="f05-s2" style="left: 1240px">
+      <div class="f05-pre">TEAM</div>
+      <div class="f05-num" id="f05-n2">0</div>
+      <div class="f05-label">Menschen</div>
+      <div class="f05-note">inhabergeführt</div>
+    </div>
+
+    <div class="f05-quote">
+      <div class="f05-qmask"><span class="f05-q f05-q1" id="f05-q1">„Der Service eines großen Unternehmens.</span></div>
+      <div class="f05-qmask">
+        <span class="f05-q f05-q2" id="f05-q2">Die Persönlichkeit eines <span class="f05-red">Familienbetriebs.</span>“</span>
+      </div>
+    </div>
+    <div class="f05-src" id="f05-src">
+      <svg class="f05-badge" viewBox="0 0 100 100">
+        <polygon points="0,0 79.5,0 0,100" fill="#c12a33" />
+        <polygon points="79.5,0 100,0 100,100 47.5,40.2" fill="#7d1720" />
+        <polygon points="47.5,40.2 100,100 0,100" fill="#a2222b" />
+      </svg>
+      <span>Inhaber Oliver Knigge – Kaufmann der Grundstücks- und Wohnungswirtschaft &amp; zertifizierter Immobiliengutachter</span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#f05-kicker", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.2);
+
+      // Anker-Zahlen zählen hoch (Social Proof + Autorität)
+      const STATS = [
+        { id: 0, to: 20, at: 0.55, dur: 1.3 },
+        { id: 1, to: 1600, at: 1.75, dur: 1.7 },
+        { id: 2, to: 17, at: 3.05, dur: 1.2 },
+      ];
+      STATS.forEach((s) => {
+        const el = document.getElementById(`f05-n${s.id}`);
+        const counter = { v: 0 };
+        tl.fromTo(`#f05-s${s.id}`, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, s.at);
+        tl.fromTo(
+          counter,
+          { v: 0 },
+          {
+            v: s.to,
+            duration: s.dur,
+            ease: "power2.out",
+            onUpdate: () => {
+              el.textContent = fmt(Math.round(counter.v));
+            },
+          },
+          s.at + 0.1
+        );
+      });
+      tl.fromTo(
+        ["#f05-d0", "#f05-d1"],
+        { scaleY: 0, transformOrigin: "50% 0%" },
+        { scaleY: 1, duration: 0.7, ease: "power2.inOut", stagger: 1.2 },
+        1.5
+      );
+
+      // Zitat: groß + persönlich
+      tl.fromTo("#f05-q1", { yPercent: 105 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 4.85);
+      tl.fromTo("#f05-q2", { yPercent: 105 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 5.9);
+      // Autorität: Qualifikation des Inhabers
+      tl.fromTo("#f05-src", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 7.1);
+
+      window.__timelines["05-zahlen"] = tl;
+    })();
+  </script>
+</template>
