@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="chrome-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        /* Logo-Bug (klein, oben links; im Hochformat oben mittig) */
+        .ch-bug {
+          position: absolute;
+          left: 4cqw;
+          top: 5.6cqh;
+          height: 5.4cqmin;
+          width: 24.4cqmin;
+        }
+        .ch-bug-inner {
+          width: 100%;
+          height: 100%;
+        }
+        .ch-bug svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        @container scene (orientation: portrait) {
+          .ch-bug {
+            left: calc(50cqw - 14.25cqmin);
+            top: 7.2cqh;
+            height: 6.3cqmin;
+            width: 28.5cqmin;
+          }
+        }
+        .ch-word {
+          font-family: "Montserrat", sans-serif;
+          fill: #444f4f;
+        }
+        /* Brand-Wipe: zwei diagonale Bahnen in KNIGGE-Rot / Bordeaux (K-Faltung) */
+        .ch-wipe {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          pointer-events: none;
+        }
+        .ch-pane {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 220cqw;
+          clip-path: polygon(20% 0, 100% 0, 80% 100%, 0 100%);
+        }
+        .ch-pane-red {
+          background: #ca2c35;
+        }
+        .ch-pane-deep {
+          background: #6d131b;
+        }
+      </style>
+
+      <div id="root" data-composition-id="chrome" data-width="1920" data-height="1080" data-duration="75">
+        <div class="ch-bug">
+          <div class="ch-bug-inner" id="ch-bug" data-layout-allow-overlap>
+            <svg viewBox="0 0 452 100" role="img" aria-label="KNIGGE Immobilien" data-layout-allow-overlap>
+              <defs>
+                <linearGradient id="ch-k-a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6">
+                  <stop offset="0" stop-color="#5e0f18" />
+                  <stop offset="0.56" stop-color="#a4222b" />
+                  <stop offset="0.8" stop-color="#c12a33" />
+                  <stop offset="0.93" stop-color="#ca2c35" />
+                </linearGradient>
+                <linearGradient id="ch-k-r" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0">
+                  <stop offset="0" stop-color="#4a0a13" />
+                  <stop offset="1" stop-color="#b0252e" />
+                </linearGradient>
+                <linearGradient id="ch-k-b" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100">
+                  <stop offset="0" stop-color="#480a12" />
+                  <stop offset="0.5" stop-color="#a2222b" />
+                  <stop offset="0.85" stop-color="#ca2c35" />
+                </linearGradient>
+              </defs>
+              <path id="ch-f-a" d="M0 0 H79.5 L0 100 Z" fill="url(#ch-k-a)" />
+              <path id="ch-f-r" d="M79.5 0 H100 V100 L47.5 40.2 Z" fill="url(#ch-k-r)" />
+              <path id="ch-f-b" d="M0 100 L47.5 40.2 L100 100 Z" fill="url(#ch-k-b)" />
+              <text class="ch-word" id="ch-w1" data-layout-allow-overlap x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing">KNIGGE</text>
+              <text class="ch-word" id="ch-w2" data-layout-allow-overlap x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing">IMMOBILIEN</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="ch-wipe">
+          <div class="ch-pane ch-pane-deep" id="ch-w1-deep"></div>
+          <div class="ch-pane ch-pane-red" id="ch-w1-red"></div>
+        </div>
+        <div class="ch-wipe">
+          <div class="ch-pane ch-pane-deep" id="ch-w2-deep"></div>
+          <div class="ch-pane ch-pane-red" id="ch-w2-red"></div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+
+          // Logo-Bug: sanft ein, bleibt bis zum großen Logo-Abschluss
+          tl.fromTo("#ch-bug", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.9, ease: "power2.out" }, 0.8);
+          tl.to("#ch-bug", { opacity: 0, duration: 0.5, ease: "power1.in" }, 65.0);
+
+          // Brand-Wipe: Bahn läuft von rechts nach links; bei xPercent -27 ist das Bild voll bedeckt.
+          function wipe(redSel, deepSel, cut) {
+            tl.fromTo(deepSel, { xPercent: 46 }, { xPercent: -27, duration: 0.42, ease: "power2.in", immediateRender: true }, cut - 0.48);
+            tl.to(deepSel, { xPercent: -100, duration: 0.5, ease: "power2.out" }, cut - 0.06);
+            tl.fromTo(redSel, { xPercent: 46 }, { xPercent: -27, duration: 0.42, ease: "power2.in", immediateRender: true }, cut - 0.42);
+            tl.to(redSel, { xPercent: -100, duration: 0.5, ease: "power2.out" }, cut);
+          }
+          wipe("#ch-w1-red", "#ch-w1-deep", 45.0);
+          wipe("#ch-w2-red", "#ch-w2-deep", 66.0);
+
+          window.__timelines["chrome"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "knigge-wohnen-im-ruhestand",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.114 preview",
+    "check": "npx --yes hyperframes@0.8.114 check",
+    "render": "npm run render:9x16-4k && npm run render:16x9-4k && npm run export",
+    "render:9x16-4k": "npx --yes hyperframes@0.8.114 render --quality delivery -c formats/9x16.html --resolution portrait-4k -o renders/knigge-wohnen-im-ruhestand-9x16-4k.mp4",
+    "render:16x9-4k": "npx --yes hyperframes@0.8.114 render --quality delivery --resolution landscape-4k -o renders/knigge-wohnen-im-ruhestand-16x9-4k.mp4",
+    "export": "bash tools/export.sh",
+    "music": "python3 tools/music/compose.py --sf2 \"$SF2\" --out assets/audio/knigge-theme.m4a --midi tools/music/knigge-theme.mid",
+    "publish": "npx --yes hyperframes@0.8.114 publish"
+  }
+}

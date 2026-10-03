@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s4-begleitung-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+
+        /* ---------- Kopf ---------- */
+        .s4-head {
+          position: absolute;
+          left: 6.5cqw;
+          top: 15cqh;
+          width: 80cqw;
+        }
+        .s4-q {
+          margin: 0 0 1.2cqmin;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 5cqmin;
+          line-height: 1.15;
+          color: #5e6a6a;
+        }
+        .s4-a {
+          margin: 0;
+          font-size: 7.4cqmin;
+          font-weight: 700;
+          line-height: 1.08;
+          letter-spacing: -0.025em;
+        }
+        .s4-red {
+          color: #ca2c35;
+        }
+
+        /* ---------- Weg mit 4 Stationen (16:9: horizontal) ---------- */
+        .s4-track {
+          position: absolute;
+          left: 7cqw;
+          right: 7cqw;
+          top: 49cqh;
+          height: 32cqh;
+        }
+        .s4-line,
+        .s4-fill {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 4.2cqmin;
+          height: 0.6cqmin;
+          margin-top: -0.3cqmin;
+          border-radius: 1cqmin;
+        }
+        .s4-line {
+          background: repeating-linear-gradient(90deg, #b9c0bc 0 1.6cqmin, transparent 1.6cqmin 2.8cqmin);
+        }
+        .s4-fill {
+          background: #ca2c35;
+          transform-origin: 0% 50%;
+          transform: scaleX(var(--prog));
+          --prog: 0;
+        }
+        .s4-fill-p {
+          display: none;
+        }
+        .s4-node {
+          position: absolute;
+          top: 0;
+          left: var(--pl);
+          width: 0;
+          height: 100%;
+        }
+        .s4-dot,
+        .s4-end {
+          position: absolute;
+          left: -4.2cqmin;
+          top: 0;
+          width: 8.4cqmin;
+          height: 8.4cqmin;
+          border-radius: 1.2cqmin;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .s4-dot {
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 4cqmin;
+          font-weight: 700;
+          box-shadow: 0 0 0 1cqmin #eceeea;
+        }
+        .s4-end {
+          background: #ffffff;
+          border: 0.35cqmin solid #444f4f;
+          box-shadow: 0 0 0 1cqmin #eceeea;
+        }
+        .s4-end svg {
+          width: 62%;
+          height: 62%;
+          overflow: visible;
+        }
+        .s4-end path {
+          fill: none;
+          stroke: #444f4f;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s4-end .s4-roof {
+          fill: #ca2c35;
+        }
+        .s4-label {
+          position: absolute;
+          left: -9.6cqw;
+          width: 19.2cqw;
+          top: 11.5cqmin;
+          text-align: center;
+        }
+        .s4-title {
+          margin: 0 0 0.6cqmin;
+          font-size: 3.6cqmin;
+          font-weight: 700;
+          line-height: 1.15;
+          letter-spacing: -0.01em;
+        }
+        .s4-sub {
+          margin: 0;
+          font-size: 3.1cqmin;
+          font-weight: 400;
+          line-height: 1.2;
+          color: #5e6a6a;
+        }
+        .s4-foot {
+          position: absolute;
+          left: 6.5cqw;
+          bottom: 8cqh;
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 4.5cqmin;
+          line-height: 1.2;
+        }
+
+        /* ---------- 9:16: Weg vertikal, Beschriftung rechts ---------- */
+        @container scene (orientation: portrait) {
+          .s4-head {
+            left: 8cqw;
+            width: 84cqw;
+            top: 14.5cqh;
+          }
+          .s4-track {
+            left: 10cqw;
+            right: 8cqw;
+            top: 35cqh;
+            height: 37cqh;
+          }
+          .s4-line,
+          .s4-fill {
+            left: 4.2cqmin;
+            right: auto;
+            top: 0;
+            bottom: 0;
+            width: 0.6cqmin;
+            height: auto;
+            margin-top: 0;
+            margin-left: -0.3cqmin;
+          }
+          .s4-line {
+            background: repeating-linear-gradient(180deg, #b9c0bc 0 1.6cqmin, transparent 1.6cqmin 2.8cqmin);
+          }
+          .s4-fill {
+            transform-origin: 50% 0%;
+            transform: scaleY(var(--prog));
+          }
+          .s4-fill-l {
+            display: none;
+          }
+          .s4-fill-p {
+            display: block;
+          }
+          .s4-node {
+            left: 0;
+            top: var(--pp);
+            width: 100%;
+            height: 0;
+          }
+          .s4-dot,
+          .s4-end {
+            left: 0;
+            top: -4.2cqmin;
+          }
+          .s4-label {
+            left: 12.5cqmin;
+            right: 0;
+            width: auto;
+            top: -4.6cqmin;
+            text-align: left;
+          }
+          .s4-title {
+            font-size: 4.1cqmin;
+          }
+          .s4-sub {
+            font-size: 3.3cqmin;
+          }
+          .s4-foot {
+            left: 8cqw;
+            right: 8cqw;
+            bottom: auto;
+            top: 75.5cqh;
+            font-size: 4.4cqmin;
+          }
+        }
+        .w {
+          display: inline-block;
+        }
+      </style>
+
+      <div id="root" data-composition-id="s4-begleitung" data-width="1920" data-height="1080" data-duration="12">
+        <div class="s4-head">
+          <p class="s4-q" id="s4-q">Und der ganze Aufwand?</p>
+          <p class="s4-a" id="s4-a">Den nehmen <span class="s4-red">wir</span> Ihnen ab.</p>
+        </div>
+
+        <div class="s4-track">
+          <div class="s4-line"></div>
+          <div class="s4-fill s4-fill-l" id="s4-fill-l"></div>
+          <div class="s4-fill s4-fill-p" id="s4-fill-p"></div>
+
+          <div class="s4-node" style="--pl: 0%; --pp: 0%">
+            <div class="s4-end" id="s4-start">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="s4-roof" d="M3 11 L12 3.5 L21 11 Z" />
+                <path d="M5.5 10.5 V20.5 H18.5 V10.5 M10 20.5 V15 H14 V20.5" />
+              </svg>
+            </div>
+          </div>
+          <div class="s4-node" style="--pl: 13%; --pp: 20%">
+            <div class="s4-dot" id="s4-d1">1</div>
+            <div class="s4-label" id="s4-l1">
+              <p class="s4-title">Wertermittlung</p>
+              <p class="s4-sub">kostenlos &amp; unverbindlich</p>
+            </div>
+          </div>
+          <div class="s4-node" style="--pl: 37.6%; --pp: 40%">
+            <div class="s4-dot" id="s4-d2">2</div>
+            <div class="s4-label" id="s4-l2">
+              <p class="s4-title">Neue Wohnung finden</p>
+              <p class="s4-sub">zur Miete oder zum Kauf</p>
+            </div>
+          </div>
+          <div class="s4-node" style="--pl: 62.4%; --pp: 60%">
+            <div class="s4-dot" id="s4-d3">3</div>
+            <div class="s4-label" id="s4-l3">
+              <p class="s4-title">Haus verkaufen</p>
+              <p class="s4-sub">diskret &amp; zum fairen Preis</p>
+            </div>
+          </div>
+          <div class="s4-node" style="--pl: 87%; --pp: 80%">
+            <div class="s4-dot" id="s4-d4">4</div>
+            <div class="s4-label" id="s4-l4">
+              <p class="s4-title">Ankommen</p>
+              <p class="s4-sub">persönlich begleitet</p>
+            </div>
+          </div>
+          <div class="s4-node" style="--pl: 100%; --pp: 100%">
+            <div class="s4-end" id="s4-goal">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="s4-roof" d="M5 3.5 H19 V5.5 H5 Z" />
+                <path d="M6 5.5 V20.5 H18 V5.5 M9 8.5 H11 V10.5 H9 Z M13 8.5 H15 V10.5 H13 Z M9 13 H11 V15 H9 Z M13 13 H15 V15 H13 Z M10.5 20.5 V17.5 H13.5 V20.5" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <p class="s4-foot" id="s4-foot">Ein Ansprechpartner – <span style="white-space: nowrap">von Anfang bis Ende.</span></p>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s4-begleitung"]');
+          const $ = (s) => root.querySelector(s);
+
+          function splitWords(el) {
+            Array.from(el.childNodes).forEach((node) => {
+              if (node.nodeType === 3) {
+                const parts = node.textContent.split(/(\s+)/);
+                const frag = document.createDocumentFragment();
+                parts.forEach((p) => {
+                  if (!p) return;
+                  if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
+                  else {
+                    const s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = p;
+                    frag.appendChild(s);
+                  }
+                });
+                node.replaceWith(frag);
+              } else if (node.nodeType === 1) splitWords(node);
+            });
+            return Array.from(el.querySelectorAll(".w"));
+          }
+
+          const tl = gsap.timeline({ paused: true });
+
+          // Einwand (Gefühlsstimme) -> Antwort (KNIGGE-Stimme)
+          splitWords($("#s4-q")).forEach((w, i) =>
+            tl.fromTo(w, { opacity: 0, yPercent: 35 }, { opacity: 1, yPercent: 0, duration: 0.7, ease: "power3.out" }, 0.35 + i * 0.09),
+          );
+          tl.fromTo("#s4-a", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.75, ease: "power3.out" }, 1.05);
+
+          // Start-Icon (Haus)
+          tl.fromTo("#s4-start", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(2)" }, 1.75);
+
+          // Weg füllt sich Station für Station (svg-path-draw-Logik als Fortschritt)
+          const stations = [1.95, 3.6, 5.25, 6.9];
+          const progL = [0.13, 0.376, 0.624, 0.87];
+          const progP = [0.2, 0.4, 0.6, 0.8];
+          stations.forEach((t, i) => {
+            const fromL = i === 0 ? 0 : progL[i - 1];
+            const fromP = i === 0 ? 0 : progP[i - 1];
+            tl.fromTo("#s4-fill-l", { "--prog": fromL }, { "--prog": progL[i], duration: 0.45, ease: "power2.inOut", immediateRender: i === 0 }, t);
+            tl.fromTo("#s4-fill-p", { "--prog": fromP }, { "--prog": progP[i], duration: 0.45, ease: "power2.inOut", immediateRender: i === 0 }, t);
+            const k = i + 1;
+            tl.fromTo("#s4-d" + k, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(2.2)" }, t + 0.38);
+            tl.fromTo("#s4-l" + k, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t + 0.55);
+          });
+          tl.fromTo("#s4-fill-l", { "--prog": 0.87 }, { "--prog": 1, duration: 0.45, ease: "power2.inOut", immediateRender: false }, 8.4);
+          tl.fromTo("#s4-fill-p", { "--prog": 0.8 }, { "--prog": 1, duration: 0.45, ease: "power2.inOut", immediateRender: false }, 8.4);
+          tl.fromTo("#s4-goal", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 8.75);
+          // kleiner Freuden-Hüpfer am Ziel
+          tl.to("#s4-goal", { y: -8, duration: 0.18, ease: "power2.out" }, 9.35);
+          tl.to("#s4-goal", { y: 0, duration: 0.3, ease: "bounce.out" }, 9.53);
+
+          tl.fromTo("#s4-foot", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 9.2);
+
+          // Ausblenden
+          tl.to(["#s4-q", "#s4-a"], { opacity: 0, duration: 0.45, ease: "power1.in" }, 11.4);
+          tl.to(".s4-track", { opacity: 0, duration: 0.45, ease: "power1.in" }, 11.4);
+          tl.to("#s4-foot", { opacity: 0, duration: 0.45, ease: "power1.in" }, 11.4);
+
+          window.__timelines["s4-begleitung"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

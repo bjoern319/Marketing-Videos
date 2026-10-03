@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>KNIGGE Immobilien – Nicht weniger Zuhause. Mehr Leben. (9:16 · Instagram Reels)</title>
+    <script src="../assets/vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #eceeea;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #eceeea;
+      }
+      #root > div[data-composition-src] {
+        position: absolute;
+        inset: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      KNIGGE Immobilien – „Nicht weniger Zuhause. Mehr Leben.“ (9:16 · Instagram Reels)
+      Szenen: compositions/*.html (gemeinsam für 16:9 und 9:16, Layout per Container-Queries)
+      Musik: assets/audio/knigge-theme.m4a (80 BPM, 1 Takt = 3 s; Szenen liegen auf Taktgrenzen)
+    -->
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="75"
+      data-width="1080"
+      data-height="1920"
+      data-fps="30"
+    >
+      <div id="el-bg" data-composition-id="bg" data-composition-src="compositions/bg.html" data-start="0" data-duration="75" data-track-index="0" data-width="1080" data-height="1920"></div>
+      <div id="el-s1" data-composition-id="s1-haus" data-composition-src="compositions/s1-haus.html" data-start="0" data-duration="18" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s2" data-composition-id="s2-mehr-leben" data-composition-src="compositions/s2-mehr-leben.html" data-start="18" data-duration="21" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s3" data-composition-id="s3-zeitpunkt" data-composition-src="compositions/s3-zeitpunkt.html" data-start="39" data-duration="6" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s4" data-composition-id="s4-begleitung" data-composition-src="compositions/s4-begleitung.html" data-start="45" data-duration="12" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s5" data-composition-id="s5-vor-ort" data-composition-src="compositions/s5-vor-ort.html" data-start="57" data-duration="9" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s6" data-composition-id="s6-kontakt" data-composition-src="compositions/s6-kontakt.html" data-start="66" data-duration="9" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-chrome" data-composition-id="chrome" data-composition-src="compositions/chrome.html" data-start="0" data-duration="75" data-track-index="2" data-width="1080" data-height="1920"></div>
+      <audio
+        id="el-music"
+        src="assets/audio/knigge-theme.m4a"
+        data-start="0"
+        data-duration="75"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

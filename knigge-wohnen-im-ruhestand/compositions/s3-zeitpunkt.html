@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s3-zeitpunkt-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        /* aufgehende Sonne (ambient-glow-bloom) */
+        .s3-sun-wrap {
+          position: absolute;
+          left: calc(50cqw - 45cqmin);
+          bottom: -52cqmin;
+          width: 90cqmin;
+          height: 90cqmin;
+        }
+        .s3-sun {
+          width: 100%;
+          height: 100%;
+        }
+        .s3-sun svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .s3-ray {
+          fill: none;
+          stroke: #ca2c35;
+          stroke-width: 1.1;
+          stroke-linecap: round;
+          stroke-dasharray: 1 2;
+          stroke-dashoffset: 1.05;
+        }
+        .s3-copy {
+          position: absolute;
+          left: 12cqw;
+          right: 12cqw;
+          top: 16cqh;
+          height: 50cqh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+        @container scene (orientation: portrait) {
+          .s3-copy {
+            left: 8cqw;
+            right: 8cqw;
+            top: 20cqh;
+            height: 40cqh;
+          }
+          .s3-sun-wrap {
+            bottom: -30cqmin;
+          }
+        }
+        .s3-l1 {
+          margin: 0 0 3cqmin;
+          font-size: 6cqmin;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+        }
+        .s3-l2 {
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 7.6cqmin;
+          line-height: 1.16;
+          letter-spacing: -0.01em;
+        }
+        .s3-mark {
+          position: relative;
+          display: inline-block;
+          margin: 0 0.2em;
+          color: #ca2c35;
+        }
+        .s3-mark svg {
+          position: absolute;
+          left: -13%;
+          top: -13%;
+          width: 126%;
+          height: 128%;
+          overflow: visible;
+        }
+        .s3-mark path {
+          fill: none;
+          stroke: #ca2c35;
+          stroke-width: 3;
+          stroke-linecap: round;
+          stroke-dasharray: 1 2;
+          stroke-dashoffset: 1.05;
+        }
+        .w {
+          display: inline-block;
+        }
+      </style>
+
+      <div id="root" data-composition-id="s3-zeitpunkt" data-width="1920" data-height="1080" data-duration="6">
+        <div class="s3-sun-wrap">
+          <div class="s3-sun" id="s3-sun">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <radialGradient id="s3-sun-g">
+                  <stop offset="0" stop-color="#f2c36b" stop-opacity="0.95" />
+                  <stop offset="0.34" stop-color="#f2c36b" stop-opacity="0.75" />
+                  <stop offset="0.36" stop-color="#f2c36b" stop-opacity="0.32" />
+                  <stop offset="1" stop-color="#f2c36b" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <circle cx="50" cy="50" r="50" fill="url(#s3-sun-g)" />
+              <g id="s3-rays">
+                <path class="s3-ray" pathLength="1" d="M50 6 V-4" />
+                <path class="s3-ray" pathLength="1" d="M28 12 L23 3" />
+                <path class="s3-ray" pathLength="1" d="M72 12 L77 3" />
+                <path class="s3-ray" pathLength="1" d="M12 28 L3 23" />
+                <path class="s3-ray" pathLength="1" d="M88 28 L97 23" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="s3-copy">
+          <p class="s3-l1" id="s3-l1">Und der richtige Zeitpunkt?</p>
+          <p class="s3-l2" id="s3-l2">
+            Solange Sie ihn
+            <span class="s3-mark" id="s3-mark"
+              >selbst<svg viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true">
+                <path id="s3-circle" pathLength="1" d="M60 6 C30 2 4 10 4 26 C4 42 36 48 58 46 C84 44 98 36 96 22 C94 10 72 4 44 7" /></svg
+            ></span>
+            bestimmen können.
+          </p>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s3-zeitpunkt"]');
+          const $ = (s) => root.querySelector(s);
+
+          function splitWords(el) {
+            Array.from(el.childNodes).forEach((node) => {
+              if (node.nodeType === 3) {
+                const parts = node.textContent.split(/(\s+)/);
+                const frag = document.createDocumentFragment();
+                parts.forEach((p) => {
+                  if (!p) return;
+                  if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(" "));
+                  else {
+                    const s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = p;
+                    frag.appendChild(s);
+                  }
+                });
+                node.replaceWith(frag);
+              }
+            });
+          }
+
+          const tl = gsap.timeline({ paused: true });
+
+          // Sonne geht langsam auf
+          tl.fromTo("#s3-sun", { yPercent: 26, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 5.2, ease: "sine.out" }, 0);
+          tl.fromTo(root.querySelectorAll(".s3-ray"), { strokeDashoffset: 1.05 }, { strokeDashoffset: 0, duration: 0.8, ease: "power2.out", stagger: 0.08 }, 3.1);
+
+          // Text
+          tl.fromTo("#s3-l1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.35);
+          splitWords($("#s3-l2"));
+          const parts = Array.from($("#s3-l2").children);
+          parts.forEach((w, i) =>
+            tl.fromTo(w, { opacity: 0, yPercent: 30 }, { opacity: 1, yPercent: 0, duration: 0.8, ease: "power3.out" }, 1.25 + i * 0.12),
+          );
+          tl.fromTo("#s3-circle", { strokeDashoffset: 1.05 }, { strokeDashoffset: 0, duration: 0.85, ease: "power2.inOut" }, 2.75);
+
+          // Ausblenden vor dem Brand-Wipe (45 s)
+          tl.to("#s3-l1", { opacity: 0, duration: 0.4, ease: "power1.in" }, 5.15);
+          tl.to("#s3-l2", { opacity: 0, duration: 0.4, ease: "power1.in" }, 5.15);
+
+          window.__timelines["s3-zeitpunkt"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

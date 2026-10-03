@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s5-vor-ort-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+
+        /* ---------- 16:9 ---------- */
+        .s5-copy {
+          position: absolute;
+          left: 6.5cqw;
+          top: 14cqh;
+          bottom: 12cqh;
+          width: 42cqw;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .s5-h {
+          margin: 0 0 2cqmin;
+          font-size: 7.6cqmin;
+          font-weight: 700;
+          line-height: 1.05;
+          letter-spacing: -0.03em;
+        }
+        .s5-sub {
+          margin: 0 0 6cqmin;
+          font-size: 4.2cqmin;
+          font-weight: 400;
+          line-height: 1.25;
+          color: #5e6a6a;
+        }
+        .s5-stat {
+          display: flex;
+          align-items: baseline;
+          gap: 2cqmin;
+          flex-wrap: wrap;
+        }
+        .s5-num {
+          display: inline-block;
+          min-width: 4.2ch;
+          font-size: 12cqmin;
+          font-weight: 900;
+          line-height: 0.95;
+          letter-spacing: -0.04em;
+          color: #ca2c35;
+          font-variant-numeric: tabular-nums;
+        }
+        .s5-num-pre {
+          font-size: 3.6cqmin;
+          font-weight: 700;
+          color: #5e6a6a;
+        }
+        .s5-num-label {
+          width: 100%;
+          margin: 1cqmin 0 0;
+          font-size: 3.8cqmin;
+          font-weight: 400;
+          color: #444f4f;
+        }
+        .s5-map {
+          position: absolute;
+          right: 3cqw;
+          top: 12cqh;
+          width: 46cqw;
+          height: 76cqh;
+        }
+        .s5-lines {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .s5-lines path {
+          fill: none;
+          stroke: #aab3b0;
+          stroke-width: 0.3;
+          stroke-linecap: round;
+          stroke-dasharray: 1 2;
+          stroke-dashoffset: 1.05;
+        }
+        .s5-ring {
+          position: absolute;
+          left: calc(50% - 9cqmin);
+          top: calc(50% - 9cqmin);
+          width: 18cqmin;
+          height: 18cqmin;
+          border-radius: 50%;
+          border: 0.4cqmin solid #ca2c35;
+          opacity: 0;
+        }
+        .s5-pos {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+        .s5-pill {
+          display: block;
+          white-space: nowrap;
+          font-size: 3cqmin;
+          font-weight: 700;
+          color: #444f4f;
+          background: #ffffff;
+          border: 0.28cqmin solid #444f4f;
+          border-radius: 0.9cqmin;
+          padding: 0.7cqmin 2cqmin 0.8cqmin;
+        }
+        .s5-center {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .s5-pin {
+          width: 9cqmin;
+          height: 11cqmin;
+          overflow: visible;
+        }
+        .s5-hub {
+          margin-top: 1cqmin;
+          white-space: nowrap;
+          font-size: 3.4cqmin;
+          font-weight: 700;
+          color: #ffffff;
+          background: #ca2c35;
+          border-radius: 0.9cqmin;
+          padding: 0.8cqmin 2.4cqmin 0.9cqmin;
+        }
+
+        /* ---------- 9:16 ---------- */
+        @container scene (orientation: portrait) {
+          .s5-copy {
+            left: 8cqw;
+            width: 84cqw;
+            top: 15cqh;
+            bottom: auto;
+            height: 13cqh;
+            justify-content: flex-start;
+          }
+          .s5-map {
+            left: 6cqw;
+            right: 6cqw;
+            width: auto;
+            top: 31cqh;
+            height: 30cqh;
+          }
+          .s5-stat {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 49cqh;
+          }
+        }
+      </style>
+
+      <div id="root" data-composition-id="s5-vor-ort" data-width="1920" data-height="1080" data-duration="9">
+        <div class="s5-copy">
+          <p class="s5-h" id="s5-h">Wir sind hier zu&nbsp;Hause.</p>
+          <p class="s5-sub" id="s5-sub">Ihr Immobilienmakler in Bergisch&nbsp;Gladbach</p>
+          <div class="s5-stat" id="s5-stat">
+            <span class="s5-num-pre">rund</span>
+            <span class="s5-num" id="s5-num">0</span>
+            <p class="s5-num-label">verwaltete Wohneinheiten in der Region</p>
+          </div>
+        </div>
+
+        <!-- Konstellation: Stadtteile rund um Bergisch Gladbach (Himmelsrichtungen grob korrekt) -->
+        <div class="s5-map">
+          <svg class="s5-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <path id="s5-c0" pathLength="1" d="M50 50 L50 12" />
+            <path id="s5-c1" pathLength="1" d="M50 50 L78.3 23.1" />
+            <path id="s5-c2" pathLength="1" d="M50 50 L90 50" />
+            <path id="s5-c3" pathLength="1" d="M50 50 L78.3 76.9" />
+            <path id="s5-c4" pathLength="1" d="M50 50 L50 88" />
+            <path id="s5-c5" pathLength="1" d="M50 50 L21.7 76.9" />
+            <path id="s5-c6" pathLength="1" d="M50 50 L10 50" />
+            <path id="s5-c7" pathLength="1" d="M50 50 L21.7 23.1" />
+          </svg>
+          <div class="s5-ring" id="s5-ring1"></div>
+          <div class="s5-ring" id="s5-ring2"></div>
+
+          <div class="s5-pos" style="left: 50%; top: 12%"><span class="s5-pill" id="s5-p0">Paffrath</span></div>
+          <div class="s5-pos" style="left: 78.3%; top: 23.1%"><span class="s5-pill" id="s5-p1">Herkenrath</span></div>
+          <div class="s5-pos" style="left: 88%; top: 50%"><span class="s5-pill" id="s5-p2">Moitzfeld</span></div>
+          <div class="s5-pos" style="left: 78.3%; top: 76.9%"><span class="s5-pill" id="s5-p3">Bensberg</span></div>
+          <div class="s5-pos" style="left: 50%; top: 88%"><span class="s5-pill" id="s5-p4">Frankenforst</span></div>
+          <div class="s5-pos" style="left: 21.7%; top: 76.9%"><span class="s5-pill" id="s5-p5">Refrath</span></div>
+          <div class="s5-pos" style="left: 12%; top: 50%"><span class="s5-pill" id="s5-p6">Köln-Ost</span></div>
+          <div class="s5-pos" style="left: 21.7%; top: 23.1%"><span class="s5-pill" id="s5-p7">Schildgen</span></div>
+
+          <div class="s5-pos" style="left: 50%; top: 47%">
+            <div class="s5-center" id="s5-center">
+              <svg class="s5-pin" id="s5-pin" viewBox="0 0 24 30" aria-hidden="true">
+                <path d="M12 29 C12 29 2 17.5 2 11 A10 10 0 0 1 22 11 C22 17.5 12 29 12 29 Z" fill="#ca2c35" stroke="#6d131b" stroke-width="1.2" />
+                <circle cx="12" cy="11" r="4" fill="#ffffff" />
+              </svg>
+              <span class="s5-hub" id="s5-hub">Bergisch Gladbach</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s5-vor-ort"]');
+          const $ = (s) => root.querySelector(s);
+          const tl = gsap.timeline({ paused: true });
+
+          tl.fromTo("#s5-h", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.75, ease: "power3.out" }, 0.3);
+          tl.fromTo("#s5-sub", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 0.95);
+
+          // Pin landet, Ringe breiten sich aus (constellation-hub)
+          tl.fromTo("#s5-pin", { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.7, ease: "bounce.out" }, 1.2);
+          tl.fromTo("#s5-hub", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 1.6);
+          ["#s5-ring1", "#s5-ring2"].forEach((r, i) => {
+            tl.fromTo(r, { opacity: 0.7, scale: 0.4 }, { opacity: 0, scale: 2.6, duration: 1.6, ease: "power2.out", immediateRender: false }, 1.7 + i * 0.55);
+          });
+
+          // Stadtteile erscheinen reihum, Verbindungen zeichnen sich
+          for (let k = 0; k < 8; k++) {
+            const t = 1.85 + k * 0.19;
+            tl.fromTo("#s5-c" + k, { strokeDashoffset: 1.05 }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, t);
+            tl.fromTo("#s5-p" + k, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.2)" }, t + 0.25);
+          }
+
+          // Zähler (counting-dynamic-scale)
+          const num = $("#s5-num");
+          const fmt = (v) => {
+            const n = Math.round(v);
+            return n >= 1000 ? Math.floor(n / 1000) + "." + String(n % 1000).padStart(3, "0") : String(n);
+          };
+          const counter = { v: 0 };
+          tl.fromTo("#s5-stat", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.9);
+          tl.fromTo(
+            counter,
+            { v: 0 },
+            {
+              v: 1600,
+              duration: 1.5,
+              ease: "power2.out",
+              onUpdate: () => {
+                num.textContent = fmt(counter.v);
+              },
+            },
+            4.0,
+          );
+          tl.fromTo("#s5-num", { scale: 0.92 }, { scale: 1, duration: 1.5, ease: "power2.out", transformOrigin: "0% 80%" }, 4.0);
+
+          // Ausblenden vor dem Brand-Wipe (66 s)
+          tl.to(["#s5-h", "#s5-sub", "#s5-stat"], { opacity: 0, duration: 0.4, ease: "power1.in" }, 8.2);
+          tl.to(".s5-map", { opacity: 0, duration: 0.4, ease: "power1.in" }, 8.2);
+
+          window.__timelines["s5-vor-ort"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
