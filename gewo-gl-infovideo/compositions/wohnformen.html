@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="wohnformen-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: #2a3737;
+          font-family: "Lato", sans-serif;
+        }
+        .wf-label {
+          position: absolute;
+          left: 122px;
+          top: 150px;
+          font-weight: 700;
+          font-size: 24px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #5e742e;
+        }
+        .wf-head {
+          position: absolute;
+          left: 120px;
+          top: 196px;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 80px;
+          line-height: 1.06;
+          letter-spacing: -0.015em;
+          white-space: nowrap;
+        }
+        .wf-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 16px;
+          margin-bottom: -16px;
+        }
+        .wf-w {
+          display: inline-block;
+          margin-right: 0.22em;
+        }
+        .wf-accent {
+          color: #5e742e;
+        }
+        .wf-chips {
+          position: absolute;
+          left: 120px;
+          top: 500px;
+          width: 840px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+        }
+        .wf-chip {
+          display: inline-flex;
+          align-items: center;
+          padding: 10px 24px;
+          border: 3px solid #5e742e;
+          border-radius: 40px;
+          background: #fcfcfc;
+          font-weight: 700;
+          font-size: 30px;
+          color: #2a3737;
+          white-space: nowrap;
+        }
+        .wf-privacy {
+          position: absolute;
+          left: 120px;
+          top: 728px;
+          display: flex;
+          align-items: flex-start;
+          gap: 26px;
+        }
+        .wf-privacy-icon {
+          display: block;
+          flex: 0 0 auto;
+          width: 64px;
+          height: 64px;
+          margin-top: 4px;
+        }
+        .wf-privacy-text {
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 50px;
+          line-height: 1.12;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+        }
+        .wf-pl {
+          display: block;
+        }
+        .wf-privacy-text em {
+          font-style: normal;
+          color: #5e742e;
+        }
+        .wf-house {
+          position: absolute;
+          left: 980px;
+          top: 150px;
+          width: 900px;
+          height: 840px;
+          overflow: visible;
+        }
+        .wf-o {
+          fill: none;
+          stroke: #2a3737;
+          stroke-width: 8;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+        }
+        .wf-i {
+          fill: none;
+          stroke: #2a3737;
+          stroke-width: 6;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+        }
+        .wf-room-label {
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 25px;
+          fill: #5e742e;
+        }
+      </style>
+
+      <div id="root" data-composition-id="wohnformen" data-width="1920" data-height="1080">
+        <div class="wf-label" id="wf-label">Raum für neue Wohnformen</div>
+        <div class="wf-head" id="wf-head">
+          <span class="wf-line"><span class="wf-w">Anders</span><span class="wf-w">wohnen</span><span class="wf-w">kann</span></span>
+          <span class="wf-line"><span class="wf-w">mehr</span><span class="wf-w wf-accent">Lebensqualität</span></span>
+          <span class="wf-line"><span class="wf-w">bedeuten.</span></span>
+        </div>
+        <div class="wf-chips" id="wf-chips">
+          <span class="wf-chip">Senioren-WGs</span>
+          <span class="wf-chip">Mehrgenerationenwohnen</span>
+          <span class="wf-chip">Hausgemeinschaften</span>
+          <span class="wf-chip">Jung &amp; Alt unterstützen sich</span>
+        </div>
+        <div class="wf-privacy" id="wf-privacy">
+          <svg class="wf-privacy-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="32" fill="#6ba221" />
+            <path d="M23 29 V23 A9 9 0 0 1 41 23 V29" fill="none" stroke="#fcfcfc" stroke-width="5" stroke-linecap="round" />
+            <rect x="18" y="29" width="28" height="21" rx="5" fill="#fcfcfc" />
+          </svg>
+          <div class="wf-privacy-text"><span class="wf-pl">Gemeinschaft bedeutet <em>nicht</em>,</span><span class="wf-pl">Privatsphäre aufzugeben.</span></div>
+        </div>
+
+        <svg class="wf-house" id="wf-house" viewBox="0 0 900 840" aria-hidden="true">
+          <g id="wf-shared-fills"></g>
+          <g id="wf-private-fills"></g>
+          <g id="wf-props"></g>
+          <g id="wf-people"></g>
+          <g id="wf-locks"></g>
+          <g id="wf-labels"></g>
+          <path class="wf-o" id="wf-shell" d="M0 790 H900 M40 790 V236 M16 238 L330 72 L644 238 M620 236 V790" />
+          <path class="wf-i" id="wf-floors" d="M40 418 H620 M40 604 H620 M330 236 V790" />
+          <circle class="wf-i" id="wf-attic" cx="330" cy="172" r="26" />
+        </svg>
+      </div>
+
+      <script>
+        (function () {
+          const C = { ink: "#2a3737", green: "#6ba221", deep: "#5e742e", tint: "#dcebc8", wall: "#fdfdfb", glow: "#f4b24e", leaf: "#b7d493" };
+          const $ = (id) => document.getElementById(id);
+          // monoline person in the style of the logo figures (ring head + arch body)
+          const person = (cx, base, s, color, cane) => {
+            let g = `<g class="wf-person">`;
+            g += `<circle cx="${cx}" cy="${base - 74 * s}" r="${13 * s}" fill="none" stroke="${color}" stroke-width="6"/>`;
+            g += `<path d="M${cx - 22 * s} ${base} V${base - 26 * s} Q${cx - 22 * s} ${base - 52 * s} ${cx} ${base - 52 * s} Q${cx + 22 * s} ${base - 52 * s} ${cx + 22 * s} ${base - 26 * s} V${base}" fill="none" stroke="${color}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+            if (cane) g += `<path d="M${cx + 34 * s} ${base} V${base - 40 * s} q0 -10 -10 -10" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round"/>`;
+            return g + `</g>`;
+          };
+          const lock = (x, y) =>
+            `<g class="wf-lock">` +
+            `<circle cx="${x}" cy="${y}" r="21" fill="${C.wall}" stroke="${C.ink}" stroke-width="4"/>` +
+            `<path d="M${x - 7} ${y - 1} V${y - 6} A7 7 0 0 1 ${x + 7} ${y - 6} V${y - 1}" fill="none" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>` +
+            `<rect x="${x - 10}" y="${y - 2}" width="20" height="14" rx="3" fill="${C.ink}"/></g>`;
+          const win = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5" fill="${C.glow}" stroke="${C.ink}" stroke-width="5"/>`;
+
+          // rooms: [x0, y0, x1, y1]
+          const R = {
+            a: [40, 236, 330, 418],
+            b: [330, 236, 620, 418],
+            guest: [40, 418, 330, 604],
+            c: [330, 418, 620, 604],
+            common: [40, 604, 330, 790],
+            shop: [330, 604, 620, 790],
+          };
+          const fill = (r, color, cls, id) =>
+            `<rect class="${cls}" id="${id}" x="${r[0] + 4}" y="${r[1] + 4}" width="${r[2] - r[0] - 8}" height="${r[3] - r[1] - 8}" fill="${color}"/>`;
+          $("wf-private-fills").innerHTML = fill(R.a, C.wall, "wf-priv", "wf-f-a") + fill(R.b, C.wall, "wf-priv", "wf-f-b") + fill(R.c, C.wall, "wf-priv", "wf-f-c");
+          $("wf-shared-fills").innerHTML =
+            fill(R.guest, C.tint, "wf-shared", "wf-f-guest") +
+            fill(R.common, C.tint, "wf-shared", "wf-f-common") +
+            fill(R.shop, C.tint, "wf-shared", "wf-f-shop") +
+            `<rect class="wf-shared" id="wf-f-garden" x="640" y="700" width="260" height="88" rx="10" fill="${C.tint}"/>`;
+
+          // props: windows, bed, table, workbench, garden
+          let p = "";
+          p += win(196, 268, 60, 74) + win(546, 268, 52, 74) + win(250, 450, 52, 66);
+          p += `<g id="wf-prop-guest"><rect x="70" y="540" width="170" height="34" rx="8" fill="${C.wall}" stroke="${C.ink}" stroke-width="5"/><rect x="66" y="506" width="14" height="70" rx="5" fill="${C.ink}"/><rect x="88" y="526" width="48" height="16" rx="6" fill="${C.wall}" stroke="${C.ink}" stroke-width="4"/><line x1="78" y1="574" x2="78" y2="598" stroke="${C.ink}" stroke-width="5"/><line x1="232" y1="574" x2="232" y2="598" stroke="${C.ink}" stroke-width="5"/></g>`;
+          p += `<g id="wf-prop-shop"><line x1="420" y1="664" x2="420" y2="706" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/><rect x="406" y="654" width="28" height="14" rx="3" fill="${C.ink}"/><line x1="470" y1="668" x2="470" y2="706" stroke="${C.ink}" stroke-width="6" stroke-linecap="round"/><circle cx="470" cy="660" r="10" fill="none" stroke="${C.ink}" stroke-width="6"/><path d="M508 704 L548 664 L560 676 L520 716 Z" fill="none" stroke="${C.ink}" stroke-width="5" stroke-linejoin="round"/></g>`;
+          p += `<g id="wf-garden"><g id="wf-tree"><rect x="826" y="676" width="18" height="112" rx="4" fill="#7a5a41" stroke="${C.ink}" stroke-width="4"/><circle cx="835" cy="640" r="58" fill="${C.leaf}" stroke="${C.ink}" stroke-width="6"/><circle cx="812" cy="652" r="18" fill="#98c46a"/><circle cx="858" cy="622" r="13" fill="#98c46a"/></g>`;
+          for (let fx = 650; fx <= 780; fx += 26) p += `<line x1="${fx}" y1="790" x2="${fx}" y2="748" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/>`;
+          p += `<line x1="644" y1="764" x2="786" y2="764" stroke="${C.ink}" stroke-width="5" stroke-linecap="round"/></g>`;
+          $("wf-props").innerHTML = p;
+
+          // people: private flats first, then the shared spaces
+          let pe = "";
+          pe += `<g id="wf-pp-a">${person(110, 404, 1, C.green, true)}${person(170, 404, 0.95, C.ink, false)}</g>`;
+          pe += `<g id="wf-pp-b">${person(430, 404, 1, C.ink, false)}<g class="wf-furn"><rect x="468" y="356" width="110" height="10" rx="3" fill="${C.ink}"/><rect x="492" y="330" width="46" height="26" rx="3" fill="none" stroke="${C.ink}" stroke-width="4"/><line x1="476" y1="366" x2="476" y2="404" stroke="${C.ink}" stroke-width="5"/><line x1="570" y1="366" x2="570" y2="404" stroke="${C.ink}" stroke-width="5"/></g></g>`;
+          pe += `<g id="wf-pp-c">${person(395, 590, 1, C.green, false)}${person(452, 590, 0.98, C.ink, false)}${person(510, 590, 0.62, C.green, false)}</g>`;
+          pe += `<g id="wf-pp-common">${person(100, 742, 0.82, C.ink, false)}${person(150, 742, 0.82, C.green, false)}${person(222, 742, 0.82, C.ink, false)}${person(272, 742, 0.82, C.green, true)}<g class="wf-furn"><rect x="72" y="728" width="226" height="16" rx="5" fill="${C.ink}"/><line x1="92" y1="744" x2="92" y2="786" stroke="${C.ink}" stroke-width="6"/><line x1="278" y1="744" x2="278" y2="786" stroke="${C.ink}" stroke-width="6"/></g></g>`;
+          pe += `<g id="wf-pp-shop">${person(578, 786, 0.92, C.green, false)}<g class="wf-furn"><rect x="368" y="724" width="168" height="14" rx="4" fill="${C.ink}"/><line x1="380" y1="738" x2="380" y2="786" stroke="${C.ink}" stroke-width="6"/><line x1="524" y1="738" x2="524" y2="786" stroke="${C.ink}" stroke-width="6"/></g></g>`;
+          pe += `<g id="wf-pp-garden">${person(684, 786, 0.62, C.green, false)}${person(744, 786, 0.95, C.ink, true)}</g>`;
+          $("wf-people").innerHTML = pe;
+
+          $("wf-locks").innerHTML = lock(304, 264) + lock(360, 264) + lock(590, 448);
+          $("wf-labels").innerHTML =
+            `<text class="wf-room-label" id="wf-l-guest" x="56" y="452">Gästezimmer</text>` +
+            `<text class="wf-room-label" id="wf-l-common" x="56" y="640">Gemeinschaftsraum</text>` +
+            `<text class="wf-room-label" id="wf-l-shop" x="346" y="640">Werkstatt</text>` +
+            `<text class="wf-room-label" id="wf-l-garden" x="652" y="690">Garten</text>`;
+
+          // measure strokes for the pen draw
+          ["wf-shell", "wf-floors", "wf-attic"].forEach((id) => {
+            const el = $(id);
+            const len = el.getTotalLength();
+            el.style.strokeDasharray = `${len}`;
+            el.style.strokeDashoffset = `${len}`;
+          });
+
+          const tl = gsap.timeline({ paused: true });
+          gsap.set([".wf-priv", ".wf-shared", "#wf-props", ".wf-furn", "#wf-labels .wf-room-label"], { opacity: 0 });
+          gsap.set(".wf-person", { scale: 0, transformOrigin: "50% 100%" });
+          gsap.set(".wf-lock", { scale: 0, transformOrigin: "50% 50%" });
+          gsap.set("#wf-tree", { scale: 0, transformOrigin: "50% 100%" });
+
+          // text column
+          tl.fromTo("#wf-label", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" }, 0.1);
+          tl.fromTo("#wf-head .wf-w", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out", stagger: 0.07 }, 0.22);
+          tl.fromTo(".wf-chip", { opacity: 0, y: 24, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(2)", stagger: 0.22 }, 2.1);
+
+          // the house is drawn, then filled with life
+          tl.to("#wf-shell", { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, 0.35);
+          tl.to("#wf-floors", { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" }, 1.05);
+          tl.to("#wf-attic", { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 1.25);
+          tl.to(".wf-priv", { opacity: 1, duration: 0.4, ease: "power1.out" }, 1.3);
+          tl.to(["#wf-props", ".wf-furn"], { opacity: 1, duration: 0.5, ease: "power1.out" }, 1.45);
+          tl.to("#wf-pp-a .wf-person, #wf-pp-b .wf-person, #wf-pp-c .wf-person", { scale: 1, duration: 0.42, ease: "back.out(2.4)", stagger: 0.12 }, 1.6);
+          tl.to(".wf-lock", { scale: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.12 }, 2.35);
+
+          // shared spaces light up in the brand green, one after another
+          [["guest", 3.2], ["common", 3.5], ["shop", 3.8], ["garden", 4.1]].forEach(([k, t]) => {
+            tl.to(`#wf-f-${k}`, { opacity: 1, duration: 0.45, ease: "power2.out" }, t);
+            tl.fromTo(`#wf-l-${k}`, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, t + 0.1);
+          });
+          tl.to("#wf-tree", { scale: 1, duration: 0.6, ease: "back.out(1.8)" }, 4.0);
+          tl.to("#wf-pp-common .wf-person, #wf-pp-shop .wf-person, #wf-pp-garden .wf-person", { scale: 1, duration: 0.42, ease: "back.out(2.4)", stagger: 0.1 }, 3.6);
+
+          // reassurance: community without giving up privacy
+          tl.fromTo("#wf-privacy", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 5.2);
+          tl.to(".wf-lock", { scale: 1.25, duration: 0.3, ease: "power2.out", yoyo: true, repeat: 1, stagger: 0.1 }, 5.55);
+
+          // breathe
+          tl.to("#wf-tree", { rotation: 2.5, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 2 }, 5.0);
+          tl.to("#wf-people .wf-person", { y: -5, duration: 0.8, ease: "sine.inOut", yoyo: true, repeat: 1, stagger: 0.06 }, 6.6);
+
+          // exit
+          tl.to(["#wf-label", "#wf-head", "#wf-chips", "#wf-privacy"], { y: -34, opacity: 0, duration: 0.32, ease: "power2.in", stagger: 0.02 }, 9.6);
+          tl.to("#wf-house", { opacity: 0, x: 40, duration: 0.34, ease: "power2.in" }, 9.62);
+
+          window.__timelines["wohnformen"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

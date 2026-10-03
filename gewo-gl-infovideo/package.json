@@ -1,0 +1,14 @@
+{
+  "name": "gewo-gl-infovideo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sfx": "bash tools/fetch-sfx.sh",
+    "dev": "npm run sfx && npx --yes hyperframes@0.8.111 preview",
+    "check": "npm run sfx && npx --yes hyperframes@0.8.111 check",
+    "render": "npm run sfx && npx --yes hyperframes@0.8.111 render --quality delivery -o renders/gewo-gl-infovideo-16x9.mp4",
+    "render:4k": "npm run sfx && npx --yes hyperframes@0.8.111 render --quality delivery --resolution landscape-4k -o renders/gewo-gl-infovideo-16x9-4k.mp4",
+    "music": "python3 tools/music/make_bgm.py",
+    "publish": "npx --yes hyperframes@0.8.111 publish"
+  }
+}

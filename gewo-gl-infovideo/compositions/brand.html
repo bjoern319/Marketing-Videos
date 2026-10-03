@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="brand-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: #2a3737;
+          font-family: "Lato", sans-serif;
+        }
+        .br-ghost {
+          position: absolute;
+          left: 1240px;
+          top: 110px;
+          width: 1000px;
+          height: 740px;
+          overflow: visible;
+        }
+        .br-ghost path,
+        .br-ghost circle {
+          fill: none;
+          stroke-width: 24;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+        }
+        .br-lockup {
+          position: absolute;
+          left: 170px;
+          top: 140px;
+          display: flex;
+          align-items: flex-end;
+          gap: 46px;
+        }
+        .br-mark {
+          display: block;
+          width: 330px;
+          height: 244px;
+          overflow: visible;
+        }
+        .br-mark path,
+        .br-mark circle {
+          fill: none;
+          stroke-width: 22;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+        }
+        .br-words {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          padding-bottom: 0;
+        }
+        .br-wordmark {
+          display: block;
+          overflow: hidden;
+          padding: 0 10px 64px 0;
+          margin-bottom: -64px;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 210px;
+          line-height: 0.92;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+        }
+        .br-ch {
+          display: inline-block;
+        }
+        .br-hyphen {
+          color: #5e742e;
+        }
+        .br-sub {
+          display: block;
+          font-weight: 700;
+          font-size: 36px;
+          letter-spacing: 0.01em;
+          color: #5a6462;
+          white-space: nowrap;
+        }
+        .br-rule {
+          position: absolute;
+          left: 180px;
+          top: 556px;
+          width: 1080px;
+          height: 5px;
+          border-radius: 3px;
+          background: #6ba221;
+          transform-origin: 0 50%;
+        }
+        .br-tag {
+          position: absolute;
+          left: 180px;
+          display: flex;
+          align-items: center;
+          gap: 28px;
+          font-family: "Lato", sans-serif;
+          font-weight: 400;
+          font-size: 58px;
+          line-height: 1.1;
+          letter-spacing: -0.015em;
+          white-space: nowrap;
+        }
+        #br-tag-1 {
+          top: 620px;
+        }
+        #br-tag-2 {
+          top: 700px;
+        }
+        #br-tag-3 {
+          top: 780px;
+        }
+        .br-dot {
+          display: block;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: #6ba221;
+          flex: 0 0 auto;
+        }
+        .br-tag em {
+          font-style: normal;
+          font-weight: 700;
+          color: #5e742e;
+        }
+      </style>
+
+      <div id="root" data-composition-id="brand" data-width="1920" data-height="1080">
+        <!-- Oversized ghost of the mark, bleeding off the right edge -->
+        <svg class="br-ghost" id="br-ghost" viewBox="24 12 738 546" aria-hidden="true">
+          <path d="M386 100 L286 28 L40 206 V542 H206 V452 C206 404 244 370 292 370 C344 370 386 402 412 440 C434 474 440 520 418 540 C404 553 382 551 372 534 C356 506 372 462 404 424" stroke="#dcebc8" />
+          <path d="M404 424 C430 393 466 370 508 370 C556 370 594 406 594 454 V542 H746 V208 L492 28 L386 100" stroke="#e2e3dd" />
+          <circle cx="278" cy="282" r="42" stroke="#dcebc8" />
+          <circle cx="512" cy="282" r="42" stroke="#e2e3dd" />
+        </svg>
+
+        <!-- Logo lockup: gewo-gl Bildmarke, vektorisiert nach dem gelieferten Logo (assets/logo/gewo-gl-logo.svg) -->
+        <div class="br-lockup" id="br-lockup">
+          <svg class="br-mark" id="br-mark" viewBox="24 12 738 546" aria-hidden="true">
+            <path id="br-logo-green" d="M386 100 L286 28 L40 206 V542 H206 V452 C206 404 244 370 292 370 C344 370 386 402 412 440 C434 474 440 520 418 540 C404 553 382 551 372 534 C356 506 372 462 404 424" stroke="#6ba221" />
+            <path id="br-logo-gray" d="M404 424 C430 393 466 370 508 370 C556 370 594 406 594 454 V542 H746 V208 L492 28 L386 100" stroke="#3f3f3f" />
+            <circle id="br-logo-head-l" cx="278" cy="282" r="42" stroke="#6ba221" />
+            <circle id="br-logo-head-r" cx="512" cy="282" r="42" stroke="#3f3f3f" />
+          </svg>
+          <div class="br-words">
+            <div class="br-wordmark" id="br-wordmark">
+              <span class="br-ch">g</span><span class="br-ch">e</span><span class="br-ch">w</span><span class="br-ch">o</span
+              ><span class="br-ch br-hyphen">-</span><span class="br-ch">g</span><span class="br-ch">l</span>
+            </div>
+            <div class="br-sub" id="br-sub">Gemeinschaft für Wohnen Bergisch Gladbach e.V.</div>
+          </div>
+        </div>
+
+        <div class="br-rule" id="br-rule"></div>
+        <div class="br-tag" id="br-tag-1"><span class="br-dot"></span><span>Mehr <em>bedarfsgerechten Wohnraum</em> schaffen.</span></div>
+        <div class="br-tag" id="br-tag-2"><span class="br-dot"></span><span>Vorhandene <em>Flächen</em> besser nutzen.</span></div>
+        <div class="br-tag" id="br-tag-3"><span class="br-dot"></span><span>Neue Formen des <em>Zusammenlebens</em> ermöglichen.</span></div>
+      </div>
+
+      <script>
+        (function () {
+          ["br-logo-green", "br-logo-gray"].forEach((id) => {
+            const p = document.getElementById(id);
+            const len = p.getTotalLength();
+            p.style.strokeDasharray = `${len}`;
+            p.style.strokeDashoffset = `${len}`;
+          });
+
+          const tl = gsap.timeline({ paused: true });
+
+          // Ambient: ghost mark slowly turns and grows for the whole scene
+          gsap.set("#br-ghost", { opacity: 0, rotation: -4, scale: 0.94 });
+          tl.to("#br-ghost", { rotation: 3, scale: 1.02, duration: 6.25, ease: "sine.out" }, 0);
+          tl.to("#br-ghost", { opacity: 1, duration: 0.8, ease: "power1.out" }, 0);
+
+          // Mark: two homes drawn like a pen, interlocking
+          // the logo is one continuous line: both colours draw at once and meet in the middle
+          gsap.set(["#br-logo-head-l", "#br-logo-head-r"], { scale: 0, transformOrigin: "50% 50%" });
+          tl.to(["#br-logo-green", "#br-logo-gray"], { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 0.1);
+          tl.to(["#br-logo-head-l", "#br-logo-head-r"], { scale: 1, duration: 0.5, ease: "back.out(2.6)", stagger: 0.12 }, 1.0);
+          tl.fromTo("#br-mark", { scale: 0.9, rotation: -3 }, { scale: 1, rotation: 0, duration: 1.3, ease: "power3.out" }, 0.1);
+
+          // Wordmark rises letter by letter out of its mask
+          tl.fromTo(
+            "#br-wordmark .br-ch",
+            { yPercent: 105 },
+            { yPercent: 0, duration: 0.7, ease: "expo.out", stagger: 0.045 },
+            0.85,
+          );
+          tl.fromTo("#br-sub", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, 1.4);
+
+          // Rule + promise
+          tl.fromTo("#br-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, 1.95);
+          tl.fromTo("#br-tag-1", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 2.3);
+          tl.fromTo("#br-tag-2", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 2.6);
+          tl.fromTo("#br-tag-3", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 2.9);
+          tl.fromTo(
+            "#br-tag-1 .br-dot, #br-tag-2 .br-dot, #br-tag-3 .br-dot",
+            { scale: 0 },
+            { scale: 1, duration: 0.5, ease: "back.out(3)", stagger: 0.3 },
+            2.36,
+          );
+
+          // Breathe: the hyphen (the link between "gewo" and "gl") gives a gentle nod
+          tl.fromTo("#br-wordmark .br-hyphen", { y: 0 }, { y: -10, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 3 }, 3.4);
+
+          // Exit
+          tl.to(["#br-lockup", "#br-rule", "#br-tag-1", "#br-tag-2", "#br-tag-3"], { y: -36, opacity: 0, duration: 0.34, ease: "power2.in", stagger: 0.03 }, 5.8);
+          tl.to("#br-ghost", { opacity: 0, duration: 0.3, ease: "power1.in" }, 5.9);
+
+          window.__timelines["brand"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

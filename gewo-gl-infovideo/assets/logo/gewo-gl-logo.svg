@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 12 738 546" width="738" height="546">
+  <!-- gewo-gl Bildmarke, als Vektor nachgezeichnet nach dem gelieferten 96x72-px-Logo. Für den finalen Einsatz bitte durch die Original-Vektordatei ersetzen. -->
+  <g fill="none" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#6BA221" d="M386 100 L286 28 L40 206 V542 H206 V452 C206 404 244 370 292 370 C344 370 386 402 412 440 C434 474 440 520 418 540 C404 553 382 551 372 534 C356 506 372 462 404 424" />
+    <path stroke="#3F3F3F" d="M404 424 C430 393 466 370 508 370 C556 370 594 406 594 454 V542 H746 V208 L492 28 L386 100" />
+    <circle stroke="#6BA221" cx="278" cy="282" r="42" />
+    <circle stroke="#3F3F3F" cx="512" cy="282" r="42" />
+  </g>
+</svg>

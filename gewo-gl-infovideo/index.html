@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="de" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>gewo-gl – Info-Werbevideo</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      /* Brand tokens – taken from the gewo-gl logo (green #6BA221, charcoal #3F3F3F) */
+      :root {
+        --paper: #f4f8f4;
+        --paper-2: #e7eadf;
+        --ink: #2a3737;
+        --ink-2: #5a6462;
+        --green: #6ba221;
+        --green-deep: #5e742e;
+        --green-tint: #dcebc8;
+        --gray-tint: #e2e3dd;
+        --window-light: #f4b24e;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Lato", sans-serif;
+      }
+      #bg-layer {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .bg-glow {
+        position: absolute;
+        border-radius: 50%;
+      }
+      #bg-glow-a {
+        width: 1500px;
+        height: 1500px;
+        left: -520px;
+        top: -640px;
+        background: radial-gradient(circle, rgba(107, 162, 33, 0.2) 0%, rgba(107, 162, 33, 0) 64%);
+      }
+      #bg-glow-b {
+        width: 1400px;
+        height: 1400px;
+        left: 1080px;
+        top: 420px;
+        background: radial-gradient(circle, rgba(244, 190, 90, 0.14) 0%, rgba(244, 190, 90, 0) 64%);
+      }
+      #bg-grain {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        opacity: 0.5;
+        mix-blend-mode: multiply;
+      }
+      [data-composition-id="main"] > div[data-composition-src] {
+        position: absolute;
+        inset: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="76.25"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Persistent background: warm paper, two breathing brand glows, fine grain -->
+      <div id="bg-layer">
+        <div id="bg-glow-a" class="bg-glow" data-layout-allow-overflow></div>
+        <div id="bg-glow-b" class="bg-glow" data-layout-allow-overflow></div>
+        <svg id="bg-grain" viewBox="0 0 1920 1080" aria-hidden="true">
+          <filter id="bg-grain-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="0.10" />
+            </feComponentTransfer>
+          </filter>
+          <rect width="1920" height="1080" filter="url(#bg-grain-filter)" />
+        </svg>
+      </div>
+
+      <!-- Scenes (1 music bar = 2.5 s) -->
+      <div
+        id="el-hook"
+        data-composition-id="hook"
+        data-composition-src="compositions/hook.html"
+        data-start="0"
+        data-duration="6.25"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="el-brand"
+        data-composition-id="brand"
+        data-composition-src="compositions/brand.html"
+        data-start="6.25"
+        data-duration="6.25"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="el-street"
+        data-composition-id="street"
+        data-composition-src="compositions/street.html"
+        data-start="12.5"
+        data-duration="20"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="el-wohnformen"
+        data-composition-id="wohnformen"
+        data-composition-src="compositions/wohnformen.html"
+        data-start="32.5"
+        data-duration="10"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="el-ziele"
+        data-composition-id="ziele"
+        data-composition-src="compositions/ziele.html"
+        data-start="42.5"
+        data-duration="7.5"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="el-trust"
+        data-composition-id="trust"
+        data-composition-src="compositions/trust.html"
+        data-start="50"
+        data-duration="7.5"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="el-entscheidung"
+        data-composition-id="entscheidung"
+        data-composition-src="compositions/entscheidung.html"
+        data-start="57.5"
+        data-duration="8.75"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="el-cta"
+        data-composition-id="cta"
+        data-composition-src="compositions/cta.html"
+        data-start="66.25"
+        data-duration="10"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- Music bed -->
+      <audio
+        id="bgm"
+        src="assets/audio/gewo-gl-theme.m4a"
+        data-start="0"
+        data-duration="76.25"
+        data-track-index="10"
+        data-volume="0.85"
+      ></audio>
+      <!-- Sound design (Pixabay SFX, see assets/audio/sfx) -->
+      <audio id="sfx-01" src="assets/audio/sfx/whoosh-short.mp3" data-start="2.35" data-duration="0.565" data-track-index="11" data-volume="0.3"></audio> <!-- hook: website line -->
+      <audio id="sfx-02" src="assets/audio/sfx/pop.mp3" data-start="4.0" data-duration="0.71" data-track-index="12" data-volume="0.18"></audio> <!-- hook potentials -->
+      <audio id="sfx-03" src="assets/audio/sfx/whoosh.mp3" data-start="6.4" data-duration="0.565" data-track-index="11" data-volume="0.22"></audio> <!-- brand logo draw -->
+      <audio id="sfx-04" src="assets/audio/sfx/chime.mp3" data-start="7.15" data-duration="2.534" data-track-index="13" data-volume="0.4"></audio> <!-- brand wordmark -->
+      <audio id="sfx-05" src="assets/audio/sfx/whoosh-short.mp3" data-start="12.5" data-duration="0.565" data-track-index="11" data-volume="0.22"></audio> <!-- street in -->
+      <audio id="sfx-06" src="assets/audio/sfx/pop.mp3" data-start="14.77" data-duration="0.71" data-track-index="12" data-volume="0.22"></audio> <!-- way 01 -->
+      <audio id="sfx-07" src="assets/audio/sfx/whoosh-short.mp3" data-start="17.8" data-duration="0.565" data-track-index="11" data-volume="0.12"></audio> <!-- pan -->
+      <audio id="sfx-08" src="assets/audio/sfx/pop.mp3" data-start="18.52" data-duration="0.71" data-track-index="12" data-volume="0.22"></audio> <!-- way 02 -->
+      <audio id="sfx-09" src="assets/audio/sfx/whoosh-short.mp3" data-start="21.55" data-duration="0.565" data-track-index="11" data-volume="0.12"></audio> <!-- pan -->
+      <audio id="sfx-10" src="assets/audio/sfx/pop.mp3" data-start="22.27" data-duration="0.71" data-track-index="12" data-volume="0.22"></audio> <!-- way 03 -->
+      <audio id="sfx-11" src="assets/audio/sfx/whoosh.mp3" data-start="25.35" data-duration="0.565" data-track-index="11" data-volume="0.3"></audio> <!-- zoom out -->
+      <audio id="sfx-12" src="assets/audio/sfx/sparkle.mp3" data-start="28.3" data-duration="1.792" data-track-index="13" data-volume="0.4"></audio> <!-- peak -->
+      <audio id="sfx-13" src="assets/audio/sfx/whoosh-short.mp3" data-start="32.55" data-duration="0.565" data-track-index="11" data-volume="0.22"></audio> <!-- wohnformen in -->
+      <audio id="sfx-14" src="assets/audio/sfx/pop.mp3" data-start="34.1" data-duration="0.71" data-track-index="12" data-volume="0.18"></audio> <!-- residents -->
+      <audio id="sfx-15" src="assets/audio/sfx/click-soft.mp3" data-start="34.85" data-duration="0.356" data-track-index="12" data-volume="0.24"></audio> <!-- privacy locks -->
+      <audio id="sfx-16" src="assets/audio/sfx/sparkle.mp3" data-start="35.7" data-duration="1.792" data-track-index="13" data-volume="0.25"></audio> <!-- shared spaces -->
+      <audio id="sfx-17" src="assets/audio/sfx/ping.mp3" data-start="37.75" data-duration="1.31" data-track-index="13" data-volume="0.22"></audio> <!-- privacy line -->
+      <audio id="sfx-18" src="assets/audio/sfx/whoosh-short.mp3" data-start="42.55" data-duration="0.565" data-track-index="11" data-volume="0.22"></audio> <!-- ziele in -->
+      <audio id="sfx-19" src="assets/audio/sfx/click-soft.mp3" data-start="43.5" data-duration="0.356" data-track-index="12" data-volume="0.28"></audio> <!-- goal 1 -->
+      <audio id="sfx-20" src="assets/audio/sfx/click-soft.mp3" data-start="44.0" data-duration="0.356" data-track-index="12" data-volume="0.28"></audio> <!-- goal 2 -->
+      <audio id="sfx-21" src="assets/audio/sfx/click-soft.mp3" data-start="44.5" data-duration="0.356" data-track-index="12" data-volume="0.28"></audio> <!-- goal 3 -->
+      <audio id="sfx-22" src="assets/audio/sfx/pop.mp3" data-start="50.2" data-duration="0.71" data-track-index="12" data-volume="0.22"></audio> <!-- count start -->
+      <audio id="sfx-23" src="assets/audio/sfx/ping.mp3" data-start="51.55" data-duration="1.31" data-track-index="13" data-volume="0.3"></audio> <!-- count 10 -->
+      <audio id="sfx-24" src="assets/audio/sfx/click-soft.mp3" data-start="53.55" data-duration="0.356" data-track-index="12" data-volume="0.25"></audio> <!-- pills -->
+      <audio id="sfx-25" src="assets/audio/sfx/whoosh-short.mp3" data-start="57.55" data-duration="0.565" data-track-index="11" data-volume="0.22"></audio> <!-- entscheidung in -->
+      <audio id="sfx-26" src="assets/audio/sfx/click-soft.mp3" data-start="59.25" data-duration="0.356" data-track-index="12" data-volume="0.28"></audio> <!-- option 1 -->
+      <audio id="sfx-27" src="assets/audio/sfx/click-soft.mp3" data-start="59.85" data-duration="0.356" data-track-index="12" data-volume="0.28"></audio> <!-- option 2 -->
+      <audio id="sfx-28" src="assets/audio/sfx/click-soft.mp3" data-start="60.45" data-duration="0.356" data-track-index="12" data-volume="0.28"></audio> <!-- option 3 -->
+      <audio id="sfx-29" src="assets/audio/sfx/whoosh.mp3" data-start="66.25" data-duration="0.565" data-track-index="11" data-volume="0.25"></audio> <!-- dark call-out -->
+      <audio id="sfx-30" src="assets/audio/sfx/whoosh.mp3" data-start="70.8" data-duration="0.565" data-track-index="11" data-volume="0.22"></audio> <!-- end card -->
+      <audio id="sfx-31" src="assets/audio/sfx/chime.mp3" data-start="71.85" data-duration="2.534" data-track-index="13" data-volume="0.45"></audio> <!-- end logo -->
+      <audio id="sfx-32" src="assets/audio/sfx/pop.mp3" data-start="72.55" data-duration="0.71" data-track-index="12" data-volume="0.3"></audio> <!-- url pill -->
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Slow ambient drift of the brand glows across the whole film (finite repeats inside 60 s).
+      tl.fromTo(
+        "#bg-glow-a",
+        { x: 0, y: 0, scale: 1 },
+        { x: 220, y: 120, scale: 1.14, duration: 15.25, ease: "sine.inOut", yoyo: true, repeat: 4 },
+        0,
+      );
+      tl.fromTo(
+        "#bg-glow-b",
+        { x: 0, y: 0, scale: 1.06 },
+        { x: -260, y: -140, scale: 0.92, duration: 15.25, ease: "sine.inOut", yoyo: true, repeat: 4 },
+        0,
+      );
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

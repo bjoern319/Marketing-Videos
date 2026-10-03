@@ -1,0 +1,8 @@
+node_modules/
+.hyperframes/
+snapshots/
+renders/
+*.log
+# Pixabay-SFX werden per tools/fetch-sfx.sh geholt (Lizenz: keine Weitergabe der Originaldateien)
+assets/audio/sfx/*.mp3
+assets/audio/*.wav

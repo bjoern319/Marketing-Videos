@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="hook-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: #2a3737;
+          font-family: "Lato", sans-serif;
+        }
+        .hk-ghost {
+          position: absolute;
+          left: 60px;
+          top: 590px;
+          font-family: "Lato", sans-serif;
+          font-weight: 900;
+          font-size: 400px;
+          line-height: 1;
+          letter-spacing: -0.015em;
+          color: #e2eedb;
+          white-space: nowrap;
+        }
+        .hk-label {
+          position: absolute;
+          left: 140px;
+          top: 96px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          font-weight: 700;
+          font-size: 26px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #5e742e;
+        }
+        .hk-pin {
+          display: block;
+          width: 30px;
+          height: 38px;
+        }
+        .hk-block {
+          position: absolute;
+          left: 140px;
+          top: 300px;
+          width: 1640px;
+        }
+        .hk-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 14px;
+          margin-bottom: -14px;
+          font-family: "Lato", sans-serif;
+          font-size: 108px;
+          line-height: 1.04;
+          letter-spacing: -0.015em;
+          white-space: nowrap;
+        }
+        .hk-statement .hk-line {
+          font-weight: 700;
+        }
+        .hk-w {
+          display: inline-block;
+          margin-right: 0.22em;
+        }
+        .hk-accent {
+          color: #5e742e;
+          font-weight: 700;
+        }
+        .hk-question {
+          position: absolute;
+          left: 140px;
+          top: 418px;
+          width: 1640px;
+        }
+        .hk-question .hk-line {
+          font-weight: 700;
+          font-size: 88px;
+          line-height: 1.07;
+        }
+        .hk-mark {
+          position: relative;
+          display: inline-block;
+        }
+        .hk-underline {
+          position: absolute;
+          left: -6px;
+          bottom: -2px;
+          width: calc(100% + 12px);
+          height: 34px;
+          overflow: visible;
+        }
+        .hk-underline path {
+          fill: none;
+          stroke: #6ba221;
+          stroke-width: 10;
+          stroke-linecap: round;
+        }
+        .hk-sky {
+          position: absolute;
+          left: 0;
+          top: 730px;
+          width: 1920px;
+          height: 350px;
+          overflow: visible;
+        }
+        .hk-house {
+          fill: #fdfdfb;
+          stroke: #2a3737;
+          stroke-width: 4;
+          stroke-linejoin: round;
+        }
+        .hk-win {
+          fill: #45473f;
+        }
+        .hk-win-lit {
+          fill: #f4b24e;
+        }
+        .hk-pot {
+          fill: none;
+          stroke: #6ba221;
+          stroke-width: 4;
+          stroke-dasharray: 10 8;
+        }
+        .hk-ground {
+          stroke: #2a3737;
+          stroke-width: 4;
+        }
+      </style>
+
+      <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
+        <div class="hk-ghost" id="hk-ghost" data-layout-ignore aria-hidden="true">Wohnraum</div>
+
+        <div class="hk-label" id="hk-label"><span>Wohnraum gemeinsam gestalten</span></div>
+
+        <div class="hk-block hk-statement" id="hk-statement">
+          <div class="hk-line">
+            <span class="hk-w hk-w1">Wie</span><span class="hk-w hk-w1">wollen</span><span class="hk-w hk-w1">wir</span><span class="hk-w hk-w1">morgen</span><span class="hk-w hk-w1">in</span>
+          </div>
+          <div class="hk-line">
+            <span class="hk-w hk-w2">Bergisch</span><span class="hk-w hk-w2">Gladbach</span><span class="hk-w hk-w2 hk-accent">wohnen?</span>
+          </div>
+        </div>
+
+        <div class="hk-question" id="hk-question">
+          <div class="hk-line">
+            <span class="hk-w hk-q1">Vielleicht</span><span class="hk-w hk-q1">steckt</span><span class="hk-w hk-q1">in</span><span class="hk-w hk-q1">einer</span>
+          </div>
+          <div class="hk-line">
+            <span class="hk-w hk-q2">Immobilie</span><span class="hk-w hk-q2 hk-mark"
+              >mehr,<svg class="hk-underline" viewBox="0 0 400 34" preserveAspectRatio="none" aria-hidden="true">
+                <path id="hk-underline-path" d="M4 22 C 90 8, 200 30, 396 12" /></svg></span
+            ><span class="hk-w hk-q2">als</span><span class="hk-w hk-q2">man</span><span class="hk-w hk-q2">auf</span>
+          </div>
+          <div class="hk-line">
+            <span class="hk-w hk-q3">den</span><span class="hk-w hk-q3">ersten</span><span class="hk-w hk-q3">Blick</span><span class="hk-w hk-q3">sieht.</span>
+          </div>
+        </div>
+
+        <svg class="hk-sky" id="hk-sky" viewBox="0 0 1920 350" aria-hidden="true">
+          <g id="hk-sky-houses"></g>
+          <line class="hk-ground" x1="0" y1="320" x2="1920" y2="320" />
+        </svg>
+      </div>
+
+      <script>
+        (function () {
+          const NS = "http://www.w3.org/2000/svg";
+          const GROUND = 320;
+          // Deterministic street skyline: x, width, wall height, roof type, roof height, window grid, lit + potential windows
+          const houses = [
+            { x: -40, w: 210, h: 150, roof: "gable", r: 80, cols: 2, rows: 2, lit: [0], pot: [] },
+            { x: 200, w: 260, h: 200, roof: "flat", r: 0, cols: 3, rows: 3, lit: [1, 5], pot: [6] },
+            { x: 490, w: 230, h: 130, roof: "gable", r: 95, cols: 2, rows: 2, lit: [2], pot: [1] },
+            { x: 750, w: 300, h: 170, roof: "gable", r: 110, cols: 3, rows: 2, lit: [3], pot: [0, 2] },
+            { x: 1080, w: 200, h: 230, roof: "flat", r: 0, cols: 2, rows: 3, lit: [0, 3], pot: [] },
+            { x: 1310, w: 270, h: 140, roof: "gable", r: 90, cols: 3, rows: 2, lit: [4], pot: [1] },
+            { x: 1610, w: 220, h: 190, roof: "shed", r: 60, cols: 2, rows: 3, lit: [1], pot: [4] },
+            { x: 1860, w: 200, h: 160, roof: "gable", r: 80, cols: 2, rows: 2, lit: [], pot: [] },
+          ];
+          const g = document.getElementById("hk-sky-houses");
+          houses.forEach((hs, i) => {
+            const top = GROUND - hs.h;
+            let d;
+            if (hs.roof === "gable") {
+              d = `M${hs.x} ${GROUND} V${top} L${hs.x + hs.w / 2} ${top - hs.r} L${hs.x + hs.w} ${top} V${GROUND} Z`;
+            } else if (hs.roof === "shed") {
+              d = `M${hs.x} ${GROUND} V${top - hs.r} L${hs.x + hs.w} ${top} V${GROUND} Z`;
+            } else {
+              d = `M${hs.x} ${GROUND} V${top} H${hs.x + hs.w} V${GROUND} Z`;
+            }
+            const body = document.createElementNS(NS, "path");
+            body.setAttribute("d", d);
+            body.setAttribute("class", "hk-house hk-house-" + i);
+            g.appendChild(body);
+            const padX = 30;
+            const padTop = 26;
+            const cellW = (hs.w - padX * 2) / hs.cols;
+            const cellH = (hs.h - padTop - 30) / hs.rows;
+            let k = 0;
+            for (let r = 0; r < hs.rows; r++) {
+              for (let c = 0; c < hs.cols; c++) {
+                const wx = hs.x + padX + c * cellW + cellW * 0.22;
+                const wy = top + padTop + r * cellH + cellH * 0.12;
+                const ww = cellW * 0.56;
+                const wh = cellH * 0.62;
+                const win = document.createElementNS(NS, "rect");
+                win.setAttribute("x", wx.toFixed(1));
+                win.setAttribute("y", wy.toFixed(1));
+                win.setAttribute("width", ww.toFixed(1));
+                win.setAttribute("height", wh.toFixed(1));
+                win.setAttribute("rx", "3");
+                win.setAttribute("class", (hs.lit.includes(k) ? "hk-win-lit" : "hk-win") + " hk-wins-" + i);
+                g.appendChild(win);
+                if (hs.pot.includes(k)) {
+                  const pot = document.createElementNS(NS, "rect");
+                  pot.setAttribute("x", (wx - 9).toFixed(1));
+                  pot.setAttribute("y", (wy - 9).toFixed(1));
+                  pot.setAttribute("width", (ww + 18).toFixed(1));
+                  pot.setAttribute("height", (wh + 18).toFixed(1));
+                  pot.setAttribute("rx", "6");
+                  pot.setAttribute("class", "hk-pot");
+                  g.appendChild(pot);
+                }
+                k++;
+              }
+            }
+          });
+
+          // Measure outlines for the pen draw
+          document.querySelectorAll("#hk-sky-houses .hk-house").forEach((p) => {
+            const len = p.getTotalLength();
+            p.style.strokeDasharray = `${len}`;
+            p.style.strokeDashoffset = `${len}`;
+            p.style.fillOpacity = "0";
+          });
+          const ul = document.getElementById("hk-underline-path");
+          const ulLen = ul.getTotalLength() * 1.05;
+          ul.style.strokeDasharray = `${ulLen}`;
+          ul.style.strokeDashoffset = `${ulLen}`;
+
+          const tl = gsap.timeline({ paused: true });
+
+          // Ambient: ghost word drifts for the whole scene
+          tl.fromTo("#hk-ghost", { x: 40, opacity: 0 }, { x: -170, opacity: 1, duration: 6.25, ease: "none" }, 0);
+
+          // Location label
+          tl.fromTo("#hk-label", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.15);
+          
+          // Statement rises word by word out of its line mask
+          tl.fromTo(".hk-w1", { yPercent: 108 }, { yPercent: 0, duration: 0.65, ease: "power3.out", stagger: 0.06 }, 0.25);
+          tl.fromTo(".hk-w2", { yPercent: 108 }, { yPercent: 0, duration: 0.75, ease: "expo.out", stagger: 0.09 }, 0.6);
+
+          // Skyline: outlines drawn like a pen, then filled
+          const bodies = document.querySelectorAll("#hk-sky-houses .hk-house");
+          bodies.forEach((p, i) => {
+            tl.to(p, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 0.55 + i * 0.09);
+            tl.to(p, { fillOpacity: 1, duration: 0.5, ease: "power1.out" }, 1.25 + i * 0.09);
+          });
+          tl.fromTo(
+            "#hk-sky .hk-win, #hk-sky .hk-win-lit",
+            { opacity: 0 },
+            { opacity: 1, duration: 0.4, ease: "power1.out", stagger: 0.012 },
+            1.35,
+          );
+
+          // Statement steps back, the question takes over
+          tl.to("#hk-statement", { y: -150, opacity: 0.32, duration: 0.6, ease: "power3.inOut" }, 2.35);
+          tl.fromTo(".hk-q1", { yPercent: 110 }, { yPercent: 0, duration: 0.55, ease: "power4.out", stagger: 0.05 }, 2.55);
+          tl.fromTo(".hk-q2", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: "power3.out", stagger: 0.05 }, 2.8);
+          tl.fromTo(".hk-q3", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: "back.out(1.4)", stagger: 0.06 }, 3.05);
+          tl.to("#hk-underline-path", { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.55);
+
+          // Foreshadowing: unused windows get the dashed "potential" frame
+          gsap.set("#hk-sky .hk-pot", { opacity: 0, scale: 0.55, strokeDashoffset: 0, transformOrigin: "50% 50%" });
+          gsap.set("#hk-question", { opacity: 0 });
+          tl.set("#hk-question", { opacity: 1 }, 2.5);
+          tl.to("#hk-sky .hk-pot", { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2.4)", stagger: 0.09 }, 4.0);
+          tl.to("#hk-sky .hk-pot", { strokeDashoffset: -42, duration: 2.25, ease: "none" }, 4.0);
+
+          // Exit (faster than the entrances)
+          tl.to(["#hk-statement", "#hk-question", "#hk-label"], { y: "-=40", opacity: 0, duration: 0.32, ease: "power2.in" }, 5.88);
+          tl.to("#hk-sky", { y: 40, opacity: 0, duration: 0.32, ease: "power2.in" }, 5.9);
+
+          window.__timelines["hook"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

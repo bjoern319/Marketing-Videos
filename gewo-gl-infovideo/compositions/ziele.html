@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="ziele-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: #2a3737;
+          font-family: "Lato", sans-serif;
+        }
+        .zi-label {
+          position: absolute;
+          left: 122px;
+          top: 150px;
+          font-weight: 700;
+          font-size: 24px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #5e742e;
+        }
+        .zi-head {
+          position: absolute;
+          left: 120px;
+          top: 196px;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 88px;
+          line-height: 1.05;
+          letter-spacing: -0.015em;
+          white-space: nowrap;
+        }
+        .zi-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 16px;
+          margin-bottom: -16px;
+        }
+        .zi-w {
+          display: inline-block;
+          margin-right: 0.22em;
+        }
+        .zi-accent {
+          color: #5e742e;
+        }
+        .zi-rail {
+          position: absolute;
+          left: 190px;
+          top: 467px;
+          width: 1160px;
+          height: 6px;
+          border-radius: 3px;
+          background: #6ba221;
+          transform-origin: 0 50%;
+        }
+        .zi-col {
+          position: absolute;
+          top: 400px;
+          width: 520px;
+          height: 480px;
+        }
+        .zi-badge {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
+          background: #e6f2dd;
+        }
+        .zi-icon {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 140px;
+          height: 140px;
+          overflow: visible;
+        }
+        .zi-icon path,
+        .zi-icon circle {
+          fill: none;
+          stroke-width: 6;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .zi-title-wrap {
+          position: absolute;
+          left: 0;
+          top: 170px;
+          overflow: hidden;
+          padding-bottom: 14px;
+        }
+        .zi-title {
+          display: block;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 52px;
+          line-height: 1.05;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+        }
+        .zi-desc {
+          position: absolute;
+          left: 0;
+          top: 252px;
+          width: 490px;
+          font-weight: 400;
+          font-size: 33px;
+          line-height: 1.36;
+          color: #5a6462;
+        }
+      </style>
+
+      <div id="root" data-composition-id="ziele" data-width="1920" data-height="1080">
+        <div class="zi-label" id="zi-label">Unsere Ziele</div>
+        <div class="zi-head" id="zi-head">
+          <span class="zi-line"
+            ><span class="zi-w">Neue</span><span class="zi-w zi-accent">Wege</span><span class="zi-w">für</span><span class="zi-w">mehr</span
+            ><span class="zi-w">Wohnraum.</span></span
+          >
+        </div>
+        <div class="zi-rail" id="zi-rail"></div>
+
+        <div class="zi-col" id="zi-col-1" style="left: 120px">
+          <div class="zi-badge"></div>
+          <svg class="zi-icon" viewBox="0 0 140 140" aria-hidden="true">
+            <path class="zi-draw" d="M32 72 L70 40" stroke="#6ba221" />
+            <path class="zi-draw" d="M70 40 L106 70 V106 H58" stroke="#2a3737" />
+            <path class="zi-draw" d="M40 66 V82" stroke="#6ba221" />
+            <path class="zi-draw" d="M88 54 V38 H97 V62" stroke="#2a3737" />
+            <path class="zi-draw" d="M62 64 h20 v20 h-20 Z M72 64 v20 M62 74 h20" stroke="#2a3737" stroke-width="4" />
+            <path class="zi-draw" d="M32 110 C32 94 44 84 60 84 C60 100 48 110 32 110 Z" stroke="#6ba221" />
+            <path class="zi-draw" d="M37 105 L53 89" stroke="#6ba221" />
+          </svg>
+          <div class="zi-title-wrap"><span class="zi-title">Zukunft bauen</span></div>
+          <div class="zi-desc">Gebäude erhalten, Flächen besser nutzen, Versiegelung möglichst vermeiden.</div>
+        </div>
+
+        <div class="zi-col" id="zi-col-2" style="left: 700px">
+          <div class="zi-badge"></div>
+          <svg class="zi-icon" viewBox="0 0 140 140" aria-hidden="true">
+            <path class="zi-draw" d="M54 102 V40 H82 V102" stroke="#2a3737" />
+            <path class="zi-draw" d="M62 50 h5 M71 50 h5 M62 60 h5 M71 60 h5" stroke="#2a3737" />
+            <path class="zi-draw" d="M24 102 V74 L39 62 L54 74" stroke="#2a3737" />
+            <path class="zi-draw" d="M82 70 L98 58 L114 70 V102" stroke="#2a3737" />
+            <circle class="zi-draw" cx="58" cy="84" r="9" stroke="#6ba221" />
+            <path class="zi-draw" d="M58 93 V104" stroke="#6ba221" />
+            <circle class="zi-draw" cx="84" cy="86" r="8" stroke="#6ba221" />
+            <path class="zi-draw" d="M84 94 V104" stroke="#6ba221" />
+            <path class="zi-draw" d="M20 106 Q70 118 120 106" stroke="#6ba221" />
+          </svg>
+          <div class="zi-title-wrap"><span class="zi-title">Quartiere gestalten</span></div>
+          <div class="zi-desc">Neue Wohnprojekte sollen sich positiv einfügen und Standorte aufwerten.</div>
+        </div>
+
+        <div class="zi-col" id="zi-col-3" style="left: 1280px">
+          <div class="zi-badge"></div>
+          <svg class="zi-icon" viewBox="0 0 140 140" aria-hidden="true">
+            <circle class="zi-draw" cx="44" cy="54" r="8" stroke="#2a3737" />
+            <circle class="zi-draw" cx="70" cy="48" r="8" stroke="#6ba221" />
+            <circle class="zi-draw" cx="96" cy="54" r="8" stroke="#2a3737" />
+            <path class="zi-draw" d="M30 84 Q30 68 44 68 Q58 68 58 84" stroke="#2a3737" />
+            <path class="zi-draw" d="M56 78 Q56 62 70 62 Q84 62 84 78" stroke="#6ba221" />
+            <path class="zi-draw" d="M82 84 Q82 68 96 68 Q110 68 110 84" stroke="#2a3737" />
+            <path class="zi-draw" d="M30 96 Q70 122 110 96" stroke="#6ba221" />
+          </svg>
+          <div class="zi-title-wrap"><span class="zi-title">Gemeinschaft leben</span></div>
+          <div class="zi-desc">Begegnung und gegenseitige Unterstützung fördern – Privatsphäre respektieren.</div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          document.querySelectorAll(".zi-draw").forEach((p) => {
+            const len = p.getTotalLength();
+            p.style.strokeDasharray = `${len}`;
+            p.style.strokeDashoffset = `${len}`;
+          });
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#zi-label", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" }, 0.1);
+          tl.fromTo("#zi-head .zi-w", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out", stagger: 0.07 }, 0.2);
+          tl.fromTo("#zi-rail", { scaleX: 0 }, { scaleX: 1, duration: 1.5, ease: "power2.inOut" }, 0.85);
+
+          [1, 2, 3].forEach((n, k) => {
+            const t = 1.0 + k * 0.5;
+            const col = `#zi-col-${n}`;
+            tl.fromTo(`${col} .zi-badge`, { scale: 0 }, { scale: 1, duration: 0.45, ease: "back.out(2.2)" }, t);
+            tl.to(`${col} .zi-draw`, { strokeDashoffset: 0, duration: 0.6, ease: "power2.out", stagger: 0.08 }, t + 0.15);
+            tl.fromTo(`${col} .zi-title`, { yPercent: 145 }, { yPercent: 0, duration: 0.6, ease: "power4.out" }, t + 0.25);
+            tl.fromTo(`${col} .zi-desc`, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, t + 0.45);
+          });
+
+          // breathe: the three badges float gently, out of phase
+          tl.to(".zi-badge, .zi-icon", { y: -7, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 1, stagger: 0.15 }, 3.6);
+
+          // exit
+          tl.to(["#zi-label", "#zi-head", "#zi-rail"], { y: -30, opacity: 0, duration: 0.3, ease: "power2.in" }, 7.05);
+          tl.to([".zi-col"], { y: 30, opacity: 0, duration: 0.32, ease: "power2.in", stagger: 0.03 }, 7.05);
+
+          window.__timelines["ziele"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

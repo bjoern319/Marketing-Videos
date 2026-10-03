@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="cta-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: #2a3737;
+          font-family: "Lato", sans-serif;
+        }
+        /* ---- phase A: dark call-out, as on the website ("Mit einem Hinweis kann es beginnen") ---- */
+        .ct-a {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #283434;
+        }
+        .ct-ghost {
+          position: absolute;
+          left: 1160px;
+          top: 330px;
+          width: 1000px;
+          height: 740px;
+          overflow: visible;
+        }
+        .ct-ghost path,
+        .ct-ghost circle {
+          fill: none;
+          stroke-width: 24;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+        }
+        .ct-label {
+          position: absolute;
+          left: 122px;
+          top: 236px;
+          font-weight: 700;
+          font-size: 28px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #bfd39a;
+        }
+        .ct-head {
+          position: absolute;
+          left: 120px;
+          top: 290px;
+          font-weight: 700;
+          font-size: 116px;
+          line-height: 1.08;
+          letter-spacing: -0.015em;
+          color: #fcfcfc;
+          white-space: nowrap;
+        }
+        .ct-line {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 18px;
+          margin-bottom: -18px;
+        }
+        .ct-hw {
+          display: inline-block;
+          margin-right: 0.24em;
+        }
+        .ct-quote-bar {
+          position: absolute;
+          left: 122px;
+          top: 604px;
+          width: 7px;
+          height: 66px;
+          border-radius: 3px;
+          background: #6ba221;
+          transform-origin: 50% 0%;
+        }
+        .ct-a-sub {
+          position: absolute;
+          left: 156px;
+          top: 610px;
+          font-weight: 400;
+          font-size: 46px;
+          color: #d3dbd8;
+          white-space: nowrap;
+        }
+        /* ---- phase B: end card ---- */
+        .ct-b {
+          position: absolute;
+          inset: 0;
+        }
+        .ct-sky {
+          position: absolute;
+          left: 0;
+          top: 780px;
+          width: 1920px;
+          height: 300px;
+          overflow: visible;
+        }
+        .ct-house {
+          fill: #fdfdfb;
+          stroke: #2a3737;
+          stroke-width: 4;
+          stroke-linejoin: round;
+        }
+        .ct-lockup {
+          position: absolute;
+          left: 0;
+          top: 150px;
+          width: 1920px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          gap: 34px;
+        }
+        .ct-mark {
+          display: block;
+          width: 250px;
+          height: 185px;
+          overflow: visible;
+        }
+        .ct-mark path,
+        .ct-mark circle {
+          fill: none;
+          stroke-width: 22;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+        }
+        .ct-wordmark {
+          display: block;
+          overflow: hidden;
+          padding: 0 8px 52px 0;
+          margin-bottom: -52px;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 168px;
+          line-height: 0.92;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+        }
+        .ct-ch {
+          display: inline-block;
+        }
+        .ct-hyphen {
+          color: #5e742e;
+        }
+        .ct-sub {
+          position: absolute;
+          left: 0;
+          top: 384px;
+          width: 1920px;
+          text-align: center;
+          font-weight: 700;
+          font-size: 36px;
+          color: #5a6462;
+        }
+        .ct-pill-wrap {
+          position: absolute;
+          left: 0;
+          top: 470px;
+          width: 1920px;
+          display: flex;
+          justify-content: center;
+        }
+        .ct-pill {
+          display: flex;
+          align-items: center;
+          gap: 28px;
+          height: 136px;
+          padding: 0 64px 0 70px;
+          border-radius: 68px;
+          background: #5e742e;
+          color: #fcfcfc;
+          font-weight: 700;
+          font-size: 80px;
+          letter-spacing: -0.01em;
+          box-shadow: 0 24px 50px rgba(79, 138, 31, 0.28);
+          white-space: nowrap;
+        }
+        .ct-arrow {
+          display: block;
+          width: 64px;
+          height: 64px;
+        }
+        .ct-arrow path {
+          fill: none;
+          stroke: #f4b24e;
+          stroke-width: 9;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .ct-next {
+          position: absolute;
+          left: 0;
+          top: 656px;
+          width: 1920px;
+          display: flex;
+          justify-content: center;
+          gap: 26px;
+          font-weight: 700;
+          font-size: 38px;
+          color: #2a3737;
+        }
+        .ct-next span {
+          display: inline-block;
+        }
+        .ct-next .ct-dot {
+          color: #5e742e;
+        }
+      </style>
+
+      <div id="root" data-composition-id="cta" data-width="1920" data-height="1080">
+        <div class="ct-a" id="ct-a">
+          <svg class="ct-ghost" id="ct-ghost" viewBox="24 12 738 546" aria-hidden="true">
+            <path d="M386 100 L286 28 L40 206 V542 H206 V452 C206 404 244 370 292 370 C344 370 386 402 412 440 C434 474 440 520 418 540 C404 553 382 551 372 534 C356 506 372 462 404 424" stroke="#34433f" />
+            <path d="M404 424 C430 393 466 370 508 370 C556 370 594 406 594 454 V542 H746 V208 L492 28 L386 100" stroke="#323e3e" />
+            <circle cx="278" cy="282" r="42" stroke="#34433f" />
+            <circle cx="512" cy="282" r="42" stroke="#323e3e" />
+          </svg>
+          <div class="ct-label" id="ct-label">Mit einem Hinweis kann es beginnen</div>
+          <div class="ct-head" id="ct-head">
+            <span class="ct-line"><span class="ct-hw">Sie</span><span class="ct-hw">sind</span><span class="ct-hw">Eigentümer</span><span class="ct-hw">–</span></span>
+            <span class="ct-line"><span class="ct-hw">oder</span><span class="ct-hw">kennen</span><span class="ct-hw">jemanden?</span></span>
+          </div>
+          <div class="ct-quote-bar" id="ct-quote-bar"></div>
+          <div class="ct-a-sub" id="ct-a-sub">Wir finden gemeinsam mit Ihnen heraus, was möglich ist.</div>
+        </div>
+
+        <div class="ct-b" id="ct-b">
+          <svg class="ct-sky" id="ct-sky" viewBox="0 0 1920 300" aria-hidden="true">
+            <g id="ct-sky-houses"></g>
+            <line x1="0" y1="290" x2="1920" y2="290" stroke="#2a3737" stroke-width="4" />
+          </svg>
+
+          <!-- Logo lockup: gewo-gl Bildmarke, vektorisiert nach dem gelieferten Logo (assets/logo/gewo-gl-logo.svg) -->
+          <div class="ct-lockup" id="ct-lockup">
+            <svg class="ct-mark" id="ct-mark" viewBox="24 12 738 546" aria-hidden="true">
+              <path id="ct-logo-green" d="M386 100 L286 28 L40 206 V542 H206 V452 C206 404 244 370 292 370 C344 370 386 402 412 440 C434 474 440 520 418 540 C404 553 382 551 372 534 C356 506 372 462 404 424" stroke="#6ba221" />
+              <path id="ct-logo-gray" d="M404 424 C430 393 466 370 508 370 C556 370 594 406 594 454 V542 H746 V208 L492 28 L386 100" stroke="#3f3f3f" />
+              <circle id="ct-logo-head-l" cx="278" cy="282" r="42" stroke="#6ba221" />
+              <circle id="ct-logo-head-r" cx="512" cy="282" r="42" stroke="#3f3f3f" />
+            </svg>
+            <div class="ct-wordmark" id="ct-wordmark">
+              <span class="ct-ch">g</span><span class="ct-ch">e</span><span class="ct-ch">w</span><span class="ct-ch">o</span
+              ><span class="ct-ch ct-hyphen">-</span><span class="ct-ch">g</span><span class="ct-ch">l</span>
+            </div>
+          </div>
+          <div class="ct-sub" id="ct-sub">Gemeinschaft für Wohnen Bergisch Gladbach e.V.</div>
+          <div class="ct-pill-wrap">
+            <div class="ct-pill" id="ct-pill">
+              <span>gewo-gl.de</span>
+              <svg class="ct-arrow" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 32 H52 M36 16 L52 32 L36 48" /></svg>
+            </div>
+          </div>
+          <div class="ct-next" id="ct-next">
+            <span>Hinweis geben</span><span class="ct-dot">·</span><span>Mitglied werden</span><span class="ct-dot">·</span><span>Unterstützen</span>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const NS = "http://www.w3.org/2000/svg";
+          const GROUND = 290;
+          // Bookend: the skyline from the opening, now every window is lit
+          const houses = [
+            { x: -40, w: 210, h: 130, roof: "gable", r: 70, cols: 2, rows: 2 },
+            { x: 200, w: 250, h: 180, roof: "flat", r: 0, cols: 3, rows: 3 },
+            { x: 480, w: 220, h: 120, roof: "gable", r: 85, cols: 2, rows: 2 },
+            { x: 730, w: 290, h: 150, roof: "gable", r: 100, cols: 3, rows: 2 },
+            { x: 1050, w: 190, h: 200, roof: "flat", r: 0, cols: 2, rows: 3 },
+            { x: 1270, w: 260, h: 130, roof: "gable", r: 80, cols: 3, rows: 2 },
+            { x: 1560, w: 210, h: 170, roof: "shed", r: 55, cols: 2, rows: 3 },
+            { x: 1800, w: 200, h: 140, roof: "gable", r: 70, cols: 2, rows: 2 },
+          ];
+          const g = document.getElementById("ct-sky-houses");
+          houses.forEach((hs) => {
+            const top = GROUND - hs.h;
+            let d;
+            if (hs.roof === "gable") d = `M${hs.x} ${GROUND} V${top} L${hs.x + hs.w / 2} ${top - hs.r} L${hs.x + hs.w} ${top} V${GROUND} Z`;
+            else if (hs.roof === "shed") d = `M${hs.x} ${GROUND} V${top - hs.r} L${hs.x + hs.w} ${top} V${GROUND} Z`;
+            else d = `M${hs.x} ${GROUND} V${top} H${hs.x + hs.w} V${GROUND} Z`;
+            const body = document.createElementNS(NS, "path");
+            body.setAttribute("d", d);
+            body.setAttribute("class", "ct-house");
+            g.appendChild(body);
+            const cellW = (hs.w - 60) / hs.cols;
+            const cellH = (hs.h - 56) / hs.rows;
+            for (let r = 0; r < hs.rows; r++) {
+              for (let c = 0; c < hs.cols; c++) {
+                const w = document.createElementNS(NS, "rect");
+                w.setAttribute("x", (hs.x + 30 + c * cellW + cellW * 0.22).toFixed(1));
+                w.setAttribute("y", (top + 26 + r * cellH + cellH * 0.12).toFixed(1));
+                w.setAttribute("width", (cellW * 0.56).toFixed(1));
+                w.setAttribute("height", (cellH * 0.62).toFixed(1));
+                w.setAttribute("rx", "3");
+                w.setAttribute("fill", "#45473f");
+                w.setAttribute("class", "ct-win");
+                g.appendChild(w);
+              }
+            }
+          });
+
+          ["ct-logo-green", "ct-logo-gray"].forEach((id) => {
+            const p = document.getElementById(id);
+            const len = p.getTotalLength();
+            p.style.strokeDasharray = `${len}`;
+            p.style.strokeDashoffset = `${len}`;
+          });
+          const tl = gsap.timeline({ paused: true });
+          gsap.set("#ct-b", { opacity: 0 });
+
+          // ---- phase A: dark call-out slides up like a new page section ----
+          tl.fromTo("#ct-a", { yPercent: 100 }, { yPercent: 0, duration: 0.6, ease: "power3.out" }, 0);
+          tl.fromTo("#ct-ghost", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 1.2, ease: "power2.out" }, 0.4);
+          tl.fromTo("#ct-ghost", { rotation: 0 }, { rotation: 3, duration: 4.0, ease: "sine.inOut", immediateRender: false }, 0.4);
+          tl.fromTo("#ct-label", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" }, 0.5);
+          tl.fromTo(".ct-hw", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: "power4.out", stagger: 0.08 }, 0.6);
+          tl.fromTo("#ct-quote-bar", { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power3.out" }, 1.75);
+          tl.fromTo("#ct-a-sub", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, 1.85);
+          tl.to("#ct-a", { yPercent: -100, duration: 0.45, ease: "power3.in" }, 4.55);
+
+          // ---- phase B: end card ----
+          tl.to("#ct-b", { opacity: 1, duration: 0.01 }, 4.99);
+          tl.fromTo("#ct-sky", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 5.0);
+          tl.to(".ct-win", { fill: "#f4b24e", duration: 0.25, ease: "power1.out", stagger: { each: 0.03, from: "center" } }, 5.5);
+          gsap.set(["#ct-logo-head-l", "#ct-logo-head-r"], { scale: 0, transformOrigin: "50% 50%" });
+          tl.to(["#ct-logo-green", "#ct-logo-gray"], { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, 5.1);
+          tl.to(["#ct-logo-head-l", "#ct-logo-head-r"], { scale: 1, duration: 0.45, ease: "back.out(2.6)", stagger: 0.1 }, 5.85);
+          tl.fromTo(".ct-ch", { yPercent: 105 }, { yPercent: 0, duration: 0.7, ease: "expo.out", stagger: 0.045 }, 5.6);
+          tl.fromTo("#ct-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 6.0);
+          tl.fromTo("#ct-pill", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2.2)" }, 6.3);
+          tl.fromTo(".ct-arrow", { x: -16 }, { x: 0, duration: 0.5, ease: "power3.out" }, 6.55);
+          tl.fromTo(
+            "#ct-next span",
+            { opacity: 0, y: 18 },
+            { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", stagger: 0.07 },
+            6.75,
+          );
+          // breathe: the button invites a click, the arrow nudges forward
+          tl.to("#ct-pill", { scale: 1.035, duration: 0.55, ease: "sine.inOut", yoyo: true, repeat: 3 }, 7.5);
+          tl.to(".ct-arrow", { x: 10, duration: 0.55, ease: "sine.inOut", yoyo: true, repeat: 3 }, 7.5);
+
+          window.__timelines["cta"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

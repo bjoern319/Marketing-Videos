@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="trust-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: #2a3737;
+          font-family: "Lato", sans-serif;
+        }
+        .tr-label {
+          position: absolute;
+          left: 122px;
+          top: 92px;
+          font-weight: 700;
+          font-size: 24px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #5e742e;
+        }
+        .tr-num {
+          position: absolute;
+          left: 80px;
+          top: 196px;
+          width: 470px;
+          text-align: right;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 400px;
+          line-height: 1;
+          letter-spacing: -0.04em;
+          font-variant-numeric: tabular-nums;
+          color: #5e742e;
+        }
+        .tr-what {
+          position: absolute;
+          left: 600px;
+          top: 286px;
+        }
+        .tr-what-title {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 12px;
+          margin-bottom: -12px;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 80px;
+          line-height: 1.04;
+          letter-spacing: -0.015em;
+          white-space: nowrap;
+        }
+        .tr-what-title span {
+          display: inline-block;
+        }
+        .tr-what-date {
+          display: block;
+          margin-top: 14px;
+          font-weight: 700;
+          font-size: 38px;
+          color: #5a6462;
+          white-space: nowrap;
+        }
+        .tr-people {
+          position: absolute;
+          left: 1240px;
+          top: 150px;
+          width: 600px;
+          height: 520px;
+          overflow: visible;
+        }
+        .tr-roof {
+          fill: none;
+          stroke: #6ba221;
+          stroke-width: 14;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+        }
+        .tr-rule {
+          position: absolute;
+          left: 120px;
+          top: 700px;
+          width: 1680px;
+          height: 4px;
+          border-radius: 2px;
+          background: #d5d9ca;
+          transform-origin: 0 50%;
+        }
+        .tr-board-label {
+          position: absolute;
+          left: 122px;
+          top: 742px;
+          font-weight: 700;
+          font-size: 24px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #5e742e;
+        }
+        .tr-board {
+          position: absolute;
+          left: 120px;
+          top: 782px;
+          display: flex;
+          gap: 18px;
+          font-family: "Lato", sans-serif;
+          font-weight: 700;
+          font-size: 52px;
+          letter-spacing: -0.015em;
+          white-space: nowrap;
+        }
+        .tr-name,
+        .tr-sep {
+          display: inline-block;
+        }
+        .tr-sep {
+          color: #5e742e;
+        }
+        .tr-pills {
+          position: absolute;
+          left: 120px;
+          top: 888px;
+          display: flex;
+          gap: 18px;
+        }
+        .tr-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 30px;
+          border: 4px solid #5e742e;
+          border-radius: 40px;
+          background: #fcfcfc;
+          font-weight: 700;
+          font-size: 32px;
+          color: #5e742e;
+          white-space: nowrap;
+        }
+        .tr-pill svg {
+          display: block;
+          width: 26px;
+          height: 26px;
+        }
+      </style>
+
+      <div id="root" data-composition-id="trust" data-width="1920" data-height="1080">
+        <div class="tr-label" id="tr-label">Wer dahintersteht</div>
+        <div class="tr-num" id="tr-num">10</div>
+        <div class="tr-what" id="tr-what">
+          <span class="tr-what-title"><span id="tr-what-1">Gründungs-</span></span>
+          <span class="tr-what-title"><span id="tr-what-2">mitglieder</span></span>
+          <span class="tr-what-date" id="tr-what-date">Gegründet am 1. September 2026</span>
+        </div>
+
+        <svg class="tr-people" id="tr-people" viewBox="0 0 600 520" aria-hidden="true">
+          <path class="tr-roof" id="tr-roof" d="M20 500 V250 L300 30 L580 250 V500" />
+          <g id="tr-crowd"></g>
+        </svg>
+
+        <div class="tr-rule" id="tr-rule"></div>
+        <div class="tr-board-label" id="tr-board-label">Vorstand</div>
+        <div class="tr-board" id="tr-board">
+          <span class="tr-name">Christel Irmen</span><span class="tr-sep">·</span><span class="tr-name">Dr. Harald Fett</span
+          ><span class="tr-sep">·</span><span class="tr-name">Oliver Knigge</span>
+        </div>
+        <div class="tr-pills" id="tr-pills">
+          <span class="tr-pill"
+            ><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M4 14 L10 20 L22 6" fill="none" stroke="#5e742e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg
+            >gemeinnützig</span
+          >
+          <span class="tr-pill"
+            ><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M4 14 L10 20 L22 6" fill="none" stroke="#5e742e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg
+            >unabhängig</span
+          >
+          <span class="tr-pill"
+            ><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M4 14 L10 20 L22 6" fill="none" stroke="#5e742e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg
+            >bringt Menschen, Ideen &amp; Fachwissen zusammen</span
+          >
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // ten founders under one roof (deterministic layout, varied tones)
+          const NS = "http://www.w3.org/2000/svg";
+          const tones = ["#6ba221", "#5e742e", "#2a3737", "#f4b24e", "#5a6462"];
+          const crowd = document.getElementById("tr-crowd");
+          const spots = [];
+          for (let i = 0; i < 4; i++) spots.push([168 + i * 88, 340, 0.86]);
+          for (let i = 0; i < 6; i++) spots.push([80 + i * 88, 472, 0.92]);
+          spots.forEach(([cx, base, s], i) => {
+            const g = document.createElementNS(NS, "g");
+            g.setAttribute("class", "tr-person");
+            g.setAttribute("fill", tones[(i * 2) % tones.length]);
+            g.innerHTML =
+              `<circle cx="${cx}" cy="${base - 92 * s}" r="${26 * s}"/>` +
+              `<path d="M${cx - 40 * s} ${base} V${base - 34 * s} Q${cx - 40 * s} ${base - 60 * s} ${cx} ${base - 60 * s} Q${cx + 40 * s} ${base - 60 * s} ${cx + 40 * s} ${base - 34 * s} V${base} Z"/>`;
+            crowd.appendChild(g);
+          });
+          const roof = document.getElementById("tr-roof");
+          const roofLen = roof.getTotalLength();
+          roof.style.strokeDasharray = `${roofLen}`;
+          roof.style.strokeDashoffset = `${roofLen}`;
+
+          const tl = gsap.timeline({ paused: true });
+          gsap.set(".tr-person", { scale: 0, opacity: 0, transformOrigin: "50% 100%" });
+
+          tl.fromTo("#tr-label", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" }, 0.1);
+
+          // count-up 0 -> 10, one founder appears per step
+          const counter = { v: 0 };
+          const numEl = document.getElementById("tr-num");
+          numEl.textContent = "0";
+          tl.fromTo("#tr-num", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 0.15);
+          tl.fromTo(
+            counter,
+            { v: 0 },
+            {
+              v: 10,
+              duration: 1.35,
+              ease: "power1.inOut",
+              onUpdate: () => {
+                numEl.textContent = String(Math.round(counter.v));
+              },
+            },
+            0.2,
+          );
+          tl.to(".tr-person", { scale: 1, opacity: 1, duration: 0.42, ease: "back.out(2.2)", stagger: 0.13 }, 0.22);
+          tl.to("#tr-roof", { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 1.45);
+          tl.fromTo("#tr-num", { scale: 1 }, { scale: 1.06, duration: 0.22, ease: "power2.out", yoyo: true, repeat: 1, immediateRender: false }, 1.55);
+
+          tl.fromTo("#tr-what-1", { yPercent: 110 }, { yPercent: 0, duration: 0.65, ease: "power4.out" }, 0.95);
+          tl.fromTo("#tr-what-2", { yPercent: 110 }, { yPercent: 0, duration: 0.65, ease: "power4.out" }, 1.08);
+          tl.fromTo("#tr-what-date", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, 1.5);
+
+          // board & principles
+          tl.fromTo("#tr-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, 2.3);
+          tl.fromTo("#tr-board-label", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 2.55);
+          tl.fromTo(
+            "#tr-board .tr-name, #tr-board .tr-sep",
+            { opacity: 0, y: 26 },
+            { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.09 },
+            2.65,
+          );
+          tl.fromTo(".tr-pill", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)", stagger: 0.18 }, 3.55);
+
+          // breathe: the community sways gently
+          tl.to(".tr-person", { y: -8, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 1, stagger: 0.08 }, 4.2);
+
+          // exit
+          tl.to(["#tr-label", "#tr-num", "#tr-what", "#tr-people"], { y: -34, opacity: 0, duration: 0.32, ease: "power2.in", stagger: 0.02 }, 7.05);
+          tl.to(["#tr-rule", "#tr-board-label", "#tr-board", "#tr-pills"], { y: 30, opacity: 0, duration: 0.3, ease: "power2.in" }, 7.1);
+
+          window.__timelines["trust"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
