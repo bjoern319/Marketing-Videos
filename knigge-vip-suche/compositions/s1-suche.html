@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s1-suche-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .w {
+          display: inline-block;
+        }
+
+        /* ---------- Hook: Zielgruppe ansprechen ---------- */
+        .s1-hook {
+          position: absolute;
+          left: 8cqw;
+          right: 8cqw;
+          top: 33cqh;
+          text-align: center;
+        }
+        .s1-hook-q {
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 8.2cqmin;
+          line-height: 1.12;
+          letter-spacing: -0.015em;
+        }
+        .s1-chips {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2.2cqmin;
+          margin-top: 4.6cqmin;
+        }
+        .s1-chip {
+          display: flex;
+          align-items: center;
+          gap: 1.2cqmin;
+          padding: 1.3cqmin 2.6cqmin 1.4cqmin 2.2cqmin;
+          border: 0.32cqmin solid #6d131b;
+          border-radius: 1cqmin;
+          background: #ffffff;
+          color: #6d131b;
+          font-weight: 700;
+          font-size: 4cqmin;
+          line-height: 1;
+        }
+        .s1-chip svg {
+          width: 4.2cqmin;
+          height: 4.2cqmin;
+          overflow: visible;
+        }
+        .s1-chip path {
+          fill: none;
+          stroke: #6d131b;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        /* ---------- Textspalte: Pain-Statements ---------- */
+        .s1-text {
+          position: absolute;
+          left: 6.5cqw;
+          width: 40cqw;
+          top: 31cqh;
+        }
+        .s1-kick {
+          margin: 0 0 2.2cqmin;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 4.6cqmin;
+          line-height: 1.2;
+          color: #5e6a6a;
+        }
+        .s1-slot {
+          position: relative;
+          height: 24cqmin;
+        }
+        .s1-pain {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 6.4cqmin;
+          line-height: 1.14;
+          letter-spacing: -0.015em;
+        }
+        .s1-pain b {
+          font-weight: 700;
+          color: #ca2c35;
+        }
+
+        /* ---------- Browserfenster ---------- */
+        .s1-browser {
+          position: absolute;
+          right: 5.5cqw;
+          top: calc(50cqh - 32cqmin);
+          width: 78cqmin;
+          height: 64cqmin;
+          background: #ffffff;
+          border: 0.32cqmin solid #444f4f;
+          border-radius: 1.4cqmin;
+          box-shadow: 0 1.4cqmin 3.6cqmin rgba(68, 79, 79, 0.14);
+        }
+        .s1-titlebar {
+          position: relative;
+          height: 6.4cqmin;
+          background: #f2f3f0;
+          border-bottom: 0.25cqmin solid #d4d8d3;
+          border-radius: 1.1cqmin 1.1cqmin 0 0;
+        }
+        .s1-dots {
+          position: absolute;
+          left: 2cqmin;
+          top: 2.5cqmin;
+          display: flex;
+          gap: 0.9cqmin;
+        }
+        .s1-dots i {
+          display: block;
+          width: 1.3cqmin;
+          height: 1.3cqmin;
+          border-radius: 50%;
+          background: #c9cec9;
+        }
+        .s1-tabs {
+          position: absolute;
+          left: 9.4cqmin;
+          bottom: -0.25cqmin;
+          display: flex;
+        }
+        .s1-tab {
+          display: flex;
+          align-items: center;
+          gap: 0.8cqmin;
+          width: 9.2cqmin;
+          height: 4.4cqmin;
+          margin-right: -0.25cqmin;
+          padding: 0 1cqmin;
+          background: #ffffff;
+          border: 0.25cqmin solid #c9cec9;
+          border-bottom: none;
+          border-radius: 1cqmin 1cqmin 0 0;
+        }
+        .s1-tab i {
+          display: block;
+          flex: none;
+          width: 1.6cqmin;
+          height: 1.6cqmin;
+          border-radius: 0.4cqmin;
+          background: var(--c);
+        }
+        .s1-tab u {
+          display: block;
+          flex: 1;
+          height: 0.8cqmin;
+          border-radius: 0.4cqmin;
+          background: #d4d8d3;
+        }
+        .s1-clock {
+          position: absolute;
+          right: 1.8cqmin;
+          top: 1.3cqmin;
+          width: 3.8cqmin;
+          height: 3.8cqmin;
+          overflow: visible;
+        }
+        .s1-clock circle {
+          fill: #ffffff;
+          stroke: #444f4f;
+          stroke-width: 1.8;
+        }
+        .s1-clock line {
+          stroke: #444f4f;
+          stroke-width: 1.8;
+          stroke-linecap: round;
+        }
+        .s1-clock .s1-min {
+          stroke: #ca2c35;
+        }
+        .s1-urlrow {
+          display: flex;
+          align-items: center;
+          height: 6.6cqmin;
+          padding: 0 2cqmin;
+          border-bottom: 0.25cqmin solid #e2e5e1;
+        }
+        .s1-url {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 1.2cqmin;
+          height: 4.2cqmin;
+          padding: 0 1.6cqmin;
+          border-radius: 2.1cqmin;
+          background: #f2f3f0;
+          font-size: 2.4cqmin;
+          font-weight: 400;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        .s1-qtext {
+          display: inline-block;
+        }
+        .s1-url svg {
+          flex: none;
+          width: 2.4cqmin;
+          height: 2.4cqmin;
+          overflow: visible;
+        }
+        .s1-url path {
+          fill: none;
+          stroke: #5e6a6a;
+          stroke-width: 2.4;
+          stroke-linecap: round;
+        }
+        .s1-grid {
+          position: absolute;
+          left: 2.4cqmin;
+          right: 2.4cqmin;
+          top: 15.4cqmin;
+          bottom: 2.4cqmin;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+          gap: 2.2cqmin;
+        }
+        .s1-card {
+          position: relative;
+        }
+        .s1-face,
+        .s1-copy,
+        .s1-empty {
+          position: absolute;
+          inset: 0;
+          border-radius: 1cqmin;
+        }
+        .s1-face {
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          gap: 1cqmin;
+          padding: 1.2cqmin;
+          background: #ffffff;
+          border: 0.25cqmin solid #c9cec9;
+        }
+        .s1-copy {
+          z-index: 1;
+          background: #ffffff;
+          border: 0.25cqmin solid #c9cec9;
+        }
+        .s1-copy.s1-copy-2 {
+          z-index: 0;
+        }
+        .s1-empty {
+          z-index: 0;
+          border: 0.3cqmin dashed #b9c0bc;
+        }
+        .s1-thumb {
+          position: relative;
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0.6cqmin;
+          background: #e3e7e2;
+        }
+        .s1-thumb svg {
+          width: 62%;
+          height: 70%;
+          overflow: visible;
+        }
+        .s1-thumb .ln {
+          fill: none;
+          stroke: #444f4f;
+          stroke-width: 2.2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s1-thumb .rf {
+          fill: #ca2c35;
+        }
+        .s1-thumb .wl {
+          fill: #ffffff;
+        }
+        .s1-l1,
+        .s1-l2 {
+          flex: none;
+          height: 1.3cqmin;
+          border-radius: 0.65cqmin;
+        }
+        .s1-l1 {
+          width: 86%;
+          background: #c9cec9;
+        }
+        .s1-l2 {
+          width: 52%;
+          background: #dfe2de;
+        }
+        .s1-badge {
+          position: absolute;
+          right: -1.4cqmin;
+          top: -1.4cqmin;
+          z-index: 3;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 5.2cqmin;
+          height: 5.2cqmin;
+          padding: 0 1cqmin;
+          border-radius: 2.6cqmin;
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 2.7cqmin;
+          font-weight: 700;
+          box-shadow: 0 0 0 0.5cqmin #ffffff;
+        }
+        .s1-heart {
+          position: absolute;
+          right: 1cqmin;
+          top: 1cqmin;
+          width: 3.4cqmin;
+          height: 3.4cqmin;
+          overflow: visible;
+        }
+        .s1-heart path {
+          fill: #ca2c35;
+        }
+        .s1-stamp {
+          position: absolute;
+          left: 50%;
+          top: 64%;
+          z-index: 4;
+          padding: 0.7cqmin 1.6cqmin 0.8cqmin;
+          border: 0.5cqmin solid #ca2c35;
+          border-radius: 0.8cqmin;
+          background: rgba(255, 255, 255, 0.9);
+          color: #ca2c35;
+          font-size: 3.3cqmin;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          white-space: nowrap;
+        }
+
+        /* ---------- 9:16 ---------- */
+        @container scene (orientation: portrait) {
+          #root .s1-hook {
+            top: 33cqh;
+          }
+          #root .s1-hook-q {
+            font-size: 8.8cqmin;
+          }
+          #root .s1-chip {
+            font-size: 4.2cqmin;
+          }
+          #root .s1-text {
+            left: 8cqw;
+            width: 84cqw;
+            top: 13.6cqh;
+          }
+          #root .s1-kick {
+            font-size: 4.8cqmin;
+          }
+          #root .s1-pain {
+            font-size: 6.6cqmin;
+          }
+          #root .s1-browser {
+            right: auto;
+            left: calc(50cqw - 39cqmin);
+            top: 31.5cqh;
+          }
+        }
+      </style>
+
+      <div id="root" data-composition-id="s1-suche" data-width="1920" data-height="1080" data-duration="12.5">
+        <!-- Hook -->
+        <div class="s1-hook" id="s1-hook">
+          <p class="s1-hook-q" id="s1-hook-q">Sie suchen eine Immobilie?</p>
+          <div class="s1-chips">
+            <div class="s1-chip" id="s1-c1">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 L12 4 L20.5 11 M5.5 9.5 V20 H18.5 V9.5 M10 20 V14.5 H14 V20" /></svg>Kaufen
+            </div>
+            <div class="s1-chip" id="s1-c2">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 15.5 A4.5 4.5 0 1 1 8 6.5 A4.5 4.5 0 1 1 8 15.5 Z M12.3 11 H21 M17.5 11 V14.5 M20.5 11 V13.5" /></svg>Mieten
+            </div>
+            <div class="s1-chip" id="s1-c3">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18 L9 12 L13 15.5 L21 7.5 M15.5 7.5 H21 V13 M3 21 H21" /></svg>Kapitalanlage
+            </div>
+          </div>
+        </div>
+
+        <!-- Pain-Statements -->
+        <div class="s1-text">
+          <p class="s1-kick" id="s1-kick">Kennen Sie das?</p>
+          <div class="s1-slot">
+            <p class="s1-pain" id="s1-p1">Abend für Abend <b>Portale</b> durchsuchen.</p>
+            <p class="s1-pain" id="s1-p2">Vieles ist <b>doppelt</b> inseriert.</p>
+            <p class="s1-pain" id="s1-p3">Und das Passende? <b>Schon wieder weg.</b></p>
+          </div>
+        </div>
+
+        <!-- Browser mit Portalen (overwhelm-surround) -->
+        <div class="s1-browser" id="s1-browser">
+          <div class="s1-titlebar">
+            <div class="s1-dots"><i></i><i></i><i></i></div>
+            <div class="s1-tabs">
+              <div class="s1-tab" id="s1-t1" style="--c: #9aa5a3"><i></i><u></u></div>
+              <div class="s1-tab" id="s1-t2" style="--c: #b9c2a0"><i></i><u></u></div>
+              <div class="s1-tab" id="s1-t3" style="--c: #aeb6bf"><i></i><u></u></div>
+              <div class="s1-tab" id="s1-t4" style="--c: #d6b98a"><i></i><u></u></div>
+              <div class="s1-tab" id="s1-t5" style="--c: #8e9a8f"><i></i><u></u></div>
+              <div class="s1-tab" id="s1-t6" style="--c: #c3a9a3"><i></i><u></u></div>
+            </div>
+            <svg class="s1-clock" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.5" />
+              <line class="s1-hour" id="s1-hour" x1="12" y1="12" x2="12" y2="7.6" />
+              <line class="s1-min" id="s1-min" x1="12" y1="12" x2="12" y2="5" />
+            </svg>
+          </div>
+          <div class="s1-urlrow">
+            <div class="s1-url">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 17 A6.5 6.5 0 1 1 10.5 4 A6.5 6.5 0 1 1 10.5 17 Z M15.2 15.2 L20.5 20.5" /></svg>
+              <span class="s1-qtext" id="s1-q">Wohnung kaufen Bergisch Gladbach</span>
+            </div>
+          </div>
+          <div class="s1-grid">
+            <div class="s1-card" id="s1-k1">
+              <div class="s1-copy" id="s1-k1-c1"></div>
+              <div class="s1-face" id="s1-k1-f">
+                <div class="s1-thumb">
+                  <svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M7 15 L24 4 L41 15 Z" /><path class="ln wl" d="M11 14.5 V29 H37 V14.5" /><path class="ln" d="M21 29 V22 H27 V29 M14 18 H18 V22 H14 Z M30 18 H34 V22 H30 Z" /></svg>
+                </div>
+                <div class="s1-l1"></div>
+                <div class="s1-l2"></div>
+              </div>
+              <div class="s1-badge" id="s1-k1-b">2×</div>
+            </div>
+            <div class="s1-card" id="s1-k2">
+              <div class="s1-face" id="s1-k2-f">
+                <div class="s1-thumb">
+                  <svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M13 6 H35 V29 H13 Z" /><path class="rf" d="M11 4 H37 V7 H11 Z" /><path class="ln" d="M17 11 H21 M27 11 H31 M17 16 H21 M27 16 H31 M17 21 H21 M27 21 H31 M22 29 V25 H26 V29" /></svg>
+                </div>
+                <div class="s1-l1"></div>
+                <div class="s1-l2"></div>
+              </div>
+            </div>
+            <div class="s1-card" id="s1-k3">
+              <div class="s1-empty"></div>
+              <div class="s1-face" id="s1-k3-f">
+                <div class="s1-thumb">
+                  <svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M5 16 L15 7 L25 16 Z M23 16 L33 7 L43 16 Z" /><path class="ln wl" d="M8 15.5 V29 H40 V15.5" /><path class="ln" d="M24 15.5 V29 M13 20 H17 V24 H13 Z M31 20 H35 V24 H31 Z" /></svg>
+                  <svg class="s1-heart" id="s1-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21 C5 16 2 12.5 2 8.6 C2 5.6 4.3 3.5 7 3.5 C9 3.5 10.8 4.7 12 6.5 C13.2 4.7 15 3.5 17 3.5 C19.7 3.5 22 5.6 22 8.6 C22 12.5 19 16 12 21 Z" /></svg>
+                </div>
+                <div class="s1-l1"></div>
+                <div class="s1-l2"></div>
+              </div>
+              <div class="s1-stamp" id="s1-stamp">VERGEBEN</div>
+            </div>
+            <div class="s1-card" id="s1-k4">
+              <div class="s1-copy" id="s1-k4-c1"></div>
+              <div class="s1-face" id="s1-k4-f">
+                <div class="s1-thumb">
+                  <svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M10 10 H38 V29 H10 Z" /><path class="rf" d="M8 7.5 H40 V10.5 H8 Z" /><path class="ln" d="M14 14 H20 V19 H14 Z M28 14 H34 V19 H28 Z M21 29 V22 H27 V29" /></svg>
+                </div>
+                <div class="s1-l1"></div>
+                <div class="s1-l2"></div>
+              </div>
+              <div class="s1-badge" id="s1-k4-b">2×</div>
+            </div>
+            <div class="s1-card" id="s1-k5">
+              <div class="s1-copy s1-copy-2" id="s1-k5-c2"></div>
+              <div class="s1-copy" id="s1-k5-c1"></div>
+              <div class="s1-face" id="s1-k5-f">
+                <div class="s1-thumb">
+                  <svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M9 14 L24 5 L39 14 Z" /><path class="ln wl" d="M12 13.5 V29 H36 V13.5" /><path class="ln" d="M16 17 H32 M16 21 H32 M22 29 V24.5 H26 V29" /></svg>
+                </div>
+                <div class="s1-l1"></div>
+                <div class="s1-l2"></div>
+              </div>
+              <div class="s1-badge" id="s1-k5-b">3×</div>
+            </div>
+            <div class="s1-card" id="s1-k6">
+              <div class="s1-face" id="s1-k6-f">
+                <div class="s1-thumb">
+                  <svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M16 4 H32 V29 H16 Z" /><path class="rf" d="M14 2.5 H34 V5 H14 Z" /><path class="ln" d="M20 9 H22 M26 9 H28 M20 14 H22 M26 14 H28 M20 19 H22 M26 19 H28 M22 29 V25 H26 V29 M6 29 H42" /></svg>
+                </div>
+                <div class="s1-l1"></div>
+                <div class="s1-l2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s1-suche"]');
+          const $ = (s) => root.querySelector(s);
+          const u = Math.min(root.clientWidth || 1920, root.clientHeight || 1080) / 100; // 1cqmin in px
+
+          function splitWords(el) {
+            Array.from(el.childNodes).forEach((node) => {
+              if (node.nodeType === 3) {
+                const parts = node.textContent.split(/(\s+)/);
+                const frag = document.createDocumentFragment();
+                parts.forEach((p) => {
+                  if (!p) return;
+                  if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
+                  else {
+                    const s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = p;
+                    frag.appendChild(s);
+                  }
+                });
+                node.replaceWith(frag);
+              } else if (node.nodeType === 1) splitWords(node);
+            });
+            return Array.from(el.querySelectorAll(".w"));
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          const wordsIn = (words, t, step, dur) =>
+            words.forEach((w, i) =>
+              tl.fromTo(w, { opacity: 0, yPercent: 38 }, { opacity: 1, yPercent: 0, duration: dur, ease: "power3.out" }, t + i * step),
+            );
+
+          // ---------- Hook: „Sie suchen eine Immobilie?“ + Zielgruppen-Chips ----------
+          wordsIn(splitWords($("#s1-hook-q")), 0.25, 0.09, 0.7);
+          ["#s1-c1", "#s1-c2", "#s1-c3"].forEach((c, i) =>
+            tl.fromTo(c, { opacity: 0, scale: 0.6, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(2.2)" }, 1.05 + i * 0.25),
+          );
+          tl.to("#s1-hook", { opacity: 0, y: -26, duration: 0.4, ease: "power2.in" }, 2.75);
+
+          // ---------- Browser erscheint ----------
+          tl.fromTo("#s1-browser", { opacity: 0, y: 34, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 3.12);
+          tl.fromTo("#s1-kick", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.18);
+          tl.fromTo("#s1-q", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.0, ease: "steps(30)" }, 3.45);
+
+          // Uhr läuft (Abend für Abend)
+          tl.fromTo("#s1-min", { rotation: 0 }, { rotation: 1440, duration: 9.1, ease: "none", svgOrigin: "12 12" }, 3.4);
+          tl.fromTo("#s1-hour", { rotation: 0 }, { rotation: 120, duration: 9.1, ease: "none", svgOrigin: "12 12" }, 3.4);
+
+          // ---------- Pain 1: Portale ----------
+          wordsIn(splitWords($("#s1-p1")), 3.6, 0.08, 0.6);
+          [3.95, 4.3, 4.6, 4.85, 5.05].forEach((t, i) =>
+            tl.fromTo("#s1-t" + (i + 2), { opacity: 0, yPercent: 70 }, { opacity: 1, yPercent: 0, duration: 0.35, ease: "power2.out" }, t),
+          );
+          [1, 2, 3, 4, 5, 6].forEach((k, i) =>
+            tl.fromTo("#s1-k" + k, { opacity: 0, y: 3 * u }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.0 + i * 0.2),
+          );
+          tl.to("#s1-p1", { opacity: 0, yPercent: -25, duration: 0.35, ease: "power2.in" }, 6.15);
+
+          // ---------- Pain 2: doppelt inseriert ----------
+          wordsIn(splitWords($("#s1-p2")), 6.45, 0.08, 0.6);
+          const dupe = (sel, t, d) =>
+            tl.fromTo(sel, { x: 0, y: 0, opacity: 0 }, { x: d * u, y: d * u, opacity: 1, duration: 0.45, ease: "power2.out" }, t);
+          const badge = (sel, t) =>
+            tl.fromTo(sel, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2.6)" }, t);
+          dupe("#s1-k1-c1", 6.8, 1.1);
+          badge("#s1-k1-b", 6.95);
+          dupe("#s1-k4-c1", 7.15, 1.1);
+          badge("#s1-k4-b", 7.3);
+          dupe("#s1-k5-c1", 7.5, 1.0);
+          dupe("#s1-k5-c2", 7.62, 2.0);
+          badge("#s1-k5-b", 7.8);
+          tl.to("#s1-p2", { opacity: 0, yPercent: -25, duration: 0.35, ease: "power2.in" }, 8.7);
+
+          // ---------- Pain 3: das Passende ist weg ----------
+          wordsIn(splitWords($("#s1-p3")), 9.0, 0.08, 0.6);
+          tl.to("#s1-k3-f", { borderColor: "#ca2c35", duration: 0.3, ease: "power1.out" }, 9.35);
+          tl.fromTo("#s1-heart", { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(3)", transformOrigin: "50% 50%" }, 9.4);
+          gsap.set("#s1-stamp", { xPercent: -50, yPercent: -50, rotation: -14 });
+          tl.fromTo("#s1-stamp", { opacity: 0, scale: 2.4 }, { opacity: 1, scale: 1, duration: 0.22, ease: "power4.in" }, 10.25);
+          tl.to("#s1-k3", { x: 0.6 * u, y: 0.3 * u, duration: 0.06, ease: "power2.out" }, 10.47);
+          tl.to("#s1-k3", { x: 0, y: 0, duration: 0.45, ease: "elastic.out(1, 0.35)" }, 10.54);
+          tl.to(["#s1-k3-f", "#s1-stamp"], { opacity: 0, duration: 0.5, ease: "power2.in" }, 11.25);
+
+          window.__timelines["s1-suche"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s2-vip-suche-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .w {
+          display: inline-block;
+        }
+        .s2-text {
+          position: absolute;
+          left: 6.5cqw;
+          width: 41cqw;
+          top: 28cqh;
+        }
+        .s2-kick {
+          margin: 0 0 2.4cqmin;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 5.2cqmin;
+          line-height: 1.2;
+          color: #5e6a6a;
+        }
+        .s2-title {
+          margin: 0 0 3.6cqmin;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 10.6cqmin;
+          line-height: 1;
+          letter-spacing: -0.03em;
+          white-space: nowrap;
+        }
+        .s2-vip {
+          display: inline-block;
+          font-weight: 700;
+          color: #ca2c35;
+        }
+        .s2-sub {
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 4.7cqmin;
+          line-height: 1.25;
+        }
+        .s2-sub b {
+          font-weight: 700;
+        }
+        .s2-art {
+          position: absolute;
+          right: 5cqw;
+          top: 9cqh;
+          height: 82cqh;
+          aspect-ratio: 600 / 640;
+        }
+        .s2-art svg.s2-svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .s2-body {
+          fill: #ffffff;
+          stroke: #444f4f;
+          stroke-width: 5;
+          stroke-linejoin: round;
+        }
+        .s2-rim {
+          fill: #ca2c35;
+        }
+        .s2-sieve {
+          fill: none;
+          stroke: #c9cec9;
+          stroke-width: 4;
+          stroke-linecap: round;
+          stroke-dasharray: 2 12;
+        }
+        .s2-cards {
+          position: absolute;
+          inset: 0;
+        }
+        .s2-card {
+          position: absolute;
+          left: 42.667%;
+          top: 28.28%;
+          width: 14.667%;
+          height: 10.31%;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5cqmin;
+          padding: 0.7cqmin;
+          background: #ffffff;
+          border: 0.25cqmin solid #c9cec9;
+          border-radius: 0.8cqmin;
+        }
+        .s2-ct {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0.4cqmin;
+          background: #e3e7e2;
+        }
+        .s2-ct svg {
+          width: 64%;
+          height: 86%;
+          overflow: visible;
+        }
+        .s2-cb1,
+        .s2-cb2 {
+          flex: none;
+          border-radius: 0.4cqmin;
+        }
+        .s2-cb1 {
+          width: 70%;
+          height: 0.8cqmin;
+          background: #c9cec9;
+        }
+        .s2-cb2 {
+          width: 44%;
+          height: 0.7cqmin;
+          background: #dfe2de;
+        }
+        .s2-art svg.s2-svg {
+          position: absolute;
+          inset: 0;
+        }
+        .s2-thumb {
+          fill: #e3e7e2;
+        }
+        .s2-ln {
+          fill: none;
+          stroke: #444f4f;
+          stroke-width: 2.4;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s2-wl {
+          fill: #ffffff;
+        }
+        .s2-rf {
+          fill: #ca2c35;
+        }
+        .s2-b1 {
+          fill: #c9cec9;
+        }
+        .s2-b2 {
+          fill: #dfe2de;
+        }
+        .s2-resbg {
+          fill: #ffffff;
+          stroke: #444f4f;
+          stroke-width: 4;
+        }
+        .s2-check circle {
+          fill: #ca2c35;
+        }
+        .s2-check path {
+          fill: none;
+          stroke: #ffffff;
+          stroke-width: 3;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        @container scene (orientation: portrait) {
+          #root .s2-text {
+            left: 8cqw;
+            width: 84cqw;
+            top: 13.6cqh;
+          }
+          #root .s2-kick {
+            font-size: 5.2cqmin;
+          }
+          #root .s2-title {
+            font-size: 11.6cqmin;
+          }
+          #root .s2-sub {
+            font-size: 4.9cqmin;
+          }
+          #root .s2-art {
+            right: auto;
+            left: calc(50cqw - 17.8cqh);
+            top: 40cqh;
+            height: 38cqh;
+          }
+        }
+      </style>
+
+      <div id="root" data-composition-id="s2-vip-suche" data-width="1920" data-height="1080" data-duration="7.5">
+        <div class="s2-text">
+          <p class="s2-kick" id="s2-kick">Es geht auch einfacher:</p>
+          <p class="s2-title" id="s2-title"><span class="s2-die" id="s2-die">Die</span> <span class="s2-vip" id="s2-vip">VIP-Suche</span></p>
+          <p class="s2-sub" id="s2-sub">Der gesamte Immobilienmarkt der Region – <b>strukturiert für Sie gefiltert.</b></p>
+        </div>
+
+        <div class="s2-art">
+          <div class="s2-cards">
+          <div class="s2-card" id="s2-in1">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-rf" d="M-17 -6 L0 -19 L17 -6 Z" /><path class="s2-ln s2-wl" d="M-13 -7 V5 H13 V-7" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in2">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-ln s2-wl" d="M-11 -17 H11 V5 H-11 Z" /><path class="s2-rf" d="M-13 -20 H13 V-16 H-13 Z" /><path class="s2-ln" d="M-6 -11 H-2 M2 -11 H6 M-6 -5 H-2 M2 -5 H6" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in3">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-rf" d="M-19 -6 L-9 -16 L1 -6 Z M-1 -6 L9 -16 L19 -6 Z" /><path class="s2-ln s2-wl" d="M-16 -7 V5 H16 V-7" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in4">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-rf" d="M-17 -6 L0 -19 L17 -6 Z" /><path class="s2-ln s2-wl" d="M-13 -7 V5 H13 V-7" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in5">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-ln s2-wl" d="M-11 -17 H11 V5 H-11 Z" /><path class="s2-rf" d="M-13 -20 H13 V-16 H-13 Z" /><path class="s2-ln" d="M-6 -11 H-2 M2 -11 H6 M-6 -5 H-2 M2 -5 H6" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in6">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-rf" d="M-19 -6 L-9 -16 L1 -6 Z M-1 -6 L9 -16 L19 -6 Z" /><path class="s2-ln s2-wl" d="M-16 -7 V5 H16 V-7" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in7">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-ln s2-wl" d="M-11 -17 H11 V5 H-11 Z" /><path class="s2-rf" d="M-13 -20 H13 V-16 H-13 Z" /><path class="s2-ln" d="M-6 -11 H-2 M2 -11 H6 M-6 -5 H-2 M2 -5 H6" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in8">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-rf" d="M-19 -6 L-9 -16 L1 -6 Z M-1 -6 L9 -16 L19 -6 Z" /><path class="s2-ln s2-wl" d="M-16 -7 V5 H16 V-7" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          <div class="s2-card" id="s2-in9">
+            <div class="s2-ct"><svg viewBox="-24 -24 48 32" aria-hidden="true"><path class="s2-rf" d="M-17 -6 L0 -19 L17 -6 Z" /><path class="s2-ln s2-wl" d="M-13 -7 V5 H13 V-7" /></svg></div>
+            <div class="s2-cb1"></div>
+            <div class="s2-cb2"></div>
+          </div>
+          </div>
+          <svg class="s2-svg" viewBox="0 0 600 640" aria-hidden="true">
+            <defs>
+              <radialGradient id="s2-glow-g" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#ca2c35" stop-opacity="0.22" />
+                <stop offset="1" stop-color="#ca2c35" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse id="s2-glow" cx="300" cy="560" rx="250" ry="120" fill="url(#s2-glow-g)" />
+            <g id="s2-funnel">
+              <path class="s2-body" id="s2-body" pathLength="1" d="M70 170 H530 L350 392 V462 H250 V392 Z" />
+              <path class="s2-sieve" d="M150 238 H450 M196 294 H404 M242 350 H358" />
+              <path class="s2-rim" id="s2-rim" d="M70 170 H530 L511 193 H89 Z" />
+            </g>
+            <g id="s2-res">
+              <rect x="140" y="490" width="320" height="140" rx="14" class="s2-resbg" />
+            <g class="s2-row" id="s2-row1">
+              <rect x="158" y="508" width="42" height="28" rx="4" class="s2-thumb" />
+              <path class="s2-rf" d="M166 523 L179 514 L192 523 Z" />
+              <path class="s2-ln s2-wl" d="M169 522.5 V531 H189 V522.5" />
+              <rect x="212" y="513" width="150" height="7" rx="3.5" class="s2-b1" />
+              <rect x="212" y="525" width="96" height="6" rx="3" class="s2-b2" />
+              <g class="s2-check" id="s2-chk1">
+                <circle cx="428" cy="522" r="11.5" />
+                <path d="M422.5 522 L426.5 526 L434 518" />
+              </g>
+            </g>
+            <g class="s2-row" id="s2-row2">
+              <rect x="158" y="548" width="42" height="28" rx="4" class="s2-thumb" />
+              <path class="s2-rf" d="M166 563 L179 554 L192 563 Z" />
+              <path class="s2-ln s2-wl" d="M169 562.5 V571 H189 V562.5" />
+              <rect x="212" y="553" width="150" height="7" rx="3.5" class="s2-b1" />
+              <rect x="212" y="565" width="96" height="6" rx="3" class="s2-b2" />
+              <g class="s2-check" id="s2-chk2">
+                <circle cx="428" cy="562" r="11.5" />
+                <path d="M422.5 562 L426.5 566 L434 558" />
+              </g>
+            </g>
+            <g class="s2-row" id="s2-row3">
+              <rect x="158" y="588" width="42" height="28" rx="4" class="s2-thumb" />
+              <path class="s2-rf" d="M166 603 L179 594 L192 603 Z" />
+              <path class="s2-ln s2-wl" d="M169 602.5 V611 H189 V602.5" />
+              <rect x="212" y="593" width="150" height="7" rx="3.5" class="s2-b1" />
+              <rect x="212" y="605" width="96" height="6" rx="3" class="s2-b2" />
+              <g class="s2-check" id="s2-chk3">
+                <circle cx="428" cy="602" r="11.5" />
+                <path d="M422.5 602 L426.5 606 L434 598" />
+              </g>
+            </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s2-vip-suche"]');
+          const $ = (s) => root.querySelector(s);
+
+          function splitWords(el) {
+            Array.from(el.childNodes).forEach((node) => {
+              if (node.nodeType === 3) {
+                const parts = node.textContent.split(/(\s+)/);
+                const frag = document.createDocumentFragment();
+                parts.forEach((p) => {
+                  if (!p) return;
+                  if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
+                  else {
+                    const s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = p;
+                    frag.appendChild(s);
+                  }
+                });
+                node.replaceWith(frag);
+              } else if (node.nodeType === 1) splitWords(node);
+            });
+            return Array.from(el.querySelectorAll(".w"));
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          const wordsIn = (words, t, step, dur) =>
+            words.forEach((w, i) =>
+              tl.fromTo(w, { opacity: 0, yPercent: 38 }, { opacity: 1, yPercent: 0, duration: dur, ease: "power3.out" }, t + i * step),
+            );
+
+          // ---------- Text: Erleichterung -> Produktname -> Versprechen ----------
+          wordsIn(splitWords($("#s2-kick")), 0.45, 0.08, 0.6);
+          tl.fromTo("#s2-die", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.15);
+          tl.fromTo("#s2-vip", { opacity: 0, scale: 0.82 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.9)", transformOrigin: "0% 70%" }, 1.3);
+          wordsIn(splitWords($("#s2-sub")), 2.45, 0.055, 0.55);
+
+          // ---------- Trichter zeichnet sich ----------
+          tl.fromTo("#s2-body", { strokeDasharray: "1 2", strokeDashoffset: 1.05, fillOpacity: 0 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 0.35);
+          tl.to("#s2-body", { fillOpacity: 1, duration: 0.5, ease: "power1.out" }, 0.9);
+          tl.fromTo("#s2-rim", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.8);
+          tl.fromTo(".s2-sieve", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 1.0);
+
+          // ---------- Inserate fallen in den Filter (depth-scatter-assemble, 2D) ----------
+          const starts = [[-236.4, -236.4, -9], [-97.7, -290.9, 6], [43.2, -257.6, -4], [193.2, -278.8, 8], [281.8, -148.5, -7], [-279.5, -112.1, 7], [-147.7, -154.5, -5], [136.4, -154.5, 5], [0.0, -184.8, -3]];
+          starts.forEach(([xp, yp, r], i) => {
+            const el = "#s2-in" + (i + 1);
+            const t0 = 0.6 + i * 0.18;
+            tl.fromTo(el, { xPercent: xp, yPercent: yp - 40, rotation: r, scale: 0.7, opacity: 0 }, { yPercent: yp, scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" }, t0);
+            tl.to(el, { xPercent: 0, yPercent: 0, rotation: 0, scale: 0.32, duration: 0.75, ease: "power2.in" }, t0 + 0.5);
+            tl.to(el, { opacity: 0, duration: 0.18, ease: "power1.in" }, t0 + 1.07);
+          });
+
+          // ---------- Geordnete Trefferliste kommt heraus ----------
+          tl.fromTo("#s2-glow", { opacity: 0 }, { opacity: 1, duration: 0.9, ease: "power1.out" }, 3.35);
+          tl.fromTo("#s2-res", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.7, ease: "back.out(1.6)" }, 3.3);
+          [1, 2, 3].forEach((k, i) => {
+            tl.fromTo("#s2-row" + k, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 3.75 + i * 0.2);
+            tl.fromTo("#s2-chk" + k, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 3.95 + i * 0.2);
+          });
+
+          // ---------- Abblende ----------
+          tl.to([".s2-text", ".s2-art"], { opacity: 0, duration: 0.4, ease: "power1.in" }, 7.05);
+
+          window.__timelines["s2-vip-suche"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

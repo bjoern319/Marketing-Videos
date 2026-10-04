@@ -1,0 +1,15 @@
+{
+  "name": "knigge-vip-suche",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.118 preview",
+    "check": "npx --yes hyperframes@0.8.118 check",
+    "render": "npm run render:9x16-4k && npm run render:16x9-4k && npm run export",
+    "render:9x16-4k": "npx --yes hyperframes@0.8.118 render --quality delivery -c formats/9x16.html --resolution portrait-4k -o renders/master/knigge-vip-suche-9x16-4k.mp4",
+    "render:16x9-4k": "npx --yes hyperframes@0.8.118 render --quality delivery --resolution landscape-4k -o renders/master/knigge-vip-suche-16x9-4k.mp4",
+    "export": "bash tools/export.sh",
+    "music": "python3 tools/music/compose.py --sf2 \"$SF2\" --out assets/audio/knigge-vip-theme.m4a --midi tools/music/knigge-vip-theme.mid",
+    "publish": "npx --yes hyperframes@0.8.118 publish"
+  }
+}

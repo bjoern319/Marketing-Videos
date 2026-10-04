@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s3-so-gehts-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .w {
+          display: inline-block;
+        }
+
+        /* ---------- Überschrift + Schrittliste ---------- */
+        .s3-h {
+          position: absolute;
+          left: 6.5cqw;
+          top: 15cqh;
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 6.2cqmin;
+          line-height: 1.15;
+          letter-spacing: -0.015em;
+        }
+        .s3-steps {
+          position: absolute;
+          left: 6.5cqw;
+          width: 37cqw;
+          top: 31cqh;
+        }
+        .s3-step {
+          display: flex;
+          align-items: flex-start;
+          gap: 2.6cqmin;
+          margin: 0 0 4cqmin;
+        }
+        .s3-num {
+          flex: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 6.6cqmin;
+          height: 6.6cqmin;
+          border-radius: 1cqmin;
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 3.8cqmin;
+          font-weight: 700;
+        }
+        .s3-st {
+          margin: 0;
+          padding-top: 0.4cqmin;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 4.3cqmin;
+          line-height: 1.22;
+        }
+        .s3-st b {
+          font-weight: 700;
+        }
+
+        /* ---------- App-Fenster ---------- */
+        .s3-win {
+          position: absolute;
+          right: 5.5cqw;
+          top: calc(50cqh - 29cqmin);
+          width: 82cqmin;
+          height: 58cqmin;
+          background: #ffffff;
+          border: 0.32cqmin solid #444f4f;
+          border-radius: 1.4cqmin;
+          box-shadow: 0 1.4cqmin 3.6cqmin rgba(68, 79, 79, 0.14);
+        }
+        .s3-wbar {
+          position: relative;
+          height: 5.6cqmin;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1cqmin;
+          background: #f2f3f0;
+          border-bottom: 0.25cqmin solid #d4d8d3;
+          border-radius: 1.1cqmin 1.1cqmin 0 0;
+          font-size: 2.4cqmin;
+          font-weight: 700;
+        }
+        .s3-wbar svg {
+          width: 2.6cqmin;
+          height: 2.6cqmin;
+        }
+        .s3-dots {
+          position: absolute;
+          left: 2cqmin;
+          top: 2.15cqmin;
+          display: flex;
+          gap: 0.9cqmin;
+        }
+        .s3-dots i {
+          display: block;
+          width: 1.3cqmin;
+          height: 1.3cqmin;
+          border-radius: 50%;
+          background: #c9cec9;
+        }
+        .s3-scr {
+          position: absolute;
+          left: 3cqmin;
+          right: 3cqmin;
+          top: 8.6cqmin;
+          bottom: 3cqmin;
+        }
+        .s3-shead {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 5cqmin;
+          margin: 0 0 2.6cqmin;
+        }
+        .s3-stitle {
+          margin: 0;
+          font-size: 3.4cqmin;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+        }
+        .s3-ssub {
+          margin: 0.4cqmin 0 0;
+          font-size: 2.3cqmin;
+          font-weight: 400;
+          color: #5e6a6a;
+        }
+
+        /* Screen 1: Suchprofil */
+        .s3-seg {
+          display: flex;
+          border: 0.3cqmin solid #6d131b;
+          border-radius: 1cqmin;
+          overflow: hidden;
+        }
+        .s3-seg span {
+          padding: 0.9cqmin 2.4cqmin 1cqmin;
+          font-size: 2.6cqmin;
+          font-weight: 700;
+          color: #6d131b;
+          background: #ffffff;
+        }
+        .s3-seg span + span {
+          border-left: 0.3cqmin solid #6d131b;
+        }
+        .s3-field {
+          display: flex;
+          align-items: center;
+          gap: 2cqmin;
+          margin: 0 0 2cqmin;
+        }
+        .s3-label {
+          flex: none;
+          width: 16cqmin;
+          font-size: 2.6cqmin;
+          font-weight: 400;
+          color: #5e6a6a;
+        }
+        .s3-input {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          height: 6cqmin;
+          padding: 0 1.8cqmin;
+          border: 0.28cqmin solid #c9cec9;
+          border-radius: 0.8cqmin;
+          font-size: 2.9cqmin;
+          font-weight: 400;
+          white-space: nowrap;
+        }
+        .s3-val {
+          display: inline-block;
+        }
+        .s3-save {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 2.4cqmin;
+          margin-top: 3.2cqmin;
+        }
+        .s3-saved {
+          display: flex;
+          align-items: center;
+          gap: 0.8cqmin;
+          font-size: 2.6cqmin;
+          font-weight: 700;
+          color: #ca2c35;
+        }
+        .s3-saved svg {
+          width: 3cqmin;
+          height: 3cqmin;
+        }
+        .s3-saved path {
+          fill: none;
+          stroke: #ca2c35;
+          stroke-width: 3;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s3-btn {
+          padding: 1.3cqmin 2.6cqmin 1.4cqmin;
+          border-radius: 1cqmin;
+          background: #6d131b;
+          color: #ffffff;
+          font-size: 2.7cqmin;
+          font-weight: 700;
+        }
+
+        /* Screen 2: Abgleich */
+        .s3-cycle {
+          display: flex;
+          align-items: center;
+          gap: 1cqmin;
+          font-size: 2.4cqmin;
+          font-weight: 700;
+          color: #ca2c35;
+        }
+        .s3-cycle svg {
+          width: 3.8cqmin;
+          height: 3.8cqmin;
+          overflow: visible;
+        }
+        .s3-cycle path {
+          fill: none;
+          stroke: #ca2c35;
+          stroke-width: 2.4;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s3-gridwrap {
+          position: relative;
+          height: 31cqmin;
+        }
+        .s3-grid {
+          position: absolute;
+          inset: 0;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+          gap: 1.8cqmin;
+        }
+        .s3-gc {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 0.8cqmin;
+          padding: 1cqmin;
+          background: #ffffff;
+          border: 0.25cqmin solid #c9cec9;
+          border-radius: 0.9cqmin;
+        }
+        .s3-gthumb,
+        .s3-mthumb {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0.5cqmin;
+          background: #e3e7e2;
+        }
+        .s3-gthumb {
+          flex: 1;
+        }
+        .s3-gthumb svg,
+        .s3-mthumb svg {
+          width: 62%;
+          height: 72%;
+          overflow: visible;
+        }
+        .s3-gthumb .ln,
+        .s3-mthumb .ln {
+          fill: none;
+          stroke: #444f4f;
+          stroke-width: 2.2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s3-gthumb .wl,
+        .s3-mthumb .wl {
+          fill: #ffffff;
+        }
+        .s3-gthumb .rf,
+        .s3-mthumb .rf {
+          fill: #ca2c35;
+        }
+        .s3-gl1,
+        .s3-gl2 {
+          height: 1.1cqmin;
+          border-radius: 0.55cqmin;
+        }
+        .s3-gl1 {
+          width: 86%;
+          background: #c9cec9;
+        }
+        .s3-gl2 {
+          width: 52%;
+          background: #dfe2de;
+        }
+        .s3-gfoot {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .s3-src {
+          width: 1.6cqmin;
+          height: 1.6cqmin;
+          border-radius: 50%;
+          background: #b9c0bc;
+        }
+        .s3-src.s3-src-k {
+          border-radius: 0.2cqmin;
+          background: linear-gradient(135deg, #6d131b 0%, #ca2c35 100%);
+        }
+        .s3-hitbadge {
+          position: absolute;
+          right: -1.3cqmin;
+          top: -1.3cqmin;
+          width: 4.4cqmin;
+          height: 4.4cqmin;
+          border-radius: 50%;
+          background: #ca2c35;
+          box-shadow: 0 0 0 0.45cqmin #ffffff;
+        }
+        .s3-hitbadge svg,
+        .s3-mchk svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .s3-hitbadge path,
+        .s3-mchk path {
+          fill: none;
+          stroke: #ffffff;
+          stroke-width: 3;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s3-scan {
+          position: absolute;
+          top: -1cqmin;
+          bottom: -1cqmin;
+          left: 0;
+          width: 100%;
+          pointer-events: none;
+        }
+        .s3-scanline {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -0.25cqmin;
+          width: 0.5cqmin;
+          border-radius: 0.25cqmin;
+          background: #ca2c35;
+          box-shadow: 0 0 2.2cqmin rgba(202, 44, 53, 0.55);
+        }
+        .s3-count {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          padding: 0.8cqmin 1.8cqmin 0.9cqmin;
+          border-radius: 1cqmin;
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 2.7cqmin;
+          font-weight: 700;
+        }
+
+        /* Screen 3: Posteingang */
+        .s3-mail {
+          display: flex;
+          align-items: center;
+          gap: 1.6cqmin;
+          padding: 1.5cqmin 1.8cqmin;
+          border: 0.28cqmin solid #ca2c35;
+          border-radius: 1cqmin;
+          background: #fbf3f3;
+        }
+        .s3-mail svg {
+          flex: none;
+          width: 4.6cqmin;
+          height: 4.6cqmin;
+          overflow: visible;
+        }
+        .s3-mail .s3-env {
+          fill: #ffffff;
+          stroke: #ca2c35;
+          stroke-width: 1.8;
+          stroke-linejoin: round;
+        }
+        .s3-mailtxt {
+          flex: 1;
+          min-width: 0;
+        }
+        .s3-from {
+          margin: 0;
+          font-size: 2.3cqmin;
+          font-weight: 400;
+          color: #5e6a6a;
+        }
+        .s3-subj {
+          margin: 0.3cqmin 0 0;
+          font-size: 2.9cqmin;
+          font-weight: 700;
+          white-space: nowrap;
+        }
+        .s3-new {
+          flex: none;
+          padding: 0.5cqmin 1.3cqmin 0.6cqmin;
+          border-radius: 0.8cqmin;
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 2.2cqmin;
+          font-weight: 700;
+        }
+        .s3-prev {
+          margin-top: 1.8cqmin;
+          padding: 1.4cqmin 1.8cqmin;
+          border: 0.25cqmin solid #c9cec9;
+          border-radius: 1cqmin;
+        }
+        .s3-mrow {
+          display: flex;
+          align-items: center;
+          gap: 1.8cqmin;
+          height: 5.4cqmin;
+        }
+        .s3-mrow + .s3-mrow {
+          margin-top: 1cqmin;
+        }
+        .s3-mthumb {
+          flex: none;
+          width: 8cqmin;
+          height: 5.4cqmin;
+        }
+        .s3-mtext {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.9cqmin;
+        }
+        .s3-mchk {
+          flex: none;
+          width: 3.6cqmin;
+          height: 3.6cqmin;
+          border-radius: 50%;
+          background: #ca2c35;
+        }
+        .s3-fly {
+          position: absolute;
+          left: 30cqmin;
+          top: 22cqmin;
+          width: 7cqmin;
+          height: 7cqmin;
+          overflow: visible;
+        }
+        .s3-fly .s3-env {
+          fill: #ffffff;
+          stroke: #ca2c35;
+          stroke-width: 1.6;
+          stroke-linejoin: round;
+        }
+
+        /* Hinweis */
+        .s3-toast {
+          position: absolute;
+          left: 50%;
+          bottom: -3.6cqmin;
+          display: flex;
+          align-items: center;
+          gap: 1.2cqmin;
+          padding: 1.3cqmin 2.4cqmin 1.4cqmin 2cqmin;
+          border-radius: 1cqmin;
+          background: #444f4f;
+          color: #ffffff;
+          font-size: 2.8cqmin;
+          font-weight: 700;
+          white-space: nowrap;
+          box-shadow: 0 1cqmin 2.4cqmin rgba(68, 79, 79, 0.25);
+        }
+        .s3-toast svg {
+          width: 3cqmin;
+          height: 3cqmin;
+        }
+        .s3-toast path {
+          fill: #ffffff;
+        }
+
+        /* ---------- 9:16 ---------- */
+        @container scene (orientation: portrait) {
+          #root .s3-h {
+            left: 8cqw;
+            top: 13.6cqh;
+            font-size: 6.4cqmin;
+          }
+          #root .s3-win {
+            right: auto;
+            left: calc(50cqw - 41cqmin);
+            top: 20.6cqh;
+          }
+          #root .s3-steps {
+            left: 8cqw;
+            width: 84cqw;
+            top: 56.4cqh;
+          }
+          #root .s3-step {
+            margin-bottom: 2.8cqmin;
+          }
+          #root .s3-st {
+            font-size: 4.2cqmin;
+          }
+        }
+      </style>
+
+      <div id="root" data-composition-id="s3-so-gehts" data-width="1920" data-height="1080" data-duration="12.5">
+        <p class="s3-h" id="s3-h">Wie funktioniert das?</p>
+
+        <div class="s3-steps">
+          <div class="s3-step">
+            <div class="s3-num" id="s3-n1">1</div>
+            <p class="s3-st" id="s3-s1">Sie hinterlegen <b>einmalig</b> Ihre Suchkriterien.</p>
+          </div>
+          <div class="s3-step">
+            <div class="s3-num" id="s3-n2">2</div>
+            <p class="s3-st" id="s3-s2">Wir gleichen sie <b>regelmäßig</b> mit dem aktuellen Markt ab.</p>
+          </div>
+          <div class="s3-step">
+            <div class="s3-num" id="s3-n3">3</div>
+            <p class="s3-st" id="s3-s3">Sie erhalten passende Angebote <b>per E-Mail</b>.</p>
+          </div>
+        </div>
+
+        <div class="s3-win" id="s3-win">
+          <div class="s3-wbar">
+            <div class="s3-dots"><i></i><i></i><i></i></div>
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <path d="M0 0 H79.5 L0 100 Z" fill="#a4222b" />
+              <path d="M79.5 0 H100 V100 L47.5 40.2 Z" fill="#6d131b" />
+              <path d="M0 100 L47.5 40.2 L100 100 Z" fill="#ca2c35" />
+            </svg>
+            VIP-Suche
+          </div>
+
+          <!-- Screen 1: Suchprofil -->
+          <div class="s3-scr" id="s3-scr1">
+            <div class="s3-shead">
+              <p class="s3-stitle">Ihr Suchprofil</p>
+              <div class="s3-seg"><span id="s3-buy">Kaufen</span><span>Mieten</span></div>
+            </div>
+            <div class="s3-field">
+              <div class="s3-label">Ort</div>
+              <div class="s3-input" id="s3-i1"><span class="s3-val" id="s3-v1">Bergisch Gladbach</span></div>
+            </div>
+            <div class="s3-field">
+              <div class="s3-label">Zimmer</div>
+              <div class="s3-input" id="s3-i2"><span class="s3-val" id="s3-v2">3 – 4</span></div>
+            </div>
+            <div class="s3-field">
+              <div class="s3-label">Wohnfläche</div>
+              <div class="s3-input" id="s3-i3"><span class="s3-val" id="s3-v3">ab 80 m²</span></div>
+            </div>
+            <div class="s3-save">
+              <div class="s3-saved" id="s3-saved">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17 L19 7.5" /></svg>Gespeichert
+              </div>
+              <div class="s3-btn" id="s3-btn">Suchprofil speichern</div>
+            </div>
+          </div>
+
+          <!-- Screen 2: Abgleich mit dem Markt -->
+          <div class="s3-scr" id="s3-scr2">
+            <div class="s3-shead">
+              <div>
+                <p class="s3-stitle">Abgleich mit dem Markt</p>
+                <p class="s3-ssub">Eigene Angebote &amp; gängige Online-Portale</p>
+              </div>
+              <div class="s3-cycle">
+                <svg viewBox="0 0 24 24" aria-hidden="true" id="s3-cyc"><path d="M19.5 9 A8 8 0 0 0 5.2 7.4 M4.5 15 A8 8 0 0 0 18.8 16.6 M19.8 4.2 V9.2 H14.8 M4.2 19.8 V14.8 H9.2" /></svg>
+                regelmäßig
+              </div>
+            </div>
+            <div class="s3-gridwrap">
+              <div class="s3-grid">
+                <div class="s3-gc" id="s3-g1">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M7 15 L24 4 L41 15 Z" /><path class="ln wl" d="M11 14.5 V29 H37 V14.5" /><path class="ln" d="M21 29 V22 H27 V29" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src"></span></div>
+                  
+                </div>
+                <div class="s3-gc s3-hit" id="s3-g2">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M13 6 H35 V29 H13 Z" /><path class="rf" d="M11 4 H37 V7 H11 Z" /><path class="ln" d="M17 11 H21 M27 11 H31 M17 17 H21 M27 17 H31 M22 29 V24 H26 V29" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src s3-src-k"></span></div>
+                  <div class="s3-hitbadge" id="s3-hb2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5 L10.2 16.5 L18 8" /></svg></div>
+                </div>
+                <div class="s3-gc" id="s3-g3">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M5 16 L15 7 L25 16 Z M23 16 L33 7 L43 16 Z" /><path class="ln wl" d="M8 15.5 V29 H40 V15.5" /><path class="ln" d="M24 15.5 V29" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src"></span></div>
+                  
+                </div>
+                <div class="s3-gc" id="s3-g4">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M10 10 H38 V29 H10 Z" /><path class="rf" d="M8 7.5 H40 V10.5 H8 Z" /><path class="ln" d="M14 14 H20 V19 H14 Z M28 14 H34 V19 H28 Z" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src"></span></div>
+                  
+                </div>
+                <div class="s3-gc" id="s3-g5">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M10 10 H38 V29 H10 Z" /><path class="rf" d="M8 7.5 H40 V10.5 H8 Z" /><path class="ln" d="M14 14 H20 V19 H14 Z M28 14 H34 V19 H28 Z" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src"></span></div>
+                  
+                </div>
+                <div class="s3-gc s3-hit" id="s3-g6">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M7 15 L24 4 L41 15 Z" /><path class="ln wl" d="M11 14.5 V29 H37 V14.5" /><path class="ln" d="M21 29 V22 H27 V29" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src"></span></div>
+                  <div class="s3-hitbadge" id="s3-hb6"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5 L10.2 16.5 L18 8" /></svg></div>
+                </div>
+                <div class="s3-gc" id="s3-g7">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M13 6 H35 V29 H13 Z" /><path class="rf" d="M11 4 H37 V7 H11 Z" /><path class="ln" d="M17 11 H21 M27 11 H31 M17 17 H21 M27 17 H31 M22 29 V24 H26 V29" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src"></span></div>
+                  
+                </div>
+                <div class="s3-gc s3-hit" id="s3-g8">
+                  <div class="s3-gthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M5 16 L15 7 L25 16 Z M23 16 L33 7 L43 16 Z" /><path class="ln wl" d="M8 15.5 V29 H40 V15.5" /><path class="ln" d="M24 15.5 V29" /></svg></div>
+                  <div class="s3-gl1"></div>
+                  <div class="s3-gfoot"><div class="s3-gl2"></div><span class="s3-src s3-src-k"></span></div>
+                  <div class="s3-hitbadge" id="s3-hb8"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5 L10.2 16.5 L18 8" /></svg></div>
+                </div>
+              </div>
+              <div class="s3-scan" id="s3-scan" data-layout-allow-overflow><div class="s3-scanline"></div></div>
+            </div>
+            <div class="s3-count" id="s3-count">3 Treffer</div>
+          </div>
+
+          <!-- Screen 3: Posteingang -->
+          <div class="s3-scr" id="s3-scr3">
+            <div class="s3-shead">
+              <p class="s3-stitle">Posteingang</p>
+            </div>
+            <div class="s3-mail" id="s3-mail">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="s3-env" d="M3 6 H21 V18 H3 Z M3 6 L12 13 L21 6" /></svg>
+              <div class="s3-mailtxt">
+                <p class="s3-from">KNIGGE VIP-Suche</p>
+                <p class="s3-subj">3 neue Angebote für Ihr Suchprofil</p>
+              </div>
+              <div class="s3-new" id="s3-new">Neu</div>
+            </div>
+            <div class="s3-prev" id="s3-prev">
+                  <div class="s3-mrow" id="s3-mr1">
+                    <div class="s3-mthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="ln wl" d="M13 6 H35 V29 H13 Z" /><path class="rf" d="M11 4 H37 V7 H11 Z" /><path class="ln" d="M17 11 H21 M27 11 H31 M17 17 H21 M27 17 H31 M22 29 V24 H26 V29" /></svg></div>
+                    <div class="s3-mtext"><div class="s3-gl1"></div><div class="s3-gl2"></div></div>
+                    <div class="s3-mchk" id="s3-mc1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5 L10.2 16.5 L18 8" /></svg></div>
+                  </div>
+                  <div class="s3-mrow" id="s3-mr2">
+                    <div class="s3-mthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M7 15 L24 4 L41 15 Z" /><path class="ln wl" d="M11 14.5 V29 H37 V14.5" /><path class="ln" d="M21 29 V22 H27 V29" /></svg></div>
+                    <div class="s3-mtext"><div class="s3-gl1"></div><div class="s3-gl2"></div></div>
+                    <div class="s3-mchk" id="s3-mc2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5 L10.2 16.5 L18 8" /></svg></div>
+                  </div>
+                  <div class="s3-mrow" id="s3-mr3">
+                    <div class="s3-mthumb"><svg viewBox="0 0 48 32" aria-hidden="true"><path class="rf" d="M5 16 L15 7 L25 16 Z M23 16 L33 7 L43 16 Z" /><path class="ln wl" d="M8 15.5 V29 H40 V15.5" /><path class="ln" d="M24 15.5 V29" /></svg></div>
+                    <div class="s3-mtext"><div class="s3-gl1"></div><div class="s3-gl2"></div></div>
+                    <div class="s3-mchk" id="s3-mc3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5 L10.2 16.5 L18 8" /></svg></div>
+                  </div>
+            </div>
+          </div>
+
+          <svg class="s3-fly" id="s3-fly" viewBox="0 0 24 24" aria-hidden="true"><path class="s3-env" d="M3 6 H21 V18 H3 Z M3 6 L12 13 L21 6" /></svg>
+
+          <div class="s3-toast" id="s3-toast">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5 H10.5 V19 H7 Z M13.5 5 H17 V19 H13.5 Z" /></svg>
+            Jederzeit anpassen oder pausieren.
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s3-so-gehts"]');
+          const $ = (s) => root.querySelector(s);
+          const u = Math.min(root.clientWidth || 1920, root.clientHeight || 1080) / 100; // 1cqmin in px
+
+          function splitWords(el) {
+            Array.from(el.childNodes).forEach((node) => {
+              if (node.nodeType === 3) {
+                const parts = node.textContent.split(/(\s+)/);
+                const frag = document.createDocumentFragment();
+                parts.forEach((p) => {
+                  if (!p) return;
+                  if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
+                  else {
+                    const s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = p;
+                    frag.appendChild(s);
+                  }
+                });
+                node.replaceWith(frag);
+              } else if (node.nodeType === 1) splitWords(node);
+            });
+            return Array.from(el.querySelectorAll(".w"));
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          const wordsIn = (words, t, step, dur) =>
+            words.forEach((w, i) =>
+              tl.fromTo(w, { opacity: 0, yPercent: 38 }, { opacity: 1, yPercent: 0, duration: dur, ease: "power3.out" }, t + i * step),
+            );
+          const step = (k, t) => {
+            tl.fromTo("#s3-n" + k, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.4)" }, t);
+            wordsIn(splitWords($("#s3-s" + k)), t + 0.15, 0.07, 0.55);
+            if (k > 1) tl.to("#s3-n" + (k - 1), { backgroundColor: "#6d131b", duration: 0.3, ease: "power1.out" }, t);
+          };
+          const typeIn = (sel, t, n, d) =>
+            tl.fromTo(sel, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: d, ease: "steps(" + n + ")" }, t);
+          const swapScreen = (outSel, inSel, t) => {
+            tl.to(outSel, { opacity: 0, x: -3 * u, duration: 0.26, ease: "power2.in" }, t);
+            tl.fromTo(inSel, { opacity: 0, x: 3 * u }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, t + 0.28);
+          };
+
+          // ---------- Überschrift + Fenster ----------
+          wordsIn(splitWords($("#s3-h")), 0.3, 0.08, 0.6);
+          tl.fromTo("#s3-win", { opacity: 0, y: 30, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 0.7);
+
+          // ---------- 1: Suchprofil hinterlegen ----------
+          step(1, 1.0);
+          tl.to("#s3-buy", { backgroundColor: "#6d131b", color: "#ffffff", duration: 0.3, ease: "power1.out" }, 1.6);
+          tl.to("#s3-i1", { borderColor: "#ca2c35", duration: 0.2 }, 1.85);
+          typeIn("#s3-v1", 1.9, 17, 0.75);
+          tl.to("#s3-i1", { borderColor: "#c9cec9", duration: 0.2 }, 2.7);
+          tl.to("#s3-i2", { borderColor: "#ca2c35", duration: 0.2 }, 2.7);
+          typeIn("#s3-v2", 2.75, 5, 0.3);
+          tl.to("#s3-i2", { borderColor: "#c9cec9", duration: 0.2 }, 3.1);
+          tl.to("#s3-i3", { borderColor: "#ca2c35", duration: 0.2 }, 3.1);
+          typeIn("#s3-v3", 3.15, 8, 0.4);
+          tl.to("#s3-i3", { borderColor: "#c9cec9", duration: 0.2 }, 3.6);
+          tl.to("#s3-btn", { scale: 0.94, duration: 0.12, ease: "power2.in" }, 3.6);
+          tl.to("#s3-btn", { scale: 1, duration: 0.45, ease: "back.out(3)" }, 3.72);
+          tl.fromTo("#s3-saved", { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 3.8);
+
+          // ---------- 2: Abgleich mit dem Markt ----------
+          gsap.set(["#s3-scr2", "#s3-scr3"], { opacity: 0 });
+          swapScreen("#s3-scr1", "#s3-scr2", 4.3);
+          step(2, 4.5);
+          [1, 2, 3, 4, 5, 6, 7, 8].forEach((k, i) =>
+            tl.fromTo("#s3-g" + k, { opacity: 0, y: 2 * u }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 4.6 + i * 0.08),
+          );
+          tl.fromTo("#s3-cyc", { rotation: 0 }, { rotation: 720, duration: 7.4, ease: "none", transformOrigin: "50% 50%" }, 4.6);
+          tl.fromTo("#s3-scan", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 5.3);
+          tl.fromTo("#s3-scan", { xPercent: 0 }, { xPercent: 100, duration: 1.4, ease: "none", immediateRender: false }, 5.35);
+          tl.to("#s3-scan", { opacity: 0, duration: 0.25 }, 6.8);
+          const cols = [0, 1, 2, 3, 0, 1, 2, 3];
+          const hitT = (k) => 5.35 + ((cols[k - 1] + 0.5) / 4) * 1.4;
+          [2, 6, 8].forEach((k) => {
+            tl.fromTo("#s3-g" + k, { borderColor: "#c9cec9", boxShadow: "0px 0px 0px 0px rgba(202, 44, 53, 0)" }, { borderColor: "#ca2c35", boxShadow: "0px 0px 0px " + (0.3 * u).toFixed(2) + "px rgba(202, 44, 53, 1)", duration: 0.2, immediateRender: false }, hitT(k));
+            tl.fromTo("#s3-hb" + k, { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(3)" }, hitT(k) + 0.05);
+          });
+          tl.to(["#s3-g1", "#s3-g3", "#s3-g4", "#s3-g5", "#s3-g7"], { opacity: 0.35, duration: 0.4, ease: "power1.out" }, 6.85);
+          tl.fromTo("#s3-count", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2.4)", transformOrigin: "0% 100%" }, 7.0);
+
+          // ---------- 3: per E-Mail ----------
+          swapScreen("#s3-scr2", "#s3-scr3", 7.85);
+          step(3, 8.0);
+          tl.fromTo("#s3-fly", { opacity: 0, x: -34 * u, y: -14 * u, rotation: -18, scale: 0.8 }, { opacity: 1, x: -20 * u, y: -9 * u, rotation: -10, scale: 1, duration: 0.25, ease: "power1.out" }, 8.1);
+          tl.to("#s3-fly", { x: -18 * u, y: -4 * u, rotation: 0, scale: 0.55, duration: 0.45, ease: "power2.in" }, 8.35);
+          tl.to("#s3-fly", { opacity: 0, duration: 0.12 }, 8.75);
+          tl.fromTo("#s3-mail", { opacity: 0, y: -2.5 * u }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 8.62);
+          tl.fromTo("#s3-new", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(3)" }, 8.85);
+          tl.fromTo("#s3-prev", { opacity: 0, y: -1.5 * u }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 9.05);
+          [1, 2, 3].forEach((k, i) => {
+            tl.fromTo("#s3-mr" + k, { opacity: 0, x: -1.6 * u }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 9.2 + i * 0.18);
+            tl.fromTo("#s3-mc" + k, { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(3)" }, 9.4 + i * 0.18);
+          });
+
+          // ---------- Hinweis: Kontrolle behalten ----------
+          gsap.set("#s3-toast", { xPercent: -50 });
+          tl.fromTo("#s3-toast", { opacity: 0, y: 2.5 * u }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 10.25);
+
+          // ---------- Abblende ----------
+          tl.to(["#s3-h", ".s3-steps", "#s3-win"], { opacity: 0, duration: 0.4, ease: "power1.in" }, 12.0);
+
+          window.__timelines["s3-so-gehts"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

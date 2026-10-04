@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s4-vorteil-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .w {
+          display: inline-block;
+        }
+        .s4-k {
+          position: absolute;
+          left: 6.5cqw;
+          top: 16cqh;
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 5.2cqmin;
+          line-height: 1.2;
+          color: #5e6a6a;
+        }
+        .s4-list {
+          position: absolute;
+          left: 6.5cqw;
+          width: 50cqw;
+          top: 28cqh;
+        }
+        .s4-row {
+          display: flex;
+          align-items: center;
+          gap: 2.4cqmin;
+          margin: 0 0 2.6cqmin;
+        }
+        .s4-tile {
+          position: relative;
+          flex: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 6.4cqmin;
+          height: 6.4cqmin;
+          border-radius: 1cqmin;
+          background: #ffffff;
+          border: 0.3cqmin solid #444f4f;
+        }
+        .s4-tile svg {
+          width: 64%;
+          height: 64%;
+          overflow: visible;
+        }
+        .s4-tile path {
+          fill: none;
+          stroke: #444f4f;
+          stroke-width: 1.9;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s4-tile .s4-x {
+          position: absolute;
+          left: 18%;
+          top: 18%;
+          width: 64%;
+          height: 64%;
+        }
+        .s4-tile .s4-x path {
+          stroke: #ca2c35;
+          stroke-width: 2.6;
+        }
+        .s4-tile.s4-good {
+          background: #ca2c35;
+          border-color: #ca2c35;
+        }
+        .s4-tile.s4-good path {
+          stroke: #ffffff;
+          stroke-width: 2.8;
+        }
+        .s4-txt {
+          position: relative;
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 4.5cqmin;
+          line-height: 1.2;
+        }
+        /* Durchstreichen über alle Zeilen: Hintergrund-Linie, die sich über die Zeilenfragmente zieht */
+        .s4-strk {
+          --s: 0;
+          background-image: linear-gradient(#ca2c35, #ca2c35);
+          background-repeat: no-repeat;
+          background-position: 0 56%;
+          background-size: calc(var(--s) * 100%) 0.5cqmin;
+        }
+        .s4-txt.s4-goodtxt {
+          font-weight: 700;
+          font-size: 4.7cqmin;
+        }
+        .s4-claim {
+          position: absolute;
+          left: 0;
+          width: 52cqw;
+          top: 0;
+          margin: 0;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 700;
+          font-size: 6.2cqmin;
+          line-height: 1.14;
+          letter-spacing: -0.02em;
+        }
+        .s4-red {
+          position: relative;
+          display: inline-block;
+          color: #ca2c35;
+        }
+        .s4-ul {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -0.7cqmin;
+          height: 0.7cqmin;
+          border-radius: 0.35cqmin;
+          background: #ca2c35;
+        }
+
+        /* Marktkarte */
+        .s4-map {
+          position: absolute;
+          right: 5.5cqw;
+          top: calc(50cqh - 26cqmin);
+          width: 64cqmin;
+          height: 52cqmin;
+          overflow: hidden;
+          background: #f4f5f2;
+          border: 0.32cqmin solid #444f4f;
+          border-radius: 1.4cqmin;
+          box-shadow: 0 1.4cqmin 3.6cqmin rgba(68, 79, 79, 0.14);
+        }
+        .s4-map svg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .s4-maphead {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1.5cqmin 2.2cqmin;
+          background: rgba(255, 255, 255, 0.94);
+          border-bottom: 0.25cqmin solid #d4d8d3;
+          font-size: 2.9cqmin;
+          font-weight: 700;
+        }
+        .s4-chip {
+          padding: 0.6cqmin 1.4cqmin 0.7cqmin;
+          border: 0.28cqmin solid #ca2c35;
+          border-radius: 0.9cqmin;
+          color: #ca2c35;
+          font-size: 2.3cqmin;
+          font-weight: 700;
+        }
+        .s4-park {
+          fill: #dfe6cf;
+        }
+        .s4-water {
+          fill: none;
+          stroke: #d3dde1;
+          stroke-width: 16;
+          stroke-linecap: round;
+        }
+        .s4-road-o {
+          fill: none;
+          stroke: #d9ddd8;
+          stroke-width: 15;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s4-road {
+          fill: none;
+          stroke: #ffffff;
+          stroke-width: 10;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .s4-blk {
+          fill: #e6e8e4;
+        }
+        .s4-gp path {
+          fill: #9aa5a3;
+        }
+        .s4-rp path {
+          fill: #ca2c35;
+        }
+        .s4-pdot {
+          fill: #ffffff;
+        }
+
+        /* ---------- 9:16 ---------- */
+        @container scene (orientation: portrait) {
+          #root .s4-k {
+            left: 8cqw;
+            top: 13.6cqh;
+          }
+          #root .s4-list {
+            left: 8cqw;
+            width: 84cqw;
+            top: 20cqh;
+          }
+          #root .s4-claim {
+            width: 84cqw;
+          }
+          #root .s4-map {
+            right: auto;
+            left: 8cqw;
+            width: 84cqw;
+            top: 51.5cqh;
+            height: 25.5cqh;
+          }
+        }
+      </style>
+
+      <div id="root" data-composition-id="s4-vorteil" data-width="1920" data-height="1080" data-duration="10">
+        <p class="s4-k" id="s4-k">Das bedeutet für Sie:</p>
+
+        <div class="s4-list" id="s4-list">
+          <div class="s4-row" id="s4-r1">
+            <div class="s4-tile">
+              <svg class="s4-ico" id="s4-i1" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7 H15 V17 H3 Z M7 7 V3 H21 V13 H15 M3 10 H15" /></svg>
+              <svg class="s4-x" id="s4-x1" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4 L20 20 M20 4 L4 20" /></svg>
+            </div>
+            <p class="s4-txt" id="s4-t1"><span class="s4-strk" id="s4-st1">Parallele Suche auf mehreren Plattformen</span></p>
+          </div>
+          <div class="s4-row" id="s4-r2">
+            <div class="s4-tile">
+              <svg class="s4-ico" id="s4-i2" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 H18 L21 6 V17 H8 Z M5 7 V21 H16 M11 9 H18 M11 12.5 H18" /></svg>
+              <svg class="s4-x" id="s4-x2" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4 L20 20 M20 4 L4 20" /></svg>
+            </div>
+            <p class="s4-txt" id="s4-t2"><span class="s4-strk" id="s4-st2">Doppelte Dateneingabe</span></p>
+          </div>
+          <div class="s4-row" id="s4-r3">
+            <div class="s4-tile">
+              <svg class="s4-ico" id="s4-i3" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6 H21 V21 H3 Z M3 10.5 H21 M8 3 V7.5 M16 3 V7.5 M7 15 H10 M14 15 H17" /></svg>
+              <svg class="s4-x" id="s4-x3" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4 L20 20 M20 4 L4 20" /></svg>
+            </div>
+            <p class="s4-txt" id="s4-t3"><span class="s4-strk" id="s4-st3">Tägliches Prüfen neuer Inserate</span></p>
+          </div>
+          <div class="s4-row" id="s4-r4">
+            <div class="s4-tile s4-good" id="s4-g">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17 L19 7.5" /></svg>
+            </div>
+            <p class="s4-txt s4-goodtxt" id="s4-t4">Strukturierte, gefilterte Marktübersicht</p>
+          </div>
+          <p class="s4-claim" id="s4-claim">
+            <span class="s4-l1" id="s4-l1">Wir bündeln den Markt –</span><br /><span class="s4-l2" id="s4-l2">Sie behalten den <span class="s4-red" id="s4-red">Überblick<span class="s4-ul" id="s4-ul"></span></span>.</span>
+          </p>
+        </div>
+
+        <div class="s4-map" id="s4-map">
+          <svg viewBox="0 0 640 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" data-layout-allow-overflow>
+            <path class="s4-park" id="s4-park1" d="M40 380 C70 330 150 340 170 390 C190 440 120 480 70 460 C30 445 25 410 40 380 Z" />
+            <path class="s4-park" id="s4-park2" d="M470 60 C520 40 600 70 600 120 C600 170 530 180 500 160 C460 135 440 80 470 60 Z" />
+            <path class="s4-water" id="s4-water" pathLength="1" d="M-20 120 C80 150 120 230 210 240 C300 250 330 180 420 190 C510 200 540 300 660 320" />
+            <g id="s4-blocks">
+              <rect class="s4-blk" x="90" y="200" width="46" height="34" rx="4" />
+              <rect class="s4-blk" x="300" y="300" width="56" height="38" rx="4" />
+              <rect class="s4-blk" x="350" y="90" width="44" height="40" rx="4" />
+              <rect class="s4-blk" x="540" y="380" width="52" height="40" rx="4" />
+              <rect class="s4-blk" x="200" y="400" width="60" height="36" rx="4" />
+              <rect class="s4-blk" x="430" y="390" width="40" height="44" rx="4" />
+            </g>
+            <path class="s4-road-o" d="M-20 290 C120 280 220 300 330 260 C430 225 520 240 660 210 M240 -20 C250 120 230 230 300 330 C350 400 330 460 340 540 M-20 470 C120 430 250 460 420 440 C520 428 580 450 660 430" />
+            <path class="s4-road" id="s4-road" pathLength="1" d="M-20 290 C120 280 220 300 330 260 C430 225 520 240 660 210 M240 -20 C250 120 230 230 300 330 C350 400 330 460 340 540 M-20 470 C120 430 250 460 420 440 C520 428 580 450 660 430" />
+            <g id="s4-gray">
+              <g transform="translate(118 176)"><g class="s4-gp" id="s4-gp1"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(164 262)"><g class="s4-gp" id="s4-gp2"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(212 150)"><g class="s4-gp" id="s4-gp3"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(238 336)"><g class="s4-gp" id="s4-gp4"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(286 228)"><g class="s4-gp" id="s4-gp5"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(318 300)"><g class="s4-gp" id="s4-gp6"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(352 152)"><g class="s4-gp" id="s4-gp7"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(378 372)"><g class="s4-gp" id="s4-gp8"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(424 214)"><g class="s4-gp" id="s4-gp9"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(452 318)"><g class="s4-gp" id="s4-gp10"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(498 166)"><g class="s4-gp" id="s4-gp11"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(528 262)"><g class="s4-gp" id="s4-gp12"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(566 344)"><g class="s4-gp" id="s4-gp13"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+              <g transform="translate(96 330)"><g class="s4-gp" id="s4-gp14"><path d="M0 0 C-2.4 -4.8 -8.8 -8.8 -8.8 -16.0 A8.8 8.8 0 1 1 8.8 -16.0 C8.8 -8.8 2.4 -4.8 0 0 Z" /><circle cx="0" cy="-16.0" r="3.2" class="s4-pdot" /></g></g>
+            </g>
+            <g id="s4-red-pins">
+              <g transform="translate(262 244)"><g class="s4-rp" id="s4-rp1"><path d="M0 0 C-4.1 -8.1 -14.9 -14.9 -14.9 -27.0 A14.9 14.9 0 1 1 14.9 -27.0 C14.9 -14.9 4.1 -8.1 0 0 Z" /><circle cx="0" cy="-27.0" r="5.4" class="s4-pdot" /></g></g>
+              <g transform="translate(404 286)"><g class="s4-rp" id="s4-rp2"><path d="M0 0 C-4.1 -8.1 -14.9 -14.9 -14.9 -27.0 A14.9 14.9 0 1 1 14.9 -27.0 C14.9 -14.9 4.1 -8.1 0 0 Z" /><circle cx="0" cy="-27.0" r="5.4" class="s4-pdot" /></g></g>
+              <g transform="translate(476 214)"><g class="s4-rp" id="s4-rp3"><path d="M0 0 C-4.1 -8.1 -14.9 -14.9 -14.9 -27.0 A14.9 14.9 0 1 1 14.9 -27.0 C14.9 -14.9 4.1 -8.1 0 0 Z" /><circle cx="0" cy="-27.0" r="5.4" class="s4-pdot" /></g></g>
+              <g transform="translate(196 312)"><g class="s4-rp" id="s4-rp4"><path d="M0 0 C-4.1 -8.1 -14.9 -14.9 -14.9 -27.0 A14.9 14.9 0 1 1 14.9 -27.0 C14.9 -14.9 4.1 -8.1 0 0 Z" /><circle cx="0" cy="-27.0" r="5.4" class="s4-pdot" /></g></g>
+            </g>
+          </svg>
+          <div class="s4-maphead">
+            <span>Ihre Marktübersicht</span>
+            <span class="s4-chip" id="s4-chip">gefiltert</span>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s4-vorteil"]');
+          const $ = (s) => root.querySelector(s);
+          const u = Math.min(root.clientWidth || 1920, root.clientHeight || 1080) / 100; // 1cqmin in px
+
+          function splitWords(el) {
+            Array.from(el.childNodes).forEach((node) => {
+              if (node.nodeType === 3) {
+                const parts = node.textContent.split(/(\s+)/);
+                const frag = document.createDocumentFragment();
+                parts.forEach((p) => {
+                  if (!p) return;
+                  if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
+                  else {
+                    const s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = p;
+                    frag.appendChild(s);
+                  }
+                });
+                node.replaceWith(frag);
+              } else if (node.nodeType === 1 && !node.classList.contains("s4-ul")) splitWords(node);
+            });
+            return Array.from(el.querySelectorAll(".w"));
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          const wordsIn = (words, t, step, dur) =>
+            words.forEach((w, i) =>
+              tl.fromTo(w, { opacity: 0, yPercent: 38 }, { opacity: 1, yPercent: 0, duration: dur, ease: "power3.out" }, t + i * step),
+            );
+
+          wordsIn(splitWords($("#s4-k")), 0.3, 0.08, 0.6);
+
+          // ---------- Marktkarte: erst der ganze, unübersichtliche Markt ----------
+          tl.fromTo("#s4-map", { opacity: 0, x: 3 * u }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 0.55);
+          tl.fromTo("#s4-road", { strokeDasharray: "1 2", strokeDashoffset: 1.05 }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.out" }, 0.8);
+          tl.fromTo("#s4-water", { strokeDasharray: "1 2", strokeDashoffset: 1.05 }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.out" }, 0.75);
+          tl.fromTo(["#s4-park1", "#s4-park2", "#s4-blocks"], { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 1.0);
+          root.querySelectorAll(".s4-gp").forEach((p, i) =>
+            tl.fromTo(p, { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, 1.0 + i * 0.11),
+          );
+          tl.fromTo("#s4-chip", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2.6)" }, 4.25);
+
+          // ---------- Lasten werden durchgestrichen (Kontrastprinzip) ----------
+          const burden = (k, t) => {
+            tl.fromTo("#s4-r" + k, { opacity: 0, x: -2 * u }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, t);
+            tl.fromTo("#s4-st" + k, { "--s": 0 }, { "--s": 1, duration: 0.45, ease: "power1.inOut" }, t + 0.7);
+            tl.to("#s4-i" + k, { opacity: 0, duration: 0.2, ease: "power1.in" }, t + 0.72);
+            tl.fromTo("#s4-x" + k, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)" }, t + 0.78);
+            tl.to("#s4-r" + k + " .s4-tile", { borderColor: "#ca2c35", duration: 0.25 }, t + 0.78);
+            tl.to("#s4-t" + k, { color: "#5e6a6a", duration: 0.3 }, t + 0.8);
+          };
+          burden(1, 0.8);
+          burden(2, 1.8);
+          burden(3, 2.8);
+
+          // ---------- Der Gewinn: gefilterte Übersicht ----------
+          tl.fromTo("#s4-g", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2.6)" }, 3.85);
+          tl.fromTo("#s4-t4", { opacity: 0, x: -1.5 * u }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 4.0);
+          tl.to("#s4-gray", { opacity: 0.22, duration: 0.5, ease: "power1.out" }, 4.0);
+          root.querySelectorAll(".s4-rp").forEach((p, i) =>
+            tl.fromTo(p, { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.55, ease: "back.out(2.4)" }, 4.15 + i * 0.13),
+          );
+
+          // ---------- Claim: Lasten gehen, Übersicht bleibt ----------
+          tl.to(["#s4-r1", "#s4-r2", "#s4-r3", "#s4-r4"], { opacity: 0, x: -2 * u, duration: 0.35, ease: "power2.in", stagger: 0.05 }, 5.55);
+          wordsIn(splitWords($("#s4-l1")), 5.95, 0.08, 0.6);
+          wordsIn(splitWords($("#s4-l2")), 6.35, 0.08, 0.6);
+          tl.fromTo("#s4-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.inOut", transformOrigin: "0% 50%" }, 7.0);
+
+          // ---------- Abblende ----------
+          tl.to(["#s4-k", "#s4-list", "#s4-map"], { opacity: 0, duration: 0.4, ease: "power1.in" }, 9.55);
+
+          window.__timelines["s4-vorteil"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

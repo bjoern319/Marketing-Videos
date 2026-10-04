@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s6-zugang-template">
+      <style>
+        #root {
+          position: absolute !important;
+          inset: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          container: scene / size;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .w {
+          display: inline-block;
+        }
+        .s6-col {
+          position: absolute;
+          left: 8cqw;
+          width: 56cqw;
+          top: 11cqh;
+          bottom: 22cqh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          text-align: left;
+        }
+        .s6-logo {
+          width: 54cqmin;
+          height: 11.95cqmin;
+          margin: 0 0 4.6cqmin;
+        }
+        .s6-logo svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .s6-word {
+          font-family: "Montserrat", sans-serif;
+          fill: #444f4f;
+        }
+        .s6-h {
+          margin: 0 0 3.4cqmin;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 400;
+          font-size: 7cqmin;
+          line-height: 1.1;
+          letter-spacing: -0.015em;
+          color: #ca2c35;
+        }
+        .s6-pill {
+          position: relative;
+          overflow: hidden;
+          margin: 0 0 2.8cqmin;
+          padding: 1.7cqmin 4.2cqmin 1.9cqmin;
+          border-radius: 1cqmin;
+          background: #6d131b;
+          color: #ffffff;
+          font-size: 4.2cqmin;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          box-shadow: 0 1cqmin 2.4cqmin rgba(109, 19, 27, 0.25);
+        }
+        .s6-sheen {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 40%;
+          background: linear-gradient(100deg, rgba(255, 253, 249, 0) 0%, rgba(255, 253, 249, 0.38) 50%, rgba(255, 253, 249, 0) 100%);
+        }
+        .s6-url {
+          margin: 0 0 1.2cqmin;
+          font-size: 4cqmin;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+        }
+        .s6-url span {
+          font-weight: 400;
+          color: #5e6a6a;
+        }
+        .s6-note {
+          margin: 0;
+          font-size: 3.2cqmin;
+          font-weight: 400;
+          color: #5e6a6a;
+        }
+        .s6-qr {
+          position: absolute;
+          right: 9cqw;
+          top: calc(44.5cqh - 19.5cqmin);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.2cqmin;
+          padding: 1.6cqmin 1.6cqmin 2cqmin;
+          background: #ffffff;
+          border: 0.3cqmin solid #444f4f;
+          border-radius: 1.4cqmin;
+          box-shadow: 0 1.4cqmin 3.6cqmin rgba(68, 79, 79, 0.14);
+        }
+        .s6-qrbox {
+          position: relative;
+          width: 30cqmin;
+          height: 30cqmin;
+          overflow: hidden;
+        }
+        .s6-qrbox svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .s6-qrscan {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+        .s6-qrline {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: -0.3cqmin;
+          height: 0.6cqmin;
+          border-radius: 0.3cqmin;
+          background: #ca2c35;
+          box-shadow: 0 0 1.8cqmin rgba(202, 44, 53, 0.6);
+        }
+        .s6-qrcap {
+          margin: 0;
+          font-size: 2.8cqmin;
+          font-weight: 700;
+        }
+        .s6-claim {
+          position: absolute;
+          left: 8cqw;
+          right: 8cqw;
+          bottom: 9cqh;
+          margin: 0;
+          font-size: 3.6cqmin;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+        }
+        .s6-red {
+          color: #ca2c35;
+        }
+
+        /* ---------- 9:16: eine zentrierte Spalte ---------- */
+        @container scene (orientation: portrait) {
+          #root .s6-col {
+            left: 8cqw;
+            width: 84cqw;
+            top: 13.5cqh;
+            bottom: auto;
+            align-items: center;
+            text-align: center;
+          }
+          #root .s6-logo {
+            width: 60cqmin;
+            height: 13.27cqmin;
+            margin-bottom: 4.4cqmin;
+          }
+          #root .s6-h {
+            font-size: 6.6cqmin;
+          }
+          #root .s6-claim .s6-red {
+            display: block;
+          }
+          #root .s6-qr {
+            right: auto;
+            left: calc(50cqw - 14cqmin);
+            top: 50.5cqh;
+            padding: 1.2cqmin 1.2cqmin 1.6cqmin;
+          }
+          #root .s6-qrbox {
+            width: 25.6cqmin;
+            height: 25.6cqmin;
+          }
+          #root .s6-qrcap {
+            font-size: 2.6cqmin;
+          }
+          #root .s6-claim {
+            bottom: 22.5cqh;
+            text-align: center;
+            font-size: 3.8cqmin;
+          }
+        }
+      </style>
+
+      <div id="root" data-composition-id="s6-zugang" data-width="1920" data-height="1080" data-duration="10">
+        <div class="s6-col">
+          <div class="s6-logo">
+            <svg viewBox="0 0 452 100" role="img" aria-label="KNIGGE Immobilien" data-layout-allow-overlap>
+              <defs>
+                <linearGradient id="s6-k-a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6">
+                  <stop offset="0" stop-color="#5e0f18" />
+                  <stop offset="0.56" stop-color="#a4222b" />
+                  <stop offset="0.8" stop-color="#c12a33" />
+                  <stop offset="0.93" stop-color="#ca2c35" />
+                </linearGradient>
+                <linearGradient id="s6-k-r" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0">
+                  <stop offset="0" stop-color="#4a0a13" />
+                  <stop offset="1" stop-color="#b0252e" />
+                </linearGradient>
+                <linearGradient id="s6-k-b" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100">
+                  <stop offset="0" stop-color="#480a12" />
+                  <stop offset="0.5" stop-color="#a2222b" />
+                  <stop offset="0.85" stop-color="#ca2c35" />
+                </linearGradient>
+              </defs>
+              <path id="s6-f-a" d="M0 0 H79.5 L0 100 Z" fill="url(#s6-k-a)" />
+              <path id="s6-f-r" d="M79.5 0 H100 V100 L47.5 40.2 Z" fill="url(#s6-k-r)" />
+              <path id="s6-f-b" d="M0 100 L47.5 40.2 L100 100 Z" fill="url(#s6-k-b)" />
+              <text class="s6-word" id="s6-w1" data-layout-allow-overlap x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing">KNIGGE</text>
+              <text class="s6-word" id="s6-w2" data-layout-allow-overlap x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing">IMMOBILIEN</text>
+            </svg>
+          </div>
+          <p class="s6-h" id="s6-h">Jetzt VIP-Zugang sichern</p>
+          <div class="s6-pill" id="s6-pill">
+            Kostenfrei registrieren
+            <div class="s6-sheen" id="s6-sheen" data-layout-allow-overflow></div>
+          </div>
+          <p class="s6-url" id="s6-url">knigge-immobilien.de <span>› VIP-Suche</span></p>
+          <p class="s6-note" id="s6-note">Unverbindlich · jederzeit pausierbar</p>
+        </div>
+
+        <div class="s6-qr" id="s6-qr">
+          <div class="s6-qrbox">
+            <svg viewBox="0 0 45 45" shape-rendering="crispEdges" role="img" aria-label="QR-Code zur VIP-Suche">
+              <rect width="45" height="45" fill="#ffffff" />
+              <path d="M4 4h7v1h-7zM12 4h2v1h-2zM15 4h1v1h-1zM17 4h1v1h-1zM19 4h2v1h-2zM22 4h3v1h-3zM26 4h1v1h-1zM28 4h2v1h-2zM32 4h1v1h-1zM34 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM14 5h2v1h-2zM17 5h3v1h-3zM21 5h3v1h-3zM26 5h1v1h-1zM30 5h3v1h-3zM34 5h1v1h-1zM40 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM13 6h3v1h-3zM19 6h1v1h-1zM21 6h1v1h-1zM23 6h1v1h-1zM25 6h1v1h-1zM28 6h1v1h-1zM30 6h3v1h-3zM34 6h1v1h-1zM36 6h3v1h-3zM40 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM15 7h1v1h-1zM19 7h5v1h-5zM26 7h1v1h-1zM28 7h3v1h-3zM34 7h1v1h-1zM36 7h3v1h-3zM40 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM12 8h2v1h-2zM21 8h1v1h-1zM24 8h1v1h-1zM27 8h1v1h-1zM30 8h1v1h-1zM34 8h1v1h-1zM36 8h3v1h-3zM40 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h3v1h-3zM19 9h2v1h-2zM22 9h4v1h-4zM28 9h1v1h-1zM31 9h2v1h-2zM34 9h1v1h-1zM40 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h7v1h-7zM19 11h3v1h-3zM23 11h4v1h-4zM28 11h1v1h-1zM30 11h1v1h-1zM32 11h1v1h-1zM5 12h7v1h-7zM13 12h1v1h-1zM17 12h1v1h-1zM20 12h3v1h-3zM24 12h1v1h-1zM26 12h3v1h-3zM35 12h2v1h-2zM40 12h1v1h-1zM5 13h1v1h-1zM7 13h1v1h-1zM9 13h1v1h-1zM11 13h2v1h-2zM14 13h2v1h-2zM19 13h2v1h-2zM22 13h4v1h-4zM27 13h1v1h-1zM29 13h4v1h-4zM34 13h1v1h-1zM4 14h1v1h-1zM7 14h1v1h-1zM9 14h2v1h-2zM13 14h2v1h-2zM17 14h2v1h-2zM21 14h3v1h-3zM25 14h2v1h-2zM28 14h3v1h-3zM34 14h1v1h-1zM37 14h1v1h-1zM39 14h2v1h-2zM4 15h1v1h-1zM8 15h2v1h-2zM11 15h1v1h-1zM14 15h1v1h-1zM19 15h2v1h-2zM22 15h2v1h-2zM25 15h2v1h-2zM30 15h1v1h-1zM32 15h1v1h-1zM34 15h1v1h-1zM4 16h2v1h-2zM7 16h1v1h-1zM9 16h2v1h-2zM18 16h3v1h-3zM22 16h1v1h-1zM24 16h1v1h-1zM27 16h4v1h-4zM33 16h7v1h-7zM4 17h1v1h-1zM6 17h3v1h-3zM11 17h1v1h-1zM13 17h1v1h-1zM15 17h1v1h-1zM18 17h5v1h-5zM27 17h4v1h-4zM33 17h1v1h-1zM35 17h1v1h-1zM37 17h2v1h-2zM4 18h3v1h-3zM8 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM15 18h3v1h-3zM19 18h1v1h-1zM21 18h1v1h-1zM26 18h1v1h-1zM29 18h3v1h-3zM33 18h1v1h-1zM35 18h3v1h-3zM39 18h2v1h-2zM4 19h1v1h-1zM8 19h1v1h-1zM13 19h2v1h-2zM16 19h3v1h-3zM20 19h1v1h-1zM22 19h1v1h-1zM24 19h1v1h-1zM27 19h1v1h-1zM30 19h2v1h-2zM33 19h4v1h-4zM39 19h2v1h-2zM4 20h1v1h-1zM7 20h2v1h-2zM10 20h2v1h-2zM14 20h5v1h-5zM20 20h1v1h-1zM25 20h2v1h-2zM28 20h4v1h-4zM33 20h2v1h-2zM36 20h1v1h-1zM38 20h1v1h-1zM5 21h2v1h-2zM8 21h2v1h-2zM11 21h4v1h-4zM17 21h1v1h-1zM22 21h3v1h-3zM32 21h1v1h-1zM5 22h3v1h-3zM9 22h3v1h-3zM14 22h4v1h-4zM20 22h5v1h-5zM27 22h3v1h-3zM31 22h5v1h-5zM38 22h3v1h-3zM4 23h3v1h-3zM8 23h2v1h-2zM11 23h2v1h-2zM16 23h2v1h-2zM19 23h1v1h-1zM22 23h1v1h-1zM24 23h4v1h-4zM30 23h3v1h-3zM35 23h1v1h-1zM40 23h1v1h-1zM4 24h1v1h-1zM8 24h4v1h-4zM13 24h1v1h-1zM16 24h1v1h-1zM18 24h4v1h-4zM23 24h2v1h-2zM26 24h5v1h-5zM33 24h6v1h-6zM40 24h1v1h-1zM5 25h1v1h-1zM7 25h3v1h-3zM11 25h2v1h-2zM14 25h1v1h-1zM16 25h3v1h-3zM20 25h2v1h-2zM24 25h2v1h-2zM27 25h1v1h-1zM29 25h2v1h-2zM35 25h1v1h-1zM39 25h1v1h-1zM4 26h1v1h-1zM6 26h5v1h-5zM17 26h2v1h-2zM21 26h3v1h-3zM25 26h2v1h-2zM29 26h3v1h-3zM33 26h1v1h-1zM37 26h1v1h-1zM39 26h2v1h-2zM6 27h2v1h-2zM11 27h1v1h-1zM18 27h2v1h-2zM21 27h1v1h-1zM24 27h6v1h-6zM35 27h1v1h-1zM40 27h1v1h-1zM4 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM12 28h2v1h-2zM15 28h2v1h-2zM18 28h2v1h-2zM21 28h1v1h-1zM24 28h1v1h-1zM26 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM32 28h2v1h-2zM37 28h2v1h-2zM4 29h1v1h-1zM7 29h3v1h-3zM11 29h5v1h-5zM17 29h1v1h-1zM20 29h1v1h-1zM27 29h1v1h-1zM31 29h1v1h-1zM34 29h1v1h-1zM38 29h1v1h-1zM4 30h1v1h-1zM8 30h3v1h-3zM12 30h2v1h-2zM16 30h2v1h-2zM19 30h1v1h-1zM21 30h1v1h-1zM23 30h2v1h-2zM26 30h1v1h-1zM29 30h4v1h-4zM34 30h1v1h-1zM40 30h1v1h-1zM4 31h1v1h-1zM8 31h1v1h-1zM11 31h2v1h-2zM17 31h5v1h-5zM24 31h2v1h-2zM28 31h1v1h-1zM30 31h2v1h-2zM33 31h1v1h-1zM35 31h2v1h-2zM4 32h1v1h-1zM7 32h2v1h-2zM10 32h2v1h-2zM15 32h3v1h-3zM20 32h2v1h-2zM24 32h1v1h-1zM26 32h2v1h-2zM29 32h11v1h-11zM12 33h1v1h-1zM14 33h1v1h-1zM16 33h1v1h-1zM19 33h1v1h-1zM22 33h1v1h-1zM24 33h4v1h-4zM30 33h1v1h-1zM32 33h1v1h-1zM36 33h1v1h-1zM4 34h7v1h-7zM12 34h1v1h-1zM14 34h1v1h-1zM16 34h1v1h-1zM18 34h1v1h-1zM20 34h1v1h-1zM22 34h2v1h-2zM25 34h1v1h-1zM29 34h1v1h-1zM32 34h1v1h-1zM34 34h1v1h-1zM36 34h2v1h-2zM39 34h2v1h-2zM4 35h1v1h-1zM10 35h1v1h-1zM12 35h2v1h-2zM16 35h1v1h-1zM19 35h2v1h-2zM24 35h4v1h-4zM32 35h1v1h-1zM36 35h1v1h-1zM4 36h1v1h-1zM6 36h3v1h-3zM10 36h1v1h-1zM12 36h3v1h-3zM16 36h1v1h-1zM18 36h2v1h-2zM23 36h1v1h-1zM25 36h1v1h-1zM29 36h8v1h-8zM38 36h2v1h-2zM4 37h1v1h-1zM6 37h3v1h-3zM10 37h1v1h-1zM12 37h2v1h-2zM15 37h1v1h-1zM17 37h3v1h-3zM21 37h1v1h-1zM24 37h1v1h-1zM26 37h1v1h-1zM28 37h1v1h-1zM34 37h1v1h-1zM36 37h1v1h-1zM39 37h1v1h-1zM4 38h1v1h-1zM6 38h3v1h-3zM10 38h1v1h-1zM12 38h1v1h-1zM14 38h1v1h-1zM16 38h1v1h-1zM18 38h1v1h-1zM20 38h2v1h-2zM23 38h1v1h-1zM25 38h1v1h-1zM30 38h4v1h-4zM38 38h1v1h-1zM40 38h1v1h-1zM4 39h1v1h-1zM10 39h1v1h-1zM12 39h2v1h-2zM17 39h1v1h-1zM19 39h2v1h-2zM23 39h3v1h-3zM28 39h1v1h-1zM30 39h3v1h-3zM35 39h1v1h-1zM40 39h1v1h-1zM4 40h7v1h-7zM13 40h1v1h-1zM15 40h2v1h-2zM19 40h1v1h-1zM23 40h1v1h-1zM26 40h1v1h-1zM28 40h3v1h-3zM33 40h3v1h-3zM37 40h4v1h-4z" fill="#2f3838" />
+            </svg>
+            <div class="s6-qrscan" id="s6-qrscan" data-layout-allow-overflow><div class="s6-qrline"></div></div>
+          </div>
+          <p class="s6-qrcap">Scannen &amp; registrieren</p>
+        </div>
+
+        <p class="s6-claim" id="s6-claim">Wir bündeln den Markt – <span class="s6-red">Sie behalten den Überblick.</span></p>
+      </div>
+
+      <script>
+        (function () {
+          const root = document.querySelector('[data-composition-id="s6-zugang"]');
+          const $ = (s) => root.querySelector(s);
+
+          function splitWords(el) {
+            Array.from(el.childNodes).forEach((node) => {
+              if (node.nodeType === 3) {
+                const parts = node.textContent.split(/(\s+)/);
+                const frag = document.createDocumentFragment();
+                parts.forEach((p) => {
+                  if (!p) return;
+                  if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p));
+                  else {
+                    const s = document.createElement("span");
+                    s.className = "w";
+                    s.textContent = p;
+                    frag.appendChild(s);
+                  }
+                });
+                node.replaceWith(frag);
+              } else if (node.nodeType === 1) splitWords(node);
+            });
+            return Array.from(el.querySelectorAll(".w"));
+          }
+
+          const tl = gsap.timeline({ paused: true });
+
+          // Bildmarke faltet sich zusammen (logo-assemble-lockup)
+          tl.fromTo("#s6-f-a", { opacity: 0, x: -70, y: -36 }, { opacity: 1, x: 0, y: 0, duration: 0.85, ease: "power3.out" }, 0.35);
+          tl.fromTo("#s6-f-r", { opacity: 0, x: 70, y: -30 }, { opacity: 1, x: 0, y: 0, duration: 0.85, ease: "power3.out" }, 0.45);
+          tl.fromTo("#s6-f-b", { opacity: 0, x: 0, y: 64 }, { opacity: 1, x: 0, y: 0, duration: 0.85, ease: "power3.out" }, 0.55);
+          tl.fromTo("#s6-w1", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 1.0);
+          tl.fromTo("#s6-w2", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 1.2);
+
+          // Exklusivität + kleiner erster Schritt
+          splitWords($("#s6-h")).forEach((w, i) =>
+            tl.fromTo(w, { opacity: 0, yPercent: 38 }, { opacity: 1, yPercent: 0, duration: 0.65, ease: "power3.out" }, 1.85 + i * 0.1),
+          );
+          tl.fromTo("#s6-pill", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, 2.7);
+          tl.fromTo("#s6-url", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.0);
+          tl.fromTo("#s6-note", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.25);
+
+          // QR-Code
+          tl.fromTo("#s6-qr", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)" }, 3.35);
+          tl.fromTo("#s6-qrscan", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 4.0);
+          tl.fromTo("#s6-qrscan", { yPercent: 0 }, { yPercent: 100, duration: 0.9, ease: "sine.inOut", immediateRender: false }, 4.05);
+          tl.to("#s6-qrscan", { opacity: 0, duration: 0.2 }, 4.9);
+
+          // Button: sanfter Druck + Glanz (physics-press-reaction)
+          tl.to("#s6-pill", { scale: 0.96, duration: 0.12, ease: "power2.in" }, 4.45);
+          tl.to("#s6-pill", { scale: 1, duration: 0.45, ease: "back.out(3)" }, 4.57);
+          tl.fromTo("#s6-sheen", { xPercent: -120 }, { xPercent: 280, duration: 1.1, ease: "power2.inOut" }, 4.5);
+          tl.fromTo("#s6-claim", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 5.0);
+          tl.fromTo("#s6-sheen", { xPercent: -120 }, { xPercent: 280, duration: 1.1, ease: "power2.inOut", immediateRender: false }, 7.2);
+
+          window.__timelines["s6-zugang"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
