@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, height=680" />
+    <title>KNIGGE Immobilien – Wipperfürth · Oberbergischer Kreis (transparent)</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 680px;
+        overflow: hidden;
+        background: transparent;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+        font-family: "Montserrat", sans-serif;
+        color: #444f4f;
+      }
+      .lines,
+      .rings {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .lines path {
+        fill: none;
+        stroke: #aab3b0;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 1 2;
+        stroke-dashoffset: 1.05;
+      }
+      .rings circle {
+        fill: none;
+        stroke: #ca2c35;
+      }
+      .pos {
+        position: absolute;
+        transform: translate(-50%, -50%);
+      }
+      .pill,
+      .hub {
+        will-change: transform; /* eigene Ebene: Graustufen-Kantenglättung statt farbiger Subpixel-Ränder */
+      }
+      .pill {
+        display: block;
+        white-space: nowrap;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #444f4f;
+        background: #ffffff;
+        border: 3px solid #444f4f;
+        border-radius: 10px;
+        padding: 8px 21px 9px;
+      }
+      .pin {
+        position: absolute;
+        left: 557px;
+        top: 238px;
+        width: 86px;
+        height: 106px;
+        overflow: visible;
+      }
+      .hubpos {
+        position: absolute;
+        left: 600px;
+        top: 354px;
+        transform: translateX(-50%);
+      }
+      .hub {
+        display: block;
+        white-space: nowrap;
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #ffffff;
+        background: #ca2c35;
+        border-radius: 10px;
+        padding: 9px 27px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      KNIGGE Immobilien – Standort-Animation Wipperfürth · Oberbergischer Kreis (transparenter Hintergrund)
+      erzeugt von tools/build.py – Namen dort ändern, nicht hier
+    -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="7.2" data-width="1200" data-height="680" data-fps="25">
+      <svg class="lines" viewBox="0 0 1200 680" aria-hidden="true" data-layout-allow-overflow>
+        <path id="ln0" pathLength="1" d="M600 340 L600.0 90.0" />
+        <path id="ln1" pathLength="1" d="M600 340 L900.5 163.2" />
+        <path id="ln2" pathLength="1" d="M600 340 L1025.0 340.0" />
+        <path id="ln3" pathLength="1" d="M600 340 L900.5 516.8" />
+        <path id="ln4" pathLength="1" d="M600 340 L600.0 590.0" />
+        <path id="ln5" pathLength="1" d="M600 340 L299.5 516.8" />
+        <path id="ln6" pathLength="1" d="M600 340 L175.0 340.0" />
+        <path id="ln7" pathLength="1" d="M600 340 L299.5 163.2" />
+      </svg>
+      <svg class="rings" viewBox="0 0 1200 680" aria-hidden="true" data-layout-allow-overflow>
+        <circle id="r1" cx="600" cy="340" r="20" stroke-width="0" />
+        <circle id="r2" cx="600" cy="340" r="20" stroke-width="0" />
+        <circle id="r3" cx="600" cy="340" r="20" stroke-width="0" />
+      </svg>
+      <div class="pos" style="left: 600.0px; top: 90.0px"><span class="pill" id="p0">Radevormwald</span></div>
+      <div class="pos" style="left: 900.5px; top: 163.2px"><span class="pill" id="p1">Marienheide</span></div>
+      <div class="pos" style="left: 1025.0px; top: 340.0px"><span class="pill" id="p2">Bergneustadt</span></div>
+      <div class="pos" style="left: 900.5px; top: 516.8px"><span class="pill" id="p3">Gummersbach</span></div>
+      <div class="pos" style="left: 600.0px; top: 590.0px"><span class="pill" id="p4">Wiehl</span></div>
+      <div class="pos" style="left: 299.5px; top: 516.8px"><span class="pill" id="p5">Engelskirchen</span></div>
+      <div class="pos" style="left: 175.0px; top: 340.0px"><span class="pill" id="p6">Lindlar</span></div>
+      <div class="pos" style="left: 299.5px; top: 163.2px"><span class="pill" id="p7">Hückeswagen</span></div>
+      <svg class="pin" id="pin" viewBox="0 0 24 30" aria-hidden="true">
+        <path d="M12 29 C12 29 2 17.5 2 11 A10 10 0 0 1 22 11 C22 17.5 12 29 12 29 Z" fill="#ca2c35" stroke="#6d131b" stroke-width="1.2" />
+        <circle cx="12" cy="11" r="4" fill="#ffffff" />
+      </svg>
+      <div class="hubpos"><span class="hub" id="hub">Wipperfürth</span></div>
+    </div>
+    <script>
+      (function () {
+        // Nur Skalierung/Position/Strich – keine Deckkraft-Blenden, damit das GIF (1-Bit-Transparenz) sauber bleibt
+        const tl = gsap.timeline({ paused: true });
+
+        // Pin landet, Ortsname erscheint
+        tl.fromTo("#pin", { y: -70, scale: 0 }, { y: 0, scale: 1, duration: 0.7, ease: "bounce.out", transformOrigin: "50% 100%" }, 0.15);
+        tl.fromTo("#hub", { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(2)", transformOrigin: "50% 0%" }, 0.55);
+
+        // Ringwellen: wachsen und werden dünner (statt auszublenden)
+        [["#r1", 0.65], ["#r2", 1.2], ["#r3", 3.9]].forEach(([r, t]) => {
+          tl.fromTo(r, { attr: { r: 20 }, strokeWidth: 6 }, { attr: { r: 190 }, strokeWidth: 0, duration: 1.6, ease: "power2.out" }, t);
+        });
+
+        // Orte erscheinen reihum, Verbindungen zeichnen sich
+        for (let k = 0; k < 8; k++) {
+          const t = 0.8 + k * 0.17;
+          tl.fromTo("#ln" + k, { strokeDashoffset: 1.05 }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, t);
+          tl.fromTo("#p" + k, { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, t + 0.22);
+        }
+
+        // Abbau für die Schleife (umgekehrte Reihenfolge)
+        for (let k = 7; k >= 0; k--) {
+          const t = 5.9 + (7 - k) * 0.05;
+          tl.to("#p" + k, { scale: 0, duration: 0.3, ease: "back.in(1.6)" }, t);
+          tl.to("#ln" + k, { strokeDashoffset: 1.05, duration: 0.35, ease: "power2.in" }, t + 0.1);
+        }
+        tl.to("#hub", { scale: 0, duration: 0.3, ease: "back.in(1.6)" }, 6.45);
+        tl.to("#pin", { y: -40, scale: 0, duration: 0.35, ease: "back.in(1.4)" }, 6.5);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

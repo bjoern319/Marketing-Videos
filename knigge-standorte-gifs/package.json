@@ -1,0 +1,12 @@
+{
+  "name": "knigge-standorte-gifs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.152 preview",
+    "check": "npx --yes hyperframes@0.8.152 check",
+    "build": "python3 tools/build.py",
+    "export": "bash tools/export.sh",
+    "publish": "npx --yes hyperframes@0.8.152 publish"
+  }
+}
