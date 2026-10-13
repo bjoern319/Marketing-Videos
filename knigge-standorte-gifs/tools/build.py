@@ -331,9 +331,10 @@ def single_page(region):
         tl.fromTo("#pin", {{ y: -70, scale: 0 }}, {{ y: 0, scale: 1, duration: 0.7, ease: "bounce.out", transformOrigin: "50% 100%" }}, 0.15);
         tl.fromTo("#hub", {{ scale: 0 }}, {{ scale: 1, duration: 0.5, ease: "back.out(2)", transformOrigin: "50% 0%" }}, 0.55);
 
-        // Ringwellen: wachsen und werden dünner (statt auszublenden)
+        // Ringwellen: erst beim Start sichtbar (vorher Strichstärke 0), wachsen und werden dünner (statt auszublenden)
         [["#r1", 0.65], ["#r2", 1.2], ["#r3", 3.9]].forEach(([r, t]) => {{
-          tl.fromTo(r, {{ attr: {{ r: 20 }}, strokeWidth: 6 }}, {{ attr: {{ r: 190 }}, strokeWidth: 0, duration: 1.6, ease: "power2.out" }}, t);
+          tl.fromTo(r, {{ attr: {{ r: 20 }}, strokeWidth: 0 }}, {{ strokeWidth: 6, duration: 0.04, ease: "none" }}, t);
+          tl.to(r, {{ attr: {{ r: 190 }}, strokeWidth: 0, duration: 1.6, ease: "power2.out" }}, t + 0.04);
         }});
 
         // Orte erscheinen reihum, Verbindungen zeichnen sich
@@ -411,7 +412,8 @@ def combined_page(spec):
           tl.fromTo("#cn" + i, {{ strokeDashoffset: 1.05 }}, {{ strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" }}, t);
           tl.fromTo("#pin" + i, {{ y: -50, scale: 0 }}, {{ y: 0, scale: 1, duration: 0.6, ease: "bounce.out", transformOrigin: "50% 100%" }}, t + 0.35);
           tl.fromTo("#hub" + i, {{ scale: 0 }}, {{ scale: 1, duration: 0.45, ease: "back.out(2)", transformOrigin: "50% 0%" }}, t + 0.6);
-          tl.fromTo("#r" + i, {{ attr: {{ r: 14 }}, strokeWidth: 5 }}, {{ attr: {{ r: 130 }}, strokeWidth: 0, duration: 1.4, ease: "power2.out" }}, t + 0.65);
+          tl.fromTo("#r" + i, {{ attr: {{ r: 14 }}, strokeWidth: 0 }}, {{ strokeWidth: 5, duration: 0.04, ease: "none" }}, t + 0.65);
+          tl.to("#r" + i, {{ attr: {{ r: 130 }}, strokeWidth: 0, duration: 1.4, ease: "power2.out" }}, t + 0.69);
         }});
         caps.forEach((i) => tl.fromTo("#cap" + i, {{ scale: 0 }}, {{ scale: 1, duration: 0.4, ease: "back.out(2)", transformOrigin: "50% 0%" }}, 0.6 + i * 0.14 + 0.8));
 

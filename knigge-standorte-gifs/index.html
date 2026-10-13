@@ -167,9 +167,10 @@
         tl.fromTo("#pin", { y: -70, scale: 0 }, { y: 0, scale: 1, duration: 0.7, ease: "bounce.out", transformOrigin: "50% 100%" }, 0.15);
         tl.fromTo("#hub", { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(2)", transformOrigin: "50% 0%" }, 0.55);
 
-        // Ringwellen: wachsen und werden dünner (statt auszublenden)
+        // Ringwellen: erst beim Start sichtbar (vorher Strichstärke 0), wachsen und werden dünner (statt auszublenden)
         [["#r1", 0.65], ["#r2", 1.2], ["#r3", 3.9]].forEach(([r, t]) => {
-          tl.fromTo(r, { attr: { r: 20 }, strokeWidth: 6 }, { attr: { r: 190 }, strokeWidth: 0, duration: 1.6, ease: "power2.out" }, t);
+          tl.fromTo(r, { attr: { r: 20 }, strokeWidth: 0 }, { strokeWidth: 6, duration: 0.04, ease: "none" }, t);
+          tl.to(r, { attr: { r: 190 }, strokeWidth: 0, duration: 1.6, ease: "power2.out" }, t + 0.04);
         });
 
         // Orte erscheinen reihum, Verbindungen zeichnen sich

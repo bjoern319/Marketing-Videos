@@ -35,14 +35,17 @@ Gesamtgrafik fehlt „Köln-Ost“ bei Bergisch Gladbach, weil Köln dort eine e
 
 ## Karten im Stil der Gebietskarte
 
-Dieselben Standorte als echte Karte: hellgraue Flächen, weiße Grenzen, blauer Rhein, rot-weiße
-Standort-Marker und das neue KNIGGE-Logo. Die Flächen wachsen von innen nach außen auf, der Rhein
-wird gezeichnet, dann erscheinen Namen, Marker und Logo. 25 fps, 7,8 s, Endlosschleife.
+Dieselben Standorte als Karte im Stil der bisherigen Gebietskarte: hellgraue Flächen, weiße Grenzen,
+blauer Rhein, rot-weiße Standort-Marker und das neue KNIGGE-Logo. Die Flächen wachsen vom Standort
+aus auf, der Rhein wird gezeichnet, dann erscheinen Namen, Marker und Logo. 25 fps, 7,8 s, Endlosschleife.
 
 | Datei | Inhalt | Größe |
 | --- | --- | --- |
+| `renders/knigge-standort-karte-bergisch-gladbach.gif` | Bergisch Gladbach (Hauptsitz) mit den Nachbarn Köln, Leverkusen, Odenthal, Kürten, Lindlar, Overath, Rösrath, Pulheim, Frechen und Hürth | 1200×800 px |
 | `renders/knigge-standort-karte-koeln.gif` | Köln mit den 9 Stadtbezirken, Standort Innenstadt (Sachsenring) hervorgehoben | 1200×800 px |
-| `renders/knigge-standort-karte-einzugsgebiet.gif` | Köln, Rheinisch-Bergischer Kreis und Oberbergischer Kreis mit den Standorten Köln, Bergisch Gladbach und Wipperfürth (Leverkusen heller als Lückenschluss) | 1920×1080 px |
+| `renders/knigge-standort-karte-wipperfuerth.gif` | Oberbergischer Kreis mit seinen 13 Gemeinden, Wipperfürth hervorgehoben | 1080×1080 px |
+| `renders/knigge-standort-karte-rheinisch-bergischer-kreis.gif` | Rheinisch-Bergischer Kreis mit seinen 8 Gemeinden, Bergisch Gladbach hervorgehoben | 1080×1080 px |
+| `renders/knigge-standort-karte-einzugsgebiet.gif` | Köln, Leverkusen, Rheinisch-Bergischer und Oberbergischer Kreis mit den Standorten Köln, Bergisch Gladbach und Wipperfürth | 1920×1080 px |
 
 Auch hier gibt es jeweils eine `.webp` mit weichen Kanten.
 
@@ -51,12 +54,16 @@ npm run build:maps                    # schreibt formats/karte-*.html (braucht P
 bash tools/export.sh karte-koeln      # nur eine Animation exportieren
 ```
 
-Kartengrundlage ist `assets/geo/region.json`, erzeugt mit `tools/geo/prepare.py` (Quellen im
-Kopf der Datei). Die Kölner Stadtbezirke sind aus den 86 Stadtteilen zusammengesetzt und an der
-amtlichen Stadtgrenze ausgerichtet; der Rhein ist die gemeinsame Grenze der links- und
-rechtsrheinischen Gebiete. Karten auf Gemeindeebene (Bergisch Gladbach mit Nachbarn,
-Rheinisch-Bergischer Kreis, Oberbergischer Kreis) folgen, sobald Gemeindegrenzen vorliegen
-(`prepare.py --gemeinden`).
+Kartengrundlage ist `assets/geo/region.json`, erzeugt mit `tools/geo/prepare.py` (Quellen und
+Download-Hinweise im Kopf der Datei):
+
+- Kreis- und Stadtgrenzen sind amtlich (BKG). Die Kölner Stadtbezirke sind aus den 86 Stadtteilen
+  zusammengesetzt, der Rhein ist die gemeinsame Grenze der links- und rechtsrheinischen Gebiete.
+- **Gemeindegrenzen innerhalb der Kreise sind schematisch:** Jede Stelle gehört zur Gemeinde der
+  nächstgelegenen Haltestelle, abgeglichen auf die amtlichen Gemeindeflächen (Abweichung meist unter
+  2 %), danach geglättet. Lage und Größe stimmen, der genaue Grenzverlauf nicht. Mit amtlichen
+  Gemeindegrenzen (z. B. DVG NRW von opengeodata.nrw.de) ersetzt `prepare.py --gemeinden <datei>`
+  die Annäherung.
 
 Quellen und Lizenzen (Nennung steht klein unten rechts in jeder Karte):
 
@@ -64,3 +71,8 @@ Quellen und Lizenzen (Nennung steht klein unten rechts in jeder Karte):
   bezogen über [geoBoundaries](https://www.geoboundaries.org/)
 - Kölner Stadtteile: Stadt Köln (Offene Daten Köln), bezogen über
   [click_that_hood](https://github.com/codeforgermany/click_that_hood)
+- Haltestellen: Zentrales Haltestellenverzeichnis (ZHV), DELFI e.V., bezogen über das npm-Paket
+  [zhv-json](https://www.npmjs.com/package/zhv-json)
+- Gemeindeflächen und Verbandsgemeinden: Gemeindeverzeichnis GV100, © Statistisches Bundesamt (Destatis),
+  Datenlizenz Deutschland – Namensnennung 2.0, bezogen über das npm-Paket
+  [gemeindeverzeichnis](https://www.npmjs.com/package/gemeindeverzeichnis)

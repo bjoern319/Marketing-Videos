@@ -2,5 +2,6 @@ node_modules/
 .hyperframes/
 snapshots/
 renders/frames-*/
+renders/work-*/
 renders/.*
 *.log

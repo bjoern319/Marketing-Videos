@@ -22,6 +22,8 @@ OFFICES = {
     "wipperfuerth": (7.3990, 51.1166),  # Wipperfürth
 }
 
+CREDIT_GEMEINDEN = "Kartengrundlage: © GeoBasis-DE / BKG 2023 · Gemeindegrenzen schematisch nach DELFI e.V. und Destatis"
+
 COLORS = {"base": "#ebedeb", "area": "#e0e3e1", "focus": "#c9cecb", "stroke": "#ffffff", "rhein": "#8ecdeb",
           "label": "#5e6a6a", "label_focus": "#444f4f"}
 
@@ -45,7 +47,7 @@ MAPS = {
         "title": "Karte Einzugsgebiet",
         "W": 1920,
         "H": 1080,
-        "areas": [("Köln", "area"), ("Leverkusen", "base"), ("Rheinisch-Bergischer Kreis", "area"),
+        "areas": [("Köln", "area"), ("Leverkusen", "area"), ("Rheinisch-Bergischer Kreis", "area"),
                   ("Oberbergischer Kreis", "area")],
         "kind": "kreis",
         "labels": {"Köln": None, "Rheinisch-Bergischer Kreis": (60, -170)},
@@ -55,6 +57,54 @@ MAPS = {
         "logo": ("tl", 360),
         "rhein": True,
         "credit": "Kartengrundlage: © GeoBasis-DE / BKG 2023",
+    },
+    "formats/karte-bergisch-gladbach.html": {
+        "title": "Karte Bergisch Gladbach",
+        "W": 1200,
+        "H": 800,
+        "areas": [("Bergisch Gladbach", "focus"), ("Köln", "area"), ("Leverkusen", "area"), ("Odenthal", "area"),
+                  ("Kürten", "area"), ("Lindlar", "area"), ("Overath", "area"), ("Rösrath", "area"),
+                  ("Pulheim", "area"), ("Frechen", "area"), ("Hürth", "area")],
+        "kind": "gemeinde",
+        "labels": {"Bergisch Gladbach": None, "Köln": (105, 10)},
+        "office_labels": {"bgl": "Bergisch Gladbach"},
+        "markers": ["bgl"],
+        "logo_at": "bgl",
+        "logo": ("tr", 260),
+        "rhein": True,
+        "credit": CREDIT_GEMEINDEN,
+    },
+    "formats/karte-rheinisch-bergischer-kreis.html": {
+        "title": "Karte Rheinisch-Bergischer Kreis",
+        "W": 1080,
+        "H": 1080,
+        "areas": [("Bergisch Gladbach", "focus"), ("Burscheid", "area"), ("Kürten", "area"), ("Leichlingen", "area"),
+                  ("Odenthal", "area"), ("Overath", "area"), ("Rösrath", "area"), ("Wermelskirchen", "area")],
+        "kind": "gemeinde",
+        "labels": {"Bergisch Gladbach": None},
+        "office_labels": {"bgl": "Bergisch Gladbach"},
+        "markers": ["bgl"],
+        "logo_at": "bgl",
+        "logo": ("tr", 260),
+        "rhein": False,
+        "credit": CREDIT_GEMEINDEN,
+    },
+    "formats/karte-wipperfuerth.html": {
+        "title": "Karte Wipperfürth",
+        "W": 1080,
+        "H": 1080,
+        "areas": [("Wipperfürth", "focus"), ("Bergneustadt", "area"), ("Engelskirchen", "area"), ("Gummersbach", "area"),
+                  ("Hückeswagen", "area"), ("Lindlar", "area"), ("Marienheide", "area"), ("Morsbach", "area"),
+                  ("Nümbrecht", "area"), ("Radevormwald", "area"), ("Reichshof", "area"), ("Waldbröl", "area"),
+                  ("Wiehl", "area")],
+        "kind": "gemeinde",
+        "labels": {"Wipperfürth": None, "Hückeswagen": (-10, -8), "Waldbröl": (-22, 4), "Morsbach": (12, 6)},
+        "office_labels": {"wipperfuerth": "Wipperfürth"},
+        "markers": ["wipperfuerth"],
+        "logo_at": "wipperfuerth",
+        "logo": ("tr", 260),
+        "rhein": False,
+        "credit": CREDIT_GEMEINDEN,
     },
 }
 
@@ -244,7 +294,7 @@ def build(rel, spec, region):
       .label {{
         display: block;
         white-space: nowrap;
-        font-size: {22 if W <= 1400 else 24}px;
+        font-size: {spec.get("label_size", 22 if W <= 1400 else 24)}px;
         font-weight: 500;
         line-height: 1.15;
         color: {COLORS["label"]};
@@ -330,9 +380,13 @@ def build(rel, spec, region):
         markers.forEach((m, i) => {{
           tl.fromTo(m, {{ y: -36, scale: 0 }}, {{ y: 0, scale: 1, duration: 0.6, ease: "bounce.out" }}, 2.0 + i * 0.18);
         }});
+        // Puls: Ring erst beim Start sichtbar (vorher Strichstärke 0), dann weiten und ausdünnen
         rings.forEach((r, i) => {{
-          tl.fromTo(r, {{ attr: {{ r: 14 }}, strokeWidth: 5 }}, {{ attr: {{ r: 110 }}, strokeWidth: 0, duration: 1.4, ease: "power2.out" }}, 2.45 + i * 0.18);
-          tl.fromTo(r, {{ attr: {{ r: 14 }}, strokeWidth: 5 }}, {{ attr: {{ r: 110 }}, strokeWidth: 0, duration: 1.4, ease: "power2.out", immediateRender: false }}, 4.4 + i * 0.18);
+          [2.45, 4.4].forEach((t0, k) => {{
+            const t = t0 + i * 0.18;
+            tl.fromTo(r, {{ attr: {{ r: 14 }}, strokeWidth: 0 }}, {{ strokeWidth: 5, duration: 0.04, ease: "none", immediateRender: k === 0 }}, t);
+            tl.to(r, {{ attr: {{ r: 110 }}, strokeWidth: 0, duration: 1.4, ease: "power2.out" }}, t + 0.04);
+          }});
         }});
         tl.fromTo("#logo", {{ scale: 0 }}, {{ scale: 1, duration: 0.55, ease: "back.out(1.6)", transformOrigin: "0% 100%" }}, 2.5);
         tl.fromTo("#credit", {{ scale: 0 }}, {{ scale: 1, duration: 0.3, ease: "power2.out", transformOrigin: "100% 100%" }}, 2.6);

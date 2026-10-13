@@ -45,5 +45,8 @@ export_one wipperfuerth formats/wipperfuerth.html
 export_one rheinisch-bergischer-kreis formats/rheinisch-bergischer-kreis.html
 export_one einzugsgebiet formats/einzugsgebiet.html
 # Karten im Stil der Gebietskarte
+export_one karte-bergisch-gladbach formats/karte-bergisch-gladbach.html
 export_one karte-koeln formats/karte-koeln.html
+export_one karte-wipperfuerth formats/karte-wipperfuerth.html
+export_one karte-rheinisch-bergischer-kreis formats/karte-rheinisch-bergischer-kreis.html
 export_one karte-einzugsgebiet formats/karte-einzugsgebiet.html
