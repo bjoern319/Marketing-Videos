@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, height=800" />
+    <title>KNIGGE Immobilien – Karte Köln (transparent)</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 800px;
+        overflow: hidden;
+        background: transparent;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+        font-family: "Montserrat", sans-serif;
+        color: #444f4f;
+      }
+      .map {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .area {
+        fill: #e0e3e1;
+        stroke: #ffffff;
+        stroke-width: 3;
+        stroke-linejoin: round;
+        transform-box: view-box;
+        transform: scale(var(--s, 1));
+      }
+      .area.base {
+        fill: #ebedeb;
+      }
+      .area.focus {
+        fill: #c9cecb;
+      }
+      .rhein {
+        fill: none;
+        stroke: #8ecdeb;
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 1 2;
+        stroke-dashoffset: 1.05;
+      }
+      .rings circle {
+        fill: none;
+        stroke: #ca2c35;
+      }
+      .lpos {
+        position: absolute;
+        transform: translate(-50%, -50%);
+      }
+      .label {
+        display: block;
+        white-space: nowrap;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 1.15;
+        color: #5e6a6a;
+        will-change: transform;
+      }
+      .label.lfocus {
+        font-weight: 700;
+        color: #444f4f;
+      }
+      .marker {
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        overflow: visible;
+        will-change: transform;
+      }
+      .logo {
+        position: absolute;
+        will-change: transform;
+      }
+      .logo svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .word {
+        font-family: "Montserrat", sans-serif;
+        fill: #444f4f;
+      }
+      .credit {
+        position: absolute;
+        right: 16px;
+        bottom: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #8a9393;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      KNIGGE Immobilien – Karte Köln (transparenter Hintergrund)
+      erzeugt von tools/build_maps.py – nicht von Hand ändern
+    -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="7.8" data-width="1200" data-height="800" data-fps="25">
+      <svg class="map" viewBox="0 0 1200 800" aria-hidden="true" data-layout-allow-overflow>
+        <g id="areas">
+        <path class="area focus" id="a0" data-d="0.097" style="transform-origin: 585.3px 440.5px" d="M524.1 450.1 L524.1 439.2 L530.1 418.7 L548.4 395.4 L562.2 393.1 L587.0 378.9 L597.3 379.1 L610.1 388.2 L626.1 404.9 L618.1 412.8 L627.0 418.3 L630.9 411.6 L638.3 414.1 L646.2 406.1 L648.5 406.1 L643.2 416.1 L647.0 415.5 L644.7 424.2 L635.6 433.4 L645.7 440.3 L628.7 470.2 L626.9 486.5 L622.1 490.9 L604.7 497.5 L590.8 500.8 L570.1 495.9 L556.2 486.3 L551.6 479.8 L544.8 476.8 L536.6 457.5 L527.1 457.4 L524.1 450.1 Z" />
+        <path class="area area" id="a1" data-d="0.419" style="transform-origin: 604.9px 607.3px" d="M512.2 626.9 L517.3 623.7 L507.9 605.6 L503.3 591.5 L551.6 479.8 L556.2 486.3 L573.6 497.4 L592.2 500.9 L609.4 495.7 L626.0 530.9 L636.0 542.7 L647.8 551.6 L670.3 558.7 L714.5 559.4 L726.7 561.9 L740.9 572.4 L744.6 578.9 L746.7 588.9 L744.5 601.5 L737.3 612.1 L701.0 632.7 L674.0 665.9 L663.2 676.0 L628.2 699.6 L622.7 708.5 L614.1 706.2 L610.4 700.2 L598.6 713.7 L579.0 724.3 L562.6 695.7 L547.5 699.8 L552.6 713.8 L535.4 718.1 L532.8 707.7 L530.8 707.9 L530.9 699.9 L527.3 700.4 L523.7 687.9 L518.6 687.9 L513.9 665.8 L510.7 666.2 L508.5 652.3 L517.8 637.7 L512.2 626.9 Z" />
+        <path class="area area" id="a2" data-d="0.428" style="transform-origin: 431.9px 452.2px" d="M336.1 436.0 L332.6 434.3 L320.4 408.1 L326.0 409.2 L331.7 401.1 L331.2 396.6 L335.2 391.4 L347.1 382.6 L338.3 361.8 L356.4 345.2 L357.4 341.3 L353.1 336.2 L361.9 327.5 L366.2 333.3 L370.0 329.8 L376.3 337.5 L392.1 325.4 L396.0 327.5 L393.9 332.9 L397.6 334.4 L399.5 349.6 L406.1 362.6 L408.6 362.3 L410.3 366.1 L416.6 370.9 L419.9 377.7 L424.6 379.7 L437.5 412.0 L461.7 407.4 L467.1 412.9 L469.8 422.5 L478.7 426.2 L479.7 421.2 L483.8 422.1 L483.8 420.1 L486.5 419.9 L489.3 423.9 L495.6 425.9 L496.1 432.9 L499.6 433.7 L506.6 421.2 L512.4 424.7 L511.5 427.5 L514.3 425.9 L525.0 435.0 L524.1 450.1 L527.0 457.1 L535.5 456.3 L545.3 477.0 L551.6 479.8 L508.3 579.5 L513.7 566.3 L444.4 517.1 L423.8 531.6 L421.1 525.1 L405.0 531.8 L382.7 515.7 L381.0 506.5 L371.6 495.4 L371.6 491.3 L375.8 483.4 L374.8 475.6 L370.6 471.5 L344.4 466.5 L340.3 450.9 L336.9 450.7 L336.1 436.0 Z" />
+        <path class="area area" id="a3" data-d="0.479" style="transform-origin: 463.4px 354.8px" d="M372.9 316.4 L375.7 310.9 L374.2 310.1 L383.3 296.1 L394.3 304.5 L416.6 282.7 L426.5 296.5 L446.8 287.3 L453.7 293.4 L465.5 287.2 L461.5 279.5 L456.5 282.0 L454.7 278.4 L465.6 273.3 L501.3 319.8 L509.1 333.3 L519.0 358.7 L530.3 376.3 L538.0 369.3 L545.8 378.0 L544.8 381.2 L551.3 384.0 L550.1 386.6 L552.8 387.5 L554.2 393.9 L548.6 395.1 L530.4 418.1 L525.0 435.0 L514.5 426.0 L513.2 428.3 L511.0 427.2 L512.1 424.5 L506.7 421.3 L499.5 433.9 L496.2 433.1 L494.6 429.4 L495.3 425.9 L489.0 423.9 L486.2 419.9 L484.1 420.4 L484.7 422.0 L479.9 421.2 L477.9 426.2 L475.6 423.5 L469.5 422.5 L467.1 412.9 L461.6 407.4 L437.4 412.1 L424.6 379.8 L419.9 377.7 L416.6 370.8 L408.7 362.5 L406.2 362.9 L399.4 349.5 L397.8 334.9 L393.8 333.1 L395.8 327.4 L392.1 325.5 L376.3 337.6 L370.0 330.0 L366.1 333.4 L361.9 327.5 L357.6 331.7 L372.9 316.4 Z" />
+        <path class="area area" id="a4" data-d="0.499" style="transform-origin: 561.3px 304.3px" d="M465.6 273.3 L487.0 258.2 L519.9 223.5 L556.0 198.7 L561.5 205.5 L563.4 216.7 L578.8 215.0 L595.6 224.4 L601.7 224.1 L600.6 227.5 L604.6 229.7 L594.1 249.9 L590.6 261.2 L590.5 272.8 L593.4 283.6 L598.3 292.2 L606.2 300.1 L646.5 323.0 L653.2 334.9 L654.0 349.2 L649.2 362.2 L641.8 372.5 L613.3 391.4 L598.8 379.8 L588.8 378.5 L562.2 393.1 L554.2 393.9 L552.7 387.7 L549.9 386.5 L550.9 383.8 L541.9 381.4 L545.4 377.6 L538.1 369.3 L530.5 376.6 L519.0 358.7 L509.1 333.3 L501.3 319.8 L465.6 273.3 Z" />
+        <path class="area area" id="a5" data-d="1.000" style="transform-origin: 435.7px 166.2px" d="M314.4 154.9 L301.9 161.9 L288.8 139.5 L283.6 125.2 L259.2 103.0 L256.4 96.7 L256.4 90.4 L258.6 85.4 L282.7 73.1 L289.9 77.0 L291.8 86.4 L306.4 99.1 L306.7 108.6 L313.3 129.9 L318.7 134.4 L328.1 136.4 L329.2 124.8 L330.8 120.8 L333.8 120.9 L334.5 115.0 L359.3 101.8 L353.9 76.2 L345.3 59.0 L372.8 47.6 L370.7 41.5 L382.4 37.0 L380.6 30.9 L398.9 30.0 L400.0 46.0 L410.1 58.4 L469.3 78.9 L592.9 174.4 L607.5 194.5 L609.9 202.7 L610.6 213.1 L607.5 225.5 L613.8 228.5 L613.2 233.5 L613.1 228.6 L606.8 225.4 L604.6 229.7 L600.4 227.5 L601.1 224.3 L595.7 224.4 L578.8 215.0 L563.2 216.8 L561.5 205.5 L556.0 198.7 L519.9 223.5 L480.0 264.3 L455.0 278.4 L456.6 281.9 L461.4 279.3 L465.9 287.0 L464.5 288.0 L453.4 293.5 L446.6 287.3 L426.4 296.6 L416.6 282.8 L394.3 304.6 L374.2 290.2 L373.7 283.2 L366.9 265.8 L376.7 255.0 L384.8 256.1 L371.5 235.5 L379.2 233.7 L370.0 219.1 L368.8 213.3 L366.3 212.6 L378.7 196.2 L368.3 189.1 L374.3 185.3 L354.6 168.2 L351.1 171.0 L346.2 162.4 L343.4 164.6 L340.6 159.0 L327.4 168.3 L325.8 165.2 L320.3 168.2 L314.4 154.9 Z" />
+        <path class="area area" id="a6" data-d="0.731" style="transform-origin: 782.7px 597.4px" d="M631.7 703.9 L628.4 699.7 L668.3 671.7 L701.0 632.7 L737.3 612.0 L744.5 601.5 L746.7 588.9 L742.2 574.2 L729.3 562.8 L714.6 559.4 L662.1 557.2 L645.1 549.9 L632.7 539.3 L622.0 524.3 L609.4 495.7 L626.3 487.5 L628.2 472.0 L633.3 462.7 L652.8 474.7 L671.7 474.4 L678.0 477.0 L678.6 492.0 L686.2 502.3 L699.4 499.4 L707.5 504.2 L710.2 495.9 L763.5 482.5 L767.4 489.8 L765.9 493.1 L762.9 493.6 L763.5 498.3 L772.8 498.0 L778.0 501.6 L787.8 515.7 L799.6 515.4 L799.9 506.0 L811.6 501.6 L829.4 505.1 L828.5 488.0 L848.9 485.3 L879.7 490.0 L901.2 488.1 L899.3 498.3 L899.9 508.4 L897.3 519.2 L898.7 525.3 L892.3 529.4 L890.2 537.7 L896.0 541.1 L899.2 552.8 L899.3 564.3 L902.6 578.8 L897.8 591.1 L905.5 600.9 L918.4 608.3 L924.5 614.6 L936.6 614.6 L943.6 627.5 L939.5 635.0 L898.0 660.8 L856.8 694.4 L852.3 705.4 L842.2 708.1 L816.6 729.0 L803.3 735.4 L765.7 740.0 L763.8 699.4 L757.8 685.4 L746.9 685.3 L745.9 682.8 L713.4 686.4 L714.4 692.3 L703.8 691.6 L703.7 700.3 L697.2 713.2 L686.0 712.0 L683.5 716.6 L679.7 716.6 L676.9 711.3 L666.9 718.8 L654.3 717.8 L647.7 721.5 L633.5 713.3 L633.6 710.1 L629.4 707.6 L631.7 703.9 Z" />
+        <path class="area area" id="a7" data-d="0.596" style="transform-origin: 771.2px 445.5px" d="M901.1 486.6 L893.5 489.7 L879.7 490.0 L848.9 485.3 L828.9 488.1 L829.8 505.2 L811.8 501.7 L800.1 506.1 L799.8 515.4 L787.7 515.8 L778.0 501.6 L772.5 498.0 L763.5 498.5 L762.8 493.4 L765.8 493.1 L767.3 489.6 L763.4 482.4 L710.2 495.9 L707.4 504.3 L699.4 499.4 L686.1 502.4 L678.6 492.0 L677.7 476.8 L671.0 474.3 L652.8 474.7 L633.3 462.7 L641.9 448.5 L644.9 440.0 L635.1 433.1 L644.7 424.2 L646.7 416.1 L642.5 417.1 L648.2 406.6 L658.6 409.7 L659.2 412.4 L686.5 408.8 L727.3 395.8 L724.3 388.9 L741.2 382.3 L743.8 379.3 L743.1 377.7 L755.3 371.4 L759.8 376.6 L764.5 370.5 L768.8 381.2 L776.5 375.4 L781.7 393.4 L789.9 390.0 L789.8 387.7 L796.1 384.0 L797.6 386.2 L807.2 382.3 L815.7 388.6 L823.5 391.0 L826.1 400.9 L837.1 404.6 L847.7 420.7 L851.7 424.6 L855.2 422.7 L860.0 428.6 L867.5 419.7 L887.9 422.4 L902.8 413.9 L909.9 415.5 L911.2 419.0 L909.8 426.1 L896.3 466.3 L902.0 480.2 L901.1 486.6 Z" />
+        <path class="area area" id="a8" data-d="0.634" style="transform-origin: 708.7px 307.5px" d="M807.7 382.2 L809.6 383.7 L807.2 382.3 L797.5 386.3 L795.9 384.1 L790.2 387.5 L789.8 390.0 L781.6 393.5 L776.4 375.4 L768.9 381.4 L764.6 370.6 L758.9 377.0 L755.2 371.5 L743.7 377.4 L741.8 382.1 L735.6 385.6 L724.8 389.0 L727.5 395.8 L677.7 410.3 L658.9 412.4 L658.6 409.7 L646.9 405.6 L638.4 414.1 L630.9 411.7 L626.8 418.2 L617.9 412.9 L625.6 404.6 L613.3 391.4 L635.7 377.6 L645.3 368.3 L653.2 352.3 L653.7 336.6 L649.7 327.1 L644.0 320.5 L609.6 302.3 L598.9 292.9 L590.9 275.3 L591.2 258.3 L606.8 225.4 L613.3 228.7 L613.1 234.5 L623.4 230.4 L630.5 232.6 L635.7 230.1 L651.0 231.8 L649.7 218.5 L670.1 207.1 L671.2 202.5 L680.6 200.6 L684.1 216.4 L690.4 215.0 L694.8 220.7 L701.6 216.1 L719.9 213.9 L729.0 206.7 L731.0 210.8 L757.2 213.0 L759.0 214.9 L764.6 211.2 L775.5 212.7 L776.7 217.4 L764.9 227.5 L790.6 260.0 L789.1 263.1 L784.5 262.9 L773.1 281.2 L776.4 284.9 L774.9 292.8 L799.9 297.2 L808.9 303.9 L824.1 306.2 L825.6 309.2 L823.4 312.5 L824.8 317.5 L830.4 316.7 L831.9 319.7 L825.9 323.9 L825.4 334.4 L831.3 339.3 L834.1 354.4 L830.2 361.8 L817.6 372.3 L818.1 374.6 L809.7 378.5 L807.7 382.2 Z" />
+        </g>
+        <g id="rhein">
+        <path class="rhein" id="rh0" pathLength="1" d="M412.3 12.1 L411.0 12.8 L405.9 17.0 L400.7 24.2 L398.9 30.0 L398.5 35.8 L400.0 46.0 L403.4 51.7 L410.1 58.4 L415.2 61.4 L453.9 72.5 L464.8 76.6 L477.1 84.0 L506.0 107.8 L582.0 164.9 L597.7 179.7 L607.5 194.5 L609.9 202.7 L610.6 213.1 L609.3 220.9 L607.5 225.5 L613.8 228.5 L613.2 233.5 L613.3 228.7 L606.8 225.4 L594.1 249.9 L591.7 256.4 L590.3 264.5 L590.5 272.8 L592.3 280.8 L597.7 291.4 L606.2 300.1 L638.8 316.9 L645.9 322.5 L652.0 331.5 L653.9 337.8 L654.5 343.0 L654.0 349.2 L652.3 355.2 L644.9 368.8 L637.7 376.1 L617.1 388.3 L610.1 394.5 L600.5 408.0 L595.6 421.4 L594.8 429.4 L595.3 438.4 L600.5 465.0 L609.4 495.8 L619.4 519.3 L626.0 530.9 L632.6 539.1 L639.7 546.0 L647.8 551.6 L659.6 556.5 L670.3 558.7 L714.5 559.4 L726.7 561.9 L734.5 565.9 L740.9 572.4 L744.6 578.9 L746.7 588.9 L746.5 594.2 L744.5 601.5 L741.8 606.6 L737.3 612.1 L730.7 616.7 L707.0 628.3 L701.0 632.7 L668.3 671.7 L659.9 678.5 L628.2 699.6 L622.7 708.5 L619.9 718.6 L620.6 727.8 L623.1 733.7 L626.8 739.0" />
+        </g>
+        <g class="rings">
+        <circle id="r0" cx="573.7" cy="470.7" r="14" stroke-width="0" />
+        </g>
+      </svg>
+      <div class="lpos" style="left: 625.2px; top: 603.5px"><span class="label" id="l1">Rodenkirchen</span></div>
+      <div class="lpos" style="left: 433.3px; top: 453.6px"><span class="label" id="l2">Lindenthal</span></div>
+      <div class="lpos" style="left: 459.5px; top: 354.1px"><span class="label" id="l3">Ehrenfeld</span></div>
+      <div class="lpos" style="left: 542.7px; top: 296.1px"><span class="label" id="l4">Nippes</span></div>
+      <div class="lpos" style="left: 465.8px; top: 166.7px"><span class="label" id="l5">Chorweiler</span></div>
+      <div class="lpos" style="left: 825.3px; top: 601.2px"><span class="label" id="l6">Porz</span></div>
+      <div class="lpos" style="left: 773.6px; top: 444.2px"><span class="label" id="l7">Kalk</span></div>
+      <div class="lpos" style="left: 725.2px; top: 310.9px"><span class="label" id="l8">Mülheim</span></div>
+      <div class="lpos" style="left: 573.7px; top: 508.7px"><span class="label lfocus" id="lo0">Innenstadt</span></div>
+      <svg class="marker" id="m0" style="left: 556.7px; top: 453.7px" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="13" fill="#ffffff" stroke="#444f4f" stroke-width="4" /><circle cx="17" cy="17" r="5.5" fill="#ca2c35" /></svg>
+      <div class="logo" id="logo" style="left: 896.0px; top: 44.0px; width: 260px; height: 57.5px">
+        <svg viewBox="0 0 452 100" role="img" aria-label="KNIGGE Immobilien">
+          <defs>
+            <linearGradient id="k-a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6">
+              <stop offset="0" stop-color="#5e0f18" /><stop offset="0.56" stop-color="#a4222b" /><stop offset="0.8" stop-color="#c12a33" /><stop offset="0.93" stop-color="#ca2c35" />
+            </linearGradient>
+            <linearGradient id="k-r" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0">
+              <stop offset="0" stop-color="#4a0a13" /><stop offset="1" stop-color="#b0252e" />
+            </linearGradient>
+            <linearGradient id="k-b" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100">
+              <stop offset="0" stop-color="#480a12" /><stop offset="0.5" stop-color="#a2222b" /><stop offset="0.85" stop-color="#ca2c35" />
+            </linearGradient>
+          </defs>
+          <path d="M0 0 H79.5 L0 100 Z" fill="url(#k-a)" />
+          <path d="M79.5 0 H100 V100 L47.5 40.2 Z" fill="url(#k-r)" />
+          <path d="M0 100 L47.5 40.2 L100 100 Z" fill="url(#k-b)" />
+          <text class="word" x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing">KNIGGE</text>
+          <text class="word" x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing">IMMOBILIEN</text>
+        </svg>
+      </div>
+      <div class="credit" id="credit">Kartengrundlage: © GeoBasis-DE / BKG 2023, Stadt Köln</div>
+    </div>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        const areas = Array.from(document.querySelectorAll(".area"));
+        const labels = Array.from(document.querySelectorAll(".label"));
+        const markers = Array.from(document.querySelectorAll(".marker"));
+        const rings = Array.from(document.querySelectorAll(".rings circle"));
+
+        // Flächen wachsen vom Standort aus nach außen auf
+        areas.forEach((a) => {
+          const d = parseFloat(a.dataset.d);
+          tl.fromTo(a, { "--s": 0 }, { "--s": 1, duration: 0.55, ease: "back.out(1.3)" }, 0.15 + d * 0.8);
+        });
+        // Rhein fließt ein
+        tl.fromTo(".rhein", { strokeDashoffset: 1.05 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 1.0);
+        // Namen
+        labels.forEach((l, i) => tl.fromTo(l, { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.5 + i * 0.06));
+        // Standorte + Logo
+        markers.forEach((m, i) => {
+          tl.fromTo(m, { y: -36, scale: 0 }, { y: 0, scale: 1, duration: 0.6, ease: "bounce.out" }, 2.0 + i * 0.18);
+        });
+        rings.forEach((r, i) => {
+          tl.fromTo(r, { attr: { r: 14 }, strokeWidth: 5 }, { attr: { r: 110 }, strokeWidth: 0, duration: 1.4, ease: "power2.out" }, 2.45 + i * 0.18);
+          tl.fromTo(r, { attr: { r: 14 }, strokeWidth: 5 }, { attr: { r: 110 }, strokeWidth: 0, duration: 1.4, ease: "power2.out", immediateRender: false }, 4.4 + i * 0.18);
+        });
+        tl.fromTo("#logo", { scale: 0 }, { scale: 1, duration: 0.55, ease: "back.out(1.6)", transformOrigin: "0% 100%" }, 2.5);
+        tl.fromTo("#credit", { scale: 0 }, { scale: 1, duration: 0.3, ease: "power2.out", transformOrigin: "100% 100%" }, 2.6);
+
+        // Abbau für die Schleife
+        tl.to(["#logo", "#credit"], { scale: 0, duration: 0.3, ease: "back.in(1.5)" }, 6.4);
+        markers.forEach((m, i) => tl.to(m, { y: -30, scale: 0, duration: 0.3, ease: "back.in(1.4)" }, 6.45 + i * 0.05));
+        labels.forEach((l, i) => tl.to(l, { scale: 0, duration: 0.25, ease: "back.in(1.5)" }, 6.5 + i * 0.02));
+        tl.to(".rhein", { strokeDashoffset: 1.05, duration: 0.5, ease: "power1.in" }, 6.55);
+        areas.forEach((a) => {
+          const d = parseFloat(a.dataset.d);
+          tl.to(a, { "--s": 0, duration: 0.35, ease: "back.in(1.3)" }, 6.75 + (1 - d) * 0.5);
+        });
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

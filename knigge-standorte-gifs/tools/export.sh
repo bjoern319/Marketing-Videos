@@ -9,7 +9,7 @@ cd "$(dirname "$0")/.."
 HF="npx --yes hyperframes@0.8.152"
 FPS=25
 
-export_one() {
+_export_one() {
   local name="$1" entry="$2"
   local frames="renders/frames-$name"
   rm -rf "$frames"
@@ -33,8 +33,17 @@ export_one() {
   ls -la "renders/knigge-standort-$name.gif" "renders/knigge-standort-$name.webp"
 }
 
+ONLY="${1:-}"  # optional: nur einen Namen exportieren, z. B. `bash tools/export.sh karte-koeln`
+export_one() {
+  [ -n "$ONLY" ] && [ "$ONLY" != "$1" ] && return 0
+  _export_one "$@"
+}
+
 export_one bergisch-gladbach index.html
 export_one koeln formats/koeln.html
 export_one wipperfuerth formats/wipperfuerth.html
 export_one rheinisch-bergischer-kreis formats/rheinisch-bergischer-kreis.html
 export_one einzugsgebiet formats/einzugsgebiet.html
+# Karten im Stil der Gebietskarte
+export_one karte-koeln formats/karte-koeln.html
+export_one karte-einzugsgebiet formats/karte-einzugsgebiet.html

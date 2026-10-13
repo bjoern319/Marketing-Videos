@@ -32,3 +32,35 @@ npm run export   # rendert PNG-Sequenzen (RGBA) und baut GIF + WebP (ffmpeg mit 
 Die Orte stehen in der richtigen Reihenfolge rund um ihre Mitte, aber nicht maßstabs- oder
 richtungsgenau (Wipperfürth liegt z. B. am Nordrand des Oberbergischen Kreises). In der
 Gesamtgrafik fehlt „Köln-Ost“ bei Bergisch Gladbach, weil Köln dort eine eigene Gruppe hat.
+
+## Karten im Stil der Gebietskarte
+
+Dieselben Standorte als echte Karte: hellgraue Flächen, weiße Grenzen, blauer Rhein, rot-weiße
+Standort-Marker und das neue KNIGGE-Logo. Die Flächen wachsen von innen nach außen auf, der Rhein
+wird gezeichnet, dann erscheinen Namen, Marker und Logo. 25 fps, 7,8 s, Endlosschleife.
+
+| Datei | Inhalt | Größe |
+| --- | --- | --- |
+| `renders/knigge-standort-karte-koeln.gif` | Köln mit den 9 Stadtbezirken, Standort Innenstadt (Sachsenring) hervorgehoben | 1200×800 px |
+| `renders/knigge-standort-karte-einzugsgebiet.gif` | Köln, Rheinisch-Bergischer Kreis und Oberbergischer Kreis mit den Standorten Köln, Bergisch Gladbach und Wipperfürth (Leverkusen heller als Lückenschluss) | 1920×1080 px |
+
+Auch hier gibt es jeweils eine `.webp` mit weichen Kanten.
+
+```bash
+npm run build:maps                    # schreibt formats/karte-*.html (braucht Python mit shapely)
+bash tools/export.sh karte-koeln      # nur eine Animation exportieren
+```
+
+Kartengrundlage ist `assets/geo/region.json`, erzeugt mit `tools/geo/prepare.py` (Quellen im
+Kopf der Datei). Die Kölner Stadtbezirke sind aus den 86 Stadtteilen zusammengesetzt und an der
+amtlichen Stadtgrenze ausgerichtet; der Rhein ist die gemeinsame Grenze der links- und
+rechtsrheinischen Gebiete. Karten auf Gemeindeebene (Bergisch Gladbach mit Nachbarn,
+Rheinisch-Bergischer Kreis, Oberbergischer Kreis) folgen, sobald Gemeindegrenzen vorliegen
+(`prepare.py --gemeinden`).
+
+Quellen und Lizenzen (Nennung steht klein unten rechts in jeder Karte):
+
+- Kreisgrenzen: © GeoBasis-DE / BKG 2023 (VG250), [Datenlizenz Deutschland – Namensnennung 2.0](https://www.govdata.de/dl-de/by-2-0),
+  bezogen über [geoBoundaries](https://www.geoboundaries.org/)
+- Kölner Stadtteile: Stadt Köln (Offene Daten Köln), bezogen über
+  [click_that_hood](https://github.com/codeforgermany/click_that_hood)
