@@ -43,6 +43,10 @@
         stroke-dasharray: 1 2;
         stroke-dashoffset: 1.05;
       }
+      .lines path.cn {
+        stroke: #ca2c35;
+        stroke-width: 4.5;
+      }
       .rings circle {
         fill: none;
         stroke: #ca2c35;
@@ -52,7 +56,8 @@
         transform: translate(-50%, -50%);
       }
       .pill,
-      .hub {
+      .hub,
+      .logo {
         will-change: transform; /* eigene Ebene: Graustufen-Kantenglättung statt farbiger Subpixel-Ränder */
       }
       .pill {
@@ -69,17 +74,16 @@
       }
       .pin {
         position: absolute;
-        left: 557px;
-        top: 238px;
         width: 86px;
         height: 106px;
         overflow: visible;
       }
       .hubpos {
         position: absolute;
-        left: 600px;
-        top: 354px;
         transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .hub {
         display: block;
@@ -92,11 +96,40 @@
         border-radius: 10px;
         padding: 9px 27px 10px;
       }
+      .cap {
+        display: block;
+        margin-top: 4px;
+        white-space: nowrap;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #444f4f;
+        background: #ffffff;
+        border-radius: 6px;
+        padding: 2px 8px 3px;
+        will-change: transform;
+      }
+      .logo {
+        position: absolute;
+        background: #ffffff;
+        border: 3px solid #444f4f;
+        border-radius: 14px;
+      }
+      .logo svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .word {
+        font-family: "Montserrat", sans-serif;
+        fill: #444f4f;
+      }
     </style>
   </head>
   <body>
     <!--
-      KNIGGE Immobilien – Standort-Animation Bergisch Gladbach (transparenter Hintergrund)
+      KNIGGE Immobilien – Bergisch Gladbach (transparenter Hintergrund)
       erzeugt von tools/build.py – Namen dort ändern, nicht hier
     -->
     <div id="root" data-composition-id="main" data-start="0" data-duration="7.2" data-width="1200" data-height="680" data-fps="25">
@@ -123,15 +156,11 @@
       <div class="pos" style="left: 299.5px; top: 516.8px"><span class="pill" id="p5">Refrath</span></div>
       <div class="pos" style="left: 175.0px; top: 340.0px"><span class="pill" id="p6">Köln-Ost</span></div>
       <div class="pos" style="left: 299.5px; top: 163.2px"><span class="pill" id="p7">Schildgen</span></div>
-      <svg class="pin" id="pin" viewBox="0 0 24 30" aria-hidden="true">
-        <path d="M12 29 C12 29 2 17.5 2 11 A10 10 0 0 1 22 11 C22 17.5 12 29 12 29 Z" fill="#ca2c35" stroke="#6d131b" stroke-width="1.2" />
-        <circle cx="12" cy="11" r="4" fill="#ffffff" />
-      </svg>
-      <div class="hubpos"><span class="hub" id="hub">Bergisch Gladbach</span></div>
+      <svg class="pin" id="pin" style="left: 557.0px; top: 237.5px" viewBox="0 0 24 30" aria-hidden="true"><path d="M12 29 C12 29 2 17.5 2 11 A10 10 0 0 1 22 11 C22 17.5 12 29 12 29 Z" fill="#ca2c35" stroke="#6d131b" stroke-width="1.2" /><circle cx="12" cy="11" r="4" fill="#ffffff" /></svg>
+      <div class="hubpos" style="left: 600px; top: 354px"><span class="hub" id="hub">Bergisch Gladbach</span></div>
     </div>
     <script>
       (function () {
-        // Nur Skalierung/Position/Strich – keine Deckkraft-Blenden, damit das GIF (1-Bit-Transparenz) sauber bleibt
         const tl = gsap.timeline({ paused: true });
 
         // Pin landet, Ortsname erscheint

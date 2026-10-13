@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Rendert die drei Standort-Animationen als transparente PNG-Sequenzen und baut daraus
+# Rendert die Standort-Animationen als transparente PNG-Sequenzen und baut daraus
 #   renders/knigge-standort-<ort>.gif   GIF, 1-Bit-Transparenz (überall einsetzbar)
 #   renders/knigge-standort-<ort>.webp  animiertes WebP mit weicher Transparenz (Websites)
+# Benötigt: ffmpeg mit libwebp; optional gifsicle (verkleinert die GIFs verlustfrei)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -21,6 +22,10 @@ export_one() {
   ffmpeg -v error -y -framerate "$FPS" -i "$frames/frame_%06d.png" \
     -filter_complex "[0:v]split[a][b];[a]palettegen=reserve_transparent=1:stats_mode=full[p];[b][p]paletteuse=dither=none:alpha_threshold=128" \
     -loop 0 "renders/knigge-standort-$name.gif"
+  # verlustfrei verkleinern: gleiche Bilder zusammenfassen, nur geänderte Bereiche speichern
+  if command -v gifsicle > /dev/null; then
+    gifsicle -O3 --no-warnings -b "renders/knigge-standort-$name.gif"
+  fi
   # WebP: weiche Alphakanten
   ffmpeg -v error -y -framerate "$FPS" -i "$frames/frame_%06d.png" \
     -c:v libwebp_anim -lossless 1 -compression_level 6 -loop 0 "renders/knigge-standort-$name.webp"
@@ -31,3 +36,5 @@ export_one() {
 export_one bergisch-gladbach index.html
 export_one koeln formats/koeln.html
 export_one wipperfuerth formats/wipperfuerth.html
+export_one rheinisch-bergischer-kreis formats/rheinisch-bergischer-kreis.html
+export_one einzugsgebiet formats/einzugsgebiet.html
