@@ -10,7 +10,7 @@ Präsentationen oder über eigene Hintergründe. 25 fps, Endlosschleife (Aufbau 
 | `renders/knigge-standort-koeln.gif` | Köln (Standort Sachsenring) | Stadtbezirke Nippes, Mülheim, Kalk, Porz, Rodenkirchen, Lindenthal, Ehrenfeld, Chorweiler |
 | `renders/knigge-standort-wipperfuerth.gif` | Wipperfürth (Oberbergischer Kreis) | Radevormwald, Marienheide, Bergneustadt, Gummersbach, Wiehl, Engelskirchen, Lindlar, Hückeswagen |
 | `renders/knigge-standort-rheinisch-bergischer-kreis.gif` | Rheinisch-Bergischer Kreis | Burscheid, Wermelskirchen, Kürten, Overath, Rösrath, Bergisch Gladbach, Odenthal, Leichlingen |
-| `renders/knigge-standort-einzugsgebiet.gif` | KNIGGE-Logo – gesamtes Einzugsgebiet | Köln (W), Rheinisch-Bergischer Kreis (N), Wipperfürth/Oberbergischer Kreis (O), Bergisch Gladbach – Hauptsitz (S), jeweils mit ihren Orten |
+| `renders/knigge-standort-einzugsgebiet.gif` | KNIGGE-Logo – gesamtes Einzugsgebiet | Köln (W), Leverkusen (NW), Rheinisch-Bergischer Kreis (N), Wipperfürth/Oberbergischer Kreis (O), Bergisch Gladbach – Hauptsitz (S), jeweils mit ihren Orten |
 
 Einzelne Gebiete: 1200×680 px, 7,2 s. Einzugsgebiet: 1920×1080 px, 10,2 s – am besten groß zeigen
 (Präsentation, TV, Website in voller Breite).

@@ -57,8 +57,8 @@ REGIONS = {
 }
 
 # ---------------------------------------------------------------------------------------------
-# Gesamtes Einzugsgebiet (1920×1080): KNIGGE-Logo in der Mitte, vier Gruppen rundherum
-# W Köln · N Rheinisch-Bergischer Kreis · O Oberbergischer Kreis (Wipperfürth) · S Bergisch Gladbach
+# Gesamtes Einzugsgebiet (1920×1080): KNIGGE-Logo in der Mitte, fünf Gruppen rundherum
+# W Köln · NW Leverkusen · N Rheinisch-Bergischer Kreis · O Oberbergischer Kreis (Wipperfürth) · S Bergisch Gladbach
 # ---------------------------------------------------------------------------------------------
 COMBINED = {
     "file": "formats/einzugsgebiet.html",
@@ -75,6 +75,14 @@ COMBINED = {
             "ry": 165,
             "places": ["Chorweiler", "Nippes", "Mülheim", "Kalk", "Porz", "Rodenkirchen", "Lindenthal", "Ehrenfeld"],
             "angles": EIGHT_TURNED,
+        },
+        {
+            "hub": "Leverkusen",
+            "c": (275, 205),
+            "rx": 205,
+            "ry": 128,
+            "places": ["Opladen", "Lützenkirchen", "Schlebusch", "Manfort", "Wiesdorf", "Hitdorf"],
+            "angles": [345, 50, 100, 165, 222, 285],
         },
         {
             "hub": "Rheinisch-Bergischer Kreis",
@@ -406,7 +414,7 @@ def combined_page(spec):
         // KNIGGE in der Mitte
         tl.fromTo("#logo", {{ scale: 0 }}, {{ scale: 1, duration: 0.6, ease: "back.out(1.8)" }}, 0.15);
 
-        // Verbindung zu den vier Gebieten, Pins landen (W, N, O, S)
+        // Verbindung zu den fünf Gebieten, Pins landen (W, NW, N, O, S)
         counts.forEach((n, i) => {{
           const t = 0.6 + i * 0.14;
           tl.fromTo("#cn" + i, {{ strokeDashoffset: 1.05 }}, {{ strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" }}, t);
