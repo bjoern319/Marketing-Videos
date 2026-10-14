@@ -45,7 +45,7 @@ aus auf, der Rhein wird gezeichnet, dann erscheinen Namen, Marker und Logo. 25 f
 | `renders/knigge-standort-karte-koeln.gif` | Köln mit den 9 Stadtbezirken, Standort Innenstadt (Sachsenring) hervorgehoben | 1200×800 px |
 | `renders/knigge-standort-karte-wipperfuerth.gif` | Oberbergischer Kreis mit seinen 13 Gemeinden, Wipperfürth hervorgehoben | 1080×1080 px |
 | `renders/knigge-standort-karte-rheinisch-bergischer-kreis.gif` | Rheinisch-Bergischer Kreis mit seinen 8 Gemeinden, Bergisch Gladbach hervorgehoben | 1080×1080 px |
-| `renders/knigge-standort-karte-einzugsgebiet.gif` | Köln, Leverkusen, Rheinisch-Bergischer und Oberbergischer Kreis mit den Standorten Köln, Bergisch Gladbach und Wipperfürth | 1920×1080 px |
+| `renders/knigge-standort-karte-einzugsgebiet.gif` | Köln, Leverkusen, Pulheim, Frechen, Hürth und die Gemeinden des Rheinisch-Bergischen und des Oberbergischen Kreises mit den Standorten Köln, Bergisch Gladbach und Wipperfürth | 1920×1080 px |
 
 Auch hier gibt es jeweils eine `.webp` mit weichen Kanten.
 
