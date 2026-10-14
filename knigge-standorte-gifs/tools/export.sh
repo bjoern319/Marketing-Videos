@@ -10,8 +10,11 @@ HF="npx --yes hyperframes@0.8.152"
 FPS=25
 
 _export_one() {
-  local name="$1" entry="$2"
+  local name="$1" entry="$2" mode="${3:-loop}"
   local frames="renders/frames-$name"
+  # „once“: einmal abspielen und auf dem letzten Bild stehen bleiben (GIF ohne Wiederholung, WebP 1 Durchlauf)
+  local gif_loop=0 webp_loop=0
+  if [ "$mode" = "once" ]; then gif_loop=-1; webp_loop=1; fi
   rm -rf "$frames"
   if [ "$entry" = "index.html" ]; then
     $HF render --format png-sequence --fps "$FPS" -o "$frames"
@@ -21,14 +24,14 @@ _export_one() {
   # GIF: eigene Palette, keine Dither-Muster, Kanten ab 50 % Deckkraft sichtbar
   ffmpeg -v error -y -framerate "$FPS" -i "$frames/frame_%06d.png" \
     -filter_complex "[0:v]split[a][b];[a]palettegen=reserve_transparent=1:stats_mode=full[p];[b][p]paletteuse=dither=none:alpha_threshold=128" \
-    -loop 0 "renders/knigge-standort-$name.gif"
+    -loop "$gif_loop" "renders/knigge-standort-$name.gif"
   # verlustfrei verkleinern: gleiche Bilder zusammenfassen, nur geänderte Bereiche speichern
   if command -v gifsicle > /dev/null; then
     gifsicle -O3 --no-warnings -b "renders/knigge-standort-$name.gif"
   fi
   # WebP: weiche Alphakanten
   ffmpeg -v error -y -framerate "$FPS" -i "$frames/frame_%06d.png" \
-    -c:v libwebp_anim -lossless 1 -compression_level 6 -loop 0 "renders/knigge-standort-$name.webp"
+    -c:v libwebp_anim -lossless 1 -compression_level 6 -loop "$webp_loop" "renders/knigge-standort-$name.webp"
   rm -rf "$frames"
   ls -la "renders/knigge-standort-$name.gif" "renders/knigge-standort-$name.webp"
 }
@@ -50,3 +53,4 @@ export_one karte-koeln formats/karte-koeln.html
 export_one karte-wipperfuerth formats/karte-wipperfuerth.html
 export_one karte-rheinisch-bergischer-kreis formats/karte-rheinisch-bergischer-kreis.html
 export_one karte-einzugsgebiet formats/karte-einzugsgebiet.html
+export_one karte-einzugsgebiet-ohne-schleife formats/karte-einzugsgebiet-ohne-schleife.html once

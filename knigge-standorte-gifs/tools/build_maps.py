@@ -4,16 +4,25 @@ und KNIGGE-Logo) als HyperFrames-Kompositionen mit transparentem Hintergrund.
 
 Kartengrundlage: assets/geo/region.json (siehe tools/geo/prepare.py).
 Karten ändern: MAPS unten anpassen, dann `python3 tools/build_maps.py` und `bash tools/export.sh`.
+Die Ortsnamen setzt tools/label_layout.py so, dass jeder in seine Fläche passt; die Ausgabe meldet
+jede Abweichung von der Wunschposition.
 """
 import json
 import math
 import os
+import sys
 
-from shapely.geometry import shape, Point
+import numpy as np
+import shapely
+from shapely.geometry import shape, Point, LineString, box
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import label_layout  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FPS = 25
 DURATION = 7.8
+ONCE_DURATION = 4.6  # Variante ohne Schleife: endet, wenn alles aufgebaut ist (und hält kurz)
 
 # Standorte (lon, lat)
 OFFICES = {
@@ -51,11 +60,9 @@ MAPS = {
                   # Rheinisch-Bergischer Kreis
                   ("Bergisch Gladbach", "focus"), ("Burscheid", "area"), ("Kürten", "area"), ("Leichlingen", "area"),
                   ("Odenthal", "area"), ("Overath", "area"), ("Rösrath", "area"), ("Wermelskirchen", "area"),
-                  # Oberbergischer Kreis
-                  ("Wipperfürth", "focus"), ("Bergneustadt", "area"), ("Engelskirchen", "area"), ("Gummersbach", "area"),
-                  ("Hückeswagen", "area"), ("Lindlar", "area"), ("Marienheide", "area"), ("Morsbach", "area"),
-                  ("Nümbrecht", "area"), ("Radevormwald", "area"), ("Reichshof", "area"), ("Waldbröl", "area"),
-                  ("Wiehl", "area")],
+                  # Oberbergischer Kreis (nur der nördliche Teil rund um Wipperfürth)
+                  ("Wipperfürth", "focus"), ("Engelskirchen", "area"), ("Hückeswagen", "area"), ("Lindlar", "area"),
+                  ("Marienheide", "area"), ("Radevormwald", "area")],
         "kind": "gemeinde",
         "labels": {"Köln": None, "Bergisch Gladbach": None, "Wipperfürth": None, "Hückeswagen": (-14, -4),
                    "Wermelskirchen": (-8, 0)},
@@ -116,6 +123,22 @@ MAPS = {
         "credit": CREDIT_GEMEINDEN,
     },
 }
+
+# Einzugsgebiet zusätzlich ohne Schleife: spielt einmal ab und bleibt aufgebaut stehen
+MAPS["formats/karte-einzugsgebiet-ohne-schleife.html"] = dict(
+    MAPS["formats/karte-einzugsgebiet.html"], title="Karte Einzugsgebiet (ohne Schleife)", once=True)
+
+# Abbau am Ende, damit die Schleife wieder bei null beginnt
+OUTRO_JS = """        // Abbau für die Schleife
+        tl.to(["#logo", "#credit"], { scale: 0, duration: 0.3, ease: "back.in(1.5)" }, 6.4);
+        markers.forEach((m, i) => tl.to(m, { y: -30, scale: 0, duration: 0.3, ease: "back.in(1.4)" }, 6.45 + i * 0.05));
+        labels.forEach((l, i) => tl.to(l, { scale: 0, duration: 0.25, ease: "back.in(1.5)" }, 6.5 + i * 0.02));
+        tl.to(".rhein", { strokeDashoffset: 1.05, duration: 0.5, ease: "power1.in" }, 6.55);
+        areas.forEach((a) => {
+          const d = parseFloat(a.dataset.d);
+          tl.to(a, { "--s": 0, duration: 0.35, ease: "back.in(1.3)" }, 6.75 + (1 - d) * 0.5);
+        });
+"""
 
 LOGO_SVG = '''<svg viewBox="0 0 452 100" role="img" aria-label="KNIGGE Immobilien">
           <defs>
@@ -197,13 +220,44 @@ def build(rel, spec, region):
         if off is not None:
             labels.append((i, name, role, lx + off[0], ly + off[1]))
 
-    rhein = []
+    rhein, rhein_px = [], []
     if spec["rhein"]:
         for k, ln in enumerate(region["rhein"]):
             line = shape(ln).intersection(union.buffer(0.01))
             for seg in getattr(line, "geoms", [line]):
                 if seg.geom_type == "LineString" and seg.length > 0.01:
                     rhein.append(line_path(seg.coords, proj))
+                    rhein_px.append(LineString([proj(x, y) for x, y in seg.coords]))
+
+    corner, lw = spec["logo"]
+    lh = lw * 100 / 452
+    pad = 44
+    lx = pad if corner in ("tl", "bl") else W - pad - lw
+    ly = pad if corner in ("tl", "tr") else H - pad - lh - 30
+
+    # Namen so setzen, dass jeder in seine Fläche passt (Prüfung mit der echten Schrift)
+    size = spec.get("label_size", 22 if W <= 1400 else 24)
+    to_px = lambda g: shapely.transform(g, lambda c: np.column_stack(proj(c[:, 0], c[:, 1])))  # noqa: E731
+    area_px = {name: to_px(g).buffer(0) for name, _, g in geoms}
+    office_px = {key: proj(*OFFICES[key]) for key in spec["markers"]}
+    items = [{"text": name, "size": size, "weight": 500, "area": area_px[name], "want": (x, y), "office": None}
+             for i, name, role, x, y in labels]
+    for key, text in spec.get("office_labels", {}).items():
+        ox, oy = proj(*OFFICES[key])
+        home = next((area_px[n] for n, _, _ in geoms if area_px[n].contains(Point(ox, oy))), None)
+        items.append({"text": text, "size": size, "weight": 700, "area": home, "want": (ox, oy + 38), "office": (ox, oy)})
+    obstacles = [Point(mx, my).buffer(19) for mx, my in office_px.values()]
+    obstacles += [ln.buffer(5) for ln in rhein_px]
+    obstacles.append(box(lx - 6, ly - 6, lx + lw + 6, ly + lh + 6))
+    try:
+        measure = label_layout.Measure()
+        ink = measure.ink(spec["credit"], 12, 500)
+        obstacles.append(box(W - 16 - (ink[2] - ink[0]) - 4, H - 8 - 14 - 4, W - 12, H - 4))
+        placed = label_layout.place(items, obstacles, W, H, measure)
+    except (FileNotFoundError, LookupError, ImportError) as e:
+        print("  Beschriftung nicht geprüft:", e)
+        placed = [{"x": it["want"][0], "y": it["want"][1], "size": size, "status": "ungeprüft", "clear": 0} for it in items]
+    report = [(it["text"], r) for it, r in zip(items, placed)]
 
     maxd = max(p[6] for p in paths) or 1
     area_svg = "\n".join(
@@ -211,13 +265,15 @@ def build(rel, spec, region):
         for i, name, role, d, cx, cy, dist in paths
     )
     rhein_svg = "\n".join(f'        <path class="rhein" id="rh{k}" pathLength="1" d="{d}" />' for k, d in enumerate(rhein))
-    label_html = "\n".join(
-        f'      <div class="lpos" style="left: {x:.1f}px; top: {y:.1f}px"><span class="label" id="l{i}">{name}</span></div>'
-        for i, name, role, x, y in labels
-    )
+    def label_div(r, cls, ident, text):
+        fs = f"; font-size: {r['size']}px" if r["size"] != size else ""
+        return (f'      <div class="lpos" style="left: {r["x"]:.1f}px; top: {r["y"]:.1f}px">'
+                f'<span class="{cls}" id="{ident}" style="{fs.lstrip("; ")}">{text}</span></div>'.replace(' style=""', ""))
+
+    n_area = len(labels)
+    label_html = "\n".join(label_div(placed[k], "label", f"l{i}", name) for k, (i, name, role, x, y) in enumerate(labels))
     for k, (key, text) in enumerate(spec.get("office_labels", {}).items()):
-        ox, oy = proj(*OFFICES[key])
-        label_html += f'\n      <div class="lpos" style="left: {ox:.1f}px; top: {oy + 38:.1f}px"><span class="label lfocus" id="lo{k}">{text}</span></div>'
+        label_html += "\n" + label_div(placed[n_area + k], "label lfocus", f"lo{k}", text)
 
     markers = []
     for k, key in enumerate(spec["markers"]):
@@ -227,13 +283,12 @@ def build(rel, spec, region):
         f'        <circle id="r{k}" cx="{proj(*OFFICES[key])[0]:.1f}" cy="{proj(*OFFICES[key])[1]:.1f}" r="14" stroke-width="0" />'
         for k, key in enumerate(spec["markers"])
     )
-    corner, lw = spec["logo"]
-    lh = lw * 100 / 452
-    pad = 44
-    lx = pad if corner in ("tl", "bl") else W - pad - lw
-    ly = pad if corner in ("tl", "tr") else H - pad - lh - 30
+    once = spec.get("once", False)
+    duration = ONCE_DURATION if once else DURATION
+    pulses = "[2.45]" if once else "[2.45, 4.4]"
+    outro = "" if once else OUTRO_JS
 
-    return f'''<!doctype html>
+    html = f'''<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
@@ -349,7 +404,7 @@ def build(rel, spec, region):
       KNIGGE Immobilien – {spec["title"]} (transparenter Hintergrund)
       erzeugt von tools/build_maps.py – nicht von Hand ändern
     -->
-    <div id="root" data-composition-id="main" data-start="0" data-duration="{DURATION}" data-width="{W}" data-height="{H}" data-fps="{FPS}">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{duration}" data-width="{W}" data-height="{H}" data-fps="{FPS}">
       <svg class="map" viewBox="0 0 {W} {H}" aria-hidden="true" data-layout-allow-overflow>
         <g id="areas">
 {area_svg}
@@ -391,7 +446,7 @@ def build(rel, spec, region):
         }});
         // Puls: Ring erst beim Start sichtbar (vorher Strichstärke 0), dann weiten und ausdünnen
         rings.forEach((r, i) => {{
-          [2.45, 4.4].forEach((t0, k) => {{
+          {pulses}.forEach((t0, k) => {{
             const t = t0 + i * 0.18;
             tl.fromTo(r, {{ attr: {{ r: 14 }}, strokeWidth: 0 }}, {{ strokeWidth: 5, duration: 0.04, ease: "none", immediateRender: k === 0 }}, t);
             tl.to(r, {{ attr: {{ r: 110 }}, strokeWidth: 0, duration: 1.4, ease: "power2.out" }}, t + 0.04);
@@ -400,32 +455,30 @@ def build(rel, spec, region):
         tl.fromTo("#logo", {{ scale: 0 }}, {{ scale: 1, duration: 0.55, ease: "back.out(1.6)", transformOrigin: "0% 100%" }}, 2.5);
         tl.fromTo("#credit", {{ scale: 0 }}, {{ scale: 1, duration: 0.3, ease: "power2.out", transformOrigin: "100% 100%" }}, 2.6);
 
-        // Abbau für die Schleife
-        tl.to(["#logo", "#credit"], {{ scale: 0, duration: 0.3, ease: "back.in(1.5)" }}, 6.4);
-        markers.forEach((m, i) => tl.to(m, {{ y: -30, scale: 0, duration: 0.3, ease: "back.in(1.4)" }}, 6.45 + i * 0.05));
-        labels.forEach((l, i) => tl.to(l, {{ scale: 0, duration: 0.25, ease: "back.in(1.5)" }}, 6.5 + i * 0.02));
-        tl.to(".rhein", {{ strokeDashoffset: 1.05, duration: 0.5, ease: "power1.in" }}, 6.55);
-        areas.forEach((a) => {{
-          const d = parseFloat(a.dataset.d);
-          tl.to(a, {{ "--s": 0, duration: 0.35, ease: "back.in(1.3)" }}, 6.75 + (1 - d) * 0.5);
-        }});
-
+{outro}
         window.__timelines["main"] = tl;
       }})();
     </script>
   </body>
 </html>
 '''
+    return html, report
 
 
 def main():
     with open(os.path.join(ROOT, "assets/geo/region.json"), encoding="utf-8") as f:
         region = json.load(f)
     for rel, spec in MAPS.items():
-        html = build(rel, spec, region)
+        html, report = build(rel, spec, region)
         with open(os.path.join(ROOT, rel), "w", encoding="utf-8") as f:
             f.write(html)
-        print("geschrieben:", rel)
+        ok = all(r["status"] == "ok" for _, r in report)
+        worst = min((r["clear"] for _, r in report), default=0)
+        print(f"geschrieben: {rel} – {len(report)} Namen, " + ("alle an ihrer Wunschposition" if ok else "angepasst:")
+              + f" (Abstand zur Flächengrenze mind. {worst:.0f} px)")
+        for text, r in report:
+            if r["status"] != "ok":
+                print(f"    {text}: {r['status']} (Schrift {r['size']} px, Abstand {r['clear']:.0f} px)")
 
 
 if __name__ == "__main__":

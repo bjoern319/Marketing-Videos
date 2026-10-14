@@ -45,14 +45,26 @@ aus auf, der Rhein wird gezeichnet, dann erscheinen Namen, Marker und Logo. 25 f
 | `renders/knigge-standort-karte-koeln.gif` | Köln mit den 9 Stadtbezirken, Standort Innenstadt (Sachsenring) hervorgehoben | 1200×800 px |
 | `renders/knigge-standort-karte-wipperfuerth.gif` | Oberbergischer Kreis mit seinen 13 Gemeinden, Wipperfürth hervorgehoben | 1080×1080 px |
 | `renders/knigge-standort-karte-rheinisch-bergischer-kreis.gif` | Rheinisch-Bergischer Kreis mit seinen 8 Gemeinden, Bergisch Gladbach hervorgehoben | 1080×1080 px |
-| `renders/knigge-standort-karte-einzugsgebiet.gif` | Köln, Leverkusen, Pulheim, Frechen, Hürth und die Gemeinden des Rheinisch-Bergischen und des Oberbergischen Kreises mit den Standorten Köln, Bergisch Gladbach und Wipperfürth | 1920×1080 px |
+| `renders/knigge-standort-karte-einzugsgebiet.gif` | Köln, Leverkusen, Pulheim, Frechen, Hürth, die 8 Gemeinden des Rheinisch-Bergischen Kreises und aus dem Oberbergischen Kreis Wipperfürth, Hückeswagen, Radevormwald, Marienheide, Lindlar und Engelskirchen – mit den Standorten Köln, Bergisch Gladbach und Wipperfürth | 1920×1080 px |
+| `renders/knigge-standort-karte-einzugsgebiet-ohne-schleife.gif` | dasselbe, spielt aber nur einmal ab und bleibt stehen, sobald alles aufgebaut ist (4,6 s) | 1920×1080 px |
 
 Auch hier gibt es jeweils eine `.webp` mit weichen Kanten.
 
 ```bash
-npm run build:maps                    # schreibt formats/karte-*.html (braucht Python mit shapely)
+npm run build:maps                    # schreibt formats/karte-*.html (braucht Python mit shapely, Pillow, fontTools)
 bash tools/export.sh karte-koeln      # nur eine Animation exportieren
 ```
+
+Beim Erzeugen prüft `tools/label_layout.py` jeden Ortsnamen in der echten Schrift (Montserrat aus dem
+HyperFrames-Font-Cache): Der Name muss mit mindestens 4 px Abstand in seine Fläche passen und darf weder
+Marker, Rhein, Logo, Quellenhinweis noch einen anderen Namen berühren. Passt die Wunschposition nicht,
+sucht das Skript in der Fläche die nächste passende Position, notfalls in etwas kleinerer Schrift, und
+meldet jede Anpassung. Einzige Ausnahme ist „Innenstadt“ in der Köln-Karte: Der Bezirk ist zu klein für
+den Namen, er steht deshalb frei neben dem Marker.
+
+Varianten ohne Schleife: In `MAPS` eine Karte mit `once=True` anlegen (siehe Einzugsgebiet) und in
+`tools/export.sh` mit dem Zusatz `once` exportieren – das GIF spielt dann einmal und bleibt auf dem
+letzten Bild stehen. Manche Plattformen (z. B. Messenger) ignorieren das und spielen trotzdem in Schleife.
 
 Kartengrundlage ist `assets/geo/region.json`, erzeugt mit `tools/geo/prepare.py` (Quellen und
 Download-Hinweise im Kopf der Datei):

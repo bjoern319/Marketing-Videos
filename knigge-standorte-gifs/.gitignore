@@ -5,3 +5,4 @@ renders/frames-*/
 renders/work-*/
 renders/.*
 *.log
+__pycache__/
