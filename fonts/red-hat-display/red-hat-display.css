@@ -1,0 +1,16 @@
+/* Red Hat Display – Hausschrift für alle KNIGGE-Videos (SIL Open Font License 1.1, siehe OFL.txt).
+   Variable Schrift: jede Stärke von 300 bis 900 über font-weight. */
+@font-face {
+  font-family: "Red Hat Display";
+  src: url("red-hat-display.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Red Hat Display";
+  src: url("red-hat-display-italic.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: block;
+}

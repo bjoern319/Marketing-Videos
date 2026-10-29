@@ -10,3 +10,9 @@ Videoprojekte für KNIGGE Immobilien, gebaut mit [HyperFrames](https://github.co
 | [knigge-einzugsgebiet-reel](knigge-einzugsgebiet-reel/) | Instagram-Reel „Drei Standorte. Eine Region.“ – v2 „Drei Facetten“ (18 s): die drei Facetten des KNIGGE-K werden die Standorte Köln, Bergisch Gladbach (Hauptsitz) und Wipperfürth, Zähler „19 Städte und Gemeinden“, am Ende setzt sich das Logo wieder zusammen; v1 (15 s) als ruhige Kamerafahrt. Beide ohne Ton | MP4 hochkant 1080×1920 |
 
 Jedes Projekt enthält Brief, Storyboard, Design-Spec (`frame.md`) und eine README mit Render-Befehlen.
+
+## Schrift für alle neuen Videos
+
+**Red Hat Display** (seit 29.10.2026) – Dateien, Lizenz (SIL OFL 1.1) und Einbindung in
+HyperFrames: [`fonts/red-hat-display/`](fonts/red-hat-display/). Das KNIGGE-Logo bleibt unverändert.
+Ältere Projekte (oben) sind noch in Montserrat gesetzt.
