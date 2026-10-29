@@ -63,9 +63,10 @@ def _fits(x, y, ink, area, canvas, tree, blockers):
     return area.boundary.distance(inner) if area is not None else CLEAR
 
 
-def place(items, obstacles, W, H, measure):
+def place(items, obstacles, W, H, measure, min_size=MIN_SIZE):
     """items: dicts mit text, size, weight, area (Polygon in px oder None), want (x, y),
-    office (Marker-Mitte für Standort-Namen oder None). Ergebnis je Eintrag: x, y, size, status, clear."""
+    office (Marker-Mitte für Standort-Namen oder None). Ergebnis je Eintrag: x, y, size, status, clear.
+    min_size: kleinste erlaubte Schrift, bevor ein Name als „passt nicht“ gilt."""
     canvas = box(0, 0, W, H)
     tree = shapely.STRtree(obstacles) if obstacles else None
     placed = []  # Schriftbilder bereits gesetzter Namen
@@ -80,7 +81,7 @@ def place(items, obstacles, W, H, measure):
             shapely.prepare(area)
         wx, wy = it["want"]
         best = None
-        for size in range(it["size"], MIN_SIZE - 1, -1):
+        for size in range(it["size"], min_size - 1, -1):
             ink = measure.ink(it["text"], size, it["weight"])
             c = _fits(wx, wy, ink, area, canvas, tree, placed)
             if c is not None:

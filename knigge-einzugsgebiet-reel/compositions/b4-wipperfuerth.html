@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de" data-composition-variables='[{"id": "dach", "type": "string", "label": "Dachzeile", "default": "Standort"}, {"id": "ort1", "type": "string", "label": "Ort, Zeile 1", "default": "Wipperfürth"}]'>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="b4-wipperfuerth-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .b4-kopf {
+          position: absolute;
+          left: 60px;
+          right: 60px;
+          top: 196px;
+          text-align: center;
+        }
+        .b4-zeile {
+          display: block;
+          white-space: nowrap;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.04;
+        }
+        .b4-dach {
+          display: block;
+          font-size: 40px;
+          font-weight: 700;
+          line-height: 1.15;
+          color: #ca2c35;
+        }
+        .b4-lpos {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+        .b4-name {
+          display: block;
+          white-space: nowrap;
+          font-size: 30px;
+          font-weight: 500;
+          line-height: 1.15;
+          color: #5e6a6a;
+        }
+        .b4-name.ort {
+          font-weight: 700;
+          color: #444f4f;
+        }
+        .b4-zeile {
+          font-size: 92px;
+        }
+      </style>
+      <div id="root" data-composition-id="b4-wipperfuerth" data-width="1080" data-height="1920" data-duration="2.8">
+        <div class="b4-kopf">
+          <span class="b4-dach" id="b4-dach" data-var-text="dach">Standort</span>
+          <span class="b4-zeile" id="b4-z1" data-var-text="ort1">Wipperfürth</span>
+        </div>
+        <div class="b4-lpos" style="left: 322.5px; top: 702.9px"><span class="b4-name" id="b4-n0">Hückeswagen</span></div>
+        <div class="b4-lpos" style="left: 339.3px; top: 465.0px"><span class="b4-name" id="b4-n1">Radevormwald</span></div>
+        <div class="b4-lpos" style="left: 811.5px; top: 978.2px"><span class="b4-name" id="b4-n2">Marienheide</span></div>
+        <div class="b4-lpos" style="left: 427.6px; top: 1155.0px"><span class="b4-name" id="b4-n3">Lindlar</span></div>
+        <div class="b4-lpos" style="left: 588.0px; top: 1279.4px"><span class="b4-name" id="b4-n4">Engelskirchen</span></div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#b4-dach", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.36);
+          tl.fromTo("#b4-z1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.43);
+          tl.fromTo("#b4-n0", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.85);
+          tl.fromTo("#b4-n1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.92);
+          tl.fromTo("#b4-n2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.99);
+          tl.fromTo("#b4-n3", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 1.06);
+          tl.fromTo("#b4-n4", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 1.13);
+          tl.to(".b4-name", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 2.50);
+          tl.to("#b4-dach", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 2.55);
+          tl.to("#b4-z1", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 2.59);
+          window.__timelines["b4-wipperfuerth"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

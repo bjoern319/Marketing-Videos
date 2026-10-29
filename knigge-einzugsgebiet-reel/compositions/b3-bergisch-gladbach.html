@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de" data-composition-variables='[{"id": "dach", "type": "string", "label": "Dachzeile", "default": "Hauptsitz"}, {"id": "ort1", "type": "string", "label": "Ort, Zeile 1", "default": "Bergisch Gladbach"}]'>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="b3-bergisch-gladbach-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .b3-kopf {
+          position: absolute;
+          left: 60px;
+          right: 60px;
+          top: 196px;
+          text-align: center;
+        }
+        .b3-zeile {
+          display: block;
+          white-space: nowrap;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.04;
+        }
+        .b3-dach {
+          display: block;
+          font-size: 40px;
+          font-weight: 700;
+          line-height: 1.15;
+          color: #ca2c35;
+        }
+        .b3-lpos {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+        .b3-name {
+          display: block;
+          white-space: nowrap;
+          font-size: 30px;
+          font-weight: 500;
+          line-height: 1.15;
+          color: #5e6a6a;
+        }
+        .b3-name.ort {
+          font-weight: 700;
+          color: #444f4f;
+        }
+        .b3-zeile {
+          font-size: 92px;
+        }
+      </style>
+      <div id="root" data-composition-id="b3-bergisch-gladbach" data-width="1080" data-height="1920" data-duration="2.8">
+        <div class="b3-kopf">
+          <span class="b3-dach" id="b3-dach" data-var-text="dach">Hauptsitz</span>
+          <span class="b3-zeile" id="b3-z1" data-var-text="ort1">Bergisch Gladbach</span>
+        </div>
+        <div class="b3-lpos" style="left: 333.4px; top: 616.2px"><span class="b3-name" id="b3-n0">Burscheid</span></div>
+        <div class="b3-lpos" style="left: 658.0px; top: 781.1px"><span class="b3-name" id="b3-n1">Kürten</span></div>
+        <div class="b3-lpos" style="left: 163.3px; top: 513.1px"><span class="b3-name" id="b3-n2">Leichlingen</span></div>
+        <div class="b3-lpos" style="left: 426.4px; top: 788.7px"><span class="b3-name" id="b3-n3">Odenthal</span></div>
+        <div class="b3-lpos" style="left: 792.2px; top: 1182.5px"><span class="b3-name" id="b3-n4">Overath</span></div>
+        <div class="b3-lpos" style="left: 491.4px; top: 1262.5px"><span class="b3-name" id="b3-n5">Rösrath</span></div>
+        <div class="b3-lpos" style="left: 596.8px; top: 519.0px"><span class="b3-name" id="b3-n6">Wermelskirchen</span></div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#b3-dach", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.36);
+          tl.fromTo("#b3-z1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.43);
+          tl.fromTo("#b3-n0", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.85);
+          tl.fromTo("#b3-n1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.92);
+          tl.fromTo("#b3-n2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.99);
+          tl.fromTo("#b3-n3", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 1.06);
+          tl.fromTo("#b3-n4", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 1.13);
+          tl.fromTo("#b3-n5", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 1.20);
+          tl.fromTo("#b3-n6", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 1.27);
+          tl.to(".b3-name", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 2.50);
+          tl.to("#b3-dach", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 2.55);
+          tl.to("#b3-z1", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 2.59);
+          window.__timelines["b3-bergisch-gladbach"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
