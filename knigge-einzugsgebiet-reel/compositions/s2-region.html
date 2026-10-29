@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s2-region-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .s2-ch,
+        .s2-w {
+          display: inline-block;
+        }
+        .s2-lpos {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+        .s2-name {
+          display: block;
+          white-space: nowrap;
+          font-size: 30px;
+          font-weight: 500;
+          line-height: 1.15;
+          color: #5e6a6a;
+        }
+        .s2-kopf {
+          position: absolute;
+          left: 40px;
+          right: 40px;
+          top: 200px;
+          text-align: center;
+          font-size: 84px;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          line-height: 1.06;
+        }
+        .s2-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+      </style>
+      <div id="root" data-composition-id="s2-region" data-width="1080" data-height="1920" data-duration="1.6">
+        <div class="s2-kopf">
+          <span class="s2-zeile"><span class="s2-w" id="s2-l0w0">Zwischen</span> <span class="s2-w" id="s2-l0w1">Köln</span></span>
+          <span class="s2-zeile"><span class="s2-w" id="s2-l1w0">und</span> <span class="s2-w" id="s2-l1w1">Oberberg</span></span>
+        </div>
+      </div>
+      <script>
+        (function () {
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s2-l0w0", { color: "#d6dad8" }, { color: "#444f4f", duration: 0.22, ease: "power2.out" }, 0.12);
+          tl.fromTo("#s2-l0w0", { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, 0.12);
+          tl.fromTo("#s2-l0w1", { color: "#d6dad8" }, { color: "#ca2c35", duration: 0.22, ease: "power2.out" }, 0.21);
+          tl.fromTo("#s2-l0w1", { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, 0.21);
+          tl.fromTo("#s2-l1w0", { color: "#d6dad8" }, { color: "#444f4f", duration: 0.22, ease: "power2.out" }, 0.30);
+          tl.fromTo("#s2-l1w0", { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, 0.30);
+          tl.fromTo("#s2-l1w1", { color: "#d6dad8" }, { color: "#444f4f", duration: 0.22, ease: "power2.out" }, 0.39);
+          tl.fromTo("#s2-l1w1", { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, 0.39);
+          tl.to(".s2-w", { opacity: 0, filter: "blur(10px)", duration: 0.16, ease: "power2.in", stagger: 0.02 }, 1.36);
+          window.__timelines["s2-region"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

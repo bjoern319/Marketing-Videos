@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-"""Erzeugt das Instagram-Reel „Drei Standorte. Eine Region." (1080×1920, 15 s, 30 fps):
+"""Erzeugt das Instagram-Reel „Drei Facetten“ (Version 2; 1080×1920, 18 s, 30 fps):
 index.html und compositions/*.html.
+
+Idee (STORYLINES.md A, SPEC.md „Version 2“): Die KNIGGE-Bildmarke besteht aus drei Facetten. Sie
+zerfällt, jede Facette fliegt als Standort-Pin auf die Karte (Köln, Bergisch Gladbach, Wipperfürth),
+die Kamera besucht die drei Standorte, ein Zähler zeigt die 19 Städte und Gemeinden, am Ende fliegen
+die Facetten zurück und setzen das Logo wieder zusammen.
 
 Grundlage ist die Einzugsgebiet-Karte aus ../knigge-standorte-gifs: Gemeinden, Standorte, Farben und
 Logo aus tools/build_maps.py, Flächen aus assets/geo/region.json, Beschriftung über
-tools/label_layout.py (jeder Name passt mit Abstand in seine Fläche, mindestens 28 px groß).
+tools/label_layout.py (jeder Name mindestens 28 px, mit Abstand in seiner Fläche).
 
-Ablauf (SPEC.md): Übersicht → Köln → Bergisch Gladbach → Wipperfürth → Übersicht mit Abschluss.
-Die Kamera ist eine Transformation der Karte über die CSS-Variablen --cx, --cy (Kartenpunkt in der
-Bildmitte) und --z (Zoom); die Marker rechnen ihre Bildposition aus denselben Variablen und
-bleiben dadurch gleich groß. Ortsnamen erscheinen nur, während die Kamera steht.
+Kamera: Transformation der Karte über die CSS-Variablen --cx, --cy (Kartenpunkt in der Bildmitte)
+und --z (Zoom); Pins rechnen ihre Bildposition aus denselben Variablen und bleiben gleich groß.
+Ortsnamen erscheinen nur, während die Kamera steht.
 
-Ändern: Texte in TEXT, Zeiten in BEATS, dann `python3 tools/build_reel.py` und `npm run check`.
+Ändern: Texte in TEXT, Zeiten in SCENES, dann `python3 tools/build_reel.py` und `npm run check`.
+(Version 1 – ruhige Kamerafahrt, 15 s – liegt in der Git-Historie: personal-website 4b93cc2, Marketing-Videos 08783a5.)
 """
 import json
 import math
@@ -20,7 +25,7 @@ import sys
 
 import numpy as np
 import shapely
-from shapely.geometry import shape, Point, LineString, box
+from shapely.geometry import shape, Point, box
 from shapely.ops import unary_union, polylabel
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,49 +34,67 @@ sys.path.insert(0, os.path.join(GIFS, "tools"))
 import build_maps  # noqa: E402  Gemeinden, Standorte, Farben, Logo
 import label_layout  # noqa: E402
 
-W, H, FPS, DURATION = 1080, 1920, 30, 15.0
+W, H, FPS, DURATION = 1080, 1920, 30, 18.0
 AX, AY = 540, 850  # Bildpunkt, auf den die Kamera ihren Kartenpunkt legt
-INK, MUTED, RED = "#444f4f", "#5e6a6a", "#ca2c35"
+INK, MUTED, RED, TINT = "#444f4f", "#5e6a6a", "#ca2c35", "#f1d0d3"
 COLORS = build_maps.COLORS
 OFFICES = build_maps.OFFICES
 AREAS = build_maps.MAPS["formats/karte-einzugsgebiet.html"]["areas"]  # (Name, Rolle) – wie im GIF
+OFFICE_AREA = {"koeln": "Köln", "bgl": "Bergisch Gladbach", "wipperfuerth": "Wipperfürth"}
 
-# Reels-Oberfläche: Text nur im Band 168–1330 px, nicht unter der Aktionsleiste rechts
-BAND_TOP, BAND_BOTTOM, RAIL = 168, 1330, box(940, 1000, W, H)
+BAND_TOP, BAND_BOTTOM, RAIL = 168, 1330, box(940, 1000, W, H)  # Instagram-Oberfläche
 
 TEXT = {
     "hook": ["Drei Standorte.", "Eine Region."],
-    "koeln": ("Standort", "Köln"),
-    "bgl": ("Hauptsitz", "Bergisch Gladbach"),
-    "wipperfuerth": ("Standort", "Wipperfürth"),
+    "region": ["Zwischen Köln", "und Oberberg"],
+    "koeln": ("Standort", ["Köln"]),
+    "bgl": ("Hauptsitz", ["Bergisch", "Gladbach"]),
+    "wipperfuerth": ("Standort", ["Wipperfürth"]),
+    "zahl": ("19", "Städte und Gemeinden"),
     "close": ["Ein Ansprechpartner", "für Ihre Immobilie."],
     "url": "knigge-immobilien.de",
 }
 
-# Szenen: id, Start, Dauer, Kameraziel (Gemeinden, die ins Bild sollen), Namen auf der Karte
-BEATS = [
-    {"id": "b1-hook", "start": 0.0, "dur": 2.6},
+SCENES = [
+    {"id": "s1-hook", "start": 0.0, "dur": 2.4},
+    {"id": "s2-region", "start": 2.4, "dur": 1.6},
     # zoom: Faktor über „alles im Rahmen“ hinaus, damit jeder Name in 30 px in seine Fläche passt
-    {"id": "b2-koeln", "start": 2.6, "dur": 2.8, "move": 0.9, "zoom": 1.15, "text": "koeln", "office": "koeln",
+    {"id": "s3-koeln", "start": 4.0, "dur": 2.6, "move": 0.75, "zoom": 1.15, "text": "koeln", "office": "koeln",
      "frame": ["Köln", "Leverkusen", "Pulheim", "Frechen", "Hürth"],
      "names": ["Leverkusen", "Pulheim", "Frechen", "Hürth"]},
-    {"id": "b3-bergisch-gladbach", "start": 5.4, "dur": 2.8, "move": 0.8, "zoom": 1.3, "text": "bgl", "office": "bgl",
+    {"id": "s4-bergisch-gladbach", "start": 6.6, "dur": 2.6, "move": 0.75, "zoom": 1.2, "text": "bgl", "office": "bgl",
      "frame": ["Bergisch Gladbach", "Burscheid", "Kürten", "Leichlingen", "Odenthal", "Overath", "Rösrath",
                "Wermelskirchen"],
      "names": ["Burscheid", "Kürten", "Leichlingen", "Odenthal", "Overath", "Rösrath", "Wermelskirchen"]},
-    {"id": "b4-wipperfuerth", "start": 8.2, "dur": 2.8, "move": 0.8, "zoom": 1.3, "text": "wipperfuerth", "office": "wipperfuerth",
+    {"id": "s5-wipperfuerth", "start": 9.2, "dur": 2.6, "move": 0.75, "zoom": 1.3, "text": "wipperfuerth",
+     "office": "wipperfuerth",
      "frame": ["Wipperfürth", "Hückeswagen", "Radevormwald", "Marienheide", "Lindlar", "Engelskirchen"],
      "names": ["Hückeswagen", "Radevormwald", "Marienheide", "Lindlar", "Engelskirchen"]},
-    {"id": "b5-abschluss", "start": 11.0, "dur": 4.0, "move": 0.9},
+    {"id": "s6-zahl", "start": 11.8, "dur": 2.8, "move": 0.75},
+    {"id": "s7-abschluss", "start": 14.6, "dur": 3.4},
 ]
-OFFICE_NAMES = {"koeln": "Köln", "bgl": "Bergisch Gladbach", "wipperfuerth": "Wipperfürth"}
+BY_ID = {s["id"]: s for s in SCENES}
 
-OVERVIEW = (50, 470, 1030, 1230)  # Rahmen der Gesamtkarte am Anfang
-FINAL = (90, 400, 990, 1000)  # Rahmen der Gesamtkarte im Abschluss (darunter Logo und Adresse)
-BEAT_FRAME = (60, 450, 1020, 1330)  # Rahmen für die Gemeinden einer Standort-Szene (vor dem Zoom-Faktor)
-LABEL, OFFICE_LABEL, MIN_LABEL = 30, 32, 28
-HEAD_TOP, KICKER, HEAD, HEAD_LH = 196, 40, 92, 1.04
-LOGO_W, LOGO_TOP, URL_TOP = 600, 1046, 1212
+OVERVIEW = (50, 470, 1030, 1230)  # Rahmen der Gesamtkarte (Kamera bei --z 1)
+ZAHL_SHIFT = 80  # Gesamtkarte im Zähler-Bild etwas tiefer, Platz für „19“
+LABEL, MIN_LABEL = 30, 28
+TAG_TOP, TAG_H, TITLE_TOP, TITLE, TITLE_LH = 196, 58, 272, 124, 1.0
+
+# Bildmarke: drei Facetten (Koordinaten 0–100 wie im Logo) → Standort
+FACETS = [
+    {"key": "A", "office": "koeln", "pts": [(0, 0), (79.5, 0), (0, 100)], "spin": -18,
+     "grad": ("0", "0", "48.9", "39.6", [("0", "#5e0f18"), ("0.56", "#a4222b"), ("0.8", "#c12a33"), ("0.93", "#ca2c35")])},
+    {"key": "R", "office": "wipperfuerth", "pts": [(79.5, 0), (100, 0), (100, 100), (47.5, 40.2)], "spin": 16,
+     "grad": ("47.5", "40.2", "100", "0", [("0", "#4a0a13"), ("1", "#b0252e")])},
+    {"key": "B", "office": "bgl", "pts": [(0, 100), (47.5, 40.2), (100, 100)], "spin": 12,
+     "grad": ("0", "100", "100", "100", [("0", "#480a12"), ("0.5", "#a2222b"), ("0.85", "#ca2c35")])},
+]
+HOOK_MARK = (540, 880, 330)  # Mitte x, Mitte y, Kantenlänge des großen K im Einstieg
+LOGO_W, LOGO_LEFT, LOGO_TOP = 820, 130, 636  # Logo im Abschluss (Bildmarke + Wortmarke)
+PIN_SCALE = 0.12  # Facettengröße am Pin (Anteil der Marke)
+
+# Marker-Strich (aus der Registry-Komponente marker-highlight, Stil „underline“)
+UNDERLINE_D = "M 2 7 C 20 4.5, 46 8.5, 66 6 C 80 4.5, 92 7.5, 98 5.5"
 
 
 def load_region():
@@ -82,7 +105,7 @@ def load_region():
 
 
 class Base:
-    """Kartenkoordinaten: Bildpunkte der Gesamtansicht am Anfang (Kamera dort: --z 1)."""
+    """Kartenkoordinaten = Bildpunkte der Gesamtansicht (Kamera dort: --z 1)."""
 
     def __init__(self, bounds, rect):
         minx, miny, maxx, maxy = bounds
@@ -109,43 +132,58 @@ class Cam:
     def geom(self, g):
         return shapely.transform(g, lambda c: np.column_stack(self.pt(c[:, 0], c[:, 1])))
 
+    def js(self):
+        return f'"--cx": {self.cx:.2f}, "--cy": {self.cy:.2f}, "--z": {self.z:.4f}'
+
     @classmethod
-    def fit(cls, g, rect):
+    def fit(cls, g, rect, zoom=1.0):
         x0, y0, x1, y1 = g.bounds
-        z = min((rect[2] - rect[0]) / (x1 - x0), (rect[3] - rect[1]) / (y1 - y0))
+        z = min((rect[2] - rect[0]) / (x1 - x0), (rect[3] - rect[1]) / (y1 - y0)) * zoom
         rx, ry = (rect[0] + rect[2]) / 2, (rect[1] + rect[3]) / 2
         return cls((x0 + x1) / 2 - (rx - AX) / z, (y0 + y1) / 2 - (ry - AY) / z, z)
 
 
-def path(g, nd=1):
+def path(g):
     polys = list(g.geoms) if g.geom_type == "MultiPolygon" else [g]
-    out = []
-    for p in polys:
-        for ring in [p.exterior, *p.interiors]:
-            out.append("M" + " L".join(f"{x:.{nd}f} {y:.{nd}f}" for x, y in ring.coords) + " Z")
-    return " ".join(out)
+    return " ".join("M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in ring.coords) + " Z"
+                    for p in polys for ring in [p.exterior, *p.interiors])
 
 
-def fit_size(measure, lines, size, weight, width):
-    """Größte Schrift ≤ size, bei der jede Zeile höchstens width breit ist."""
-    while size > MIN_LABEL:
-        if all(measure.ink(t, size, weight)[2] - measure.ink(t, size, weight)[0] <= width for t in lines):
-            return size
-        size -= 2
-    return size
+def centroid(pts):
+    """Flächenschwerpunkt eines Polygons (Koordinaten 0–100)."""
+    a = cx = cy = 0.0
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:] + pts[:1]):
+        c = x0 * y1 - x1 * y0
+        a += c
+        cx += (x0 + x1) * c
+        cy += (y0 + y1) * c
+    return cx / (3 * a), cy / (3 * a)
 
 
-def head_lines(measure, text):
-    """Ortsname in einer Zeile, wenn er passt, sonst an Leerzeichen umbrechen."""
-    ink = measure.ink(text, HEAD, 800)
-    return [text] if ink[2] - ink[0] <= 940 else text.split(" ", 1)
+def bezier_length(d):
+    """Länge des Marker-Pfads (nur M und C) – für das Strichmuster, ohne getTotalLength im Browser."""
+    nums = [float(t) for t in d.replace("M", " ").replace("C", " ").replace(",", " ").split()]
+    pts = list(zip(nums[0::2], nums[1::2]))
+    length, cur = 0.0, pts[0]
+    for i in range(1, len(pts), 3):
+        p1, p2, p3 = pts[i], pts[i + 1], pts[i + 2]
+        prev = cur
+        for k in range(1, 101):
+            t = k / 100
+            x = (1 - t) ** 3 * cur[0] + 3 * (1 - t) ** 2 * t * p1[0] + 3 * (1 - t) * t ** 2 * p2[0] + t ** 3 * p3[0]
+            y = (1 - t) ** 3 * cur[1] + 3 * (1 - t) ** 2 * t * p1[1] + 3 * (1 - t) * t ** 2 * p2[1] + t ** 3 * p3[1]
+            length += math.hypot(x - prev[0], y - prev[1])
+            prev = (x, y)
+        cur = p3
+    return length
 
 
-def head_bottom(n_lines):
-    return HEAD_TOP + KICKER * 1.15 + n_lines * HEAD * HEAD_LH
+def ink_w(measure, text, size, weight):
+    i = measure.ink(text, size, weight)
+    return i[2] - i[0]
 
 
-def place_names(measure, cam, base_areas, names, office_key, obstacles, extra_office=None):
+def place_names(measure, cam, base_areas, names, obstacles):
     items = []
     for n in names:
         a = cam.geom(base_areas[n]).buffer(0)
@@ -153,28 +191,15 @@ def place_names(measure, cam, base_areas, names, office_key, obstacles, extra_of
         part = max(getattr(vis, "geoms", [vis]), key=lambda p: p.area) if not vis.is_empty else a
         want = polylabel(part, 1.0) if part.geom_type == "Polygon" else part.representative_point()
         items.append({"text": n, "size": LABEL, "weight": 500, "area": a, "want": (want.x, want.y), "office": None})
-    for key in extra_office or []:
-        ox, oy = extra_office[key]
-        home = next((cam.geom(base_areas[n]).buffer(0) for n, _ in AREAS
-                     if cam.geom(base_areas[n]).contains(Point(ox, oy))), None)
-        items.append({"text": OFFICE_NAMES[key], "size": OFFICE_LABEL, "weight": 700, "area": home,
-                      "want": (ox, oy + 46), "office": (ox, oy)})
     res = label_layout.place(items, obstacles, W, H, measure, min_size=MIN_LABEL)
-    return [(it, r) for it, r in zip(items, res)]
-
-
-def common_obstacles(cam, rhein_base, markers_px):
-    obs = [box(0, 0, W, BAND_TOP), box(0, BAND_BOTTOM, W, H), RAIL]
-    obs += [Point(x, y).buffer(30) for x, y in markers_px]
-    obs += [cam.geom(ln).buffer(6) for ln in rhein_base]
-    return obs
+    return list(zip(items, res))
 
 
 # ------------------------------------------------------------------------------------------------
-# HTML
+# HTML-Bausteine
 # ------------------------------------------------------------------------------------------------
 SCENE_HEAD = '''<!doctype html>
-<html lang="de"{vars}>
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
   </head>
@@ -195,6 +220,7 @@ SCENE_HEAD = '''<!doctype html>
 SCENE_TAIL = '''      </div>
       <script>
         (function () {{
+{pre}
           const tl = gsap.timeline({{ paused: true }});
 {js}
           window.__timelines["{id}"] = tl;
@@ -205,26 +231,34 @@ SCENE_TAIL = '''      </div>
 </html>
 '''
 
-TEXT_CSS = '''        .{p}-kopf {{
-          position: absolute;
-          left: 60px;
-          right: 60px;
-          top: {top}px;
-          text-align: center;
-        }}
-        .{p}-zeile {{
-          display: block;
-          white-space: nowrap;
-          font-weight: 800;
-          letter-spacing: -0.03em;
-          line-height: {lh};
-        }}
-        .{p}-dach {{
-          display: block;
-          font-size: {kicker}px;
-          font-weight: 700;
-          line-height: 1.15;
-          color: {red};
+
+def scene(sid, css, body, js, pre=""):
+    s = BY_ID[sid]
+    return (SCENE_HEAD.format(id=sid, ink=INK, css=css, W=W, H=H, dur=s["dur"]) + body
+            + SCENE_TAIL.format(pre=pre, js="\n".join("          " + j for j in js), id=sid))
+
+
+def words_html(p, k, line, cls="w"):
+    return " ".join(f'<span class="{p}-{cls}" id="{p}-l{k}w{i}">{w}</span>' for i, w in enumerate(line.split(" ")))
+
+
+def letters_html(p, k, line):
+    return "".join(f'<span class="{p}-ch" id="{p}-l{k}c{i}">{"&nbsp;" if ch == " " else ch}</span>'
+                   for i, ch in enumerate(line))
+
+
+def facet_svg(f, gid):
+    x1, y1, x2, y2, stops = f["grad"]
+    st = "".join(f'<stop offset="{o}" stop-color="{c}" />' for o, c in stops)
+    pts = " ".join(f"{x},{y}" for x, y in f["pts"])
+    return (f'<svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="{gid}" gradientUnits="userSpaceOnUse" '
+            f'x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}">{st}</linearGradient></defs>'
+            f'<polygon points="{pts}" fill="url(#{gid})" /></svg>')
+
+
+BASE_TEXT_CSS = '''        .{p}-ch,
+        .{p}-w {{
+          display: inline-block;
         }}
         .{p}-lpos {{
           position: absolute;
@@ -238,34 +272,7 @@ TEXT_CSS = '''        .{p}-kopf {{
           line-height: 1.15;
           color: {muted};
         }}
-        .{p}-name.ort {{
-          font-weight: 700;
-          color: {ink};
-        }}
 '''
-
-
-def variables(spec):
-    return " data-composition-variables='" + json.dumps(spec, ensure_ascii=False) + "'"
-
-
-def blur_in(sel, t, dur=0.15):
-    return (f'          tl.fromTo("{sel}", {{ opacity: 0, filter: "blur(8px)" }}, '
-            f'{{ opacity: 1, filter: "blur(0px)", duration: {dur}, ease: "power4.out" }}, {t:.2f});')
-
-
-def blur_out(sel, t, dur=0.15):
-    return (f'          tl.to("{sel}", {{ opacity: 0, filter: "blur(8px)", duration: {dur}, ease: "power2.in" }}, {t:.2f});')
-
-
-def name_divs(p, placed):
-    out = []
-    for k, (it, r) in enumerate(placed):
-        cls = f"{p}-name ort" if it["office"] else f"{p}-name"
-        fs = f' style="font-size: {r["size"]}px"' if r["size"] != it["size"] else ""
-        out.append(f'        <div class="{p}-lpos" style="left: {r["x"]:.1f}px; top: {r["y"]:.1f}px">'
-                   f'<span class="{cls}" id="{p}-n{k}"{fs}>{it["text"]}</span></div>')
-    return "\n".join(out)
 
 
 def build():
@@ -280,43 +287,55 @@ def build():
         for s in getattr(seg, "geoms", [seg]):
             if s.geom_type == "LineString" and s.length > 0.01:
                 rhein_base.append(base.geom(s))
-    office_base = {k: base(*OFFICES[k]) for k in OFFICE_NAMES}
-
-    cams = {"b1-hook": Cam(AX, AY, 1.0)}
-    for b in BEATS:
-        if "frame" in b:
-            c = Cam.fit(unary_union([base_areas[n] for n in b["frame"]]), BEAT_FRAME)
-            cams[b["id"]] = Cam(c.cx, c.cy, c.z * b["zoom"])
-    cams["b5-abschluss"] = Cam.fit(base_union, FINAL)
-
+    office_base = {k: base(*OFFICES[k]) for k in OFFICE_AREA}
     measure = label_layout.Measure()
-    report = []
-    files = {}
+    report, files = [], {}
 
-    # --- Karte: Flächen, Rhein, Marker, Kamera -------------------------------------------------
+    # Kameras
+    cam_over = Cam(AX, AY, 1.0)
+    cam_zahl = Cam(AX, AY - ZAHL_SHIFT, 1.0)
+    head_bottom = {}
+    cams = {}
+    for s in SCENES:
+        if "frame" in s:
+            n_lines = len(TEXT[s["text"]][1])
+            head_bottom[s["id"]] = TITLE_TOP + n_lines * TITLE * TITLE_LH
+            frame = (60, head_bottom[s["id"]] + 40, 1020, 1330)
+            cams[s["id"]] = Cam.fit(unary_union([base_areas[n] for n in s["frame"]]), frame, s["zoom"])
+    # Abschluss: die Karte schrumpft um ihren Schwerpunkt in die Bildmarke – als Bildtransformation, nicht
+    # über die Kamera (deren Mitte und Zoom getrennt zu interpolieren ließe die Karte erst seitlich wegziehen)
+    k_logo = LOGO_W / 452
+    mark = 100 * k_logo
+    mark_cx, mark_cy = LOGO_LEFT + mark / 2, LOGO_TOP + mark / 2
+    shrink = 0.16
+    ucx, ucy = cam_zahl.pt(base_union.centroid.x, base_union.centroid.y)
+
+    # ------------------------------------------------------------------ Karte
     roles = dict(AREAS)
+    names = list(base_areas)
+    bgl = base_areas["Bergisch Gladbach"].centroid
+    dist = {n: base_areas[n].centroid.distance(bgl) for n in names}
+    dmax = max(dist.values()) or 1
     area_svg = "\n".join(
         f'            <path class="karte-area{" focus" if roles[n] == "focus" else ""}" id="karte-a{i}" d="{path(g)}" />'
         for i, (n, g) in enumerate(base_areas.items()))
-    # Rhein doppelt: gestrichelt zum Einzeichnen (nur bei Zoom 1), dann die durchgehende Linie
-    # (ein Strichmuster würde mit non-scaling-stroke beim Zoomen falsch skalieren)
     rhein_d = ["M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in ln.coords) for ln in rhein_base]
     rhein_svg = "\n".join(f'            <path class="karte-rhein draw" id="karte-rd{k}" pathLength="100" d="{d}" />\n'
-                           f'            <path class="karte-rhein ganz" id="karte-rh{k}" d="{d}" />'
-                           for k, d in enumerate(rhein_d))
-    marker_html = []
-    for k, key in enumerate(OFFICE_NAMES):
+                          f'            <path class="karte-rhein ganz" id="karte-rh{k}" d="{d}" />' for k, d in enumerate(rhein_d))
+    pins = []
+    for k, key in enumerate(OFFICE_AREA):
         mx, my = office_base[key]
-        marker_html.append(f'''        <div class="karte-mpos" style="transform: translate(calc({AX}px + ({mx:.1f} - var(--cx)) * var(--z) * 1px), calc({AY}px + ({my:.1f} - var(--cy)) * var(--z) * 1px))">
-          <svg class="karte-ring" viewBox="-160 -160 320 320" aria-hidden="true"><circle id="karte-r{k}" cx="0" cy="0" r="20" stroke-width="0" /></svg>
-          <div class="karte-marker" id="karte-m{k}">
-            <svg viewBox="-22 -22 44 44" aria-hidden="true"><circle cx="0" cy="0" r="17" fill="#ffffff" stroke="{INK}" stroke-width="5" /><circle cx="0" cy="0" r="7" fill="{RED}" /></svg>
-          </div>
-        </div>''')
-    karte_css = f'''        #karte-world {{
+        pins.append(f'''          <div class="karte-mpos" style="transform: translate(calc({AX}px + ({mx:.1f} - var(--cx)) * var(--z) * 1px), calc({AY}px + ({my:.1f} - var(--cy)) * var(--z) * 1px))">
+            <svg class="karte-ring" viewBox="-170 -170 340 340" aria-hidden="true"><circle id="karte-r{k}" cx="0" cy="0" r="20" stroke-width="0" /></svg>
+            <div class="karte-pin" id="karte-p{k}">
+              <svg viewBox="-24 -24 48 48" aria-hidden="true"><circle cx="0" cy="0" r="19" fill="{RED}" stroke="#ffffff" stroke-width="6" /><circle cx="0" cy="0" r="6.5" fill="#ffffff" /></svg>
+            </div>
+          </div>''')
+    css = f'''        #karte-world {{
           position: absolute;
           inset: 0;
           background: #ffffff;
+          transform-origin: {ucx:.1f}px {ucy:.1f}px;
         }}
         #karte-svg {{
           position: absolute;
@@ -336,6 +355,9 @@ def build():
           stroke-width: 3;
           stroke-linejoin: round;
           vector-effect: non-scaling-stroke;
+          transform-box: fill-box;
+          transform-origin: 50% 50%;
+          transform: scale(var(--s, 0));
         }}
         .karte-area.focus {{
           fill: {COLORS["focus"]};
@@ -364,197 +386,442 @@ def build():
         }}
         .karte-ring {{
           position: absolute;
-          left: -160px;
-          top: -160px;
-          width: 320px;
-          height: 320px;
+          left: -170px;
+          top: -170px;
+          width: 340px;
+          height: 340px;
           overflow: visible;
         }}
         .karte-ring circle {{
           fill: none;
           stroke: {RED};
         }}
-        .karte-marker {{
+        .karte-pin {{
           position: absolute;
-          left: -22px;
-          top: -22px;
-          width: 44px;
-          height: 44px;
+          left: -24px;
+          top: -24px;
+          width: 48px;
+          height: 48px;
+          opacity: 0;
         }}
-        .karte-marker svg {{
+        .karte-pin svg {{
           display: block;
           width: 100%;
           height: 100%;
           overflow: visible;
         }}'''
-    A = cams["b1-hook"]
-    js = [f'          const world = document.getElementById("karte-world");',
-          f'          tl.set(world, {{ "--cx": {A.cx:.2f}, "--cy": {A.cy:.2f}, "--z": {A.z:.4f} }}, 0);',
-          '          // Rhein zeichnet sich ein, danach übernimmt die durchgehende Linie',
-          '          tl.fromTo(".karte-rhein.draw", { strokeDashoffset: 110 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 0.17);',
-          '          tl.set(".karte-rhein.ganz", { opacity: 1 }, 1.2);',
-          '          tl.set(".karte-rhein.draw", { opacity: 0 }, 1.2);',
-          '          // drei Standorte fallen nacheinander, jeder pulst einmal']
+    js = ['const world = document.getElementById("karte-world");',
+          f'tl.set(world, {{ {cam_over.js()} }}, 0);',
+          '// Gemeinden wachsen von Bergisch Gladbach aus auf']
+    for i, n in enumerate(names):
+        js.append(f'tl.fromTo("#karte-a{i}", {{ "--s": 0 }}, {{ "--s": 1, duration: 0.5, ease: "back.out(1.25)" }}, {1.1 + dist[n] / dmax * 0.6:.3f});')
+    js += ['// Rhein zeichnet sich ein, danach übernimmt die durchgehende Linie',
+           'tl.fromTo(".karte-rhein.draw", { strokeDashoffset: 110 }, { strokeDashoffset: 0, duration: 0.9, ease: "power1.inOut" }, 1.45);',
+           'tl.set(".karte-rhein.ganz", { opacity: 1 }, 2.38);',
+           'tl.set(".karte-rhein.draw", { opacity: 0 }, 2.38);',
+           '// Facetten landen als Pins (Szene s1-hook), Ringe pulsen']
 
     def pulse(k, t, first):
-        return [f'          tl.fromTo("#karte-r{k}", {{ attr: {{ r: 20 }}, strokeWidth: 0 }}, {{ strokeWidth: 5, duration: 0.04, ease: "none", immediateRender: {"true" if first else "false"} }}, {t:.2f});',
-                f'          tl.to("#karte-r{k}", {{ attr: {{ r: 130 }}, strokeWidth: 0, duration: 1.2, ease: "power2.out" }}, {t + 0.04:.2f});']
+        return [f'tl.fromTo("#karte-r{k}", {{ attr: {{ r: 20 }}, strokeWidth: 0 }}, {{ strokeWidth: 6, duration: 0.04, ease: "none", immediateRender: {"true" if first else "false"} }}, {t:.2f});',
+                f'tl.to("#karte-r{k}", {{ attr: {{ r: 140 }}, strokeWidth: 0, duration: 1.1, ease: "power2.out" }}, {t + 0.04:.2f});']
 
     for k in range(3):
-        t = 0.47 + k * 0.23
-        js.append(f'          tl.fromTo("#karte-m{k}", {{ y: -40, scale: 0 }}, {{ y: 0, scale: 1, duration: 0.47, ease: "back.out(1.7)" }}, {t:.2f});')
-        js += pulse(k, t + 0.4, True)
-    js.append('          // Kamera: Köln → Bergisch Gladbach → Wipperfürth → Übersicht')
-    for b in BEATS[1:]:
-        c = cams[b["id"]]
-        js.append(f'          tl.to(world, {{ "--cx": {c.cx:.2f}, "--cy": {c.cy:.2f}, "--z": {c.z:.4f}, duration: {b["move"]}, ease: "power2.inOut" }}, {b["start"]:.2f});')
-    t_end = BEATS[-1]["start"] + BEATS[-1]["move"]
-    js.append('          // Abschluss: alle drei Standorte pulsen gemeinsam')
+        js.append(f'tl.fromTo("#karte-p{k}", {{ opacity: 0, scale: 0.45 }}, {{ opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }}, {2.16 + 0.04 * k:.2f});')
+        js += pulse(k, 2.2 + 0.04 * k, True)
+    js.append('// Kamera: Köln → Bergisch Gladbach → Wipperfürth → Übersicht')
+    for s in SCENES[2:5]:
+        js.append(f'tl.to(world, {{ {cams[s["id"]].js()}, duration: {s["move"]}, ease: "power3.inOut" }}, {s["start"]:.2f});')
+        # Standort-Gemeinde färbt sich, solange ihre Szene läuft
+        a = names.index(OFFICE_AREA[s["office"]])
+        t_in, t_out = s["start"] + s["move"] - 0.2, s["start"] + s["dur"] - 0.3
+        js.append(f'tl.fromTo("#karte-a{a}", {{ fill: "{COLORS["focus"]}" }}, {{ fill: "{TINT}", duration: 0.3, ease: "power2.out", immediateRender: false }}, {t_in:.2f});')
+        js.append(f'tl.to("#karte-a{a}", {{ fill: "{COLORS["focus"]}", duration: 0.25, ease: "power2.in" }}, {t_out:.2f});')
+        # ihr Pin pulst, sobald die Kamera steht
+        js += pulse(list(OFFICE_AREA).index(s["office"]), s["start"] + s["move"] - 0.05, False)
+    z = BY_ID["s6-zahl"]
+    js.append(f'tl.to(world, {{ {cam_zahl.js()}, duration: {z["move"]}, ease: "power3.inOut" }}, {z["start"]:.2f});')
+    js.append('// Zähler-Welle: die 19 Gemeinden leuchten nacheinander auf')
+    t_wave = z["start"] + 0.65
+    for i, n in enumerate(sorted(names, key=lambda n: dist[n])):
+        a = names.index(n)
+        base_fill = COLORS["focus"] if roles[n] == "focus" else COLORS["area"]
+        t = t_wave + i * 0.06
+        js.append(f'tl.fromTo("#karte-a{a}", {{ fill: "{base_fill}" }}, {{ fill: "{TINT}", duration: 0.14, ease: "power2.out", immediateRender: false }}, {t:.2f});')
+        js.append(f'tl.to("#karte-a{a}", {{ fill: "{base_fill}", duration: 0.5, ease: "power1.inOut" }}, {t + 0.5:.2f});')
+    e = BY_ID["s7-abschluss"]
+    js.append('// Abschluss: Pins heben ab (die Facetten übernehmen), die Karte schrumpft in die Bildmarke')
     for k in range(3):
-        js += pulse(k, t_end + k * 0.12, False)
+        js.append(f'tl.to("#karte-p{k}", {{ opacity: 0, scale: 0.4, duration: 0.12, ease: "power2.in" }}, {e["start"]:.2f});')
+    js.append(f'tl.to(world, {{ x: {mark_cx - ucx:.1f}, y: {mark_cy - ucy:.1f}, scale: {shrink}, duration: 0.7, ease: "power2.inOut" }}, {e["start"]:.2f});')
+    js.append(f'tl.to("#karte-svg", {{ opacity: 0, duration: 0.5, ease: "power1.in" }}, {e["start"] + 0.15:.2f});')
     files["compositions/karte.html"] = (
-        SCENE_HEAD.format(vars="", id="karte", ink=INK, css=karte_css, W=W, H=H, dur=DURATION)
-        + f'''        <div id="karte-world" style="--cx: {A.cx:.2f}; --cy: {A.cy:.2f}; --z: {A.z:.4f}">
+        SCENE_HEAD.format(id="karte", ink=INK, css=css, W=W, H=H, dur=DURATION)
+        + f'''        <div id="karte-world" style="{cam_over.js().replace('"', '').replace(',', ';')}">
           <svg id="karte-svg" viewBox="0 0 {W} {H}" aria-hidden="true" data-layout-allow-overflow>
             <g id="karte-cam">
 {area_svg}
 {rhein_svg}
             </g>
           </svg>
-{chr(10).join(marker_html)}
+{chr(10).join(pins)}
         </div>
-''' + SCENE_TAIL.format(js="\n".join(js), id="karte"))
+''' + SCENE_TAIL.format(pre="", js="\n".join("          " + j for j in js), id="karte"))
 
-    def marker_px(cam):
-        return [cam.pt(*office_base[k]) for k in OFFICE_NAMES]
-
-    # --- b1: Einstieg ---------------------------------------------------------------------------
-    hook_size = fit_size(measure, TEXT["hook"], 96, 800, 940)
-    css = TEXT_CSS.format(p="b1", top=HEAD_TOP, lh=1.04, kicker=KICKER, red=RED, label=LABEL, muted=MUTED, ink=INK)
-    css += f'''        .b1-zeile {{
-          font-size: {hook_size}px;
-        }}
-        .b1-zeile.akzent {{
-          color: {RED};
-        }}'''
-    vs = [{"id": "zeile1", "type": "string", "label": "Einstieg, Zeile 1", "default": TEXT["hook"][0]},
-          {"id": "zeile2", "type": "string", "label": "Einstieg, Zeile 2", "default": TEXT["hook"][1]}]
-    body = f'''        <div class="b1-kopf">
-          <span class="b1-zeile" id="b1-z1" data-var-text="zeile1">{TEXT["hook"][0]}</span>
-          <span class="b1-zeile akzent" id="b1-z2" data-var-text="zeile2">{TEXT["hook"][1]}</span>
-        </div>
-'''
-    b = BEATS[0]
-    js = [blur_out("#b1-z1", b["dur"] - 0.2), blur_out("#b1-z2", b["dur"] - 0.15)]
-    files["compositions/b1-hook.html"] = (SCENE_HEAD.format(vars=variables(vs), id="b1-hook", ink=INK, css=css, W=W, H=H, dur=b["dur"])
-                                          + body + SCENE_TAIL.format(js="\n".join(js), id="b1-hook"))
-
-    # --- b2–b4: Standorte -----------------------------------------------------------------------
-    for b in BEATS[1:4]:
-        p = b["id"].split("-")[0]
-        kicker, ort = TEXT[b["text"]]
-        lines = head_lines(measure, ort)
-        cam = cams[b["id"]]
-        obs = common_obstacles(cam, rhein_base, marker_px(cam))
-        obs.append(box(0, 0, W, head_bottom(len(lines)) + 16))
-        placed = place_names(measure, cam, base_areas, b["names"], b["office"], obs)
-        report.append((b["id"], placed))
-        css = TEXT_CSS.format(p=p, top=HEAD_TOP, lh=HEAD_LH, kicker=KICKER, red=RED, label=LABEL, muted=MUTED, ink=INK)
-        css += f'''        .{p}-zeile {{
-          font-size: {HEAD}px;
-        }}'''
-        vs = [{"id": "dach", "type": "string", "label": "Dachzeile", "default": kicker}]
-        vs += [{"id": f"ort{i + 1}", "type": "string", "label": f"Ort, Zeile {i + 1}", "default": ln} for i, ln in enumerate(lines)]
-        heads = "\n".join(f'          <span class="{p}-zeile" id="{p}-z{i + 1}" data-var-text="ort{i + 1}">{ln}</span>' for i, ln in enumerate(lines))
-        body = f'''        <div class="{p}-kopf">
-          <span class="{p}-dach" id="{p}-dach" data-var-text="dach">{kicker}</span>
-{heads}
-        </div>
-{name_divs(p, placed)}
-'''
-        t_head = b["move"] * 0.45  # Ortsname steht fest im Bild – er darf schon während der Fahrt kommen
-        t_names = b["move"] + 0.05
-        t_out = b["dur"] - 0.25
-        js = [blur_in(f"#{p}-dach", t_head)]
-        js += [blur_in(f"#{p}-z{i + 1}", t_head + 0.07 * (i + 1)) for i in range(len(lines))]
-        js += [blur_in(f"#{p}-n{k}", t_names + 0.07 * k) for k in range(len(placed))]
-        js += [blur_out(f".{p}-name", t_out - 0.05), blur_out(f"#{p}-dach", t_out), ]
-        js += [blur_out(f"#{p}-z{i + 1}", t_out + 0.04 * (i + 1)) for i in range(len(lines))]
-        files[f"compositions/{b['id']}.html"] = (SCENE_HEAD.format(vars=variables(vs), id=b["id"], ink=INK, css=css, W=W, H=H, dur=b["dur"])
-                                                 + body + SCENE_TAIL.format(js="\n".join(js), id=b["id"]))
-
-    # --- b5: Abschluss --------------------------------------------------------------------------
-    b = BEATS[4]
-    cam = cams[b["id"]]
-    close_size = fit_size(measure, TEXT["close"], 66, 800, 940)
-    lh = LOGO_W * 100 / 452
-    obs = common_obstacles(cam, rhein_base, marker_px(cam))
-    obs += [box(0, 0, W, HEAD_TOP + 2 * close_size * 1.1 + 20), box(0, LOGO_TOP - 20, W, H)]
-    placed = place_names(measure, cam, base_areas, [], None, obs, extra_office=dict(zip(OFFICE_NAMES, marker_px(cam))))
-    report.append((b["id"], placed))
-    css = TEXT_CSS.format(p="b5", top=HEAD_TOP, lh=1.1, kicker=KICKER, red=RED, label=OFFICE_LABEL, muted=MUTED, ink=INK)
-    css += f'''        .b5-zeile {{
-          font-size: {close_size}px;
-        }}
-        .b5-zeile.akzent {{
-          color: {RED};
-        }}
-        .b5-logo {{
+    # ------------------------------------------------------------------ s1: Einstieg + Facetten
+    p = "s1"
+    hook_size = 104
+    while max(ink_w(measure, t, hook_size, 900) for t in TEXT["hook"]) > 960:
+        hook_size -= 2
+    hx, hy, hs = HOOK_MARK
+    mx0, my0 = hx - hs / 2, hy - hs / 2
+    line2_w = ink_w(measure, TEXT["hook"][1], hook_size, 900)
+    ul_len = bezier_length(UNDERLINE_D)
+    ul_top = 196 + hook_size * 1.04 * 2 - 6
+    facets, fjs = [], []
+    for f in FACETS:
+        cx, cy = centroid(f["pts"])
+        px, py = office_base[f["office"]]  # Kamera bei --z 1: Kartenpunkt = Bildpunkt
+        sx, sy = mx0 + cx / 100 * hs, my0 + cy / 100 * hs  # Schwerpunkt im Bild
+        dx, dy = cx - 50, cy - 50
+        norm = math.hypot(dx, dy) or 1
+        # Drehpunkt = Schwerpunkt der Facette, damit sie genau auf dem Pin landet
+        facets.append(f'        <div class="{p}-facet" id="{p}-f{f["key"]}" style="left: {mx0:.1f}px; top: {my0:.1f}px; width: {hs}px; height: {hs}px; transform-origin: {cx:.2f}% {cy:.2f}%">'
+                      f'{facet_svg(f, p + "-g" + f["key"])}</div>')
+        fjs += [f'tl.fromTo("#{p}-f{f["key"]}", {{ x: 0, y: 0, rotation: 0, scale: 1 }}, {{ x: {dx / norm * 30:.1f}, y: {dy / norm * 30:.1f}, rotation: {f["spin"] * 0.4:.1f}, duration: 0.3, ease: "expo.out" }}, 1.0);',
+                f'tl.to("#{p}-f{f["key"]}", {{ x: {px - sx:.1f}, duration: 0.7, ease: "power2.inOut" }}, 1.45);',
+                f'tl.to("#{p}-f{f["key"]}", {{ y: {py - sy:.1f}, duration: 0.7, ease: "power3.in" }}, 1.45);',
+                f'tl.to("#{p}-f{f["key"]}", {{ scale: {PIN_SCALE}, rotation: {f["spin"]}, duration: 0.7, ease: "power2.in" }}, 1.45);',
+                f'tl.to("#{p}-f{f["key"]}", {{ opacity: 0, duration: 0.08, ease: "none" }}, 2.15);']
+    css = BASE_TEXT_CSS.format(p=p, label=LABEL, muted=MUTED) + f'''        .{p}-kopf {{
           position: absolute;
-          left: {(W - LOGO_W) / 2:.0f}px;
-          top: {LOGO_TOP}px;
-          width: {LOGO_W}px;
-          height: {lh:.1f}px;
+          left: 40px;
+          right: 40px;
+          top: 196px;
+          text-align: center;
+          font-size: {hook_size}px;
+          font-weight: 900;
+          letter-spacing: -0.035em;
+          line-height: 1.04;
         }}
-        .b5-logo svg {{
+        .{p}-zeile {{
+          display: block;
+          white-space: nowrap;
+        }}
+        .{p}-zeile.akzent {{
+          color: {RED};
+        }}
+        .{p}-strich {{
+          position: absolute;
+          left: {540 - line2_w * 0.54:.1f}px;
+          top: {ul_top:.1f}px;
+          width: {line2_w * 1.08:.1f}px;
+          height: 30px;
+          overflow: visible;
+        }}
+        .{p}-strich path {{
+          fill: none;
+          stroke: {RED};
+          stroke-width: 4.5;
+          stroke-linecap: round;
+          stroke-dasharray: {ul_len:.2f};
+          stroke-dashoffset: {ul_len:.2f};
+          opacity: 0;
+        }}
+        .{p}-facet {{
+          position: absolute;
+        }}
+        .{p}-facet svg {{
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }}'''
+    body = f'''        <div class="{p}-kopf">
+          <span class="{p}-zeile" id="{p}-z1">{TEXT["hook"][0]}</span>
+          <span class="{p}-zeile akzent" id="{p}-z2">{words_html(p, 2, TEXT["hook"][1])}</span>
+        </div>
+        <svg class="{p}-strich" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path id="{p}-ul" d="{UNDERLINE_D}" /></svg>
+{chr(10).join(facets)}
+'''
+    js = [f'tl.fromTo("#{p}-l2w{i}", {{ opacity: 0, scale: 1.25, filter: "blur(10px)" }}, {{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.18, ease: "expo.out" }}, {0.33 + 0.09 * i:.2f});'
+          for i in range(len(TEXT["hook"][1].split(" ")))]
+    js += [f'tl.set("#{p}-ul", {{ opacity: 1 }}, 0.72);',
+           f'tl.fromTo("#{p}-ul", {{ strokeDashoffset: {ul_len:.2f} }}, {{ strokeDashoffset: 0, duration: 0.45, ease: "power2.inOut" }}, 0.72);']
+    js += fjs
+    js += [f'tl.to("#{p}-z1", {{ opacity: 0, filter: "blur(10px)", duration: 0.18, ease: "power2.in" }}, 2.08);',
+           f'tl.to(["#{p}-z2", "#{p}-ul"], {{ opacity: 0, filter: "blur(10px)", duration: 0.18, ease: "power2.in" }}, 2.14);']
+    files[f"compositions/{BY_ID['s1-hook']['id']}.html"] = scene("s1-hook", css, body, js)
+
+    # ------------------------------------------------------------------ s2: Region
+    p = "s2"
+    css = BASE_TEXT_CSS.format(p=p, label=LABEL, muted=MUTED) + f'''        .{p}-kopf {{
+          position: absolute;
+          left: 40px;
+          right: 40px;
+          top: 200px;
+          text-align: center;
+          font-size: 84px;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          line-height: 1.06;
+        }}
+        .{p}-zeile {{
+          display: block;
+          white-space: nowrap;
+        }}'''
+    body = f'''        <div class="{p}-kopf">
+''' + "\n".join(f'          <span class="{p}-zeile">{words_html(p, k, ln)}</span>' for k, ln in enumerate(TEXT["region"])) + '''
+        </div>
+'''
+    js, t = [], 0.12
+    for k, ln in enumerate(TEXT["region"]):
+        for i, _ in enumerate(ln.split(" ")):
+            js.append(f'tl.fromTo("#{p}-l{k}w{i}", {{ color: "#d6dad8" }}, {{ color: "{RED if k == 0 and i == 1 else INK}", duration: 0.22, ease: "power2.out" }}, {t:.2f});')
+            js.append(f'tl.fromTo("#{p}-l{k}w{i}", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.08, ease: "none" }}, {t:.2f});')
+            t += 0.09
+    js.append(f'tl.to(".{p}-w", {{ opacity: 0, filter: "blur(10px)", duration: 0.16, ease: "power2.in", stagger: 0.02 }}, {BY_ID["s2-region"]["dur"] - 0.24:.2f});')
+    files["compositions/s2-region.html"] = scene("s2-region", css, body, js)
+
+    # ------------------------------------------------------------------ s3–s5: Standorte
+    for s in SCENES[2:5]:
+        p = s["id"].split("-")[0]
+        tag, lines = TEXT[s["text"]]
+        cam = cams[s["id"]]
+        obs = [box(0, 0, W, BAND_TOP), box(0, BAND_BOTTOM, W, H), RAIL,
+               box(0, 0, W, head_bottom[s["id"]] + 24)]
+        obs += [Point(*cam.pt(*office_base[k])).buffer(34) for k in OFFICE_AREA]
+        obs += [cam.geom(ln).buffer(6) for ln in rhein_base]
+        placed = place_names(measure, cam, base_areas, s["names"], obs)
+        report.append((s["id"], placed))
+        tag_w = ink_w(measure, tag, 36, 800) + 36
+        css = BASE_TEXT_CSS.format(p=p, label=LABEL, muted=MUTED) + f'''        .{p}-tag {{
+          position: absolute;
+          left: {540 - tag_w / 2:.1f}px;
+          top: {TAG_TOP}px;
+          width: {tag_w:.1f}px;
+          height: {TAG_H - 6}px;
+          border-radius: 8px;
+          background: {RED};
+          color: #ffffff;
+          font-size: 36px;
+          font-weight: 800;
+          line-height: {TAG_H - 6}px;
+          text-align: center;
+          letter-spacing: 0.01em;
+        }}
+        .{p}-titel {{
+          position: absolute;
+          left: 30px;
+          right: 30px;
+          top: {TITLE_TOP}px;
+          text-align: center;
+          font-size: {TITLE}px;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+          line-height: {TITLE_LH};
+        }}
+        .{p}-zeile {{
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          padding: 0.14em 0 0.06em;
+          margin: -0.14em 0 -0.06em;
+        }}'''
+        names_html = []
+        for k, (it, r) in enumerate(placed):
+            fs = f' style="font-size: {r["size"]}px"' if r["size"] != it["size"] else ""
+            names_html.append(f'        <div class="{p}-lpos" style="left: {r["x"]:.1f}px; top: {r["y"]:.1f}px">'
+                              f'<span class="{p}-name" id="{p}-n{k}"{fs}>{it["text"]}</span></div>')
+        body = (f'        <div class="{p}-tag" id="{p}-tag">{tag}</div>\n        <div class="{p}-titel">\n'
+                + "\n".join(f'          <span class="{p}-zeile">{letters_html(p, k, ln)}</span>' for k, ln in enumerate(lines))
+                + "\n        </div>\n" + "\n".join(names_html) + "\n")
+        mv, dur = s["move"], s["dur"]
+        js = [f'tl.fromTo("#{p}-tag", {{ clipPath: "inset(0% 100% 0% 0% round 8px)" }}, {{ clipPath: "inset(0% 0% 0% 0% round 8px)", duration: 0.28, ease: "power3.out" }}, {mv * 0.4:.2f});']
+        t = mv * 0.45
+        for k, ln in enumerate(lines):
+            for i, _ in enumerate(ln):
+                js.append(f'tl.fromTo("#{p}-l{k}c{i}", {{ yPercent: 115 }}, {{ yPercent: 0, duration: 0.42, ease: "expo.out" }}, {t:.3f});')
+                t += 0.035
+        js += [f'tl.fromTo("#{p}-n{k}", {{ opacity: 0, scale: 0.8, filter: "blur(6px)" }}, {{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }}, {mv + 0.08 + 0.06 * k:.2f});'
+               for k in range(len(placed))]
+        t_out = dur - 0.26
+        js.append(f'tl.to(".{p}-name", {{ opacity: 0, filter: "blur(8px)", duration: 0.14, ease: "power2.in" }}, {t_out - 0.04:.2f});')
+        js.append(f'tl.to(".{p}-ch", {{ yPercent: -115, duration: 0.22, ease: "power3.in", stagger: 0.012 }}, {t_out:.2f});')
+        js.append(f'tl.to("#{p}-tag", {{ clipPath: "inset(0% 0% 0% 100% round 8px)", duration: 0.2, ease: "power3.in" }}, {t_out + 0.02:.2f});')
+        files[f"compositions/{s['id']}.html"] = scene(s["id"], css, body, js)
+
+    # ------------------------------------------------------------------ s6: 19 Städte und Gemeinden
+    p = "s6"
+    zahl, zlabel = TEXT["zahl"]
+    css = BASE_TEXT_CSS.format(p=p, label=LABEL, muted=MUTED) + f'''        .{p}-zahl {{
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 176px;
+          text-align: center;
+          font-size: 270px;
+          font-weight: 900;
+          letter-spacing: -0.05em;
+          line-height: 1;
+          color: {RED};
+        }}
+        .{p}-label {{
+          position: absolute;
+          left: 40px;
+          right: 40px;
+          top: 452px;
+          text-align: center;
+          font-size: 62px;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
+        }}
+        /* Zahlenrad (Registry: number-wheel) */
+        .hf-number-wheel {{
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.02em;
+          font-variant-numeric: tabular-nums;
+        }}
+        .hf-number-wheel-digit {{
+          display: inline-block;
+          height: 1em;
+          overflow: hidden;
+        }}
+        .hf-number-wheel-strip {{
+          display: grid;
+        }}
+        .hf-number-wheel-strip span {{
+          height: 1em;
+          line-height: 1em;
+        }}'''
+    body = f'''        <div class="{p}-zahl" id="{p}-zahl"><span class="hf-number-wheel" id="{p}-rad" data-value="{zahl}" data-layout-ignore></span></div>
+        <div class="{p}-label" id="{p}-label">{words_html(p, 0, zlabel)}</div>
+'''
+    # Zahlenrad aufbauen (aus compositions/components/number-wheel.html, eine Extra-Umdrehung)
+    pre = f'''          document.querySelectorAll("#{p}-rad").forEach((el) => {{
+            if (el.dataset.ready === "1") return;
+            const value = el.dataset.value || "0";
+            el.textContent = "";
+            for (const ch of value) {{
+              const stops = 10 + Number(ch);
+              const frame = document.createElement("span");
+              frame.className = "hf-number-wheel-digit";
+              const strip = document.createElement("span");
+              strip.className = "hf-number-wheel-strip";
+              strip.dataset.stops = String(stops);
+              for (let i = 0; i <= stops; i++) {{
+                const step = document.createElement("span");
+                step.textContent = String(i % 10);
+                strip.appendChild(step);
+              }}
+              frame.appendChild(strip);
+              el.appendChild(frame);
+            }}
+            el.dataset.ready = "1";
+          }});'''
+    t0 = z["move"] - 0.2
+    js = [f'tl.fromTo("#{p}-zahl", {{ opacity: 0, scale: 0.86, filter: "blur(12px)" }}, {{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.22, ease: "expo.out" }}, {t0:.2f});',
+          f'tl.fromTo("#{p}-rad .hf-number-wheel-strip", {{ y: 0 }}, {{ y: (i, el) => -Number(el.dataset.stops) + "em", duration: 1.2, ease: "power3.out", stagger: 0.08 }}, {t0:.2f});']
+    js += [f'tl.fromTo("#{p}-l0w{i}", {{ opacity: 0, filter: "blur(8px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }}, {t0 + 0.35 + 0.08 * i:.2f});'
+           for i in range(len(zlabel.split(" ")))]
+    js.append(f'tl.to(["#{p}-zahl", "#{p}-label"], {{ opacity: 0, filter: "blur(12px)", duration: 0.18, ease: "power2.in" }}, {z["dur"] - 0.22:.2f});')
+    files["compositions/s6-zahl.html"] = scene("s6-zahl", css, body, js, pre=pre)
+
+    # ------------------------------------------------------------------ s7: Logo setzt sich zusammen
+    p = "s7"
+    close_size = 82
+    while max(ink_w(measure, t, close_size, 900) for t in TEXT["close"]) > 960:
+        close_size -= 2
+    zmark = []
+    fjs = []
+    for f in FACETS:
+        cx, cy = centroid(f["pts"])
+        px, py = cam_zahl.pt(*office_base[f["office"]])  # Pin-Position am Ende des Zähler-Bilds
+        sx, sy = LOGO_LEFT + cx / 100 * mark, LOGO_TOP + cy / 100 * mark
+        zmark.append(f'        <div class="{p}-facet" id="{p}-f{f["key"]}" style="left: {LOGO_LEFT}px; top: {LOGO_TOP}px; width: {mark:.1f}px; height: {mark:.1f}px; transform-origin: {cx:.2f}% {cy:.2f}%">'
+                     f'{facet_svg(f, p + "-g" + f["key"])}</div>')
+        s_start = PIN_SCALE * HOOK_MARK[2] / mark
+        t0 = 0.05 * FACETS.index(f)  # Facetten nacheinander, A – R – B
+        # löst den Pin ab (Überblendung 3 Frames), dann Bogenflug: x und y mit verschiedenen Kurven
+        fjs += [f'tl.fromTo("#{p}-f{f["key"]}", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.1, ease: "none" }}, 0.0);',
+                f'tl.fromTo("#{p}-f{f["key"]}", {{ x: {px - sx:.1f}, scale: {s_start:.3f}, rotation: {f["spin"]} }}, {{ x: 0, scale: 1, rotation: 0, duration: 0.8, ease: "power3.inOut" }}, {t0:.2f});',
+                f'tl.fromTo("#{p}-f{f["key"]}", {{ y: {py - sy:.1f} }}, {{ y: 0, duration: 0.8, ease: "power2.inOut" }}, {t0:.2f});']
+    css = BASE_TEXT_CSS.format(p=p, label=LABEL, muted=MUTED) + f'''        .{p}-kopf {{
+          position: absolute;
+          left: 40px;
+          right: 40px;
+          top: 300px;
+          text-align: center;
+          font-size: {close_size}px;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          line-height: 1.08;
+        }}
+        .{p}-zeile {{
+          display: block;
+          white-space: nowrap;
+        }}
+        .{p}-zeile.akzent {{
+          color: {RED};
+        }}
+        .{p}-facet {{
+          position: absolute;
+        }}
+        .{p}-facet svg,
+        .{p}-wort svg {{
           display: block;
           width: 100%;
           height: 100%;
           overflow: visible;
         }}
-        .word {{
+        .{p}-wort {{
+          position: absolute;
+          left: {LOGO_LEFT + 120 * k_logo:.1f}px;
+          top: {LOGO_TOP}px;
+          width: {340 * k_logo:.1f}px;
+          height: {mark:.1f}px;
+        }}
+        .{p}-wort text {{
           font-family: "Montserrat", sans-serif;
           fill: {INK};
         }}
-        .b5-adresse {{
+        .{p}-adresse {{
           position: absolute;
-          left: 60px;
-          right: 60px;
-          top: {URL_TOP}px;
+          left: 40px;
+          right: 40px;
+          top: {LOGO_TOP + mark + 70:.0f}px;
           text-align: center;
-          font-size: 40px;
-          font-weight: 600;
-          line-height: 1.15;
+          font-size: 46px;
+          font-weight: 700;
           letter-spacing: -0.01em;
-          color: {INK};
+          line-height: 1.1;
         }}'''
-    vs = [{"id": "zeile1", "type": "string", "label": "Abschluss, Zeile 1", "default": TEXT["close"][0]},
-          {"id": "zeile2", "type": "string", "label": "Abschluss, Zeile 2", "default": TEXT["close"][1]},
-          {"id": "adresse", "type": "string", "label": "Adresse", "default": TEXT["url"]}]
-    logo = build_maps.LOGO_SVG.replace('id="k-', 'id="b5-k-').replace("url(#k-", "url(#b5-k-")
-    body = f'''        <div class="b5-kopf">
-          <span class="b5-zeile akzent" id="b5-z1" data-var-text="zeile1">{TEXT["close"][0]}</span>
-          <span class="b5-zeile" id="b5-z2" data-var-text="zeile2">{TEXT["close"][1]}</span>
+    body = (f'''        <div class="{p}-kopf">
+          <span class="{p}-zeile akzent">{words_html(p, 0, TEXT["close"][0])}</span>
+          <span class="{p}-zeile">{words_html(p, 1, TEXT["close"][1])}</span>
         </div>
-{name_divs("b5", placed)}
-        <div class="b5-logo" id="b5-logo">
-        {logo}
+''' + "\n".join(zmark) + f'''
+        <div class="{p}-wort" id="{p}-wort">
+          <svg viewBox="120 0 340 100" aria-hidden="true"><text x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing">KNIGGE</text><text x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing">IMMOBILIEN</text></svg>
         </div>
-        <div class="b5-adresse" id="b5-adresse" data-var-text="adresse">{TEXT["url"]}</div>
-'''
-    t0 = b["move"]
-    js = [blur_in("#b5-z1", t0 - 0.45), blur_in("#b5-z2", t0 - 0.38)]
-    js += [blur_in(f"#b5-n{k}", t0 + 0.05 + 0.07 * k) for k in range(len(placed))]
-    js.append('          tl.fromTo("#b5-logo", { opacity: 0, scale: 0.94, filter: "blur(8px)" }, '
-              f'{{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.22, ease: "expo.out" }}, {t0 + 0.3:.2f});')
-    js.append(blur_in("#b5-adresse", t0 + 0.6, 0.18))
-    files["compositions/b5-abschluss.html"] = (SCENE_HEAD.format(vars=variables(vs), id="b5-abschluss", ink=INK, css=css, W=W, H=H, dur=b["dur"])
-                                               + body + SCENE_TAIL.format(js="\n".join(js), id="b5-abschluss"))
+        <div class="{p}-adresse" id="{p}-adresse">{TEXT["url"]}</div>
+''')
+    js = list(fjs)
+    js.append(f'tl.fromTo("#{p}-wort", {{ clipPath: "inset(0% 100% 0% 0%)" }}, {{ clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.out" }}, 0.8);')
+    t = 0.9
+    for k, ln in enumerate(TEXT["close"]):
+        for i, _ in enumerate(ln.split(" ")):
+            js.append(f'tl.fromTo("#{p}-l{k}w{i}", {{ opacity: 0, filter: "blur(8px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }}, {t:.2f});')
+            t += 0.07
+    # Adresse als letzte Zeile: mindestens 2 s bis zum Ende
+    js.append(f'tl.fromTo("#{p}-adresse", {{ opacity: 0, filter: "blur(8px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }}, 1.2);')
+    files["compositions/s7-abschluss.html"] = scene("s7-abschluss", css, body, js)
 
-    # --- index.html -----------------------------------------------------------------------------
+    # ------------------------------------------------------------------ index.html
     hosts = [f'      <div id="karte" data-composition-id="karte" data-composition-src="compositions/karte.html" data-start="0" data-duration="{DURATION}" data-track-index="0" data-track-kind="graphics" data-width="{W}" data-height="{H}"></div>']
-    for b in BEATS:
-        hosts.append(f'      <div id="{b["id"]}" data-composition-id="{b["id"]}" data-composition-src="compositions/{b["id"]}.html" data-start="{b["start"]}" data-duration="{b["dur"]}" data-track-index="1" data-track-kind="graphics" data-width="{W}" data-height="{H}"></div>')
+    for s in SCENES:
+        hosts.append(f'      <div id="{s["id"]}" data-composition-id="{s["id"]}" data-composition-src="compositions/{s["id"]}.html" data-start="{s["start"]}" data-duration="{s["dur"]}" data-track-index="1" data-track-kind="graphics" data-width="{W}" data-height="{H}"></div>')
     files["index.html"] = f'''<!doctype html>
 <html lang="de" data-resolution="portrait">
   <head>
@@ -586,10 +853,10 @@ def build():
   </head>
   <body>
     <!--
-      KNIGGE Immobilien – Instagram-Reel „Drei Standorte. Eine Region." (1080×1920, 15 s, ohne Ton)
-      erzeugt von tools/build_reel.py – Texte lassen sich in Studio über die Variablen der Szenen ändern
+      KNIGGE Immobilien – Instagram-Reel „Drei Facetten“ (1080×1920, 18 s, ohne Ton)
+      erzeugt von tools/build_reel.py – Texte dort in TEXT ändern
     -->
-    <div id="root" data-composition-id="main" data-start="0" data-duration="{DURATION}" data-width="{W}" data-height="{H}" data-fps="{FPS}">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{DURATION}" data-width="{W}" data-height="{H}" data-fps="{FPS}" data-motion-blur="on">
 {chr(10).join(hosts)}
     </div>
     <script>
@@ -599,16 +866,21 @@ def build():
   </body>
 </html>
 '''
+    # alte Szenen von Version 1 entfernen
+    for old in ("b1-hook", "b2-koeln", "b3-bergisch-gladbach", "b4-wipperfuerth", "b5-abschluss"):
+        fp = os.path.join(ROOT, "compositions", old + ".html")
+        if os.path.exists(fp):
+            os.remove(fp)
     for rel, html in files.items():
         with open(os.path.join(ROOT, rel), "w", encoding="utf-8") as f:
             f.write(html)
         print("geschrieben:", rel)
     print(f"Einstieg {hook_size} px, Abschluss {close_size} px")
-    for k, c in cams.items():
+    for k, c in {**{"übersicht": cam_over, "zahl": cam_zahl}, **cams}.items():
         print(f"  Kamera {k}: Mitte ({c.cx:.0f}, {c.cy:.0f}), Zoom {c.z:.2f}")
-    for bid, placed in report:
+    for sid, placed in report:
         bad = [(it["text"], r) for it, r in placed if r["status"] != "ok"]
-        print(f"  {bid}: {len(placed)} Namen" + ("" if not bad else " – " + ", ".join(
+        print(f"  {sid}: {len(placed)} Namen" + ("" if not bad else " – " + ", ".join(
             f"{t} {r['status']} ({r['size']} px)" for t, r in bad)))
 
 

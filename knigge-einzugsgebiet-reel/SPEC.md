@@ -39,3 +39,41 @@ QA:      t=0 (Vorschaubild: Einstieg + Karte), 1.3 (drei Marker), 4.5 (Köln, al
          Adresse). Aller Text im Band 168–1330 px, rechts nicht unter der Aktionsleiste (x > 940 ab
          y 1000), keine Schrift unter 28 px.
 ```
+
+## Version 2 – „Drei Facetten“ (29.10.2026)
+
+```text
+GOAL:    Der Zuschauer sieht, wie das KNIGGE-K in drei Standorte zerfällt und als ein Logo
+         zurückkommt – und merkt sich: drei Standorte, eine Region, ein Ansprechpartner.
+OUTPUT:  HyperFrames, 1080 x 1920, 30 fps, H.264, kein Ton, data-motion-blur auf der Wurzel
+TIME:    18 s x 30 fps = 540 frames
+LOOK:    wie v1 (Papierweiß, Karte aus den GIFs, Montserrat, Schiefergrau #444F4F, Rot #CA2C35);
+         aktive Standort-Gemeinde und die Zähler-Welle färben sich #F1D0D3 (helles KNIGGE-Rot);
+         Bildmarke in ihren eigenen Verläufen; Titel 900, Ortstitel 124 px, Einstieg 104 px,
+         Region 80 px, Zahl 260 px, Etikett 36 px/800 weiß auf Rot (Radius 8 px), Namen 30 px/500.
+OBJECTS: KNIGGE-K aus drei Facetten (A links → Köln, B unten → Bergisch Gladbach, R rechts →
+         Wipperfürth), die Karte, drei Pins (roter Kreis, weißer Rand), Logo mit Wortmarke.
+MOTION:  Ankunft expo.out / back.out(1.6) für Pins; Kamera power3.inOut 22 Frames; Facetten-Flug
+         21 Frames, x power2.inOut / y power3.in (Bogen), Drehung ±18°; Buchstaben steigen aus einer
+         Maske 12 Frames expo.out, 1 Frame Versatz; Wörter blur 8→0 in 5 Frames, 2–3 Frames Versatz;
+         Marker-Strich 14 Frames power2.inOut; Zahlenrad 36 Frames power3.out; Abgänge 5–6 Frames.
+SHOTS:   0–72     Hook: Bild 0 „Drei Standorte.“ + großes K. „Eine Region.“ schlägt ein (10), roter
+                  Strich darunter (22). K springt auseinander (30), Karte wächst aus der Mitte (33–60),
+                  Facetten fliegen zu den Standorten (45–66) und werden Pins (66), Ringe pulsen.
+         72–120   „Zwischen Köln / und Oberberg“: Wörter färben sich von Hellgrau zu Schiefergrau.
+         120–198  Köln: Kamera (120–142), Etikett „Standort“, Titel „Köln“ Buchstabe für Buchstabe,
+                  Köln färbt sich hellrot, der Pin pulst, sobald die Kamera steht, Namen der Nachbarn.
+         198–276  Bergisch Gladbach: Etikett „Hauptsitz“, zweizeiliger Titel, 7 Namen.
+         276–354  Wipperfürth: Etikett „Standort“, Titel, 5 Namen.
+         354–438  Zahl: Kamera zurück (354–376), „19“ rollt hoch (372–408), „Städte und Gemeinden“,
+                  die 19 Gemeinden leuchten als Welle nacheinander hellrot auf.
+         438–540  Abschluss: die Facetten lösen die Pins ab (3 Frames) und fliegen nacheinander im
+                  Bogen in die Logo-Position (438–465), die Karte schrumpft um ihren Schwerpunkt in
+                  die Bildmarke und blendet aus; Wortmarke wischt ein (462), „Ein Ansprechpartner /
+                  für Ihre Immobilie.“ wortweise (465–480), Adresse (474); Stand bis 540.
+BANNED:  wie v1, dazu: alles auf demselben Weg einblenden (jede Szene hat ihren eigenen Auftritt),
+         Leuchten, Partikel, Glanz auf dem Logo.
+QA:      t=0 (Vorschaubild), 1.6 (Facetten im Flug), 3.4 (Region), 5.6 (Köln), 8.2 (Bergisch
+         Gladbach), 10.8 (Wipperfürth), 13.4 (19 + Welle), 15.0 (Logo setzt sich zusammen), 17.5
+         (Abschluss). Text im Band 168–1330 px, ≥ 28 px.
+```

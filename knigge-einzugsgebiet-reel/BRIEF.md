@@ -48,3 +48,17 @@ Vom Nutzer gewählt (Rückfragen vom 29.10.2026):
 - Reels-Oberfläche: kein Text oberhalb 168 px, aller Text im Band 168–1330 px, nicht unter der
   Aktionsleiste rechts.
 - Gemeindegrenzen sind schematisch (siehe Quellenhinweis der Karte).
+
+## Version 2 – 29.10.2026
+
+Anfrage: „Nutze hyperframes um daraus ein geiles reel zu macheb mit schönen Animationen und texten“.
+
+- Gleiche Botschaft, gleiches Format (1080×1920, ohne Ton, kein Storyboard vorab).
+- Neu: Erzählidee „Drei Facetten“ (STORYLINES.md A) – die drei Facetten der KNIGGE-Bildmarke werden die
+  drei Standort-Pins und setzen sich am Ende wieder zum Logo zusammen; mehr Text und Bewegung:
+  „Zwischen Köln und Oberberg“, große Ortstitel mit Buchstaben-Animation, Zähler
+  „19 Städte und Gemeinden“, Marker-Strich unter „Eine Region.“.
+- Länge (inferred): 18 s statt 15 s, damit die zusätzlichen Texte lesbar bleiben.
+- Fakten: 3 Standorte (Website: Hauptsitz Laurentiusstraße 98 Bergisch Gladbach, Büros am Kölner
+  Sachsenring und in Wipperfürth), 19 Städte und Gemeinden = die Gemeinden der Einzugsgebiet-Karte.
+- Ausgabe: renders/knigge-einzugsgebiet-reel-v2.mp4 (v1 bleibt erhalten).

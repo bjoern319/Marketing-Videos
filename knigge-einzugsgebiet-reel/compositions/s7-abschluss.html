@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s7-abschluss-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .s7-ch,
+        .s7-w {
+          display: inline-block;
+        }
+        .s7-lpos {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+        .s7-name {
+          display: block;
+          white-space: nowrap;
+          font-size: 30px;
+          font-weight: 500;
+          line-height: 1.15;
+          color: #5e6a6a;
+        }
+        .s7-kopf {
+          position: absolute;
+          left: 40px;
+          right: 40px;
+          top: 300px;
+          text-align: center;
+          font-size: 82px;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          line-height: 1.08;
+        }
+        .s7-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+        .s7-zeile.akzent {
+          color: #ca2c35;
+        }
+        .s7-facet {
+          position: absolute;
+        }
+        .s7-facet svg,
+        .s7-wort svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .s7-wort {
+          position: absolute;
+          left: 347.7px;
+          top: 636px;
+          width: 616.8px;
+          height: 181.4px;
+        }
+        .s7-wort text {
+          font-family: "Montserrat", sans-serif;
+          fill: #444f4f;
+        }
+        .s7-adresse {
+          position: absolute;
+          left: 40px;
+          right: 40px;
+          top: 887px;
+          text-align: center;
+          font-size: 46px;
+          font-weight: 700;
+          letter-spacing: -0.01em;
+          line-height: 1.1;
+        }
+      </style>
+      <div id="root" data-composition-id="s7-abschluss" data-width="1080" data-height="1920" data-duration="3.4">
+        <div class="s7-kopf">
+          <span class="s7-zeile akzent"><span class="s7-w" id="s7-l0w0">Ein</span> <span class="s7-w" id="s7-l0w1">Ansprechpartner</span></span>
+          <span class="s7-zeile"><span class="s7-w" id="s7-l1w0">für</span> <span class="s7-w" id="s7-l1w1">Ihre</span> <span class="s7-w" id="s7-l1w2">Immobilie.</span></span>
+        </div>
+        <div class="s7-facet" id="s7-fA" style="left: 130px; top: 636px; width: 181.4px; height: 181.4px; transform-origin: 26.50% 33.33%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s7-gA" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6"><stop offset="0" stop-color="#5e0f18" /><stop offset="0.56" stop-color="#a4222b" /><stop offset="0.8" stop-color="#c12a33" /><stop offset="0.93" stop-color="#ca2c35" /></linearGradient></defs><polygon points="0,0 79.5,0 0,100" fill="url(#s7-gA)" /></svg></div>
+        <div class="s7-facet" id="s7-fR" style="left: 130px; top: 636px; width: 181.4px; height: 181.4px; transform-origin: 81.57% 42.21%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s7-gR" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0"><stop offset="0" stop-color="#4a0a13" /><stop offset="1" stop-color="#b0252e" /></linearGradient></defs><polygon points="79.5,0 100,0 100,100 47.5,40.2" fill="url(#s7-gR)" /></svg></div>
+        <div class="s7-facet" id="s7-fB" style="left: 130px; top: 636px; width: 181.4px; height: 181.4px; transform-origin: 49.17% 80.07%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s7-gB" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100"><stop offset="0" stop-color="#480a12" /><stop offset="0.5" stop-color="#a2222b" /><stop offset="0.85" stop-color="#ca2c35" /></linearGradient></defs><polygon points="0,100 47.5,40.2 100,100" fill="url(#s7-gB)" /></svg></div>
+        <div class="s7-wort" id="s7-wort">
+          <svg viewBox="120 0 340 100" aria-hidden="true"><text x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing">KNIGGE</text><text x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing">IMMOBILIEN</text></svg>
+        </div>
+        <div class="s7-adresse" id="s7-adresse">knigge-immobilien.de</div>
+      </div>
+      <script>
+        (function () {
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s7-fA", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.0);
+          tl.fromTo("#s7-fA", { x: 131.8, scale: 0.218, rotation: -18 }, { x: 0, scale: 1, rotation: 0, duration: 0.8, ease: "power3.inOut" }, 0.00);
+          tl.fromTo("#s7-fA", { y: 428.2 }, { y: 0, duration: 0.8, ease: "power2.inOut" }, 0.00);
+          tl.fromTo("#s7-fR", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.0);
+          tl.fromTo("#s7-fR", { x: 511.8, scale: 0.218, rotation: 16 }, { x: 0, scale: 1, rotation: 0, duration: 0.8, ease: "power3.inOut" }, 0.05);
+          tl.fromTo("#s7-fR", { y: 86.3 }, { y: 0, duration: 0.8, ease: "power2.inOut" }, 0.05);
+          tl.fromTo("#s7-fB", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.0);
+          tl.fromTo("#s7-fB", { x: 284.4, scale: 0.218, rotation: 12 }, { x: 0, scale: 1, rotation: 0, duration: 0.8, ease: "power3.inOut" }, 0.10);
+          tl.fromTo("#s7-fB", { y: 231.7 }, { y: 0, duration: 0.8, ease: "power2.inOut" }, 0.10);
+          tl.fromTo("#s7-wort", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.out" }, 0.8);
+          tl.fromTo("#s7-l0w0", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.90);
+          tl.fromTo("#s7-l0w1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.97);
+          tl.fromTo("#s7-l1w0", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.04);
+          tl.fromTo("#s7-l1w1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.11);
+          tl.fromTo("#s7-l1w2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.18);
+          tl.fromTo("#s7-adresse", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 1.2);
+          window.__timelines["s7-abschluss"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

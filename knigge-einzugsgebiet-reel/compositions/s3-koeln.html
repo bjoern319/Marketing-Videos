@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s3-koeln-template">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Montserrat", sans-serif;
+          color: #444f4f;
+        }
+        .s3-ch,
+        .s3-w {
+          display: inline-block;
+        }
+        .s3-lpos {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+        .s3-name {
+          display: block;
+          white-space: nowrap;
+          font-size: 30px;
+          font-weight: 500;
+          line-height: 1.15;
+          color: #5e6a6a;
+        }
+        .s3-tag {
+          position: absolute;
+          left: 437.5px;
+          top: 196px;
+          width: 205.0px;
+          height: 52px;
+          border-radius: 8px;
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 36px;
+          font-weight: 800;
+          line-height: 52px;
+          text-align: center;
+          letter-spacing: 0.01em;
+        }
+        .s3-titel {
+          position: absolute;
+          left: 30px;
+          right: 30px;
+          top: 272px;
+          text-align: center;
+          font-size: 124px;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+          line-height: 1.0;
+        }
+        .s3-zeile {
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          padding: 0.14em 0 0.06em;
+          margin: -0.14em 0 -0.06em;
+        }
+      </style>
+      <div id="root" data-composition-id="s3-koeln" data-width="1080" data-height="1920" data-duration="2.6">
+        <div class="s3-tag" id="s3-tag">Standort</div>
+        <div class="s3-titel">
+          <span class="s3-zeile"><span class="s3-ch" id="s3-l0c0">K</span><span class="s3-ch" id="s3-l0c1">ö</span><span class="s3-ch" id="s3-l0c2">l</span><span class="s3-ch" id="s3-l0c3">n</span></span>
+        </div>
+        <div class="s3-lpos" style="left: 753.8px; top: 539.7px"><span class="s3-name" id="s3-n0">Leverkusen</span></div>
+        <div class="s3-lpos" style="left: 195.5px; top: 707.4px"><span class="s3-name" id="s3-n1">Pulheim</span></div>
+        <div class="s3-lpos" style="left: 161.4px; top: 1061.3px"><span class="s3-name" id="s3-n2">Frechen</span></div>
+        <div class="s3-lpos" style="left: 361.1px; top: 1217.0px"><span class="s3-name" id="s3-n3">Hürth</span></div>
+      </div>
+      <script>
+        (function () {
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s3-tag", { clipPath: "inset(0% 100% 0% 0% round 8px)" }, { clipPath: "inset(0% 0% 0% 0% round 8px)", duration: 0.28, ease: "power3.out" }, 0.30);
+          tl.fromTo("#s3-l0c0", { yPercent: 115 }, { yPercent: 0, duration: 0.42, ease: "expo.out" }, 0.338);
+          tl.fromTo("#s3-l0c1", { yPercent: 115 }, { yPercent: 0, duration: 0.42, ease: "expo.out" }, 0.373);
+          tl.fromTo("#s3-l0c2", { yPercent: 115 }, { yPercent: 0, duration: 0.42, ease: "expo.out" }, 0.408);
+          tl.fromTo("#s3-l0c3", { yPercent: 115 }, { yPercent: 0, duration: 0.42, ease: "expo.out" }, 0.443);
+          tl.fromTo("#s3-n0", { opacity: 0, scale: 0.8, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, 0.83);
+          tl.fromTo("#s3-n1", { opacity: 0, scale: 0.8, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, 0.89);
+          tl.fromTo("#s3-n2", { opacity: 0, scale: 0.8, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, 0.95);
+          tl.fromTo("#s3-n3", { opacity: 0, scale: 0.8, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, 1.01);
+          tl.to(".s3-name", { opacity: 0, filter: "blur(8px)", duration: 0.14, ease: "power2.in" }, 2.30);
+          tl.to(".s3-ch", { yPercent: -115, duration: 0.22, ease: "power3.in", stagger: 0.012 }, 2.34);
+          tl.to("#s3-tag", { clipPath: "inset(0% 0% 0% 100% round 8px)", duration: 0.2, ease: "power3.in" }, 2.36);
+          window.__timelines["s3-koeln"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
