@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s3-aufgabe-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #ffffff;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        .s3-strich {
+          position: absolute;
+          left: 72px;
+          top: 208px;
+          width: 100px;
+          height: 9px;
+          background: #ca2c35;
+          transform-origin: 0 50%;
+        }
+        .s3-kopf {
+          position: absolute;
+          left: 72px;
+          top: 240px;
+          font-size: 104px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          line-height: 1;
+        }
+        .s3-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+        .s3-zeile.rot {
+          color: #ca2c35;
+        }
+        .s3-w {
+          display: inline-block;
+        }
+        .s3-buehne {
+          position: absolute;
+          inset: 0;
+        }
+        .s3-buehne div {
+          box-sizing: border-box;
+        }
+        .s3-geruest,
+        .s3-balken {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1080px;
+          height: 1920px;
+          overflow: visible;
+        }
+        #s3-balken-g {
+          transform-box: view-box;
+          transform-origin: 540px 930px;
+          transform: rotate(calc(var(--a) * 1deg));
+        }
+        .s3-schale {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 0;
+          height: 0;
+        }
+        #s3-schale-l {
+          transform: translate(calc(540px - 320px * cos(calc(var(--a) * 1deg))), calc(930px - 320px * sin(calc(var(--a) * 1deg))));
+        }
+        #s3-schale-r {
+          transform: translate(calc(540px + 320px * cos(calc(var(--a) * 1deg))), calc(930px + 320px * sin(calc(var(--a) * 1deg))));
+        }
+        .s3-schale svg.s3-korb {
+          position: absolute;
+          left: -200px;
+          top: -20px;
+          width: 400px;
+          height: 330px;
+          overflow: visible;
+        }
+        .s3-plakette {
+          position: absolute;
+          left: -85px;
+          top: 90px;
+          width: 170px;
+          height: 170px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 6px solid #ffffff;
+          box-shadow: 0 10px 26px rgba(30, 40, 48, 0.22);
+        }
+        .s3-plakette img {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .s3-last {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 8px 18px rgba(30, 40, 48, 0.16);
+        }
+        .s3-last.rund {
+          border-radius: 50%;
+          background: #ffffff;
+          border: 3px solid #323c44;
+        }
+        .s3-last.eckig {
+          border-radius: 18px;
+          background: #f3f0eb;
+          border: 2px solid #ded8ce;
+        }
+        .s3-zettel {
+          position: absolute;
+          width: 136px;
+          height: 90px;
+          background: #ffffff;
+          clip-path: polygon(0.00% 0px, 9.09% 6px, 18.18% 0px, 27.27% 6px, 36.36% 0px, 45.45% 6px, 54.55% 0px, 63.64% 6px, 72.73% 0px, 81.82% 6px, 90.91% 0px, 100.00% 6px, 100% 100%, 0% 100%);
+          box-shadow: 0 6px 14px rgba(30, 40, 48, 0.16);
+        }
+        .s3-zettel i {
+          position: absolute;
+          left: 16px;
+          height: 5px;
+          border-radius: 3px;
+          background: #e4e7e9;
+        }
+        .s3-zettel b {
+          position: absolute;
+          right: 12px;
+          top: 30px;
+          width: 46px;
+          height: 22px;
+          border: 3px solid #ca2c35;
+          border-radius: 4px;
+          transform: rotate(-8deg);
+        }
+        .s3-zeile2 {
+          position: absolute;
+          left: 72px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          gap: 22px;
+        }
+        .s3-ikon {
+          box-sizing: border-box;
+          flex: none;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: #ffffff;
+          border: 2.5px solid #323c44;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .s3-text {
+          display: block;
+          white-space: nowrap;
+          font-size: 40px;
+          font-weight: 500;
+          line-height: 1.2;
+        }
+      </style>
+      <div id="root" data-composition-id="s3-aufgabe" data-width="1080" data-height="1920" data-duration="4.5">
+        <div class="s3-strich"></div>
+        <div class="s3-kopf">
+          <span class="s3-zeile"><span class="s3-w" id="s3-l0w0">Wenn</span> <span class="s3-w" id="s3-l0w1">das</span> <span class="s3-w" id="s3-l0w2">Haus</span></span>
+          <span class="s3-zeile rot"><span class="s3-w" id="s3-l1w0">zur</span> <span class="s3-w" id="s3-l1w1">Aufgabe</span> <span class="s3-w" id="s3-l1w2">wird.</span></span>
+        </div>
+        <div class="s3-zeile2" id="s3-z0" style="top: 488px"><span class="s3-ikon" id="s3-i0"><svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40c-2-10 2-20 13-25 2 12-3 22-13 25Z"/><path d="M24 40c2-10-2-20-13-25-2 12 3 22 13 25Z"/></svg></span><span class="s3-text" id="s3-t0">Der große Garten macht viel Arbeit.</span></div>
+        <div class="s3-zeile2" id="s3-z1" style="top: 568px"><span class="s3-ikon" id="s3-i1"><svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 23 24 9l17 14"/><path d="M11 20v19h26V20"/><path d="M20 39V29h8v10"/></svg></span><span class="s3-text" id="s3-t1">Viele Zimmer stehen leer.</span></div>
+        <div class="s3-zeile2" id="s3-z2" style="top: 648px"><span class="s3-ikon" id="s3-i2"><svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39V31h8v-8h8v-8h8V7h6v32Z"/></svg></span><span class="s3-text" id="s3-t2">Treppen werden beschwerlicher.</span></div>
+        <div class="s3-zeile2" id="s3-z3" style="top: 728px"><span class="s3-ikon" id="s3-i3"><svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="15.5"/><path d="M24 14v10l6.5 4"/></svg></span><span class="s3-text" id="s3-t3">Pflege und Instandhaltung kosten Zeit und Kraft.</span></div>
+        <div class="s3-buehne" id="s3-buehne" style="--a: 0">
+        <svg class="s3-geruest" viewBox="0 0 1080 1920" aria-hidden="true">
+          <path d="M540 930 V1322" stroke="#323c44" stroke-width="14" stroke-linecap="round" fill="none" />
+          <rect x="430" y="1316" width="220" height="30" rx="15" fill="#323c44" />
+          <rect id="s3-lot" x="537" y="832" width="6" height="26" rx="3" fill="#ca2c35" />
+        </svg>
+        <div class="s3-schale" id="s3-schale-l">
+          <svg class="s3-korb" viewBox="-200 -20 400 330" aria-hidden="true"><path d="M0 0 L-168 262 M0 0 L168 262" stroke="#323c44" stroke-width="3" fill="none" /><path d="M-178 262 H178 Q162 296 0 298 Q-162 296 -178 262 Z" fill="#323c44" /></svg>
+          <div class="s3-plakette"><img src="assets/img/haus-rund.jpg" alt="" /></div>
+        </div>
+        <div class="s3-schale" id="s3-schale-r">
+          <svg class="s3-korb" viewBox="-200 -20 400 330" aria-hidden="true"><path d="M0 0 L-168 262 M0 0 L168 262" stroke="#323c44" stroke-width="3" fill="none" /><path d="M-178 262 H178 Q162 296 0 298 Q-162 296 -178 262 Z" fill="#323c44" /></svg>
+          <div class="s3-zettel" id="s3-r0" style="left: -138px; top: 172px"><i style="top: 22px; width: 70px"></i><i style="top: 38px; width: 52px"></i><i style="top: 54px; width: 62px"></i><b></b></div>
+          <div class="s3-last rund" id="s3-r1" style="left: 18px; top: 162px"><svg viewBox="0 0 48 48" width="54" height="54" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40c-2-10 2-20 13-25 2 12-3 22-13 25Z"/><path d="M24 40c2-10-2-20-13-25-2 12 3 22 13 25Z"/></svg></div>
+          <div class="s3-last rund" id="s3-r2" style="left: -102px; top: 73px"><svg viewBox="0 0 48 48" width="54" height="54" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 23 24 9l17 14"/><path d="M11 20v19h26V20"/><path d="M20 39V29h8v10"/></svg></div>
+          <div class="s3-last rund" id="s3-r3" style="left: 8px; top: 67px"><svg viewBox="0 0 48 48" width="54" height="54" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39V31h8v-8h8v-8h8V7h6v32Z"/></svg></div>
+          <div class="s3-last rund" id="s3-r4" style="left: -46px; top: -24px"><svg viewBox="0 0 48 48" width="54" height="54" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="15.5"/><path d="M24 14v10l6.5 4"/></svg></div>
+        </div>
+        <svg class="s3-balken" viewBox="0 0 1080 1920" aria-hidden="true">
+          <g id="s3-balken-g">
+            <rect x="220" y="924" width="640" height="12" rx="6" fill="#323c44" />
+            <circle cx="220" cy="930" r="10" fill="#323c44" />
+            <circle cx="860" cy="930" r="10" fill="#323c44" />
+            <path d="M540 872 L527 914 H553 Z" fill="#323c44" />
+            <circle cx="540" cy="930" r="19" fill="#323c44" />
+            <circle cx="540" cy="930" r="7" fill="#ffffff" />
+          </g>
+        </svg>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo(".s3-strich", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, 0);
+          tl.fromTo("#s3-l0w0", { y: -44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out" }, 0.050);
+          tl.fromTo("#s3-l0w1", { y: -44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out" }, 0.110);
+          tl.fromTo("#s3-l0w2", { y: -44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out" }, 0.170);
+          tl.fromTo("#s3-l1w0", { y: -44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out" }, 0.230);
+          tl.fromTo("#s3-l1w1", { y: -44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out" }, 0.290);
+          tl.fromTo("#s3-l1w2", { y: -44, opacity: 0 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out" }, 0.350);
+          tl.fromTo("#s3-r0", { y: -1500 }, { y: 0, duration: 0.26, ease: "power2.in" }, 0.040);
+          tl.to("#s3-buehne", { "--a": 5, duration: 0.44, ease: "elastic.out(1, 0.5)" }, 0.300);
+          tl.fromTo("#s3-r1", { y: -1500 }, { y: 0, duration: 0.3, ease: "power2.in" }, 0.450);
+          tl.to("#s3-buehne", { "--a": 9, duration: 0.74, ease: "elastic.out(1, 0.5)" }, 0.750);
+          tl.fromTo("#s3-i0", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 0.750);
+          tl.fromTo("#s3-t0", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.32, ease: "power3.out" }, 0.790);
+          tl.fromTo("#s3-r2", { y: -1500 }, { y: 0, duration: 0.3, ease: "power2.in" }, 1.200);
+          tl.to("#s3-buehne", { "--a": 12.5, duration: 0.74, ease: "elastic.out(1, 0.5)" }, 1.500);
+          tl.fromTo("#s3-i1", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 1.500);
+          tl.fromTo("#s3-t1", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.32, ease: "power3.out" }, 1.540);
+          tl.fromTo("#s3-r3", { y: -1500 }, { y: 0, duration: 0.3, ease: "power2.in" }, 1.950);
+          tl.to("#s3-buehne", { "--a": 15.5, duration: 0.74, ease: "elastic.out(1, 0.5)" }, 2.250);
+          tl.fromTo("#s3-i2", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 2.250);
+          tl.fromTo("#s3-t2", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.32, ease: "power3.out" }, 2.290);
+          tl.fromTo("#s3-r4", { y: -1500 }, { y: 0, duration: 0.3, ease: "power2.in" }, 2.700);
+          tl.to("#s3-buehne", { "--a": 18, duration: 0.85, ease: "elastic.out(1, 0.5)" }, 3.000);
+          tl.fromTo("#s3-i3", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2)" }, 3.000);
+          tl.fromTo("#s3-t3", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.32, ease: "power3.out" }, 3.040);
+          tl.to(["#s3-l0w0", "#s3-l0w1", "#s3-l0w2", "#s3-l1w0", "#s3-l1w1", "#s3-l1w2", "#s3-z0", "#s3-z1", "#s3-z2", "#s3-z3"], { opacity: 0, filter: "blur(10px)", duration: 0.22, ease: "power2.in" }, 4.200);
+          window.__timelines["s3-aufgabe"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

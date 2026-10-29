@@ -1,0 +1,13 @@
+{
+  "name": "knigge-haus-abbezahlt-reel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.216 preview",
+    "assets": "python3 tools/prepare_assets.py",
+    "build": "python3 tools/build_reel.py",
+    "check": "npx --yes hyperframes@0.8.216 check",
+    "render": "npx --yes hyperframes@0.8.216 render -o renders/knigge-haus-abbezahlt-reel.mp4 -q delivery -f 30",
+    "publish": "npx --yes hyperframes@0.8.216 publish"
+  }
+}

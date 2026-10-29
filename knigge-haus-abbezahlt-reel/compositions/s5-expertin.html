@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s5-expertin-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #ffffff;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        .s5-strich {
+          position: absolute;
+          left: 72px;
+          top: 208px;
+          width: 100px;
+          height: 9px;
+          background: #ca2c35;
+          transform-origin: 0 50%;
+        }
+        .s5-kopf {
+          position: absolute;
+          left: 72px;
+          top: 240px;
+          font-size: 82px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          line-height: 1;
+        }
+        .s5-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+        .s5-zeile.rot {
+          color: #ca2c35;
+        }
+        .s5-w {
+          display: inline-block;
+        }
+        .s5-kopf {
+          line-height: 1.04;
+        }
+        #s5-l2w0 {
+          transform-origin: 0% 60%;
+        }
+        .s5-strich2 {
+          position: absolute;
+          left: 72px;
+          top: 1006px;
+          width: 70px;
+          height: 7px;
+          background: #ca2c35;
+          transform-origin: 0 50%;
+        }
+        .s5-name {
+          position: absolute;
+          left: 72px;
+          top: 1036px;
+          font-size: 46px;
+          font-weight: 800;
+          line-height: 1.15;
+          white-space: nowrap;
+        }
+        .s5-funktion {
+          position: absolute;
+          left: 72px;
+          top: 1100px;
+          font-size: 32px;
+          font-weight: 500;
+          line-height: 1.3;
+        }
+        .s5-funktion span {
+          display: block;
+          white-space: nowrap;
+        }
+        .s5-foto {
+          position: absolute;
+          left: 434px;
+          top: 610px;
+          width: 646px;
+          height: 1310px;
+          overflow: hidden;
+        }
+        .s5-foto img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 646px;
+          height: 1310px;
+          transform-origin: 50% 35%;
+        }
+        .s5-schleier0 {
+          position: absolute;
+          left: 434px;
+          top: 600px;
+          width: 646px;
+          height: 250px;
+          background: linear-gradient(180deg, #ffffff 0%, #ffffff 10%, rgba(255, 255, 255, 0) 100%);
+        }
+        .s5-schleier1 {
+          position: absolute;
+          left: 430px;
+          top: 610px;
+          width: 250px;
+          height: 1310px;
+          background: linear-gradient(90deg, #ffffff 0%, #ffffff 12%, rgba(255, 255, 255, 0) 100%);
+        }
+      </style>
+      <div id="root" data-composition-id="s5-expertin" data-width="1080" data-height="1920" data-duration="5.25">
+        <div class="s5-foto"><img id="s5-bild" src="assets/img/andrea.jpg" alt="" /></div>
+        <div class="s5-schleier0"></div>
+        <div class="s5-schleier1"></div>
+        <div class="s5-strich"></div>
+        <div class="s5-kopf">
+          <span class="s5-zeile"><span class="s5-w" id="s5-l0w0">Nicht</span> <span class="s5-w" id="s5-l0w1">jedes</span> <span class="s5-w" id="s5-l0w2">Haus</span> <span class="s5-w" id="s5-l0w3">muss</span></span>
+          <span class="s5-zeile"><span class="s5-w" id="s5-l1w0">verkauft</span> <span class="s5-w" id="s5-l1w1">werden.</span></span>
+          <span class="s5-zeile rot"><span class="s5-w" id="s5-l2w0">Aber</span> <span class="s5-w" id="s5-l2w1">jedes</span> <span class="s5-w" id="s5-l2w2">Zuhause</span></span>
+          <span class="s5-zeile rot"><span class="s5-w" id="s5-l3w0">sollte</span> <span class="s5-w" id="s5-l3w1">zum</span> <span class="s5-w" id="s5-l3w2">Leben</span> <span class="s5-w" id="s5-l3w3">passen.</span></span>
+        </div>
+        <div class="s5-strich2" id="s5-strich2"></div>
+        <div class="s5-name" id="s5-name">Andrea Gerhardus</div>
+        <div class="s5-funktion"><span id="s5-f0">Immobilienexpertin bei</span><span id="s5-f1">KNIGGE Immobilien</span></div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s5-bild", { scale: 1 }, { scale: 1.04, duration: 5.25, ease: "power1.inOut" }, 0);
+          tl.fromTo(".s5-strich", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, 0);
+          tl.fromTo("#s5-l0w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.200);
+          tl.fromTo("#s5-l0w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.270);
+          tl.fromTo("#s5-l0w2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.340);
+          tl.fromTo("#s5-l0w3", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.410);
+          tl.fromTo("#s5-l1w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.480);
+          tl.fromTo("#s5-l1w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.550);
+          tl.fromTo("#s5-l2w0", { opacity: 0, scale: 1.3, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 1.500);
+          tl.fromTo("#s5-l2w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.640);
+          tl.fromTo("#s5-l2w2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.710);
+          tl.fromTo("#s5-l3w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.780);
+          tl.fromTo("#s5-l3w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.850);
+          tl.fromTo("#s5-l3w2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.920);
+          tl.fromTo("#s5-l3w3", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 1.990);
+          tl.fromTo("#s5-strich2", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, 2.4);
+          tl.fromTo("#s5-name", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 2.500);
+          tl.fromTo("#s5-f0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 2.640);
+          tl.fromTo("#s5-f1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 2.720);
+          tl.to(["#s5-l0w0", "#s5-l0w1", "#s5-l0w2", "#s5-l0w3", "#s5-l1w0", "#s5-l1w1", "#s5-l2w0", "#s5-l2w1", "#s5-l2w2", "#s5-l3w0", "#s5-l3w1", "#s5-l3w2", "#s5-l3w3", "#s5-strich2", "#s5-name", "#s5-f0", "#s5-f1"], { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 5.000);
+          window.__timelines["s5-expertin"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

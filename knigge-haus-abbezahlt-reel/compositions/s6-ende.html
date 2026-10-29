@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s6-ende-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #ffffff;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        .s6-strich {
+          position: absolute;
+          left: 72px;
+          top: 208px;
+          width: 100px;
+          height: 9px;
+          background: #ca2c35;
+          transform-origin: 0 50%;
+        }
+        .s6-kopf {
+          position: absolute;
+          left: 72px;
+          top: 240px;
+          font-size: 112px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          line-height: 1;
+        }
+        .s6-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+        .s6-zeile.rot {
+          color: #ca2c35;
+        }
+        .s6-w {
+          display: inline-block;
+        }
+        .s6-maske {
+          display: block;
+          overflow: hidden;
+          padding: 0.06em 0 0.24em;
+          margin: -0.06em 0 -0.24em;
+        }
+        .s6-innen {
+          display: inline-block;
+        }
+        .s6-knopf {
+          position: absolute;
+          left: 72px;
+          top: 626px;
+          width: 588px;
+          height: 150px;
+          border-radius: 26px;
+          background: #ca2c35;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          padding-left: 36px;
+          box-shadow: 0 14px 30px rgba(202, 44, 53, 0.28);
+        }
+        .s6-knopf span {
+          display: block;
+          white-space: nowrap;
+          font-size: 42px;
+          font-weight: 800;
+          line-height: 1.14;
+        }
+        .s6-facet {
+          position: absolute;
+        }
+        .s6-facet svg,
+        .s6-wort svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .s6-wort {
+          position: absolute;
+          left: 220.7px;
+          top: 846px;
+          width: 421.2px;
+          height: 123.9px;
+        }
+        .s6-wort text {
+          font-family: "Montserrat", sans-serif;
+          fill: #323c44;
+        }
+        .s6-foto {
+          position: absolute;
+          left: 113px;
+          top: 560px;
+          width: 967px;
+          height: 1360px;
+          overflow: hidden;
+        }
+        .s6-foto img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 967px;
+          height: 1360px;
+          transform-origin: 60% 55%;
+        }
+        .s6-schleier0 {
+          position: absolute;
+          left: 113px;
+          top: 550px;
+          width: 967px;
+          height: 260px;
+          background: linear-gradient(180deg, #ffffff 0%, #ffffff 14%, rgba(255, 255, 255, 0) 100%);
+        }
+        .s6-schleier1 {
+          position: absolute;
+          left: 110px;
+          top: 560px;
+          width: 430px;
+          height: 1360px;
+          background: linear-gradient(90deg, #ffffff 0%, #ffffff 30%, rgba(255, 255, 255, 0) 100%);
+        }
+      </style>
+      <div id="root" data-composition-id="s6-ende" data-width="1080" data-height="1920" data-duration="4.5">
+        <div class="s6-foto"><img id="s6-bild" src="assets/img/tisch.jpg" alt="" /></div>
+        <div class="s6-schleier0"></div>
+        <div class="s6-schleier1"></div>
+        <div class="s6-strich"></div>
+        <div class="s6-kopf">
+          <span class="s6-zeile s6-maske"><span class="s6-innen" id="s6-z0">Den ganzen</span></span>
+          <span class="s6-zeile s6-maske"><span class="s6-innen" id="s6-z1">Expertenbeitrag</span></span>
+          <span class="s6-zeile s6-maske rot"><span class="s6-innen" id="s6-z2">jetzt lesen.</span></span>
+        </div>
+        <div class="s6-knopf" id="s6-knopf"><svg viewBox="0 0 48 48" width="56" height="56" aria-hidden="true" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M27 9h12v12"/><path d="M39 9 22 26"/><path d="M33 27v11H10V15h11"/></svg><div><span>Zum Expertenbeitrag</span><span>auf in-gl.de</span></div></div>
+        <div class="s6-facet" id="s6-fA" style="left: 72px; top: 846px; width: 123.9px; height: 123.9px; transform-origin: 26.50% 33.33%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s6-gA" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6"><stop offset="0" stop-color="#5e0f18" /><stop offset="0.56" stop-color="#a4222b" /><stop offset="0.8" stop-color="#c12a33" /><stop offset="0.93" stop-color="#ca2c35" /></linearGradient></defs><polygon points="0,0 79.5,0 0,100" fill="url(#s6-gA)" /></svg></div>
+        <div class="s6-facet" id="s6-fR" style="left: 72px; top: 846px; width: 123.9px; height: 123.9px; transform-origin: 81.57% 42.21%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s6-gR" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0"><stop offset="0" stop-color="#4a0a13" /><stop offset="1" stop-color="#b0252e" /></linearGradient></defs><polygon points="79.5,0 100,0 100,100 47.5,40.2" fill="url(#s6-gR)" /></svg></div>
+        <div class="s6-facet" id="s6-fB" style="left: 72px; top: 846px; width: 123.9px; height: 123.9px; transform-origin: 49.17% 80.07%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s6-gB" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100"><stop offset="0" stop-color="#480a12" /><stop offset="0.5" stop-color="#a2222b" /><stop offset="0.85" stop-color="#ca2c35" /></linearGradient></defs><polygon points="0,100 47.5,40.2 100,100" fill="url(#s6-gB)" /></svg></div>
+        <div class="s6-wort" id="s6-wort"><svg viewBox="120 0 340 100" aria-hidden="true"><text x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing">KNIGGE</text><text x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing">IMMOBILIEN</text></svg></div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s6-bild", { scale: 1 }, { scale: 1.04, duration: 4.5, ease: "power1.inOut" }, 0);
+          tl.fromTo(".s6-strich", { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, 0);
+          tl.fromTo("#s6-z0", { yPercent: 112 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 0.050);
+          tl.fromTo("#s6-z1", { yPercent: 112 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 0.130);
+          tl.fromTo("#s6-z2", { yPercent: 112 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 0.210);
+          tl.fromTo("#s6-knopf", { clipPath: "inset(0% 100% 0% 0% round 26px)" }, { clipPath: "inset(0% 0% 0% 0% round 26px)", duration: 0.36, ease: "power3.out" }, 0.62);
+          tl.fromTo("#s6-fA", { x: -90, y: -20, rotation: -16, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 1.080);
+          tl.fromTo("#s6-fR", { x: 70, y: -60, rotation: 14, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 1.120);
+          tl.fromTo("#s6-fB", { x: 20, y: 80, rotation: 10, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 1.160);
+          tl.fromTo("#s6-wort", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.out" }, 1.5);
+          window.__timelines["s6-ende"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s2-kosten-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #ffffff;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        .s2-strich {
+          position: absolute;
+          left: 72px;
+          top: 208px;
+          width: 100px;
+          height: 9px;
+          background: #ca2c35;
+          transform-origin: 0 50%;
+        }
+        .s2-kopf {
+          position: absolute;
+          left: 72px;
+          top: 240px;
+          font-size: 112px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          line-height: 1;
+        }
+        .s2-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+        .s2-zeile.rot {
+          color: #ca2c35;
+        }
+        .s2-w {
+          display: inline-block;
+        }
+        .s2-foto {
+          position: absolute;
+          left: 0px;
+          top: 600px;
+          width: 714px;
+          height: 1320px;
+          overflow: hidden;
+        }
+        .s2-foto img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 714px;
+          height: 1330px;
+          transform-origin: 40% 60%;
+        }
+        .s2-schleier0 {
+          position: absolute;
+          left: 0px;
+          top: 590px;
+          width: 714px;
+          height: 240px;
+          background: linear-gradient(180deg, #ffffff 0%, #ffffff 20%, rgba(255, 255, 255, 0) 100%);
+        }
+        .s2-schleier1 {
+          position: absolute;
+          left: 430px;
+          top: 600px;
+          width: 290px;
+          height: 1320px;
+          background: linear-gradient(270deg, #ffffff 0%, #ffffff 8%, rgba(255, 255, 255, 0) 100%);
+        }
+        #s2-l2w0 {
+          transform-origin: 0 0;
+        }
+        .s2-fenster {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1080px;
+          height: 1290px;
+          overflow: hidden;
+        }
+        .s2-bon {
+          position: absolute;
+          left: 340px;
+          top: 706px;
+          width: 560px;
+          height: 584px;
+          background: #ffffff;
+          clip-path: polygon(0.00% 0px, 2.86% 9px, 5.71% 0px, 8.57% 9px, 11.43% 0px, 14.29% 9px, 17.14% 0px, 20.00% 9px, 22.86% 0px, 25.71% 9px, 28.57% 0px, 31.43% 9px, 34.29% 0px, 37.14% 9px, 40.00% 0px, 42.86% 9px, 45.71% 0px, 48.57% 9px, 51.43% 0px, 54.29% 9px, 57.14% 0px, 60.00% 9px, 62.86% 0px, 65.71% 9px, 68.57% 0px, 71.43% 9px, 74.29% 0px, 77.14% 9px, 80.00% 0px, 82.86% 9px, 85.71% 0px, 88.57% 9px, 91.43% 0px, 94.29% 9px, 97.14% 0px, 100.00% 9px, 100% 100%, 0% 100%);
+        }
+        .s2-schatten {
+          position: absolute;
+          left: 340px;
+          top: 718px;
+          width: 560px;
+          height: 572px;
+          box-shadow: 0 18px 40px rgba(30, 40, 48, 0.2);
+        }
+        .s2-reihe {
+          position: absolute;
+          left: 34px;
+          right: 34px;
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          font-size: 36px;
+          font-weight: 600;
+          line-height: 1.12;
+        }
+        .s2-reihe .s2-txt {
+          display: block;
+          white-space: nowrap;
+        }
+        .s2-reihe.kopf {
+          font-weight: 700;
+          justify-content: space-between;
+        }
+        .s2-reihe.summe {
+          font-size: 40px;
+          font-weight: 800;
+          justify-content: space-between;
+        }
+        .s2-frage {
+          display: inline-block;
+          color: #ca2c35;
+          font-size: 66px;
+          font-weight: 900;
+          line-height: 1;
+        }
+        .s2-trenn {
+          position: absolute;
+          left: 34px;
+          right: 34px;
+          height: 0;
+          border-top: 3px dashed #c9ced2;
+        }
+        .s2-fein {
+          position: absolute;
+          left: 34px;
+          right: 34px;
+          height: 0;
+          border-top: 1.5px solid #e4e7e9;
+        }
+        .s2-stempel {
+          position: absolute;
+          left: 236px;
+          top: 30px;
+          padding: 4px 16px 6px;
+          border: 5px solid #ca2c35;
+          border-radius: 10px;
+          color: #ca2c35;
+          font-size: 44px;
+          font-weight: 900;
+          letter-spacing: 0.06em;
+          line-height: 1.1;
+          opacity: 0.92;
+        }
+        .s2-drucker {
+          position: absolute;
+          left: 290px;
+          top: 1280px;
+          width: 660px;
+          height: 190px;
+        }
+      </style>
+      <div id="root" data-composition-id="s2-kosten" data-width="1080" data-height="1920" data-duration="4.5">
+        <div class="s2-foto"><img id="s2-bild" src="assets/img/kosten.jpg" alt="" /></div>
+        <div class="s2-schleier0"></div>
+        <div class="s2-schleier1"></div>
+        <div class="s2-strich"></div>
+        <div class="s2-kopf">
+          <span class="s2-zeile"><span class="s2-w" id="s2-l0w0">Keine</span></span>
+          <span class="s2-zeile"><span class="s2-w" id="s2-l1w0">Kreditrate</span> <span class="s2-w" id="s2-l1w1">mehr.</span></span>
+          <span class="s2-zeile rot"><span class="s2-w" id="s2-l2w0">Aber</span> <span class="s2-w" id="s2-l2w1">die</span> <span class="s2-w" id="s2-l2w2">Kosten</span></span>
+          <span class="s2-zeile rot"><span class="s2-w" id="s2-l3w0">bleiben.</span></span>
+        </div>
+        <div class="s2-fenster">
+          <div class="s2-bonflug" id="s2-bonflug" style="position: absolute; inset: 0">
+            <div class="s2-schatten" id="s2-schatten"></div>
+            <div class="s2-bon" id="s2-bon">
+              <div class="s2-reihe kopf" style="top: 34px; height: 70px"><span class="s2-txt">Kreditrate</span></div>
+              <div class="s2-stempel" id="s2-stempel">ABBEZAHLT</div>
+              <div class="s2-trenn" style="top: 112px"></div>
+              <div class="s2-reihe" style="top: 122px; height: 60px"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 13v22M19 11v26M25 11v26M31 11v26M37 13v22"/><path d="M9.5 17h31M9.5 31h31"/><path d="M15 37v3.5M35 37v3.5"/></svg><span class="s2-txt">Heizung und Energie</span></div>
+              <div class="s2-fein" style="top: 182px"></div>
+              <div class="s2-reihe" style="top: 182px; height: 60px"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 23 24 9l17 14"/><path d="M11 20v19h26V20"/><path d="M20 39V29h8v10"/></svg><span class="s2-txt">Grundsteuer</span></div>
+              <div class="s2-fein" style="top: 242px"></div>
+              <div class="s2-reihe" style="top: 242px; height: 60px"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6 39 11.5V23c0 9.5-6.5 15.5-15 19-8.5-3.5-15-9.5-15-19V11.5Z"/><path d="m17 23.5 5 5 9.5-10"/></svg><span class="s2-txt">Versicherungen</span></div>
+              <div class="s2-fein" style="top: 302px"></div>
+              <div class="s2-reihe" style="top: 302px; height: 98px"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M30.5 8.5a8.5 8.5 0 0 0-8.9 11.3L9.3 32.1a3.6 3.6 0 0 0 5.1 5.1L26.7 25a8.5 8.5 0 0 0 11.3-8.9l-5.3 5.3-4.6-1.3-1.3-4.6Z"/></svg><span class="s2-txt">Reparaturen und<br />Instandhaltung</span></div>
+              <div class="s2-fein" style="top: 400px"></div>
+              <div class="s2-reihe" style="top: 400px; height: 60px"><svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true" fill="none" stroke="#323c44" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="12" rx="12" ry="5"/><path d="M12 12v8c0 2.8 5.4 5 12 5s12-2.2 12-5v-8"/><path d="M12 20v8c0 2.8 5.4 5 12 5s12-2.2 12-5v-8"/><path d="M12 28v8c0 2.8 5.4 5 12 5s12-2.2 12-5v-8"/></svg><span class="s2-txt">Modernisierungen</span></div>
+              <div class="s2-trenn" style="top: 468px"></div>
+              <div class="s2-reihe summe" style="top: 478px; height: 82px"><span class="s2-txt">Summe</span><span class="s2-frage" id="s2-frage">?</span></div>
+            </div>
+          </div>
+        </div>
+        <svg class="s2-drucker" id="s2-drucker" viewBox="0 0 660 190" aria-hidden="true"><rect x="0" y="10" width="660" height="180" rx="28" fill="#323c44" /><rect x="22" y="0" width="616" height="26" rx="13" fill="#20282e" /><rect x="44" y="11" width="572" height="5" rx="2.5" fill="#0f1417" /></svg>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s2-bild", { scale: 1 }, { scale: 1.04, duration: 4.5, ease: "power1.inOut" }, 0);
+          tl.fromTo("#s2-l2w0", { y: 24, scale: 1.1071 }, { y: 0, scale: 1, duration: 0.45, ease: "power3.inOut" }, 0);
+          tl.fromTo("#s2-l0w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.100);
+          tl.fromTo("#s2-l1w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.170);
+          tl.fromTo("#s2-l1w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.240);
+          tl.fromTo("#s2-l2w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.500);
+          tl.fromTo("#s2-l2w2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.570);
+          tl.fromTo("#s2-l3w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.640);
+          tl.fromTo("#s2-drucker", { y: 700 }, { y: 0, duration: 0.4, ease: "power3.out" }, 0.15);
+          tl.set(["#s2-bon", "#s2-schatten"], { y: 584 }, 0);
+          tl.to(["#s2-bon", "#s2-schatten"], { y: 462, duration: 0.13, ease: "power2.out" }, 0.750);
+          tl.fromTo("#s2-stempel", { opacity: 0, scale: 1.6, rotation: -16, filter: "blur(6px)" }, { opacity: 0.92, scale: 1, rotation: -8, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 1.125);
+          tl.to(["#s2-bon", "#s2-schatten"], { y: 402, duration: 0.13, ease: "power2.out" }, 1.500);
+          tl.to(["#s2-bon", "#s2-schatten"], { y: 342, duration: 0.13, ease: "power2.out" }, 1.875);
+          tl.to(["#s2-bon", "#s2-schatten"], { y: 282, duration: 0.13, ease: "power2.out" }, 2.250);
+          tl.to(["#s2-bon", "#s2-schatten"], { y: 184, duration: 0.13, ease: "power2.out" }, 2.625);
+          tl.to(["#s2-bon", "#s2-schatten"], { y: 124, duration: 0.13, ease: "power2.out" }, 3.000);
+          tl.to(["#s2-bon", "#s2-schatten"], { y: 0, duration: 0.13, ease: "power2.out" }, 3.375);
+          tl.fromTo("#s2-frage", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.2)" }, 3.555);
+          tl.to("#s2-bonflug", { y: -16, duration: 0.06, ease: "power2.out" }, 4.2);
+          tl.to("#s2-bonflug", { y: -1500, x: 240, rotation: 14, duration: 0.26, ease: "power2.in" }, 4.26);
+          tl.to("#s2-drucker", { y: 320, duration: 0.22, ease: "power2.in" }, 4.26);
+          tl.to(["#s2-l0w0", "#s2-l1w0", "#s2-l1w1", "#s2-l2w0", "#s2-l2w1", "#s2-l2w2", "#s2-l3w0"], { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 4.220);
+          window.__timelines["s2-kosten"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
