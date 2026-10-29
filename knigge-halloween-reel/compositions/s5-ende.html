@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s5-ende-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        .s5-titel {
+          position: absolute;
+          left: 72px;
+          right: 60px;
+          top: 212px;
+          font-size: 96px;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          line-height: 1.02;
+          color: #323c44;
+        }
+        .s5-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+        .s5-zeile.rot {
+          color: #ca2c35;
+        }
+        .s5-w {
+          display: inline-block;
+        }
+        .s5-cta {
+          position: absolute;
+          left: 72px;
+          top: 452px;
+          width: 686px;
+          height: 96px;
+          border-radius: 22px;
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 48px;
+          font-weight: 800;
+          line-height: 96px;
+          text-align: center;
+          box-shadow: 0 12px 26px rgba(202, 44, 53, 0.3);
+        }
+        .s5-url {
+          position: absolute;
+          left: 72px;
+          top: 574px;
+          font-size: 46px;
+          font-weight: 700;
+          color: #323c44;
+          white-space: nowrap;
+        }
+        .s5-facet {
+          position: absolute;
+        }
+        .s5-facet svg,
+        .s5-wort svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .s5-wort {
+          position: absolute;
+          left: 186.2px;
+          top: 678px;
+          width: 323.5px;
+          height: 95.1px;
+        }
+        .s5-wort text {
+          font-family: "Montserrat", sans-serif;
+          fill: #323c44;
+        }
+      </style>
+      <div id="root" data-composition-id="s5-ende" data-width="1080" data-height="1920" data-duration="6.0">
+        <div class="s5-titel">
+          <span class="s5-zeile"><span class="s5-w" id="s5-l0w0">Jedes</span> <span class="s5-w" id="s5-l0w1">Haus</span> <span class="s5-w" id="s5-l0w2">verdient</span></span>
+          <span class="s5-zeile rot"><span class="s5-w" id="s5-l1w0">ein</span> <span class="s5-w" id="s5-l1w1">zweites</span> <span class="s5-w" id="s5-l1w2">Leben.</span></span>
+        </div>
+        <div class="s5-cta" id="s5-cta">Kostenlose Wertermittlung</div>
+        <div class="s5-url" id="s5-url">knigge-immobilien.de</div>
+        <div class="s5-facet" id="s5-fA" style="left: 72px; top: 678px; width: 95.1px; height: 95.1px; transform-origin: 26.50% 33.33%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s5-gA" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6"><stop offset="0" stop-color="#5e0f18" /><stop offset="0.56" stop-color="#a4222b" /><stop offset="0.8" stop-color="#c12a33" /><stop offset="0.93" stop-color="#ca2c35" /></linearGradient></defs><polygon points="0,0 79.5,0 0,100" fill="url(#s5-gA)" /></svg></div>
+        <div class="s5-facet" id="s5-fR" style="left: 72px; top: 678px; width: 95.1px; height: 95.1px; transform-origin: 81.57% 42.21%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s5-gR" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0"><stop offset="0" stop-color="#4a0a13" /><stop offset="1" stop-color="#b0252e" /></linearGradient></defs><polygon points="79.5,0 100,0 100,100 47.5,40.2" fill="url(#s5-gR)" /></svg></div>
+        <div class="s5-facet" id="s5-fB" style="left: 72px; top: 678px; width: 95.1px; height: 95.1px; transform-origin: 49.17% 80.07%"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="s5-gB" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100"><stop offset="0" stop-color="#480a12" /><stop offset="0.5" stop-color="#a2222b" /><stop offset="0.85" stop-color="#ca2c35" /></linearGradient></defs><polygon points="0,100 47.5,40.2 100,100" fill="url(#s5-gB)" /></svg></div>
+        <div class="s5-wort" id="s5-wort"><svg viewBox="120 0 340 100" aria-hidden="true"><text x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing">KNIGGE</text><text x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing">IMMOBILIEN</text></svg></div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s5-l0w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.250);
+          tl.fromTo("#s5-l0w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.320);
+          tl.fromTo("#s5-l0w2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.390);
+          tl.fromTo("#s5-l1w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.460);
+          tl.fromTo("#s5-l1w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.530);
+          tl.fromTo("#s5-l1w2", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.600);
+          tl.fromTo("#s5-cta", { clipPath: "inset(0% 100% 0% 0% round 22px)" }, { clipPath: "inset(0% 0% 0% 0% round 22px)", duration: 0.36, ease: "power3.out" }, 1.5);
+          tl.fromTo("#s5-url", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 1.950);
+          tl.fromTo("#s5-fA", { x: -90, y: -20, rotation: -16, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 2.58);
+          tl.fromTo("#s5-fR", { x: 70, y: -60, rotation: 14, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 2.62);
+          tl.fromTo("#s5-fB", { x: 20, y: 80, rotation: 10, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 2.66);
+          tl.fromTo("#s5-wort", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.out" }, 3.0);
+          window.__timelines["s5-ende"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

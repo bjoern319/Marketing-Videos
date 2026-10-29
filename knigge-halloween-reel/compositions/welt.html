@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="welt-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        #welt-kamera {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1080px;
+          height: 1920px;
+          transform-origin: 0 0;
+        }
+        #welt-svg {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1080px;
+          height: 1920px;
+          overflow: visible;
+        }
+        .welt-schild {
+          position: absolute;
+          left: 88px;
+          top: 1226px;
+          width: 236px;
+          height: 250px;
+          transform-origin: 50% 100%;
+        }
+        .welt-schild-pfosten {
+          position: absolute;
+          left: 110px;
+          top: 110px;
+          width: 16px;
+          height: 140px;
+          background: #5b4636;
+          border-radius: 4px;
+        }
+        .welt-schild-brett {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 236px;
+          height: 120px;
+          background: #ffffff;
+          border: 6px solid #ca2c35;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+        }
+        .welt-band {
+          position: absolute;
+          left: 6px;
+          top: 36px;
+          width: 224px;
+          height: 54px;
+          background: #ca2c35;
+          color: #ffffff;
+          font-size: 36px;
+          font-weight: 900;
+          letter-spacing: 0.06em;
+          line-height: 54px;
+          text-align: center;
+          border-radius: 6px;
+        }
+        .figur {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+        .figur svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        #herbert {
+          left: -100px;
+          top: -120px;
+          width: 200px;
+          height: 240px;
+        }
+        #kind {
+          left: -80px;
+          top: -107px;
+          width: 160px;
+          height: 214px;
+        }
+        #spinne {
+          left: -80px;
+          top: -60px;
+          width: 160px;
+          height: 120px;
+        }
+
+      </style>
+      <div id="root" data-composition-id="welt" data-width="1080" data-height="1920" data-duration="28.0">
+        <div id="welt-kamera" data-layout-allow-overflow>
+          <svg id="welt-svg" viewBox="0 0 1080 1920" aria-hidden="true" data-layout-allow-overflow>
+<rect x="-600" y="-900" width="2280" height="3600" class="t-himmel" fill="#26303a" />
+<g id="sterne"><circle cx="80" cy="210" r="2.2" fill="#e8e0c4" /><circle cx="190" cy="330" r="3.0" fill="#e8e0c4" /><circle cx="320" cy="180" r="3.8" fill="#e8e0c4" /><circle cx="430" cy="420" r="2.2" fill="#e8e0c4" /><circle cx="610" cy="260" r="3.0" fill="#e8e0c4" /><circle cx="960" cy="240" r="3.8" fill="#e8e0c4" /><circle cx="1010" cy="520" r="2.2" fill="#e8e0c4" /><circle cx="140" cy="560" r="3.0" fill="#e8e0c4" /><circle cx="520" cy="120" r="3.8" fill="#e8e0c4" /><circle cx="700" cy="560" r="2.2" fill="#e8e0c4" /><circle cx="880" cy="640" r="3.0" fill="#e8e0c4" /><circle cx="260" cy="680" r="3.8" fill="#e8e0c4" /><circle cx="40" cy="760" r="2.2" fill="#e8e0c4" /><circle cx="1040" cy="760" r="3.0" fill="#e8e0c4" /><circle cx="380" cy="600" r="3.8" fill="#e8e0c4" /><circle cx="590" cy="690" r="2.2" fill="#e8e0c4" /></g>
+<g id="mond"><circle cx="860" cy="560" r="88" fill="#efe6c8" /><circle cx="834" cy="542" r="15" fill="#e2d7b3" /><circle cx="886" cy="588" r="11" fill="#e2d7b3" /><circle cx="860" cy="610" r="7" fill="#e2d7b3" /></g>
+<circle id="sonne" cx="900" cy="620" r="84" fill="#ffd166" />
+<g id="fm0"><path d="M0 0 C6 -9 14 -11 20 -4 C24 -13 30 -13 32 -6 C34 -13 40 -13 44 -4 C50 -11 58 -9 64 0 C56 -2 50 2 46 9 C40 4 36 6 32 13 C28 6 24 4 18 9 C14 2 8 -2 0 0 Z" fill="#11171b" transform="translate(-32 0)" /></g>
+<g id="fm1"><path d="M0 0 C6 -9 14 -11 20 -4 C24 -13 30 -13 32 -6 C34 -13 40 -13 44 -4 C50 -11 58 -9 64 0 C56 -2 50 2 46 9 C40 4 36 6 32 13 C28 6 24 4 18 9 C14 2 8 -2 0 0 Z" fill="#11171b" transform="translate(-32 0)" /></g>
+<g id="fm2"><path d="M0 0 C6 -9 14 -11 20 -4 C24 -13 30 -13 32 -6 C34 -13 40 -13 44 -4 C50 -11 58 -9 64 0 C56 -2 50 2 46 9 C40 4 36 6 32 13 C28 6 24 4 18 9 C14 2 8 -2 0 0 Z" fill="#11171b" transform="translate(-32 0)" /></g>
+<path d="M-600 1398 C -100 1390, 300 1372, 700 1382 C 900 1386, 1100 1372, 1700 1360 L1700 2700 L-600 2700 Z" class="t-huegel" fill="#1b2328" />
+<path d="M500 1400 H580 L680 2700 H400 Z" class="t-weg" fill="#2a3238" />
+<g id="baum"><path d="M150 1402 C152 1300 140 1200 146 1078" class="t-baum-s" stroke="#12191d" stroke-width="22" stroke-linecap="round" fill="none" /><path d="M146 1170 C112 1132 84 1110 48 1068" class="t-baum-s" stroke="#12191d" stroke-width="10" stroke-linecap="round" fill="none" /><path d="M148 1138 C182 1098 212 1086 248 1046" class="t-baum-s" stroke="#12191d" stroke-width="10" stroke-linecap="round" fill="none" /><path d="M145 1092 C132 1046 120 1012 98 982" class="t-baum-s" stroke="#12191d" stroke-width="8" stroke-linecap="round" fill="none" /><path d="M147 1104 C162 1056 178 1024 204 994" class="t-baum-s" stroke="#12191d" stroke-width="8" stroke-linecap="round" fill="none" /><path d="M100 984 C88 962 84 946 70 930" class="t-baum-s" stroke="#12191d" stroke-width="5" stroke-linecap="round" fill="none" /><path d="M204 994 C214 970 228 958 244 944" class="t-baum-s" stroke="#12191d" stroke-width="5" stroke-linecap="round" fill="none" /></g>
+<g id="laub"><circle class="blatt" cx="70" cy="1040" r="46" fill="#e9a23b" /><circle class="blatt" cx="130" cy="990" r="58" fill="#d9622b" /><circle class="blatt" cx="200" cy="1010" r="52" fill="#f2c14e" /><circle class="blatt" cx="250" cy="1060" r="40" fill="#e9a23b" /><circle class="blatt" cx="100" cy="1090" r="44" fill="#f2c14e" /><circle class="blatt" cx="175" cy="1080" r="48" fill="#e9a23b" /><circle class="blatt" cx="60" cy="960" r="36" fill="#d9622b" /><circle class="blatt" cx="225" cy="950" r="40" fill="#d9622b" /><circle class="blatt" cx="150" cy="930" r="44" fill="#e9a23b" /></g>
+<rect x="250" y="905" width="580" height="497" class="t-wand" fill="#3b474f" />
+<g id="risse" stroke="#2c363d" stroke-width="3" fill="none" stroke-linecap="round"><path d="M280 1120 l18 26 l-10 20 l16 30" /><path d="M790 1010 l-14 22 l8 16 l-12 28" /><path d="M620 1340 l12 -20 l-6 -18" /></g>
+<g opacity="0.08" stroke="#000" stroke-width="2"><path d="M250 1000 H830 M250 1100 H830 M250 1150 H830 M250 1340 H830" /></g>
+<polygon points="205,922 540,640 875,922" class="t-dach" fill="#1c2329" />
+<path d="M198 926 L540 634 L882 926" class="t-dachkante-s" stroke="#12181c" stroke-width="16" fill="none" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="680" y="690" width="60" height="120" class="t-kamin" fill="#2a3238" /><rect x="672" y="680" width="76" height="16" class="t-kamin" fill="#2a3238" />
+<circle cx="540" cy="820" r="40" class="t-fenster" fill="#161c20" /><circle cx="540" cy="820" r="40" fill="none" class="t-rahmen-s" stroke="#2a3238" stroke-width="8" /><path d="M540 780 V860 M500 820 H580" class="t-rahmen-s" stroke="#2a3238" stroke-width="6" />
+<rect x="252" y="965" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-OL-l" />
+<rect x="424" y="965" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-OL-r" />
+<rect x="300" y="965" width="120" height="130" class="t-fenster" fill="#161c20" />
+<clipPath id="fenster-ol-clip"><rect x="300" y="965" width="120" height="130" /></clipPath><g clip-path="url(#fenster-ol-clip)"><g id="familie"><circle cx="336" cy="1023" r="15" fill="#3a464e" /><path d="M312 1097 C312 1057 360 1057 360 1097 Z" fill="#3a464e" /><circle cx="384" cy="1017" r="16" fill="#46525a" /><path d="M358 1097 C358 1053 410 1053 410 1097 Z" fill="#46525a" /><rect id="familie-arm" x="402" y="1013" width="10" height="40" rx="5" fill="#46525a" /></g></g>
+<rect x="300" y="965" width="120" height="130" fill="none" class="t-rahmen-s" stroke="#2a3238" stroke-width="8" /><path d="M360.0 965 V1095 M300 1030.0 H420" class="t-rahmen-s" stroke="#2a3238" stroke-width="6" />
+<rect x="612" y="965" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-OR-l" />
+<rect x="784" y="965" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-OR-r" />
+<rect x="660" y="965" width="120" height="130" class="t-fenster" fill="#161c20" />
+<rect id="spuklicht" x="660" y="965" width="120" height="130" fill="#d8c27a" opacity="0.35" />
+<rect x="660" y="965" width="120" height="130" fill="none" class="t-rahmen-s" stroke="#2a3238" stroke-width="8" /><path d="M720.0 965 V1095 M660 1030.0 H780" class="t-rahmen-s" stroke="#2a3238" stroke-width="6" />
+<rect x="252" y="1175" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-UL-l" />
+<rect x="424" y="1175" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-UL-r" />
+<rect x="300" y="1175" width="120" height="130" class="t-fenster" fill="#161c20" />
+<rect x="300" y="1175" width="120" height="130" fill="none" class="t-rahmen-s" stroke="#2a3238" stroke-width="8" /><path d="M360.0 1175 V1305 M300 1240.0 H420" class="t-rahmen-s" stroke="#2a3238" stroke-width="6" />
+<rect x="612" y="1175" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-UR-l" />
+<rect x="784" y="1175" width="44" height="130" class="t-laden" fill="#2a343b" id="laden-UR-r" />
+<rect x="660" y="1175" width="120" height="130" class="t-fenster" fill="#161c20" />
+<rect x="660" y="1175" width="120" height="130" fill="none" class="t-rahmen-s" stroke="#2a3238" stroke-width="8" /><path d="M720.0 1175 V1305 M660 1240.0 H780" class="t-rahmen-s" stroke="#2a3238" stroke-width="6" />
+<g id="bretter"><rect x="274" y="1223" width="172" height="22" rx="3" fill="#5c4636" transform="rotate(18 360 1234)" /><rect x="274" y="1237" width="172" height="22" rx="3" fill="#6b5240" transform="rotate(-16 360 1248)" /></g>
+<rect x="480" y="1205" width="120" height="196" class="t-tuer" fill="#20282d" /><rect x="480" y="1205" width="120" height="196" fill="none" class="t-rahmen-s" stroke="#2a3238" stroke-width="8" /><circle cx="582" cy="1310" r="7" class="t-knauf" fill="#7d8378" /><rect x="458" y="1398" width="164" height="14" class="t-stufe" fill="#252d33" />
+<g id="spinnweben"><path d="M252 924 L344.0 924.0 M252 924 L337.0 959.2 M252 924 L317.1 989.1 M252 924 L287.2 1009.0 M252 924 L252.0 1016.0 M284.2 924.0 Q279.3 929.4 281.7 936.3 Q275.1 939.4 274.8 946.8 Q267.4 947.1 264.3 953.7 Q257.4 951.3 252.0 956.2 M309.0 924.0 Q300.3 933.6 304.7 945.8 Q292.9 951.4 292.3 964.3 Q279.4 964.9 273.8 976.7 Q261.6 972.3 252.0 981.0 M334.8 924.0 Q322.1 937.9 328.5 955.7 Q311.4 963.7 310.5 982.5 Q291.7 983.4 283.7 1000.5 Q265.9 994.1 252.0 1006.8 " stroke="#c9d1d6" stroke-width="2" fill="none" opacity="0.8" /><path d="M600 1207 L600.0 1277.0 M600 1207 L573.2 1271.7 M600 1207 L550.5 1256.5 M600 1207 L535.3 1233.8 M600 1207 L530.0 1207.0 M600.0 1231.5 Q595.9 1227.7 590.6 1229.6 Q588.3 1224.6 582.7 1224.3 Q582.4 1218.7 577.4 1216.4 Q579.3 1211.1 575.5 1207.0 M600.0 1250.4 Q592.7 1243.7 583.4 1247.1 Q579.2 1238.1 569.3 1237.7 Q568.9 1227.8 559.9 1223.6 Q563.3 1214.3 556.6 1207.0 M600.0 1270.0 Q589.4 1260.3 575.9 1265.2 Q569.8 1252.2 555.5 1251.5 Q554.8 1237.2 541.8 1231.1 Q546.7 1217.6 537.0 1207.0 " stroke="#c9d1d6" stroke-width="2" fill="none" opacity="0.8" /></g>
+<g id="kuerbis"><ellipse cx="410" cy="1366" rx="48" ry="38" fill="#e07b2a" /><path d="M390 1332 C380 1352 380 1384 392 1402 M430 1332 C440 1352 440 1384 428 1402" stroke="#c9661f" stroke-width="4" fill="none" /><rect x="404" y="1318" width="12" height="18" rx="4" fill="#5d7a3a" /><g id="kuerbis-boese" fill="#ffcf5a"><path d="M384 1352 l12 -14 l8 16 Z" /><path d="M418 1354 l10 -16 l10 14 Z" /><path d="M380 1374 l10 6 l8 -6 l8 6 l8 -6 l8 6 l8 -6 l8 6 l4 -6 l-4 16 h-56 Z" /></g><g id="kuerbis-froh" opacity="0"><circle cx="394" cy="1356" r="6" fill="#5b3a1d" /><circle cx="426" cy="1356" r="6" fill="#5b3a1d" /><path d="M390 1374 Q410 1392 430 1374" stroke="#5b3a1d" stroke-width="6" fill="none" stroke-linecap="round" /></g></g>
+<g id="zaun"><rect x="-200" y="1412" width="625" height="10" class="t-zaun" fill="#2c353b" /><rect x="640" y="1412" width="640" height="10" class="t-zaun" fill="#2c353b" /><path id="latte0" class="latte t-zaun" fill="#2c353b" d="M26 1462 V1400 L41 1384 L56 1400 V1462 Z" /><path id="latte1" class="latte t-zaun" fill="#2c353b" d="M78 1462 V1400 L93 1384 L108 1400 V1462 Z" /><path id="latte2" class="latte t-zaun" fill="#2c353b" d="M130 1462 V1400 L145 1384 L160 1400 V1462 Z" /><path id="latte3" class="latte t-zaun" fill="#2c353b" d="M182 1462 V1400 L197 1384 L212 1400 V1462 Z" /><path id="latte4" class="latte t-zaun" fill="#2c353b" d="M234 1462 V1400 L249 1384 L264 1400 V1462 Z" /><path id="latte5" class="latte t-zaun" fill="#2c353b" d="M286 1462 V1400 L301 1384 L316 1400 V1462 Z" /><path id="latte6" class="latte t-zaun" fill="#2c353b" d="M338 1462 V1400 L353 1384 L368 1400 V1462 Z" /><path id="latte7" class="latte t-zaun" fill="#2c353b" d="M390 1462 V1400 L405 1384 L420 1400 V1462 Z" /><path id="latte8" class="latte t-zaun" fill="#2c353b" d="M650 1462 V1400 L665 1384 L680 1400 V1462 Z" /><path id="latte9" class="latte t-zaun" fill="#2c353b" d="M702 1462 V1400 L717 1384 L732 1400 V1462 Z" /><path id="latte10" class="latte t-zaun" fill="#2c353b" d="M754 1462 V1400 L769 1384 L784 1400 V1462 Z" /><path id="latte11" class="latte t-zaun" fill="#2c353b" d="M806 1462 V1400 L821 1384 L836 1400 V1462 Z" /><path id="latte12" class="latte t-zaun" fill="#2c353b" d="M858 1462 V1400 L873 1384 L888 1400 V1462 Z" /><path id="latte13" class="latte t-zaun" fill="#2c353b" d="M910 1462 V1400 L925 1384 L940 1400 V1462 Z" /><path id="latte14" class="latte t-zaun" fill="#2c353b" d="M962 1462 V1400 L977 1384 L992 1400 V1462 Z" /><path id="latte15" class="latte t-zaun" fill="#2c353b" d="M1014 1462 V1400 L1029 1384 L1044 1400 V1462 Z" /></g>
+<g id="blumen"><g class="blume"><path d="M270 1392 V1418" stroke="#4f8a3c" stroke-width="4" /><circle cx="270" cy="1392" r="11" fill="#ca2c35" /><circle cx="270" cy="1392" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M300 1395 V1421" stroke="#4f8a3c" stroke-width="4" /><circle cx="300" cy="1395" r="11" fill="#f2c14e" /><circle cx="300" cy="1395" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M335 1390 V1416" stroke="#4f8a3c" stroke-width="4" /><circle cx="335" cy="1390" r="11" fill="#ffffff" /><circle cx="335" cy="1390" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M640 1393 V1419" stroke="#4f8a3c" stroke-width="4" /><circle cx="640" cy="1393" r="11" fill="#e9a23b" /><circle cx="640" cy="1393" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M680 1390 V1416" stroke="#4f8a3c" stroke-width="4" /><circle cx="680" cy="1390" r="11" fill="#ca2c35" /><circle cx="680" cy="1390" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M720 1394 V1420" stroke="#4f8a3c" stroke-width="4" /><circle cx="720" cy="1394" r="11" fill="#ffffff" /><circle cx="720" cy="1394" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M760 1391 V1417" stroke="#4f8a3c" stroke-width="4" /><circle cx="760" cy="1391" r="11" fill="#f2c14e" /><circle cx="760" cy="1391" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M800 1394 V1420" stroke="#4f8a3c" stroke-width="4" /><circle cx="800" cy="1394" r="11" fill="#ca2c35" /><circle cx="800" cy="1394" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M60 1440 V1466" stroke="#4f8a3c" stroke-width="4" /><circle cx="60" cy="1440" r="11" fill="#ca2c35" /><circle cx="60" cy="1440" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M330 1446 V1472" stroke="#4f8a3c" stroke-width="4" /><circle cx="330" cy="1446" r="11" fill="#f2c14e" /><circle cx="330" cy="1446" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M720 1450 V1476" stroke="#4f8a3c" stroke-width="4" /><circle cx="720" cy="1450" r="11" fill="#ffffff" /><circle cx="720" cy="1450" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M960 1440 V1466" stroke="#4f8a3c" stroke-width="4" /><circle cx="960" cy="1440" r="11" fill="#ca2c35" /><circle cx="960" cy="1440" r="4" fill="#f7d36a" /></g><g class="blume"><path d="M1010 1452 V1478" stroke="#4f8a3c" stroke-width="4" /><circle cx="1010" cy="1452" r="11" fill="#f2c14e" /><circle cx="1010" cy="1452" r="4" fill="#f7d36a" /></g></g>
+<g id="kartons"><rect x="618" y="1338" width="92" height="64" rx="4" fill="#c99a5b" /><path d="M664 1338 V1402" stroke="#b07f44" stroke-width="6" /><rect x="640" y="1292" width="70" height="48" rx="4" fill="#d6a868" /><path d="M675 1292 V1340" stroke="#b07f44" stroke-width="5" /></g>
+          </svg>
+          <div id="schild" class="welt-schild">
+            <div class="welt-schild-pfosten"></div>
+            <div class="welt-schild-brett" data-layout-ignore><svg viewBox="0 0 452 100" width="190" height="42" aria-hidden="true"><defs><linearGradient id="sg-a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="48.9" y2="39.6"><stop offset="0" stop-color="#5e0f18" /><stop offset="0.56" stop-color="#a4222b" /><stop offset="0.93" stop-color="#ca2c35" /></linearGradient><linearGradient id="sg-r" gradientUnits="userSpaceOnUse" x1="47.5" y1="40.2" x2="100" y2="0"><stop offset="0" stop-color="#4a0a13" /><stop offset="1" stop-color="#b0252e" /></linearGradient><linearGradient id="sg-b" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="100" y2="100"><stop offset="0" stop-color="#480a12" /><stop offset="0.5" stop-color="#a2222b" /><stop offset="0.85" stop-color="#ca2c35" /></linearGradient></defs><path d="M0 0 H79.5 L0 100 Z" fill="url(#sg-a)" /><path d="M79.5 0 H100 V100 L47.5 40.2 Z" fill="url(#sg-r)" /><path d="M0 100 L47.5 40.2 L100 100 Z" fill="url(#sg-b)" /><text x="125.2" y="53" font-size="77" font-weight="700" textLength="328.5" lengthAdjust="spacing" fill="#323c44" font-family="Montserrat, sans-serif">KNIGGE</text><text x="125.5" y="100" font-size="44.3" font-weight="400" textLength="330.5" lengthAdjust="spacing" fill="#323c44" font-family="Montserrat, sans-serif">IMMOBILIEN</text></svg></div>
+            <div class="welt-band" id="schild-band">VERKAUFT</div>
+          </div>
+        </div>
+        <div class="figur" id="spinne" data-layout-ignore><svg viewBox="-80 -60 160 120" aria-hidden="true">
+              <path d="M0 -2600 V-26" stroke="#aab2b7" stroke-width="2" />
+              <g id="spinne-beine"><path d="M-16 6 Q-46 -12 -62 24" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M-16 10 Q-52 -2 -68 35" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M-16 14 Q-52 8 -68 46" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M-16 18 Q-46 18 -62 57" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M16 6 Q46 -12 62 24" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M16 10 Q52 -2 68 35" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M16 14 Q52 8 68 46" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /><path d="M16 18 Q46 18 62 57" stroke="#1d2328" stroke-width="5" fill="none" stroke-linecap="round" /></g>
+              <ellipse cx="0" cy="12" rx="22" ry="20" fill="#1d2328" />
+              <circle cx="0" cy="-14" r="13" fill="#1d2328" />
+              <circle cx="-5" cy="-15" r="4.5" fill="#ffffff" /><circle cx="5" cy="-15" r="4.5" fill="#ffffff" />
+              <rect x="-11" y="-21" width="22" height="6" fill="#1d2328" />
+            </svg></div>
+        <div class="figur" id="herbert" data-layout-ignore><svg viewBox="0 0 200 240" aria-hidden="true">
+              <g id="herbert-koffer" opacity="0"><rect x="150" y="150" width="58" height="44" rx="6" fill="#a9443c" /><path d="M166 150 v-10 h26 v10" stroke="#7a2f2a" stroke-width="5" fill="none" /><rect x="150" y="166" width="58" height="5" fill="#7a2f2a" /></g>
+              <path id="herbert-arm-l" d="M30 112 Q2 118 6 140 Q12 154 34 142" fill="#f8f5ee" />
+              <path id="herbert-arm-r" d="M170 112 Q198 118 194 140 Q188 154 166 142" fill="#f8f5ee" />
+              <path d="M100 12 C150 12 176 52 176 104 L176 198 Q163 224 148 204 Q133 228 117 204 Q100 230 84 204 Q68 228 53 204 Q38 224 24 198 L24 104 C24 52 50 12 100 12 Z" fill="#f8f5ee" />
+              <path d="M150 30 C170 52 176 80 176 104 L176 198 Q163 224 148 204 C156 150 160 80 150 30 Z" fill="#e5dfd1" />
+              <ellipse cx="64" cy="118" rx="12" ry="7" fill="#f2b8b2" opacity="0.8" />
+              <ellipse cx="136" cy="118" rx="12" ry="7" fill="#f2b8b2" opacity="0.8" />
+              <g id="herbert-augen"><g id="herbert-pupillen">
+                <ellipse cx="76" cy="86" rx="13" ry="19" fill="#1d2328" /><ellipse cx="124" cy="86" rx="13" ry="19" fill="#1d2328" />
+                <circle cx="80" cy="78" r="4.5" fill="#ffffff" /><circle cx="128" cy="78" r="4.5" fill="#ffffff" /></g></g>
+              <path id="herbert-brauen" d="M58 70 L88 60 M142 70 L112 60" stroke="#1d2328" stroke-width="5" stroke-linecap="round" opacity="0" />
+              <ellipse id="herbert-mund-o" cx="100" cy="134" rx="15" ry="19" fill="#1d2328" />
+              <path id="herbert-mund-flach" d="M86 134 Q100 130 114 134" stroke="#1d2328" stroke-width="6" stroke-linecap="round" fill="none" opacity="0" />
+              <path id="herbert-mund-lachen" d="M80 126 Q100 156 120 126 Z" fill="#1d2328" opacity="0" />
+              <ellipse id="herbert-mund-schrei" cx="100" cy="140" rx="22" ry="30" fill="#1d2328" opacity="0" />
+            </svg></div>
+        <div class="figur" id="kind" data-layout-ignore><svg viewBox="0 0 160 214" aria-hidden="true">
+              <g id="kind-schuh-l"><ellipse cx="58" cy="196" rx="20" ry="11" fill="#ca2c35" /><rect x="38" y="200" width="40" height="6" rx="3" fill="#ffffff" /></g>
+              <g id="kind-schuh-r"><ellipse cx="102" cy="196" rx="20" ry="11" fill="#ca2c35" /><rect x="82" y="200" width="40" height="6" rx="3" fill="#ffffff" /></g>
+              <path d="M80 10 C122 10 140 42 142 86 L150 174 Q132 186 114 176 Q97 188 80 178 Q63 188 46 176 Q28 186 10 174 L18 86 C20 42 38 10 80 10 Z" fill="#ffffff" stroke="#d8d2c4" stroke-width="2" />
+              <path d="M48 120 C56 140 52 160 46 176 M112 120 C104 142 110 160 114 176" stroke="#e4ded2" stroke-width="3" fill="none" />
+              <ellipse cx="62" cy="72" rx="10" ry="13" fill="#1d2328" /><ellipse cx="98" cy="72" rx="10" ry="13" fill="#1d2328" />
+            </svg></div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.set("#welt-kamera", { x: 0.00, y: 0.00, scale: 1.0 }, 0);
+          tl.set("#herbert-arm-l", { transformOrigin: "100% 20%" }, 0);
+          tl.set("#herbert-arm-r", { transformOrigin: "0% 20%" }, 0);
+          tl.set("#herbert-augen", { transformOrigin: "50% 50%" }, 0);
+          tl.set("#spinne-beine", { transformOrigin: "50% 30%" }, 0);
+          tl.set("#familie-arm", { transformOrigin: "50% 90%" }, 0);
+          tl.set("#laden-OL-l", { rotation: 24, transformOrigin: "100% 0%" }, 0);
+          tl.set("#latte0", { rotation: 0, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte1", { rotation: -9, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte2", { rotation: 6, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte3", { rotation: -14, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte4", { rotation: 3, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte5", { rotation: 11, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte6", { rotation: -5, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte7", { rotation: 8, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte8", { rotation: 0, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte9", { rotation: -9, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte10", { rotation: 6, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte11", { rotation: -14, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte12", { rotation: 3, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte13", { rotation: 11, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte14", { rotation: -5, transformOrigin: "50% 100%" }, 0);
+          tl.set("#latte15", { rotation: 8, transformOrigin: "50% 100%" }, 0);
+          tl.to("#welt-kamera", { x: -405.00, y: -390.00, scale: 1.35, duration: 0.95, ease: "power2.in" }, 1.2);
+          tl.to("#welt-kamera", { x: -87.20, y: -137.60, scale: 1.12, duration: 0.6, ease: "power2.inOut" }, 4.0);
+          tl.to("#welt-kamera", { x: 43.20, y: 40.00, scale: 0.92, duration: 0.8, ease: "power2.inOut" }, 10.0);
+          tl.to("#welt-kamera", { x: 0.00, y: 0.00, scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 13.0);
+          tl.to("#welt-kamera", { x: 118.80, y: 304.80, scale: 0.78, duration: 0.7, ease: "power2.inOut" }, 22.0);
+          tl.fromTo("#fm0", { x: 1180, y: 300 }, { x: -140, y: 240, duration: 1.6, ease: "none" }, 0.25);
+          tl.set("#fm0", { opacity: 0 }, 1.87);
+          tl.fromTo("#fm0 path", { scaleY: 1, transformOrigin: "50% 50%" }, { scaleY: 0.35, duration: 0.12, ease: "sine.inOut", yoyo: true, repeat: 13 }, 0.25);
+          tl.fromTo("#fm1", { x: 1180, y: 380 }, { x: -140, y: 320, duration: 1.6, ease: "none" }, 0.55);
+          tl.set("#fm1", { opacity: 0 }, 2.17);
+          tl.fromTo("#fm1 path", { scaleY: 1, transformOrigin: "50% 50%" }, { scaleY: 0.35, duration: 0.12, ease: "sine.inOut", yoyo: true, repeat: 13 }, 0.55);
+          tl.fromTo("#fm2", { x: 1180, y: 250 }, { x: -140, y: 190, duration: 1.6, ease: "none" }, 0.85);
+          tl.set("#fm2", { opacity: 0 }, 2.47);
+          tl.fromTo("#fm2 path", { scaleY: 1, transformOrigin: "50% 50%" }, { scaleY: 0.35, duration: 0.12, ease: "sine.inOut", yoyo: true, repeat: 13 }, 0.85);
+          tl.to("#spuklicht", { opacity: 0.7, duration: 0.05, ease: "none" }, 0.3);
+          tl.to("#spuklicht", { opacity: 0.2, duration: 0.05, ease: "none" }, 0.5);
+          tl.to("#spuklicht", { opacity: 0.6, duration: 0.05, ease: "none" }, 0.62);
+          tl.to("#spuklicht", { opacity: 0.25, duration: 0.05, ease: "none" }, 1.1);
+          tl.to("#spuklicht", { opacity: 0.75, duration: 0.05, ease: "none" }, 1.4);
+          tl.to("#spuklicht", { opacity: 0.3, duration: 0.05, ease: "none" }, 1.9);
+          tl.to("#spuklicht", { opacity: 0.9, duration: 0.05, ease: "none" }, 2.15);
+          tl.to("#spuklicht", { opacity: 0.4, duration: 0.3, ease: "power1.out" }, 2.6);
+          tl.set("#herbert", { x: 567.0, y: 1000.5, scale: 0.18, opacity: 0 }, 0);
+          tl.set("#herbert", { opacity: 1 }, 2.12);
+          tl.to("#herbert", { x: 540, y: 1090, scale: 2.1, duration: 0.24, ease: "back.out(2.2)" }, 2.14);
+          tl.fromTo("#herbert svg", { scaleX: 1, scaleY: 1 }, { scaleX: 0.88, scaleY: 1.16, duration: 0.1, ease: "power2.out", transformOrigin: "50% 100%" }, 2.14);
+          tl.to("#herbert svg", { scaleX: 1, scaleY: 1, duration: 0.3, ease: "elastic.out(1, 0.45)" }, 2.26);
+          tl.fromTo("#herbert-arm-l", { rotation: 0 }, { rotation: -55, duration: 0.14, ease: "back.out(2)" }, 2.16);
+          tl.fromTo("#herbert-arm-r", { rotation: 0 }, { rotation: 55, duration: 0.14, ease: "back.out(2)" }, 2.19);
+          tl.to("#herbert-pupillen", { x: -9, duration: 0.16, ease: "power2.out" }, 2.85);
+          tl.to("#herbert-pupillen", { x: 9, duration: 0.2, ease: "power2.inOut" }, 3.18);
+          tl.to("#herbert-pupillen", { x: 0, y: 4, duration: 0.2, ease: "power2.inOut" }, 3.5);
+          tl.to("#herbert-arm-l", { rotation: 18, duration: 0.3, ease: "power2.inOut" }, 3.45);
+          tl.to("#herbert-arm-r", { rotation: -14, duration: 0.34, ease: "power2.inOut" }, 3.5);
+          tl.to("#herbert svg", { scaleY: 0.9, scaleX: 1.05, duration: 0.3, ease: "power2.inOut" }, 3.5);
+          tl.set("#herbert-mund-o", { opacity: 0 }, 3.5);
+          tl.set("#herbert-mund-flach", { opacity: 1 }, 3.5);
+          tl.to("#herbert-brauen", { opacity: 1, duration: 0.15 }, 3.5);
+          tl.to("#herbert", { x: 330, y: 1150, scale: 1.9, duration: 0.6, ease: "power2.inOut" }, 4.0);
+          tl.to("#herbert svg", { scaleY: 1, scaleX: 1, duration: 0.4, ease: "power2.out" }, 4.0);
+          tl.fromTo("#herbert svg", { y: 0 }, { y: -12, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 3 }, 4.6);
+          tl.set("#herbert-mund-o", { opacity: 1 }, 4.30);
+          tl.set("#herbert-mund-flach", { opacity: 0 }, 4.30);
+          tl.set("#herbert-mund-o", { opacity: 0 }, 4.46);
+          tl.set("#herbert-mund-flach", { opacity: 1 }, 4.46);
+          tl.set("#herbert-mund-o", { opacity: 1 }, 4.62);
+          tl.set("#herbert-mund-flach", { opacity: 0 }, 4.62);
+          tl.set("#herbert-mund-o", { opacity: 0 }, 4.78);
+          tl.set("#herbert-mund-flach", { opacity: 1 }, 4.78);
+          tl.set("#herbert-mund-o", { opacity: 1 }, 6.70);
+          tl.set("#herbert-mund-flach", { opacity: 0 }, 6.70);
+          tl.set("#herbert-mund-o", { opacity: 0 }, 6.86);
+          tl.set("#herbert-mund-flach", { opacity: 1 }, 6.86);
+          tl.set("#herbert-mund-o", { opacity: 1 }, 7.02);
+          tl.set("#herbert-mund-flach", { opacity: 0 }, 7.02);
+          tl.set("#herbert-mund-o", { opacity: 0 }, 7.18);
+          tl.set("#herbert-mund-flach", { opacity: 1 }, 7.18);
+          tl.fromTo("#spinne", { x: 905, y: -200, scale: 1.6 }, { y: 1010, duration: 0.42, ease: "power2.in" }, 7.3);
+          tl.to("#spinne", { y: 990, duration: 0.25, ease: "back.out(3)" }, 7.72);
+          tl.to("#herbert-pupillen", { x: 10, y: 0, duration: 0.18, ease: "power2.out" }, 7.5);
+          tl.to("#herbert", { rotation: 8, duration: 0.18, ease: "power2.out" }, 7.75);
+          tl.set("#herbert-mund-flach", { opacity: 0 }, 7.78);
+          tl.set("#herbert-mund-o", { opacity: 1, scale: 0.6, transformOrigin: "50% 50%" }, 7.78);
+          tl.set("#herbert-mund-o", { opacity: 0 }, 8.1);
+          tl.set("#herbert-mund-flach", { opacity: 1 }, 8.1);
+          tl.to("#herbert", { rotation: 0, duration: 0.3, ease: "power2.inOut" }, 8.2);
+          tl.fromTo("#spinne-beine", { scaleY: 1, y: 0 }, { scaleY: 1.25, y: -8, duration: 0.16, ease: "power2.out" }, 8.3);
+          tl.to("#spinne-beine", { scaleY: 1, y: 0, duration: 0.24, ease: "power2.inOut" }, 8.62);
+          tl.to("#spinne", { y: -260, duration: 0.6, ease: "power2.in" }, 9.3);
+          tl.to("#herbert", { x: 374.4, y: 987.6, scale: 0.32, rotation: 0, duration: 0.8, ease: "power2.inOut" }, 10.0);
+          tl.set("#herbert-mund-o", { scale: 1 }, 10.0);
+          tl.to("#herbert", { x: 360.0, y: 1030.0, scale: 0.35, duration: 0.6, ease: "power2.inOut" }, 13.0);
+          tl.to("#herbert-brauen", { opacity: 0, duration: 0.1 }, 13.3);
+          tl.set("#herbert-mund-flach", { opacity: 0 }, 13.3);
+          tl.set("#herbert-mund-o", { opacity: 1 }, 13.3);
+          tl.fromTo("#herbert-augen", { scale: 1 }, { scale: 1.25, duration: 0.15, ease: "back.out(2)" }, 13.3);
+          tl.to("#herbert-augen", { scale: 1, duration: 0.3, ease: "power2.out" }, 14.0);
+          tl.set("#herbert-mund-o", { opacity: 0 }, 14.0);
+          tl.set("#herbert-mund-lachen", { opacity: 1 }, 14.0);
+          tl.to("#welt-kamera", { x: -318.00, y: -1069.50, scale: 1.65, duration: 0.7, ease: "power2.inOut" }, 15.3);
+          tl.to("#herbert", { x: 391.5, y: 1012.8, scale: 1.023, duration: 0.7, ease: "power2.inOut" }, 15.3);
+          tl.to("#herbert-pupillen", { x: 9, duration: 0.2, ease: "power2.out" }, 16.1);
+          tl.fromTo("#kind", { x: 1300, y: 1075.5, scale: 1.237 }, { x: 754.5, duration: 0.7, ease: "power1.out" }, 16.0);
+          tl.to("#kind-schuh-l", { y: -10, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 1 }, 16.00);
+          tl.to("#kind-schuh-r", { y: -10, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 1 }, 16.14);
+          tl.to("#kind-schuh-l", { y: -10, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 1 }, 16.28);
+          tl.to("#kind-schuh-r", { y: -10, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 1 }, 16.42);
+          tl.to("#kind-schuh-l", { y: -10, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 1 }, 16.56);
+          tl.fromTo("#kind svg", { y: 0 }, { y: -10, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 9 }, 16.0);
+          tl.fromTo("#kind svg", { scaleY: 1, scaleX: 1 }, { scaleY: 1.12, scaleX: 0.94, duration: 0.1, ease: "power2.out", transformOrigin: "50% 100%" }, 16.75);
+          tl.to("#kind svg", { scaleY: 1, scaleX: 1, duration: 0.25, ease: "elastic.out(1, 0.5)" }, 16.86);
+          tl.to("#herbert svg", { scaleY: 0.82, scaleX: 1.1, duration: 0.07, ease: "power2.in" }, 16.8);
+          tl.to("#herbert", { y: 682.8, duration: 0.26, ease: "power2.out" }, 16.87);
+          tl.to("#herbert svg", { scaleY: 1.22, scaleX: 0.88, duration: 0.12, ease: "power2.out" }, 16.87);
+          tl.set("#herbert-mund-lachen", { opacity: 0 }, 16.87);
+          tl.set("#herbert-mund-schrei", { opacity: 1 }, 16.87);
+          tl.to("#herbert-augen", { scale: 1.4, duration: 0.1, ease: "back.out(3)" }, 16.87);
+          tl.to("#herbert-arm-l", { rotation: -70, duration: 0.12, ease: "back.out(2)" }, 16.87);
+          tl.to("#herbert-arm-r", { rotation: 70, duration: 0.12, ease: "back.out(2)" }, 16.9);
+          tl.to("#herbert", { y: 1012.8, duration: 0.3, ease: "power2.in" }, 17.2);
+          tl.to("#herbert svg", { scaleY: 0.86, scaleX: 1.08, duration: 0.08, ease: "power2.out" }, 17.5);
+          tl.to("#herbert svg", { scaleY: 1, scaleX: 1, duration: 0.35, ease: "elastic.out(1, 0.5)" }, 17.58);
+          tl.to("#herbert-augen", { scale: 1, duration: 0.2 }, 17.5);
+          tl.to(["#herbert-arm-l", "#herbert-arm-r"], { rotation: 0, duration: 0.3, ease: "power2.out" }, 17.55);
+          tl.set("#herbert-mund-schrei", { opacity: 0 }, 17.6);
+          tl.set("#herbert-mund-lachen", { opacity: 1 }, 17.6);
+          tl.to("#herbert svg", { y: -14, duration: 0.14, ease: "power1.out", yoyo: true, repeat: 3 }, 17.75);
+          tl.to("#kind svg", { y: -10, duration: 0.15, ease: "power1.out", yoyo: true, repeat: 3 }, 17.85);
+          tl.to("#welt-kamera", { x: 0.00, y: 0.00, scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 18.2);
+          tl.to("#herbert", { x: 430, y: 1262, scale: 0.62, duration: 0.6, ease: "power2.inOut" }, 18.2);
+          tl.to("#kind", { x: 650, y: 1300, scale: 0.75, duration: 0.6, ease: "power2.inOut" }, 18.2);
+          tl.to("#herbert", { x: 454.2, y: 1289.2, scale: 0.484, duration: 0.7, ease: "power2.inOut" }, 22.0);
+          tl.to("#kind", { x: 625.8, y: 1318.8, scale: 0.585, duration: 0.7, ease: "power2.inOut" }, 22.0);
+          tl.to("#herbert-koffer", { opacity: 1, duration: 0.15 }, 25.4);
+          tl.to("#herbert-arm-l", { rotation: -60, duration: 0.15, ease: "power2.out" }, 25.55);
+          tl.to("#herbert-arm-l", { rotation: -30, duration: 0.14, ease: "sine.inOut" }, 25.72);
+          tl.to("#herbert-arm-l", { rotation: -65, duration: 0.14, ease: "sine.inOut" }, 25.87);
+          tl.to("#herbert-arm-l", { rotation: -30, duration: 0.14, ease: "sine.inOut" }, 26.02);
+          tl.to("#herbert-arm-l", { rotation: -65, duration: 0.14, ease: "sine.inOut" }, 26.17);
+          tl.to("#herbert", { x: 1220, y: 760, scale: 0.42, duration: 1.4, ease: "power2.in" }, 26.0);
+          tl.to("#kind-schuh-l", { y: -6, duration: 0.12, ease: "power1.out", yoyo: true, repeat: 5 }, 26.0);
+          tl.fromTo(".t-himmel", { fill: "#26303a" }, { fill: "#e6f1f6", duration: 0.7, ease: "power2.inOut" }, 13.00);
+          tl.fromTo(".t-dach", { fill: "#1c2329" }, { fill: "#a9443c", duration: 0.7, ease: "power2.inOut" }, 13.04);
+          tl.fromTo(".t-dachkante-s", { stroke: "#12181c" }, { stroke: "#8a342e", duration: 0.7, ease: "power2.inOut" }, 13.08);
+          tl.fromTo(".t-kamin", { fill: "#2a3238" }, { fill: "#7b5446", duration: 0.7, ease: "power2.inOut" }, 13.12);
+          tl.fromTo(".t-wand", { fill: "#3b474f" }, { fill: "#f4ede1", duration: 0.7, ease: "power2.inOut" }, 13.16);
+          tl.fromTo(".t-fenster", { fill: "#161c20" }, { fill: "#ffd98a", duration: 0.7, ease: "power2.inOut" }, 13.20);
+          tl.fromTo(".t-rahmen-s", { stroke: "#2a3238" }, { stroke: "#f7f2e8", duration: 0.7, ease: "power2.inOut" }, 13.24);
+          tl.fromTo(".t-laden", { fill: "#2a343b" }, { fill: "#3f6e5b", duration: 0.7, ease: "power2.inOut" }, 13.28);
+          tl.fromTo(".t-tuer", { fill: "#20282d" }, { fill: "#ca2c35", duration: 0.7, ease: "power2.inOut" }, 13.32);
+          tl.fromTo(".t-knauf", { fill: "#7d8378" }, { fill: "#f2c14e", duration: 0.7, ease: "power2.inOut" }, 13.36);
+          tl.fromTo(".t-stufe", { fill: "#252d33" }, { fill: "#cdbfa8", duration: 0.7, ease: "power2.inOut" }, 13.40);
+          tl.fromTo(".t-huegel", { fill: "#1b2328" }, { fill: "#8cbf6e", duration: 0.7, ease: "power2.inOut" }, 13.44);
+          tl.fromTo(".t-weg", { fill: "#2a3238" }, { fill: "#d9c7a8", duration: 0.7, ease: "power2.inOut" }, 13.48);
+          tl.fromTo(".t-zaun", { fill: "#2c353b" }, { fill: "#f7f2e8", duration: 0.7, ease: "power2.inOut" }, 13.52);
+          tl.fromTo(".t-baum-s", { stroke: "#12191d" }, { stroke: "#6e4b36", duration: 0.7, ease: "power2.inOut" }, 13.56);
+          tl.to("#sterne", { opacity: 0, duration: 0.4, ease: "power1.in" }, 13.0);
+          tl.to("#mond", { y: 120, opacity: 0, duration: 0.35, ease: "power2.in" }, 13.0);
+          tl.fromTo("#sonne", { y: 480, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power2.out" }, 13.35);
+          tl.to(["#spinnweben", "#risse", "#spuklicht"], { opacity: 0, duration: 0.35, ease: "power1.in" }, 13.1);
+          tl.to("#bretter", { y: 260, rotation: 25, opacity: 0, duration: 0.5, ease: "power2.in", transformOrigin: "50% 50%" }, 13.15);
+          tl.to("#laden-OL-l", { rotation: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" }, 13.35);
+          tl.to(".latte", { rotation: 0, duration: 0.45, ease: "back.out(2)", stagger: 0.025 }, 13.3);
+          tl.to("#kuerbis-boese", { opacity: 0, duration: 0.2 }, 13.5);
+          tl.to("#kuerbis-froh", { opacity: 1, duration: 0.2 }, 13.6);
+          tl.fromTo(".blatt", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.35, ease: "back.out(2.2)", stagger: 0.05 }, 13.45);
+          tl.fromTo(".blume", { scale: 0, transformOrigin: "50% 100%" }, { scale: 1, duration: 0.3, ease: "back.out(2.4)", stagger: 0.035 }, 13.6);
+          tl.fromTo("#schild", { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.36, ease: "back.out(2)" }, 12.0);
+          tl.fromTo("#schild-band", { scale: 1.7, rotation: -28, opacity: 0 }, { scale: 1, rotation: -10, opacity: 1, duration: 0.16, ease: "expo.out" }, 13.75);
+          tl.fromTo("#familie", { y: 80 }, { y: 0, duration: 0.45, ease: "back.out(1.6)" }, 14.5);
+          tl.fromTo("#familie-arm", { rotation: 0 }, { rotation: -35, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 5 }, 14.95);
+          tl.fromTo("#kartons", { scale: 0, transformOrigin: "50% 100%" }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 15.0);
+          window.__timelines["welt"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

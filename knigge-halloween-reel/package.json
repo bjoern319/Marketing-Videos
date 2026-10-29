@@ -1,0 +1,13 @@
+{
+  "name": "knigge-halloween-reel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes hyperframes@0.8.216 preview",
+    "audio": "python3 tools/make_audio.py --sf2 \"$SF2\"",
+    "build": "python3 tools/build_reel.py",
+    "check": "npx --yes hyperframes@0.8.216 check",
+    "render": "npx --yes hyperframes@0.8.216 render -o renders/knigge-halloween-reel.mp4 -q delivery -f 30",
+    "publish": "npx --yes hyperframes@0.8.216 publish"
+  }
+}

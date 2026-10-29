@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s2-allein-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        .s2-blase {
+          position: absolute;
+          background: #ffffff;
+          border-radius: 30px;
+          padding: 26px 34px 30px;
+          box-shadow: 0 14px 30px rgba(10, 14, 18, 0.28);
+          color: #323c44;
+          font-size: 46px;
+          font-weight: 700;
+          line-height: 1.16;
+        }
+        .s2-blase span {
+          display: block;
+          white-space: nowrap;
+        }
+        .s2-blase svg {
+          position: absolute;
+          overflow: visible;
+        }
+      </style>
+      <div id="root" data-composition-id="s2-allein" data-width="1080" data-height="1920" data-duration="6.0">
+        <div class="s2-blase" id="s2-b1" style="left: 380px; top: 646px; width: 466px; padding: 26px 34px 30px; font-size: 46px; font-weight: 700"><span>Seit die Kinder</span><span>ausgezogen sind …</span><svg width="1" height="1" style="left: 0; top: 0" aria-hidden="true"><path d="M54 157 L40 300 L106 157 Z" fill="#ffffff" /></svg></div>
+        <div class="s2-blase" id="s2-b2" style="left: 380px; top: 646px; width: 470px; padding: 26px 34px 30px; font-size: 46px; font-weight: 700"><span>… erschreck ich nur</span><span>noch Spinnen.</span><svg width="1" height="1" style="left: 0; top: 0" aria-hidden="true"><path d="M54 157 L40 300 L106 157 Z" fill="#ffffff" /></svg></div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s2-b1", { scale: 0.6, opacity: 0, transformOrigin: "15% 100%" }, { scale: 1, opacity: 1, duration: 0.27, ease: "back.out(1.8)" }, 0.300);
+          tl.to("#s2-b1", { opacity: 0, scale: 0.92, duration: 0.14, ease: "power2.in" }, 2.5);
+          tl.fromTo("#s2-b2", { scale: 0.6, opacity: 0, transformOrigin: "15% 100%" }, { scale: 1, opacity: 1, duration: 0.27, ease: "back.out(1.8)" }, 2.700);
+          tl.to("#s2-b2", { opacity: 0, scale: 0.92, duration: 0.18, ease: "power2.in" }, 5.62);
+          window.__timelines["s2-allein"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template id="s4-neues-leben-template">
+      <style>
+        @font-face {
+          font-family: "Red Hat Display";
+          src: url("assets/fonts/red-hat-display.woff2") format("woff2");
+          font-weight: 300 900;
+          font-style: normal;
+          font-display: block;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          font-family: "Red Hat Display", sans-serif;
+          color: #323c44;
+        }
+        .s4-titel {
+          position: absolute;
+          left: 72px;
+          right: 60px;
+          top: 226px;
+          font-size: 120px;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          line-height: 1.02;
+          color: #323c44;
+        }
+        .s4-zeile {
+          display: block;
+          white-space: nowrap;
+        }
+        .s4-zeile.rot {
+          color: #ca2c35;
+        }
+        .s4-w {
+          display: inline-block;
+        }
+        .s4-blase {
+          position: absolute;
+          background: #ffffff;
+          border-radius: 30px;
+          padding: 26px 34px 30px;
+          box-shadow: 0 14px 30px rgba(10, 14, 18, 0.28);
+          color: #323c44;
+          font-size: 46px;
+          font-weight: 700;
+          line-height: 1.16;
+        }
+        .s4-blase span {
+          display: block;
+          white-space: nowrap;
+        }
+        .s4-blase svg {
+          position: absolute;
+          overflow: visible;
+        }
+        .s4-titel2 {
+          position: absolute;
+          left: 72px;
+          right: 60px;
+          top: 226px;
+          font-size: 120px;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          line-height: 1.02;
+          color: #323c44;
+        }
+        .s4-kind-blase {
+          color: #ca2c35;
+          font-size: 64px;
+          font-weight: 900;
+        }
+        .s4-aaah {
+          position: absolute;
+          left: 500px;
+          top: 452px;
+          font-size: 84px;
+          font-weight: 900;
+          color: #323c44;
+          letter-spacing: -0.01em;
+        }
+      </style>
+      <div id="root" data-composition-id="s4-neues-leben" data-width="1080" data-height="1920" data-duration="9.0">
+        <div class="s4-titel">
+          <span class="s4-zeile"><span class="s4-w" id="s4-l0w0">Zeit</span> <span class="s4-w" id="s4-l0w1">für</span></span>
+          <span class="s4-zeile rot"><span class="s4-w" id="s4-l1w0">neues</span> <span class="s4-w" id="s4-l1w1">Leben.</span></span>
+        </div>
+        <div class="s4-titel2"><span class="s4-zeile"><span class="s4-w" id="s4-v0w0">Der</span> <span class="s4-w" id="s4-v0w1">Spuk</span></span><span class="s4-zeile rot"><span class="s4-w" id="s4-v1w0">ist</span> <span class="s4-w" id="s4-v1w1">vorbei.</span></span></div>
+        <div class="s4-blase" id="s4-kb" style="left: 650px; top: 792px; width: 216px; padding: 12px 30px 16px; font-size: 64px; font-weight: 900; color: #ca2c35"><span>BUH!</span><svg width="1" height="1" style="left: 0; top: 0" aria-hidden="true"><path d="M94 96 L80 150 L146 96 Z" fill="#ffffff" /></svg></div>
+        <div class="s4-aaah" id="s4-aaah">AAAH!</div>
+      </div>
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#s4-l0w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.050);
+          tl.fromTo("#s4-l0w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.130);
+          tl.fromTo("#s4-l1w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.210);
+          tl.fromTo("#s4-l1w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 0.290);
+          tl.to(["#s4-l0w0", "#s4-l0w1", "#s4-l1w0", "#s4-l1w1"], { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 2.250);
+          tl.fromTo("#s4-kb", { scale: 0.6, opacity: 0, transformOrigin: "30% 100%" }, { scale: 1, opacity: 1, duration: 0.27, ease: "back.out(1.8)" }, 3.750);
+          tl.to("#s4-kb", { opacity: 0, duration: 0.15, ease: "power2.in" }, 4.75);
+          tl.fromTo("#s4-aaah", { scale: 0.4, rotation: -20, opacity: 0 }, { scale: 1, rotation: -8, opacity: 1, duration: 0.16, ease: "back.out(2.6)" }, 3.9);
+          tl.to("#s4-aaah", { opacity: 0, duration: 0.2, ease: "power2.in" }, 4.9);
+          tl.fromTo("#s4-v0w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 5.850);
+          tl.fromTo("#s4-v0w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 5.940);
+          tl.fromTo("#s4-v1w0", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 6.030);
+          tl.fromTo("#s4-v1w1", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.out" }, 6.120);
+          tl.to(["#s4-v0w0", "#s4-v0w1", "#s4-v1w0", "#s4-v1w1"], { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 8.700);
+          window.__timelines["s4-neues-leben"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

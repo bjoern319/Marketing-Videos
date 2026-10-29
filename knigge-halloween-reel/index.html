@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>KNIGGE Immobilien – Hausgeist Herbert (Halloween-Reel)</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #26303a;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #26303a;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      KNIGGE Immobilien – Halloween-Reel „Hausgeist Herbert“ (1080×1920, 28 s, Musik + Geräusche)
+      erzeugt von tools/build_reel.py – Texte dort in TEXT ändern
+    -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="28.0" data-width="1080" data-height="1920" data-fps="30" data-motion-blur="on">
+      <div id="welt" data-composition-id="welt" data-composition-src="compositions/welt.html" data-start="0" data-duration="28.0" data-track-index="0" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="s1-spuk" data-composition-id="s1-spuk" data-composition-src="compositions/s1-spuk.html" data-start="0.0" data-duration="4.0" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="s2-allein" data-composition-id="s2-allein" data-composition-src="compositions/s2-allein.html" data-start="4.0" data-duration="6.0" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="s3-zu-gross" data-composition-id="s3-zu-gross" data-composition-src="compositions/s3-zu-gross.html" data-start="10.0" data-duration="3.0" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="s4-neues-leben" data-composition-id="s4-neues-leben" data-composition-src="compositions/s4-neues-leben.html" data-start="13.0" data-duration="9.0" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="s5-ende" data-composition-id="s5-ende" data-composition-src="compositions/s5-ende.html" data-start="22.0" data-duration="6.0" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <audio id="musik" class="clip" src="assets/audio/musik.m4a" data-start="0" data-duration="28" data-track-index="2" data-volume="1"></audio>
+      <audio id="sfx-buh" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="2.160" data-duration="2.116" data-track-index="3" data-volume="0.32"></audio>
+      <audio id="sfx-flug" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="10.121" data-duration="0.575" data-track-index="3" data-volume="0.5"></audio>
+      <audio id="sfx-schild" class="clip" src="assets/sfx/pop.mp3" data-start="12.033" data-duration="0.72" data-track-index="3" data-volume="0.9"></audio>
+      <audio id="sfx-tag" class="clip" src="assets/sfx/sparkle.mp3" data-start="13.006" data-duration="1.802" data-track-index="3" data-volume="0.4"></audio>
+      <audio id="sfx-verkauft" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="13.671" data-duration="0.575" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="sfx-kind" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="16.710" data-duration="2.116" data-track-index="3" data-volume="0.28"></audio>
+      <audio id="sfx-sprung" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="16.821" data-duration="0.575" data-track-index="4" data-volume="0.5"></audio>
+      <audio id="sfx-weg" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="26.471" data-duration="0.575" data-track-index="3" data-volume="0.35"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
