@@ -1,0 +1,133 @@
+{
+  "canvas": { "w": 1080, "h": 1920, "fps": 30, "frames": 645, "bg": "#000000", "boil": 2 },
+  "beat": { "bpm": 145, "t0": 0 },
+  "palette": { "red": "#CA2C35", "slate": "#444F4F", "ink": "#323C44" },
+  "fonts": [
+    { "family": "RHD", "url": "comp/assets/fonts/RedHatDisplay-VF.ttf", "weight": "300 900" },
+    { "family": "RHD", "url": "comp/assets/fonts/RedHatDisplay-Italic-VF.ttf", "weight": "300 900", "style": "italic" }
+  ],
+  "look": "clean",
+  "clips": {
+    "v_ext": { "frames_dir": "plates/v_ext" },
+    "v_liv": { "frames_dir": "plates/v_liv" },
+    "v_kit": { "frames_dir": "plates/v_kit" },
+    "v_ter": { "frames_dir": "plates/v_ter" },
+    "loc_liv": { "frames_dir": "plates/loc_liv" },
+    "loc_kit": { "frames_dir": "plates/loc_kit" },
+    "loc_ter": { "frames_dir": "plates/loc_ter" },
+    "loc_ext": { "frames_dir": "plates/loc_ext" },
+    "st_winter": { "frames_dir": "plates/st_winter" },
+    "st_spring": { "frames_dir": "plates/st_spring" },
+    "st_summer": { "frames_dir": "plates/st_summer" }
+  },
+  "shots": [
+    {
+      "t0": 0, "t1": 1.6552, "clip": "v_ext", "src": 0.25, "speed": 1.55, "speed1": 3.0,
+      "cam": { "zoom": { "z0": 1.0, "z1": 1.08, "ease": "in2" }, "roll": { "rate": -0.035 }, "handheld": { "amp": 3, "hz": 1.3 } },
+      "look": { "type": "grade", "filter": "contrast(1.06) saturate(1.08)" },
+      "fx": { "skytitle": { "text": "Bergisch Gladbach", "y": 0.13, "size": 104, "w": 800, "w0": 0.12, "w1": 0.55, "f0": 1.05, "f1": 1.5, "track": 1 } },
+      "note": "s1 hook: FPV approach, door opens, sky title flown through"
+    },
+    {
+      "t0": 1.6552, "t1": 2.6897, "clip": "loc_liv", "speed": 0, "srcf": 0,
+      "cam": { "ay": 0.55, "sy": 0.55, "zoom": { "z0": 1.02, "z1": 1.34, "ease": "in2" }, "roll": { "rate": 0.06 } },
+      "look": { "type": "grade", "filter": "brightness(1.32) contrast(1.03) saturate(0.72)" },
+      "in": { "type": "flash", "d": 0.2, "color": "#fff6e8" },
+      "fx": { "flyword": { "text": "Quadratmeter.", "y": 0.47, "size": 150, "s0": 0.5, "s1": 1.0, "a0": 0.1 } },
+      "note": "s2 empty living room, word flown through"
+    },
+    {
+      "t0": 2.6897, "t1": 4.9655, "clip": "v_liv", "src": 0.05, "speed": 1.7, "speed1": 1.0,
+      "cam": { "punch": { "amt": 0.06, "d": 0.3 }, "handheld": { "amp": 3, "hz": 0.9 } },
+      "look": { "type": "grade", "filter": "contrast(1.05) saturate(1.06)" },
+      "fx": { "label": { "text": "Zuhause.", "y": 0.33, "size": 150, "a0": 0.42, "it": true } },
+      "note": "s3 same room alive"
+    },
+    {
+      "t0": 4.9655, "t1": 5.5862, "clip": "loc_kit", "speed": 0, "srcf": 0,
+      "cam": { "zoom": { "z0": 1.12, "z1": 1.32, "ease": "inout" }, "roll": { "v": -0.3, "rate": 0.32 } },
+      "look": { "type": "grade", "filter": "brightness(1.18) contrast(1.03) saturate(0.72)" },
+      "in": { "type": "blur", "d": 0.12, "max": 18 },
+      "out": { "type": "blur", "d": 0.12, "max": 22 },
+      "note": "s4 empty kitchen swoop"
+    },
+    {
+      "t0": 5.5862, "t1": 7.8621, "clip": "v_kit", "src": 0.0, "speed": 1.35, "speed1": 1.0,
+      "cam": { "punch": { "amt": 0.05, "d": 0.25 }, "handheld": { "amp": 2.5, "hz": 0.8 } },
+      "look": { "type": "grade", "filter": "contrast(1.05) saturate(1.06)" },
+      "in": { "type": "blur", "d": 0.14, "max": 16 },
+      "out": { "type": "blur", "d": 0.14, "max": 26 },
+      "note": "s5 kitchen alive"
+    },
+    {
+      "t0": 7.8621, "t1": 9.1034, "clip": "loc_ext", "speed": 0, "srcf": 0,
+      "cam": { "ay": 0.4, "sy": 0.4, "zoom": { "z0": 1.0, "z1": 1.03, "ease": "lin" } },
+      "look": { "type": "grade", "filter": "contrast(1.04) saturate(1.05)" },
+      "in": { "type": "flash", "d": 0.12 },
+      "fx": { "season": { "text": "HERBST" } },
+      "note": "s7 season HERBST"
+    },
+    {
+      "t0": 9.1034, "t1": 10.3448, "clip": "st_winter", "speed": 0, "srcf": 0,
+      "cam": { "ay": 0.4, "sy": 0.4, "zoom": { "z0": 1.03, "z1": 1.06, "ease": "lin" } },
+      "look": { "type": "grade", "filter": "contrast(1.04) saturate(1.05)" },
+      "in": { "type": "flash", "d": 0.08 },
+      "fx": { "season": { "text": "WINTER" } },
+      "note": "s7 season WINTER"
+    },
+    {
+      "t0": 10.3448, "t1": 11.5862, "clip": "st_spring", "speed": 0, "srcf": 0,
+      "cam": { "ay": 0.4, "sy": 0.4, "zoom": { "z0": 1.06, "z1": 1.09, "ease": "lin" } },
+      "look": { "type": "grade", "filter": "contrast(1.04) saturate(1.05)" },
+      "in": { "type": "flash", "d": 0.08 },
+      "fx": { "season": { "text": "FRÜHLING" } },
+      "note": "s7 season FRÜHLING"
+    },
+    {
+      "t0": 11.5862, "t1": 13.2414, "clip": "st_summer", "speed": 0, "srcf": 0,
+      "cam": { "ay": 0.4, "sy": 0.4, "zoom": { "z0": 1.09, "z1": 1.14, "ease": "lin" } },
+      "look": { "type": "grade", "filter": "contrast(1.04) saturate(1.05)" },
+      "in": { "type": "flash", "d": 0.08 },
+      "fx": { "season": { "text": "SOMMER" } },
+      "note": "s7 season SOMMER"
+    },
+    {
+      "t0": 13.2414, "t1": 14.475, "clip": "loc_ter", "speed": 0, "srcf": 0,
+      "cam": { "ay": 0.5, "sy": 0.5, "zoom": { "z0": 1.0, "z1": 1.45, "ease": "in3" }, "roll": { "rate": -0.12 } },
+      "look": { "type": "grade", "filter": "contrast(1.04)" },
+      "in": { "type": "flash", "d": 0.1 },
+      "out": { "type": "blur", "d": 0.12, "max": 24 },
+      "note": "s8 empty terrace push into the loud entry"
+    },
+    {
+      "t0": 14.475, "t1": 16.5517, "clip": "v_ter", "src": 1.0, "speed": 1.0, "speed1": 1.25,
+      "cam": { "punch": { "amt": 0.07, "d": 0.3 }, "shake": { "amp": [14, 10], "d": 0.3 }, "handheld": { "amp": 3, "hz": 0.9 } },
+      "look": { "type": "grade", "filter": "contrast(1.05) saturate(1.06)" },
+      "in": { "type": "flash", "d": 0.14 },
+      "out": { "type": "flash", "d": 0.1 },
+      "note": "s9 night terrace toast (src stays below the 3.70 s bad range)"
+    },
+    {
+      "t0": 16.5517, "t1": 17.3793, "clip": "st_summer", "speed": 0, "srcf": 0,
+      "cam": { "ax": 0.4964, "ay": 0.5069, "sx": 0.4952, "sy": 0.3611, "zoom": { "z0": 3.4, "z1": 1.32, "ease": "out3" }, "cover": true },
+      "look": { "type": "grade", "filter": "contrast(1.04) saturate(1.05)" },
+      "in": { "type": "flash", "d": 0.12 },
+      "fx": { "doorglow": { "box": [700, 1245, 810, 1480] } },
+      "note": "s10 pull-out through the red front door | repeat: the summer still returns on purpose, like the ref's portal pull-out back to its opening framing (F897-F914)",
+      "repeat": true
+    },
+    {
+      "t0": 17.3793, "t1": 21.5, "clip": "st_summer", "speed": 0, "srcf": 0,
+      "cam": { "ax": 0.5, "ay": 0.4, "sx": 0.5, "sy": 0.22, "z": 1.32, "zoom": { "z0": 1.0, "z1": 1.035, "ease": "lin" }, "cover": true },
+      "look": { "type": "grade", "filter": "contrast(1.04) saturate(1.05)" },
+      "fx": { "endcard": { "t0": 17.379, "top": 820, "left": 72, "l1": "Wir verkaufen", "l2": "Zuhause.", "cta": "Kostenlose Wertermittlung", "url": "knigge-immobilien.de", "tl": 17.6, "t1": 17.793, "t2": 18.207, "t3": 18.621, "t4": 18.828 } },
+      "note": "s11 brand end card | repeat: the summer still returns on purpose, like the ref's portal pull-out back to its opening framing (F897-F914)",
+      "repeat": true
+    }
+  ],
+  "text": [],
+  "stickers": [],
+  "post": { "grain": { "amt": 0.08 } },
+  "sfx": { "auto": false, "cues": [], "hits": false },
+  "audio": { "src": "audio/music_final.wav", "start": 0, "sfx": false }
+}
