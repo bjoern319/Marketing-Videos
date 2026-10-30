@@ -29,7 +29,8 @@ Fertiges Video (v2): Higgsfield-Bibliothek, Media-ID `ec273fb7-9656-45fd-969f-c0
 - **Schnitt und Markenebene:** Katana-Compositor. Schnittliste mit Shots, Kamera, Übergängen und Texten:
   `comp/edl.json`; Effekte (Himmelstitel, Flugwort, Raum-Label, Jahreszeiten, Türlicht, Endkarte): `comp/fx.js`.
   Schrift Red Hat Display (SIL OFL 1.1); Logo aus der Original-SVG gerendert, unverändert.
-- **Ton:** Mixkit Nr. 400 „Raising Me Higher“, zwei taktgenaue Ausschnitte (145 BPM); Geräusche CC0 von
+- **Ton:** Stock-Musik, nicht KI-generiert: Mixkit Nr. 400 „Raising Me Higher“, zwei taktgenaue Ausschnitte (145 BPM);
+  der Originalton der Vorlage ist nicht verwendet. Geräusche CC0 von
   [Kenney](https://kenney.nl) und [OpenGameArt](https://opengameart.org).
 - **Kosten:** 265,21 Higgsfield-Credits (4 × 64 Seedance, 3 × 2,75 GPT Image, 8 × 0,12 Soul Cinematic) aus dem
   Plus-Kontingent, kein Zusatzgeld.
@@ -71,6 +72,8 @@ das nicht, weil Uploads zu und Downloads von Higgsfield gesperrt sind (Proxy 403
 - **KI-Kennzeichnung:** Haus, Räume und Menschen sind generiert – Label „Mit KI erstellt“ setzen, nicht als echtes
   Objekt bewerben.
 - Anstoßen auf der Terrasse: Das Glas des Mädchens soll als Saft lesen – kurz ansehen.
-- Musik: Lizenz auf der Mixkit-Trackseite bestätigen ([Lizenz](https://mixkit.co/license/)); einmal mit Ton anhören
-  (bisher nur gemessen).
+- Musik einmal mit Ton anhören (bisher nur gemessen). Lizenz geprüft: Die
+  [Mixkit Stock Music Free License](https://mixkit.co/license/) erlaubt Social-Media-Posts und Online-Werbung,
+  kostenlos und ohne Namensnennung – nicht aber TV/Radio, CD/DVD, Spiele, die Musik allein weiterzugeben oder sie bei
+  Content-ID-Diensten zu registrieren. Kommt trotzdem ein Claim, an team@mixkit.co weiterleiten.
 - Instagram: Text liegt zwischen 168 und 1330 px, nichts unter der Aktionsleiste rechts.
